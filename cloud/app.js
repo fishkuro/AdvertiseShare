@@ -534,7 +534,7 @@ var cloudMsg;
 AV.Cloud.define("memberLogin", function(req, res) {
   var nameStr = req.params.username;
   var passStr = req.params.password;
-  var ipStr = Utility.getIpAddress(req);
+  var ipStr = Utility.getCloudIpAddress(req);
 
   var user = new AV.User();
   user.set("username",nameStr);
@@ -618,7 +618,7 @@ AV.Cloud.define("memberLogout", function(req, res) {
 AV.Cloud.define("memberLogin22", function(req, res) {
   var nameStr = req.params.username;
   var passStr = req.params.password;
-  var ipStr = Utility.getIpAddress(req);
+  var ipStr = Utility.getCloudIpAddress(req);
 
   var user = new AV.User();
   user.set("username",nameStr);
@@ -685,7 +685,7 @@ AV.Cloud.define("memberRegister", function(req, res) {
   var nameStr = req.params.username;
   var passStr = req.params.password;
   var tokenStr = req.params.devicetoken;
-  var ipStr = Utility.getIpAddress(req);
+  var ipStr = Utility.getCloudIpAddress(req);
 
   var members = Members.create();
   var query = new AV.Query(members);
@@ -723,7 +723,7 @@ AV.Cloud.define("addSubAccount", function(req, res) {
   var nameStr = req.params.username;
   var passStr = req.params.password;
   var tokenStr = req.params.devicetoken;
-  var ipStr = Utility.getIpAddress(req);
+  var ipStr = Utility.getCloudIpAddress(req);
 
   var members = Members.create();
   var query = new AV.Query(member);

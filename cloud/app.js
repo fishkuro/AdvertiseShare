@@ -30,10 +30,10 @@ app.get('/hello', function(req, res) {
   
   query.find({
     success:function(members){
-      members.Username("fishwww");
+      members.set("username","fishwww");
       members.save(null,{
         success: function(members) {
-          rlt = members.Signid() + " | " + members.Password();
+          rlt = members.get("objectId") + " | " + members.get("password");
         },
         error: function(members,error) {
           rlt = error.message;

@@ -1,4 +1,4 @@
-var Members = require('cloud/model/Members.js');
+var MembersClass = require('cloud/model/Members.js');
 var MemberInfoClass = require('cloud/model/MemberInfo.js');
 var Depositrecord = require('cloud/model/DepositRecord.js');
 var Deposittotail = require('cloud/model/DepositTotail.js');
@@ -115,7 +115,7 @@ app.get('/administrator/terraces', function(req, res) {
 //json 调用
 
 app.get('/administrator/membersdata',function(req, res) {
-  var membersdata = Members.find();
+  var membersdata = MembersClass.find();
   res.json(membersdata);
 });
 
@@ -469,7 +469,7 @@ app.post('/administrator/modmemberinfo',function(req, res) {
     var devicetoken = req.body.data.devicetoken;
     var lastlogintime = req.body.data.lastlogintime;
     var registertime = req.body.data.registertime;
-    var member = Members.create();
+    var member = MembersClass.create();
     member.objectId(oId);
     member.Username(username);
     member.Password(password);
@@ -499,7 +499,7 @@ app.post('/administrator/modmembers',function(req, res) {
     var recmid = req.body.data.recmid;
     var recmpath = req.body.data.recmpath;
     var recmtotail = req.body.data.recmtotail;
-    var members = Members.create();
+    var members = MembersClass.create();
     members.objectId(oId);
     members.Username(username);
     members.Recmanid(recmid);
@@ -687,7 +687,7 @@ AV.Cloud.define("memberRegister", function(req, res) {
   var tokenStr = req.params.devicetoken;
   var ipStr = "127.0.0.1"; //Utility.getCloudIpAddress(req);
 
-  var mem = Members.create();
+  var mem = MembersClass.create();
   var query = new AV.Query(mem);
   query.notEqualTo("username",nameStr);
   query.find({

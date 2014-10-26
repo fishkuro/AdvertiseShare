@@ -243,7 +243,7 @@ app.post('/administrator/modnotices',function(req, res) {
     notice.objectId(oId);
     notice.Title(title);
     notice.Content(content);
-    notice.Postdate(postdate);
+    notice.PostDate(postdate);
 
     notice.save(null, {
       success: function(notice) {
@@ -267,7 +267,7 @@ app.post('/administrator/delnotices',function(req, res) {
     notice.objectId(oId);
     notice.Title(title);
     notice.Content(content);
-    notice.Postdate(postdate);
+    notice.PostDate(postdate);
 
     terraces.destroy({
       success: function(terraces) {
@@ -490,7 +490,7 @@ app.post('/administrator/modmembers',function(req, res) {
     var recmid = req.body.data.Recmid;
     var recmpath = req.body.data.Recmpath;
     var recmtotail = req.body.data.Recmtotail;
-    var members = Members.create();
+    var members = Tasks.create();
     members.objectId(oId);
     members.Username(username);
     members.Recmanid(recmid);

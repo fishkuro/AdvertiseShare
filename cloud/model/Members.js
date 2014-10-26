@@ -3,7 +3,7 @@
 /// Data: 2014/10/15 23:58:32
 /// </summary>
 
-var MemberClass = AV.Object.extend("Members", {
+var Members = AV.Object.extend("Members", {
 	Signid:function(value)		// GUID
 	{
 		if(value) {
@@ -57,7 +57,7 @@ var MemberClass = AV.Object.extend("Members", {
 });
 
 exports.init = function(username,recmanid,recmanpath,recmantotail) {
-    var members = new MemberClass();
+    var members = new Members();
 	members.set("username",username);		//string
 	members.set("recmanid",recmanid);		//Int64
 	members.set("recmanpath",recmanpath);		//string
@@ -67,7 +67,7 @@ exports.init = function(username,recmanid,recmanpath,recmantotail) {
   };
 
 exports.create = function() {
-    var members = new MemberClass();
+    var members = new Members();
     return members;
 };
 

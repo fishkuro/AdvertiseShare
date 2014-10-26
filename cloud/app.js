@@ -705,20 +705,20 @@ AV.Cloud.define("memberRegister", function(req, res) {
   query.find({
     success:function(members)
     {
-      members.Username(nameStr);
+      members.set('username',nameStr);
       members.save();
-      // var dateNow = new Date();
-      // var memberinfo = MemberInfoCls.init(member.Signid(),nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
-      // memberinfo.save(null,{
-      //   success:function(memberinfo)
-      //   {
+      var dateNow = new Date();
+      var memberinfo = MemberInfoCls.init(members.get('signid'),nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
+      memberinfo.save(null,{
+        success:function(memberinfo)
+        {
           cloudMsg = "注册成功";
-      //   },
-      //   error:function(memberinfo,error)
-      //   {
-      //     cloudMsg = error.message;
-      //   }
-      // });
+        },
+        error:function(memberinfo,error)
+        {
+          cloudMsg = error.message;
+        }
+      });
     },
     error:function(error)
     {

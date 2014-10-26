@@ -1,5 +1,5 @@
-var MembersClass = require('cloud/model/Members.js');
-var MemberInfoClass = require('cloud/model/MemberInfo.js');
+var Members = require('cloud/model/Members.js');
+var Memberinfo = require('cloud/model/MemberInfo.js');
 var Depositrecord = require('cloud/model/DepositRecord.js');
 var Deposittotail = require('cloud/model/DepositTotail.js');
 var Notices = require('cloud/model/Notices.js');
@@ -25,16 +25,19 @@ app.use(express.bodyParser());    // 读取请求 body 的中间件
 // 使用 Express 路由 API 服务 /hello 的 HTTP GET 请求
 app.get('/hello', function(req, res) {
   var rlt = false;
-  AV.Cloud.run("testCloud", {fuck: 'dennis', you: 'fdsfds'}, {
-    success: function(data){
-      //调用成功，得到成功的应答data
-      res.render('hello', { message: data });
+  var members = Members.crate();
+  members.Username("fishwww");
+  members.Password("1234567");
+  members.save(null,{
+    success: function(members) {
+      rlt = members.Username() + " | " + members.Password();
     },
-    error: function(err){
-      //处理调用失败
-      res.render('hello', { message: err });
+    error: function(members,error) {
+      rlt = error.message;
     }
   });
+
+  res.render('hello', { message: rlt });
 });
 
 // 后台管理开始
@@ -115,12 +118,12 @@ app.get('/administrator/terraces', function(req, res) {
 //json 调用
 
 app.get('/administrator/membersdata',function(req, res) {
-  var membersdata = MembersClass.find();
+  var membersdata = Members.find();
   res.json(membersdata);
 });
 
 app.get('/administrator/memberinfodata',function(req, res) {
-  var memberinfodata = MemberInfoClass.find();
+  var memberinfodata = Memberinfo.find();
   res.json(memberinfodata);
 });
 
@@ -469,7 +472,7 @@ app.post('/administrator/modmemberinfo',function(req, res) {
     var devicetoken = req.body.data.devicetoken;
     var lastlogintime = req.body.data.lastlogintime;
     var registertime = req.body.data.registertime;
-    var member = MembersClass.create();
+    var member = Members.create();
     member.objectId(oId);
     member.Username(username);
     member.Password(password);
@@ -499,7 +502,7 @@ app.post('/administrator/modmembers',function(req, res) {
     var recmid = req.body.data.recmid;
     var recmpath = req.body.data.recmpath;
     var recmtotail = req.body.data.recmtotail;
-    var members = MembersClass.create();
+    var members = Members.create();
     members.objectId(oId);
     members.Username(username);
     members.Recmanid(recmid);
@@ -539,7 +542,7 @@ AV.Cloud.define("memberLogin", function(req, res) {
   var user = new AV.User();
   user.set("username",nameStr);
   user.set("password",passStr);
-  var meminfo = MemberInfoClass.create();
+  var meminfo = Memberinfo.create();
   var query = new AV.Query(meminfo);
   query.equalTo("username", nameStr);
   query.greaterThan("password", passStr);
@@ -585,7 +588,7 @@ AV.Cloud.define("memberLogout", function(req, res) {
   var nameStr = req.params.username;
   var passStr = req.params.password;
 
-  var meminfo = MemberInfoClass.create();
+  var meminfo = Memberinfo.create();
   var query = new AV.Query(memberinfo);
   query.equalTo("username", nameStr);
   query.greaterThan("password", passStr);
@@ -623,7 +626,7 @@ AV.Cloud.define("memberLogin22", function(req, res) {
   var user = new AV.User();
   user.set("username",nameStr);
   user.set("password",passStr);
-  var meminfo = MemberInfoClass.create();
+  var meminfo = Memberinfo.create();
   var query = new AV.Query(memberinfo);
   query.equalTo("username", nameStr);
   query.greaterThan("password", passStr);
@@ -687,7 +690,7 @@ AV.Cloud.define("memberRegister", function(req, res) {
   var tokenStr = req.params.devicetoken;
   var ipStr = "127.0.0.1"; //Utility.getCloudIpAddress(req);
 
-  var mem = MembersClass.create();
+  var mem = Members.create();
   var query = new AV.Query(mem);
   query.notEqualTo("username",nameStr);
   query.find({
@@ -696,7 +699,7 @@ AV.Cloud.define("memberRegister", function(req, res) {
       mem.Username(nameStr);
       mem.save();
       var dateNow = new Date();
-      var meminfo = MemberInfoClass.init(mem.Signid(),nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
+      var meminfo = Memberinfo.init(mem.Signid(),nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
       meminfo.save(null,{
         success:function(memberinfo)
         {
@@ -731,7 +734,7 @@ AV.Cloud.define("addSubAccount", function(req, res) {
   query.find({
     success:function(members)
     {
-      var meminfo = MemberInfoClass.create();
+      var meminfo = Memberinfo.create();
       var aquery = new AV.Query(meminfo);
       aquery.notEqualTo("username",nameStr);
       aquery.greaterThan("password",passStr);

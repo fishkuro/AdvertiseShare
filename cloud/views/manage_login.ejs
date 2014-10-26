@@ -1,0 +1,55 @@
+<%include header.ejs%>
+
+<link href="/Content/login.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+    function f_validate() {{
+        var form = liger.get('form1');
+        if (form.valid()) {{
+            login();
+        }}
+        else {{
+            alert("验证不过");
+        }}
+    }}
+
+    //实现用户登录
+    function login() {
+        var data = {
+            username: $("#txtUsername").val(),
+            password: $("#txtPassword").val()
+        };
+        //发送异步请求实现登录 ajax
+        $.ajax({
+            url: '/administrator/login',
+            data: data,
+            cache: false,
+            async: true,
+            type: 'post',
+            success: function (data) {
+                if (data == "ok") {
+                    window.location.href = "/administrator/index";
+                } else {
+                    alert(data);
+                }
+            }
+        });
+    }
+</script>
+
+<div style="width:100%;">
+        <div id="login">
+            <div class="panel-h"></div>
+        <div class="panel-c"><div id="loginlogo"></div>
+        <form id="form1" class="liger-form" data-validate="{}">
+        <ul id="loginpanel">
+            <li><label>帐号：</label><input id="txtUsername" data-type="text" data-label="标题" data-name="username" validate="{required:true,minlength:5}">
+        </li>
+            <li><label>密码：</label><input id="txtPassword" type="password" data-type="password" data-label="密码" data-name="password" validate="{required:true}"></li>
+            <li><input type="button" value="登录" onclick="f_validate();" class="login-btn" /></li>
+        </ul>
+        </form>
+        </div><div class="panel-f"></div></div>
+        <div class="l-clear"></div>
+    </div>
+
+<%include footer.ejs%>

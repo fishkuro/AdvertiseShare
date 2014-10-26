@@ -1,0 +1,176 @@
+﻿<%include header.ejs%>
+
+<script type="text/javascript">
+    var Urldepositrecorddata = "/administrator/depositrecorddata";
+	var Urlmoddepositrecord = "/administrator/moddepositrecord"
+    var ValidateMsg = " <span style='color:red'>必填</span>";
+    var data = null;
+    //var grid = null;
+    $(function () {
+        window['g'] = $("#grid").ligerGrid({
+            columns:
+            [{ display: '编号', name: 'objectId', align: 'center', width: '5%', isSort: true },
+            { display: '用户编号', name: 'Userid', align: 'left', width: '20%', isSort: true },
+			{ display: '用户名称', name: 'Username', align: 'left', width: '20%', isSort: true },
+			{ display: '渠道编号', name: 'Terraceid', align: 'left', width: '20%', isSort: true },
+			{ display: '渠道名称', name: 'Terracename', align: 'left', width: '20%', isSort: true },
+			{ display: '支付金额', name: 'Payvalue', align: 'left', width: '20%', isSort: true },
+			{ display: '支付标识', name: 'Payvalid', align: 'left', width: '20%', isSort: true },
+			{ display: '申请时间', name: 'Applytime', align: 'left', width: '20%', isSort: true },
+			{ display: '支付时间', name: 'Payfortime', align: 'left', width: '20%', isSort: true }],
+            width: '98%',
+            pageSizeOptions: [10, 30, 50],
+            height: '97%',
+            url: Urldepositrecorddata,
+            //data: $.extend(true, {}, result),
+            dataAction: 'local', //本地排序
+            alternatingRow: false,
+            rowHeight: 30,
+            headerRowHeight: 30,
+            isScroll: false,
+            sortName: 'Applytime',
+            sortOrder: 'desc',
+            toolbar: {
+                items: [{ text: '修改', click: ModifyModule, img: '/Content/LigerUI/icons/modify.gif' }] }
+            });
+    });
+
+    function search() {
+        var key = $("#txtSelect").val();
+        var grid = window['g'];
+
+        if (key == "") {
+            grid.reload();
+        }
+        else {
+            //grid.options.data = $.extend(true, {}, grid.Data);
+            grid.loadData(getWhere(key));
+        }
+    }
+
+    function getWhere(e) {
+        var grid = window['g'];
+        if (!grid) return null;
+
+        var clause = function (rowdata, rowindex) {
+            return rowdata.Username.toString().indexOf(e) > -1;
+        };
+        return clause;
+    }
+
+    function formPost(frmName, flags, f) {
+        var validateIns;
+        var validateRes;
+        if (flags) {
+            validateIns = { txtAddPayvalid: { required: true } };
+            validateRes = { txtAddPayvalid: { required: ValidateMsg } };
+        }
+        else {
+            validateIns = { txtModifyPayvalid: { required: true } };
+            validateRes = { txtModifyPayvalid: { required: ValidateMsg } };
+        }
+        $(frmName).validate({
+            errorPlacement: function (error, element) {
+                error.insertAfter(element);
+            },
+            rules: validateIns,
+            messages: validateRes,
+            debug: true,
+            invalidHandler: function () {
+                alert("操作失败");
+            },
+            submitHandler: function () {
+                f();
+            }
+        });
+    }
+
+    function ModifyModule() {
+        var ModifyDialog;
+        var grid = window['g'];
+        var row = grid.getSelectedRow();
+        if (row == null) {
+            alert("请选择一条数据");
+            return;
+        }
+
+        $("#winModify").data("objectId", row.objectId);
+		$("#winModify").data("Userid", row.Userid);
+        $("#winModify").data("Username", row.Username);
+		$("#winModify").data("Terraceid", row.Terraceid);
+		$("#winModify").data("Terracename", row.Terracename);
+		$("#winModify").data("Payvalue", row.Payvalue);
+		$("#winModify").data("Payvalid", row.Payvalid);
+		$("#winModify").data("Applytime", row.Applytime);
+		$("#winModify").data("Payfortime", row.Payfortime);
+
+        $("#txtModifyPayvalid").val($("#winModify").data("Payvalid"));
+
+        if (!window.modifyWin) {
+            window.modifyWin = $.ligerDialog.open({
+                target: $("#winModify"),
+                height: 350,
+                width: 500,
+                title: "修改"
+            });
+
+            $("#btnModifyCancel").click(function () {
+                window.modifyWin.hide();
+            });
+
+            formPost("#frmModify", false, function () {
+                var objectId = $("#winModify").data("objectId");
+				var userid = $("#winModify").data("Userid");
+				var username = $("#winModify").data("Username");
+				var terraceid = $("#winModify").data("Terraceid");
+				var terracename = $("#winModify").data("Terracename");
+				var payvalue = $("#winModify").data("Payvalue");
+                var payvalid = $("#txtModifyPayvalid").val();
+				var applytime = $("#winModify").data("Applytime");
+				var payfortime = $("#winModify").data("Payfortime");
+				var row = {objectId: objectId, Userid: userid, Username: username, Terraceid: terraceid, Terracename: terracename, Payvalue: payvalue, Payvalid: payvalid, Applytime: applytime, Payfortime: payfortime};
+                $.post(Urlmoddepositrecord, { data: row }, function (e) {
+                    if (e.result) {
+                        $("#grid").ligerGrid().reload();
+                        window.modifyWin.hide();
+                    } else {
+                        alert(e.msg);
+                    }
+                });
+            });
+
+        } else {
+            window.modifyWin.show();
+        }
+    }
+</script>
+
+<div id="search">
+<table width="550px">
+    <tr class="search-tr">
+        <td width="15px"></td>
+        <td class="search-td">用户名称：<input type="text" name="txtSelect" id="txtSelect" class="k-text-bg k-text-field" /></td>
+        <td>&nbsp;&nbsp;<input class="liger-button" id="btnSelect" type="button" value="查询" onclick="search()" /></td>
+    </tr>
+</table>
+</div>
+<div id="grid"></div>
+
+<div id="winModify" style="display: none;">
+<form action="" method="post" id="frmModify">
+    <table class="tb" style="height: 200px;">
+        <tr class="tr">
+            <td class="td">支付标识：</td>
+            <td align="left" class="inputd"><input type="text" name="txtModifyPayvalid" id="txtModifyPayvalid" class="required k-text-bg k-text-field" /></td>
+        </tr>
+        <tr class="tr">
+            <td colspan="2">
+                <button type="submit" id="btnModifyConfirm" class="liger-button m_7td">确定</button>
+                <button type="button" id="btnModifyCancel" class="liger-button m_7td">取消</button>
+            </td>
+        </tr>
+    </table>
+</form>
+</div>
+
+<%include footer.ejs%>

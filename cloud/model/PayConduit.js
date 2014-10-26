@@ -1,0 +1,46 @@
+/// <summary>
+/// Author: Kurodo
+/// Data: 2014/10/15 23:59:22
+/// </summary>
+
+var PayConduit = AV.Object.extend("PayConduit", {
+	ObjectId:function(value)		// GUID
+	{
+		if(value) {
+			this.set("objectId",value);
+		}
+		else
+		{
+		return this.get("objectId");
+		}
+	},
+	Payname:function(value)		// string
+	{
+		if (value) {
+			this.set("Payname",value);
+		}
+		else
+		{
+			 return this.get("Payname");
+		}
+	}
+});
+
+exports.init = function(payname) {
+    var payconduit = new PayConduit();
+	payconduit.set("Payname",payname);		//string
+	
+    return payconduit;
+  };
+
+exports.create = function() {
+    var payconduit = new PayConduit();
+    return payconduit;
+};
+
+exports.find = function(options) {
+    var PayConduit = AV.Object.extend("PayConduit");
+    var query = new AV.Query(PayConduit);
+    var reslut = query.find(options);
+	return reslut;
+};

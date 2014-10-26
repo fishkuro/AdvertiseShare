@@ -1,0 +1,64 @@
+<%include header.ejs%>
+
+<script type="text/javascript">
+        var Urlscoretotaildata = "/administrator/scoretotaildata";
+
+        var data = null;
+        //var grid = null;
+        $(function () {
+            window['g'] = $("#grid").ligerGrid({
+                columns:
+                [{ display: '编号', name: 'objectId', align: 'center', width: '5%', isSort: true },
+                { display: '用户名称', name: 'Username', align: 'left', width: '20%', isSort: true },
+                { display: '积分统计', name: 'Sctotail', align: 'left', width: '20%', isSort: true }],
+                width: '98%',
+                pageSizeOptions: [10, 30, 50],
+                height: '97%',
+                url: Urlscoretotaildata,
+                //data: $.extend(true, {}, result),
+                dataAction: 'local', //本地排序
+                alternatingRow: false,
+                rowHeight: 30,
+                headerRowHeight: 30,
+                isScroll: false,
+                sortName: 'Sctotail',
+                sortOrder: 'desc',
+                });
+        });
+
+        function search() {
+            var key = $("#txtSelect").val();
+            var grid = window['g'];
+
+            if (key == "") {
+                grid.reload();
+            }
+            else {
+                //grid.options.data = $.extend(true, {}, grid.Data);
+                grid.loadData(getWhere(key));
+            }
+        }
+
+        function getWhere(e) {
+            var grid = window['g'];
+            if (!grid) return null;
+
+            var clause = function (rowdata, rowindex) {
+                return rowdata.Username.toString().indexOf(e) > -1;
+            };
+            return clause;
+        }
+    </script>
+
+<div id="search">
+<table width="550px">
+    <tr class="search-tr">
+        <td width="15px"></td>
+        <td class="search-td">用户名称：<input type="text" name="txtSelect" id="txtSelect" class="k-text-bg k-text-field" /></td>
+        <td>&nbsp;&nbsp;<input class="liger-button" id="btnSelect" type="button" value="查询" onclick="search()" /></td>
+    </tr>
+</table>
+</div>
+<div id="grid"></div>
+
+<%include footer.ejs%>

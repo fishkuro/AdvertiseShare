@@ -1,0 +1,212 @@
+﻿<%include header.ejs%>
+
+<script type="text/javascript">
+    var Urlmemberinfodata = "/administrator/memberinfodata";
+	var Urlmodmemberinfo = "/administrator/modmemberinfo"
+    var ValidateMsg = " <span style='color:red'>必填</span>";
+    var data = null;
+    //var grid = null;
+    $(function () {
+        window['g'] = $("#grid").ligerGrid({
+            columns:
+            [{ display: '编号', name: 'objectId', align: 'center', width: '5%', isSort: true },
+            { display: '用户名称', name: 'Username', align: 'left', width: '20%', isSort: true },
+			{ display: '用户密码', name: 'Password', align: 'left', width: '20%', isSort: true },
+			{ display: '用户积分', name: 'Point', align: 'left', width: '20%', isSort: true },
+			{ display: '注册IP', name: 'Registerip', align: 'left', width: '20%', isSort: true },
+			{ display: '登录IP', name: 'Loginip', align: 'left', width: '20%', isSort: true },
+			{ display: '设备标识', name: 'Devicetoken', align: 'left', width: '20%', isSort: true },
+			{ display: '登录时间', name: 'Lastlogintime', align: 'left', width: '20%', isSort: true },
+			{ display: '注册时间', name: 'Registertime', align: 'left', width: '20%', isSort: true }],
+            width: '98%',
+            pageSizeOptions: [10, 30, 50],
+            height: '97%',
+            url: Urlmemberinfodata,
+            //data: $.extend(true, {}, result),
+            dataAction: 'local', //本地排序
+            alternatingRow: false,
+            rowHeight: 30,
+            headerRowHeight: 30,
+            isScroll: false,
+            sortName: 'Lastlogintime',
+            sortOrder: 'desc',
+            toolbar: {
+                items: [{ text: '修改', click: ModifyModule, img: '/Content/LigerUI/icons/modify.gif' }] }
+            });
+    });
+
+    function search() {
+        var key = $("#txtSelect").val();
+        var grid = window['g'];
+
+        if (key == "") {
+            grid.reload();
+        }
+        else {
+            //grid.options.data = $.extend(true, {}, grid.Data);
+            grid.loadData(getWhere(key));
+        }
+    }
+
+    function getWhere(e) {
+        var grid = window['g'];
+        if (!grid) return null;
+
+        var clause = function (rowdata, rowindex) {
+            return rowdata.Username.toString().indexOf(e) > -1;
+        };
+        return clause;
+    }
+
+    function formPost(frmName, flags, f) {
+        var validateIns;
+        var validateRes;
+        if (flags) {
+            validateIns = { txtAddUsername: { required: true } };
+            validateRes = { txtAddUsername: { required: ValidateMsg } };
+        }
+        else {
+            validateIns = { txtModifyUsername: { required: true } };
+            validateRes = { txtModifyUsername: { required: ValidateMsg } };
+        }
+        $(frmName).validate({
+            errorPlacement: function (error, element) {
+                error.insertAfter(element);
+            },
+            rules: validateIns,
+            messages: validateRes,
+            debug: true,
+            invalidHandler: function () {
+                alert("操作失败");
+            },
+            submitHandler: function () {
+                f();
+            }
+        });
+    }
+
+    function ModifyModule() {
+        var ModifyDialog;
+        var grid = window['g'];
+        var row = grid.getSelectedRow();
+        if (row == null) {
+            alert("请选择一条数据");
+            return;
+        }
+
+        $("#winModify").data("objectId", row.objectId);
+        $("#winModify").data("Username", row.Username);
+		$("#winModify").data("Password", row.Password);
+		$("#winModify").data("Point", row.Point);
+		$("#winModify").data("Registerip", row.Registerip);
+		$("#winModify").data("Loginip", row.Loginip);
+		$("#winModify").data("Devicetoken", row.Devicetoken);
+		$("#winModify").data("Lastlogintime", row.Lastlogintime);
+		$("#winModify").data("Registertime", row.Registertime);
+
+        $("#txtModifyUsername").val($("#winModify").data("Username"));
+		$("#txtModifyPassword").val($("#winModify").data("Password"));
+		$("#txtModifyPoint").val($("#winModify").data("Point"));
+		$("#txtModifyRegisterip").val($("#winModify").data("Registerip"));
+		$("#txtModifyLoginip").val($("#winModify").data("Loginip"));
+		$("#txtModifyDevicetoken").val($("#winModify").data("Devicetoken"));
+		$("#txtModifyLastlogintime").val($("#winModify").data("Lastlogintime"));
+		$("#txtModifyRegistertime").val($("#winModify").data("Registertime"));
+
+        if (!window.modifyWin) {
+            window.modifyWin = $.ligerDialog.open({
+                target: $("#winModify"),
+                height: 350,
+                width: 500,
+                title: "修改"
+            });
+
+            $("#btnModifyCancel").click(function () {
+                window.modifyWin.hide();
+            });
+
+            formPost("#frmModify", false, function () {
+                var objectId = $("#winModify").data("objectId");
+                var username = $("#txtModifyUsername").val();
+				var password = $("#txtModifyPassword").val();
+				var point = $("#txtModifyPoint").val();
+				var registerip = $("#txtModifyRegisterip").val();
+				var loginip = $("#txtModifyLoginip").val();
+				var devicetoken = $("#txtModifyDevicetoken").val();
+				var lastlogintime = $("#txtModifyLastlogintime").val();
+				var registertime = $("#txtModifyRegistertime").val();
+				var row = {objectId: objectId,Username: username,Password: password,Point: point,Registerip: registerip,
+				Loginip: loginip,Devicetoken: devicetoken, Lastlogintime: lastlogintime, Registertime: registertime};
+                $.post(UrlModifyChannelModule, { data: row }, function (e) {
+                    if (e.result) {
+                        $("#grid").ligerGrid().reload();
+                        window.modifyWin.hide();
+                    } else {
+                        alert(e.msg);
+                    }
+                });
+            });
+
+        } else {
+            window.modifyWin.show();
+        }
+    }
+</script>
+
+<div id="search">
+<table width="550px">
+    <tr class="search-tr">
+        <td width="15px"></td>
+        <td class="search-td">用户名称：<input type="text" name="txtSelect" id="txtSelect" class="k-text-bg k-text-field" /></td>
+        <td>&nbsp;&nbsp;<input class="liger-button" id="btnSelect" type="button" value="查询" onclick="search()" /></td>
+    </tr>
+</table>
+</div>
+<div id="grid"></div>
+
+<div id="winModify" style="display: none;">
+<form action="" method="post" id="frmModify">
+    <table class="tb" style="height: 200px;">
+        <tr class="tr">
+            <td class="td">平台名称：</td>
+            <td align="left" class="inputd"><input type="text" name="txtModifyUsername" id="txtModifyUsername" class="required k-text-bg k-text-field" /></td>
+        </tr>
+		<tr class="tr">
+            <td class="td">平台名称：</td>
+            <td align="left" class="inputd"><input type="text" name="txtModifyPassword" id="txtModifyPassword" class="required k-text-bg k-text-field" /></td>
+        </tr>
+		<tr class="tr">
+            <td class="td">平台名称：</td>
+            <td align="left" class="inputd"><input type="text" name="txtModifyPoint" id="txtModifyPoint" class="required k-text-bg k-text-field" /></td>
+        </tr>
+		<tr class="tr">
+            <td class="td">平台名称：</td>
+            <td align="left" class="inputd"><input type="text" name="txtModifyRegisterip" id="txtModifyRegisterip" class="required k-text-bg k-text-field" /></td>
+        </tr>
+		<tr class="tr">
+            <td class="td">平台名称：</td>
+            <td align="left" class="inputd"><input type="text" name="txtModifyLoginip" id="txtModifyLoginip" class="required k-text-bg k-text-field" /></td>
+        </tr>
+		<tr class="tr">
+            <td class="td">平台名称：</td>
+            <td align="left" class="inputd"><input type="text" name="txtModifyDevicetoken" id="txtModifyDevicetoken" class="required k-text-bg k-text-field" /></td>
+        </tr>
+		<tr class="tr">
+            <td class="td">平台名称：</td>
+            <td align="left" class="inputd"><input type="text" name="txtModifyLastlogintime" id="txtModifyLastlogintime" class="required k-text-bg k-text-field" /></td>
+        </tr>
+		<tr class="tr">
+            <td class="td">平台名称：</td>
+            <td align="left" class="inputd"><input type="text" name="txtModifyRegistertime" id="txtModifyRegistertime" class="required k-text-bg k-text-field" /></td>
+        </tr>
+        <tr class="tr">
+            <td colspan="2">
+                <button type="submit" id="btnModifyConfirm" class="liger-button m_7td">确定</button>
+                <button type="button" id="btnModifyCancel" class="liger-button m_7td">取消</button>
+            </td>
+        </tr>
+    </table>
+</form>
+</div>
+
+<%include footer.ejs%>

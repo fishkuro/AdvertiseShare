@@ -36,7 +36,7 @@ app.get('/hello', function(req, res) {
   //   }
   // });
 
-  AV.Cloud.run('memberRegister', {username:"fishwww",password:"123456"}, {
+  AV.Cloud.run('memberRegister', {username:"fishwww",password:"123456",devicetoken:"fdvsdvfd"}, {
     success: function(result) {
     // result is 'Hello world!'
       rlt = result;
@@ -707,18 +707,18 @@ AV.Cloud.define("memberRegister", function(req, res) {
     {
       member.Username(nameStr);
       member.save();
-      var dateNow = new Date();
-      var memberinfo = MemberInfoCls.init(member.Signid(),nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
-      memberinfo.save(null,{
-        success:function(memberinfo)
-        {
-          cloudMsg = "注册成功";
-        },
-        error:function(memberinfo,error)
-        {
-          cloudMsg = error.message;
-        }
-      });
+      // var dateNow = new Date();
+      // var memberinfo = MemberInfoCls.init(member.Signid(),nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
+      // memberinfo.save(null,{
+      //   success:function(memberinfo)
+      //   {
+      //     cloudMsg = "注册成功";
+      //   },
+      //   error:function(memberinfo,error)
+      //   {
+      //     cloudMsg = error.message;
+      //   }
+      // });
     },
     error:function(error)
     {

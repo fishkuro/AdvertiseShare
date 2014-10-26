@@ -25,7 +25,7 @@ app.use(express.bodyParser());    // 读取请求 body 的中间件
 // 使用 Express 路由 API 服务 /hello 的 HTTP GET 请求
 app.get('/hello', function(req, res) {
   var rlt = false;
-  var members = Members.crate();
+  var members = Members.create();
   members.Username("fishwww");
   members.Password("1234567");
   members.save(null,{
@@ -251,7 +251,7 @@ app.post('/administrator/modnotices',function(req, res) {
     var title = req.body.data.title;
     var content = req.body.data.content;
     var postdate = new Date();
-    var notice = Notices.crate();
+    var notice = Notices.create();
     notice.objectId(oId);
     notice.Title(title);
     notice.Content(content);
@@ -275,7 +275,7 @@ app.post('/administrator/delnotices',function(req, res) {
     var title = req.body.data.title;
     var content = req.body.data.content;
     var postdate = req.body.data.postdate;
-    var notice = Notices.crate();
+    var notice = Notices.create();
     notice.objectId(oId);
     notice.Title(title);
     notice.Content(content);

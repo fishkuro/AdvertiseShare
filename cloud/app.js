@@ -526,7 +526,7 @@ AV.Cloud.define("testCloud", function(req, res) {
 	var nameStr = req.params.fuck;
 	var passStr = req.params.you;
 
-	return nameStr + " || " + passStr;
+  response.success(nameStr + " | " + passStr);
 });
 
 //

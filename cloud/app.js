@@ -10,7 +10,6 @@ var TasksCls = require('cloud/model/Tasks.js');
 var TerracesCls = require('cloud/model/Terraces.js');
 // =====
 var AdminsCls = require('cloud/model/Admins.js');
-
 var UtilityCls = require('cloud/utils/Utility.js');
 
 // 在 Cloud code 里初始化 Express 框架
@@ -26,15 +25,27 @@ app.use(express.bodyParser());    // 读取请求 body 的中间件
 app.get('/hello', function(req, res) {
   var rlt = false;
   var members = MembersCls.create();
-  members.Username("fishwww");
-  members.save(null,{
-    success: function(members) {
-      rlt = members.Signid() + " | " + members.Password();
+  var query = new AV.Query(members);
+  query.notEqualTo("username",nameStr);
+  
+  query.find({
+    success:function(members){
+      members.Username("fishwww");
+      members.save(null,{
+        success: function(members) {
+          rlt = members.Signid() + " | " + members.Password();
+        },
+        error: function(members,error) {
+          rlt = error.message;
+        }
+      });
     },
-    error: function(members,error) {
+    error:function(error){
       rlt = error.message;
     }
+    
   });
+  
   // var nameStr = "fishwww";
   // var passStr = "1234567";
   // var tokenStr = "FDSAFDASFDAS";

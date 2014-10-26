@@ -25,12 +25,11 @@ app.use(express.bodyParser());    // 读取请求 body 的中间件
 // 使用 Express 路由 API 服务 /hello 的 HTTP GET 请求
 app.get('/hello', function(req, res) {
   var rlt = false;
-  var mem = MembersClass.create();
-  mem.Username("fishwww");
-  mem.Password("1234567");
-  mem.save(null,{
+  var members = MembersClass.create();
+  members.Username("fishwww");
+  members.save(null,{
     success: function(members) {
-      rlt = mem.Username() + " | " + mem.Password();
+      rlt = members.Username() + " | " + members.Password();
     },
     error: function(members,error) {
       rlt = error.message;

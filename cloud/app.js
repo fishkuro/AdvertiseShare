@@ -159,7 +159,7 @@ app.get('/administrator/terracesdata',function(req, res) {
 var rlt = { result:false, msg:"错误结果!" };
 
 app.post('/administrator/addterraces',function(req, res) {
-  var tname = req.body.Terracename;
+  var tname = req.body.terracename;
   var terraces = Terraces.init(tname);
 
   terraces.save(null, {
@@ -177,7 +177,7 @@ app.post('/administrator/addterraces',function(req, res) {
 
 app.post('/administrator/modterraces',function(req, res) {
   var oid = req.body.objectId;
-  var tname = req.body.Terracename;
+  var tname = req.body.terracename;
   var terraces = Terraces.create();
   terraces.objectId(oid);
   terraces.TerraceName(tname);
@@ -197,7 +197,7 @@ app.post('/administrator/modterraces',function(req, res) {
 
 app.post('/administrator/delterraces',function(req, res) {
   var oid = req.body.data.objectId;
-  var tname = req.body.data.Terracename;
+  var tname = req.body.data.terracename;
   var terraces = Terraces.create();
   terraces.objectId(oid);
   terraces.Terracename(tname);
@@ -216,10 +216,10 @@ app.post('/administrator/delterraces',function(req, res) {
 });
 
 app.post('/administrator/addnotices',function(req, res) {
-    var title = req.body.data.Title;
-    var content = req.body.data.Content;
+    var title = req.body.data.title;
+    var content = req.body.data.content;
     var postdate = new Date();
-    var notice = Notice.init(title,postdate,content);
+    var notice = Notices.init(title,postdate,content);
 
     notice.save(null, {
       success: function(notice) {
@@ -236,10 +236,10 @@ app.post('/administrator/addnotices',function(req, res) {
 
 app.post('/administrator/modnotices',function(req, res) {
     var oId = req.body.data.objectId;
-    var title = req.body.data.Title;
-    var content = req.body.data.Content;
+    var title = req.body.data.title;
+    var content = req.body.data.content;
     var postdate = new Date();
-    var notice = Notice.crate();
+    var notice = Notices.crate();
     notice.objectId(oId);
     notice.Title(title);
     notice.Content(content);
@@ -260,9 +260,9 @@ app.post('/administrator/modnotices',function(req, res) {
 
 app.post('/administrator/delnotices',function(req, res) {
     var oId = req.body.data.objectId;
-    var title = req.body.data.Title;
-    var content = req.body.data.Content;
-    var postdate = req.body.data.PostDate;
+    var title = req.body.data.title;
+    var content = req.body.data.content;
+    var postdate = req.body.data.postdate;
     var notice = Notices.crate();
     notice.objectId(oId);
     notice.Title(title);
@@ -283,7 +283,7 @@ app.post('/administrator/delnotices',function(req, res) {
 });
 
 app.post('/administrator/addpayconduit',function(req, res) {
-  var pname = req.body.Payname;
+  var pname = req.body.payname;
   var payconduit = Payconduit.init(pname);
 
   payconduit.save(null, {
@@ -301,7 +301,7 @@ app.post('/administrator/addpayconduit',function(req, res) {
 
 app.post('/administrator/modpayconduit',function(req, res) {
   var oid = req.body.data.objectId;
-  var pname = req.body.data.Payname;
+  var pname = req.body.data.payname;
   var payconduit = Payconduit.create();
   payconduit.objectId(oid);
   payconduit.Payname(pname);
@@ -321,7 +321,7 @@ app.post('/administrator/modpayconduit',function(req, res) {
 
 app.post('/administrator/delpayconduit',function(req, res) {
   var oid = req.body.data.objectId;
-  var pname = req.body.data.Payname;
+  var pname = req.body.data.payname;
   var payconduit = Payconduit.create();
   payconduit.objectId(oid);
   payconduit.Payname(pname);
@@ -341,13 +341,13 @@ app.post('/administrator/delpayconduit',function(req, res) {
 
 app.post('/administrator/moddepositrecord',function(req, res) {
   var oid = req.body.data.objectId;
-  var userid = req.body.data.Userid;
-  var username = req.body.data.Username;
-  var tid = req.body.data.Terracesid;
-  var tname = req.body.data.Terracename;
-  var pve = req.body.data.Payvalue;
-  var pvd = req.body.data.Payvalid;
-  var atime = req.body.data.Applytime;
+  var userid = req.body.data.userid;
+  var username = req.body.data.username;
+  var tid = req.body.data.terracesid;
+  var tname = req.body.data.terracename;
+  var pve = req.body.data.payvalue;
+  var pvd = req.body.data.payvalid;
+  var atime = req.body.data.applytime;
   var ptime = new Date();
   var depositrecord = Depositrecord.create();
   depositrecord.objectId(oid);
@@ -374,11 +374,11 @@ app.post('/administrator/moddepositrecord',function(req, res) {
 });
 
 app.post('/administrator/addtasks',function(req, res) {
-    var tname = req.body.data.Taskname;
-    var stitle = req.body.data.Subtitle;
-    var tid = req.body.data.Terraceid;
-    var tname = req.body.data.Terracename;
-    var enable = req.body.data.Enable;
+    var tname = req.body.data.taskname;
+    var stitle = req.body.data.subtitle;
+    var tid = req.body.data.terraceid;
+    var tname = req.body.data.terracename;
+    var enable = req.body.data.enable;
     var task = Tasks.init(tname,stitle,tid,enable,tname);
 
     task.save(null, {
@@ -396,11 +396,11 @@ app.post('/administrator/addtasks',function(req, res) {
 
 app.post('/administrator/modtasks',function(req, res) {
     var oId = req.body.data.objectId;
-    var tname = req.body.data.Taskname;
-    var stitle = req.body.data.Subtitle;
-    var tid = req.body.data.Terraceid;
-    var tname = req.body.data.Terracename;
-    var enable = req.body.data.Enable;
+    var tname = req.body.data.taskname;
+    var stitle = req.body.data.subtitle;
+    var tid = req.body.data.terraceid;
+    var tname = req.body.data.terracename;
+    var enable = req.body.data.enable;
     var task = Tasks.create();
     task.objectId(oId);
     task.Taskname(tname);
@@ -424,11 +424,11 @@ app.post('/administrator/modtasks',function(req, res) {
 
 app.post('/administrator/deltasks',function(req, res) {
     var oId = req.body.data.objectId;
-    var tname = req.body.data.Taskname;
-    var stitle = req.body.data.Subtitle;
-    var tid = req.body.data.Terraceid;
-    var tname = req.body.data.Terracename;
-    var enable = req.body.data.Enable;
+    var tname = req.body.data.taskname;
+    var stitle = req.body.data.subtitle;
+    var tid = req.body.data.terraceid;
+    var tname = req.body.data.terracename;
+    var enable = req.body.data.enable;
     var task = Tasks.create();
     task.objectId(oId);
     task.Taskname(tname);
@@ -452,14 +452,14 @@ app.post('/administrator/deltasks',function(req, res) {
 
 app.post('/administrator/modmemberinfo',function(req, res) {
     var oId = req.body.data.objectId;
-    var username = req.body.data.Username;
-    var password = req.body.data.Password;
-    var point = req.body.data.Point;
-    var registerip = req.body.data.Registerip;
-    var loginip = req.body.data.Loginip;
-    var devicetoken = req.body.data.Devicetoken;
-    var lastlogintime = req.body.data.Lastlogintime;
-    var registertime = req.body.data.Registertime;
+    var username = req.body.data.username;
+    var password = req.body.data.password;
+    var point = req.body.data.point;
+    var registerip = req.body.data.registerip;
+    var loginip = req.body.data.loginip;
+    var devicetoken = req.body.data.devicetoken;
+    var lastlogintime = req.body.data.lastlogintime;
+    var registertime = req.body.data.registertime;
     var member = Memberinfo.create();
     member.objectId(oId);
     member.Username(username);
@@ -486,10 +486,10 @@ app.post('/administrator/modmemberinfo',function(req, res) {
 
 app.post('/administrator/modmembers',function(req, res) {
     var oId = req.body.data.objectId;
-    var username = req.body.data.Username;
-    var recmid = req.body.data.Recmid;
-    var recmpath = req.body.data.Recmpath;
-    var recmtotail = req.body.data.Recmtotail;
+    var username = req.body.data.username;
+    var recmid = req.body.data.recmid;
+    var recmpath = req.body.data.recmpath;
+    var recmtotail = req.body.data.recmtotail;
     var members = Tasks.create();
     members.objectId(oId);
     members.Username(username);
@@ -604,160 +604,160 @@ var cloudMsg;
 
 // });
 
-// //
-// // 云函数 - 自定义登录
-// AV.Cloud.define("memberLogin", function(req, res) {
-//   var nameStr = req.body.username;
-//   var passStr = req.body.password;
-//   var ipStr = utility.getIpAddress(req);
+//
+// 云函数 - 自定义登录
+AV.Cloud.define("memberLogin", function(req, res) {
+  var nameStr = req.body.username;
+  var passStr = req.body.password;
+  var ipStr = utility.getIpAddress(req);
 
-//   var user = new AV.User();
-//   user.set("username",nameStr);
-//   user.set("password",passStr);
-//   var memberinfo = Memberinfo.create();
-//   var query = new AV.Query(memberinfo);
-//   query.equalTo("username", nameStr);
-//   query.greaterThan("password", passStr);
-//   query.find({
-//     success: function(memberinfo) {
-//       //try av.user login
-//       user.logIn({
-//         success: function(user) {
-//           // 1 登录成功
-//           cloudMsg = "登录成功";
-//         },
-//         error: function(user,error) {
-//           //补充注册 先重置再注册
-//           user.destroy({
-//             success: function(user)
-//             {},
-//             error: function(user,error)
-//             {}
-//           });
-//           //注册
-//           user.set("username",nameStr);
-//           user.set("password",passStr);
-//           user.signUp(null,{
-//             success:function(user) {
-//               //注册完成后登录
-//               user.set("username",nameStr);
-//               user.set("password",passStr);
-//               user.logIn({
-//                   success: function(user) {
-//                     cloudMsg = "登录成功";
-//                   },
-//                   error: function(user, error) {
-//                     cloudMsg = error.message;
-//                   }
-//               });
-//             },
-//             error:function(user,error){
-//               cloudMsg = error.message;
-//             }
-//           });
-//         }
-//       });
+  var user = new AV.User();
+  user.set("username",nameStr);
+  user.set("password",passStr);
+  var memberinfo = Memberinfo.create();
+  var query = new AV.Query(memberinfo);
+  query.equalTo("username", nameStr);
+  query.greaterThan("password", passStr);
+  query.find({
+    success: function(memberinfo) {
+      //try av.user login
+      user.logIn({
+        success: function(user) {
+          // 1 登录成功
+          cloudMsg = "登录成功";
+        },
+        error: function(user,error) {
+          //补充注册 先重置再注册
+          user.destroy({
+            success: function(user)
+            {},
+            error: function(user,error)
+            {}
+          });
+          //注册
+          user.set("username",nameStr);
+          user.set("password",passStr);
+          user.signUp(null,{
+            success:function(user) {
+              //注册完成后登录
+              user.set("username",nameStr);
+              user.set("password",passStr);
+              user.logIn({
+                  success: function(user) {
+                    cloudMsg = "登录成功";
+                  },
+                  error: function(user, error) {
+                    cloudMsg = error.message;
+                  }
+              });
+            },
+            error:function(user,error){
+              cloudMsg = error.message;
+            }
+          });
+        }
+      });
 
-//       memberinfo.Loginip(ipStr);
-//       memberinfo.Lastlogintime(new Date());
-//       memberinfo.save();
-//     },
-//     error: function(error) {
-//       cloudMsg = "信息输入不对";
-//     }
-//   });
+      memberinfo.Loginip(ipStr);
+      memberinfo.Lastlogintime(new Date());
+      memberinfo.save();
+    },
+    error: function(error) {
+      cloudMsg = "信息输入不对";
+    }
+  });
 
-//   return cloudMsg;
-// });
+  return cloudMsg;
+});
 
-// //
-// // 云函数 - 自定义注册
-// AV.Cloud.define("memberRegister", function(req, res) {
-//   var nameStr = req.body.username;
-//   var passStr = req.body.password;
-//   var tokenStr = req.body.devicetoken;
-//   var ipStr = utility.getIpAddress(req);
+//
+// 云函数 - 自定义注册
+AV.Cloud.define("memberRegister", function(req, res) {
+  var nameStr = req.body.username;
+  var passStr = req.body.password;
+  var tokenStr = req.body.devicetoken;
+  var ipStr = utility.getIpAddress(req);
 
-//   var members = Members.create();
-//   var query = new AV.Query(members);
-//   query.notEqualTo("username",nameStr);
-//   query.find({
-//     success:function(members)
-//     {
-//       members.Username(nameStr);
-//       members.save();
-//       var dateNow = new Date();
-//       var memberinfo = Memberinfo.init(members.Signid(),nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
-//       memberinfo.save(null,{
-//         success:function(memberinfo)
-//         {
-//           cloudMsg = "注册成功";
-//         },
-//         error:function(memberinfo,error)
-//         {
-//           cloudMsg = error.message;
-//         }
-//       });
-//     },
-//     error:function(error)
-//     {
-//       cloudMsg = "该账户已存在";
-//     }
-//   });
+  var members = Members.create();
+  var query = new AV.Query(members);
+  query.notEqualTo("username",nameStr);
+  query.find({
+    success:function(members)
+    {
+      members.Username(nameStr);
+      members.save();
+      var dateNow = new Date();
+      var memberinfo = Memberinfo.init(members.Signid(),nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
+      memberinfo.save(null,{
+        success:function(memberinfo)
+        {
+          cloudMsg = "注册成功";
+        },
+        error:function(memberinfo,error)
+        {
+          cloudMsg = error.message;
+        }
+      });
+    },
+    error:function(error)
+    {
+      cloudMsg = "该账户已存在";
+    }
+  });
 
-//   return cloudMsg;
-// });
+  return cloudMsg;
+});
 
-// //
-// // 云函数 - 自定义添加子帐户
-// AV.Cloud.define("addSubAccount", function(req, res) {
-//   var nameStr = req.body.username;
-//   var passStr = req.body.password;
-//   var tokenStr = req.body.devicetoken;
-//   var ipStr = utility.getIpAddress(req);
+//
+// 云函数 - 自定义添加子帐户
+AV.Cloud.define("addSubAccount", function(req, res) {
+  var nameStr = req.body.username;
+  var passStr = req.body.password;
+  var tokenStr = req.body.devicetoken;
+  var ipStr = utility.getIpAddress(req);
 
-//   var members = Members.create();
-//   var query = new AV.Query(member);
-//   query.equalTo("username",nameStr);
-//   query.find({
-//     success:function(members)
-//     {
-//       var memberinfo = Memberinfo.create();
-//       var aquery = new AV.Query(memberinfo);
-//       aquery.notEqualTo("username",nameStr);
-//       aquery.greaterThan("password",passStr);
-//       aquery.find(null,{
-//         success:function(memberinfo) {
-//           memberinfo.Signid(members.Signid())
-//           memberinfo.Username(nameStr);
-//           memberinfo.Password(passStr);
-//           memberinfo.Point(0);
-//           memberinfo.Registerip(ipStr);
-//           memberinfo.Devicetoken(tokenStr);
-//           memberinfo.Registertime(new Date());
-//           memberinfo.save(null,{
-//             success:function(memberinfo)
-//             {
-//               cloudMsg = "添加成功";
-//             },
-//             error:function(memberinfo,error)
-//             {
-//               cloudMsg = error.message;
-//             }
-//           });
-//         },
-//         error:function(memberinfo,error)
-//         {
-//           cloudMsg = "该账户已存在"
-//         }
-//       });
-//     },
-//     error:function(members,error)
-//     {
-//       cloudMsg = "账户异常";
-//     }
-//   });
-// });
+  var members = Members.create();
+  var query = new AV.Query(member);
+  query.equalTo("username",nameStr);
+  query.find({
+    success:function(members)
+    {
+      var memberinfo = Memberinfo.create();
+      var aquery = new AV.Query(memberinfo);
+      aquery.notEqualTo("username",nameStr);
+      aquery.greaterThan("password",passStr);
+      aquery.find(null,{
+        success:function(memberinfo) {
+          memberinfo.Signid(members.Signid())
+          memberinfo.Username(nameStr);
+          memberinfo.Password(passStr);
+          memberinfo.Point(0);
+          memberinfo.Registerip(ipStr);
+          memberinfo.Devicetoken(tokenStr);
+          memberinfo.Registertime(new Date());
+          memberinfo.save(null,{
+            success:function(memberinfo)
+            {
+              cloudMsg = "添加成功";
+            },
+            error:function(memberinfo,error)
+            {
+              cloudMsg = error.message;
+            }
+          });
+        },
+        error:function(memberinfo,error)
+        {
+          cloudMsg = "该账户已存在"
+        }
+      });
+    },
+    error:function(members,error)
+    {
+      cloudMsg = "账户异常";
+    }
+  });
+});
 
 // 最后，必须有这行代码来使 express 响应 HTTP 请求
 app.listen();

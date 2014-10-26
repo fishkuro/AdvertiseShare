@@ -514,8 +514,8 @@ var cloudMsg;
 
 // 测试云函数
 AV.Cloud.define("testCloud", function(req, res) {
-	var nameStr = req.body.username;
-	var passStr = req.body.password;
+	var nameStr = req.body.fuck;
+	var passStr = req.body.you;
 
 	return nameStr + " || " + passStr;
 });

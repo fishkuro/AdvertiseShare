@@ -28,14 +28,13 @@ app.get('/hello', function(req, res) {
   AV.Cloud.run("testCloud", {fuck: 'dennis', you: 'fdsfds'}, {
     success: function(data){
       //调用成功，得到成功的应答data
-      rlt = data;
+      res.render('hello', { message: data });
     },
     error: function(err){
       //处理调用失败
-      rlt = err
+      res.render('hello', { message: err });
     }
   });
-  res.render('hello', { message: rlt });
 });
 
 // 后台管理开始

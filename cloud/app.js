@@ -1,5 +1,5 @@
 var Members = require('cloud/model/Members.js');
-var Memberinfo = require('cloud/model/MemberInfo.js');
+var MemberInfoClass = require('cloud/model/MemberInfo.js');
 var Depositrecord = require('cloud/model/DepositRecord.js');
 var Deposittotail = require('cloud/model/DepositTotail.js');
 var Notices = require('cloud/model/Notices.js');
@@ -120,7 +120,7 @@ app.get('/administrator/membersdata',function(req, res) {
 });
 
 app.get('/administrator/memberinfodata',function(req, res) {
-  var memberinfodata = Memberinfo.find();
+  var memberinfodata = MemberInfoClass.find();
   res.json(memberinfodata);
 });
 
@@ -539,7 +539,7 @@ AV.Cloud.define("memberLogin", function(req, res) {
   var user = new AV.User();
   user.set("username",nameStr);
   user.set("password",passStr);
-  var meminfo = Memberinfo.create();
+  var meminfo = MemberInfoClass.create();
   var query = new AV.Query(meminfo);
   query.equalTo("username", nameStr);
   query.greaterThan("password", passStr);
@@ -585,7 +585,7 @@ AV.Cloud.define("memberLogout", function(req, res) {
   var nameStr = req.params.username;
   var passStr = req.params.password;
 
-  var meminfo = Memberinfo.create();
+  var meminfo = MemberInfoClass.create();
   var query = new AV.Query(memberinfo);
   query.equalTo("username", nameStr);
   query.greaterThan("password", passStr);
@@ -623,7 +623,7 @@ AV.Cloud.define("memberLogin22", function(req, res) {
   var user = new AV.User();
   user.set("username",nameStr);
   user.set("password",passStr);
-  var meminfo = Memberinfo.create();
+  var meminfo = MemberInfoClass.create();
   var query = new AV.Query(memberinfo);
   query.equalTo("username", nameStr);
   query.greaterThan("password", passStr);
@@ -696,7 +696,7 @@ AV.Cloud.define("memberRegister", function(req, res) {
       members.Username(nameStr);
       members.save();
       var dateNow = new Date();
-      var meminfo = Memberinfo.init(members.Signid(),nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
+      var meminfo = MemberInfoClass.init(members.Signid(),nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
       memberinfo.save(null,{
         success:function(memberinfo)
         {
@@ -731,7 +731,7 @@ AV.Cloud.define("addSubAccount", function(req, res) {
   query.find({
     success:function(members)
     {
-      var meminfo = Memberinfo.create();
+      var meminfo = MemberInfoClass.create();
       var aquery = new AV.Query(meminfo);
       aquery.notEqualTo("username",nameStr);
       aquery.greaterThan("password",passStr);

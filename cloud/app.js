@@ -521,6 +521,14 @@ app.post('/administrator/modmembers',function(req, res) {
 
 var cloudMsg;
 
+// 测试云函数
+// AV.Cloud.define("testCloud", function(req, res) {
+// 	var nameStr = req.params.fuck;
+// 	var passStr = req.params.you;
+
+//   res.success(nameStr + " | " + passStr);
+// });
+
 //
 // 带SessionId逻辑
 AV.Cloud.define("memberLogin", function(req, res) {
@@ -606,8 +614,8 @@ AV.Cloud.define("memberLogout", function(req, res) {
 });
 
 //
-// 云函数 - 自定义登录
-AV.Cloud.define("memberLogin2", function(req, res) {
+// 云函数 - 自定义登录 暂时不用
+AV.Cloud.define("memberLogin22", function(req, res) {
   var nameStr = req.params.username;
   var passStr = req.params.password;
   var ipStr = Utility.getIpAddress(req);

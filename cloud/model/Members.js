@@ -67,7 +67,7 @@ exports.init = function(username,recmanid,recmanpath,recmantotail) {
   };
 
 exports.create = function() {
-    var members = AV.Object.extend("Members");
+    var members = new Members();
     return members;
 };
 

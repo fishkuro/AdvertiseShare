@@ -11,7 +11,7 @@ var Members = AV.Object.extend("Members", {
 		}
 		else
 		{
-		return this.get("objectId");
+			return this.get("objectId");
 		}
 	},
 	Username:function(value)		// string
@@ -21,7 +21,7 @@ var Members = AV.Object.extend("Members", {
 		}
 		else
 		{
-			 return this.get("username");
+			return this.get("username");
 		}
 	},
 	Recmanid:function(value)		// Int64
@@ -31,7 +31,7 @@ var Members = AV.Object.extend("Members", {
 		}
 		else
 		{
-			 return this.get("recmanid");
+			return this.get("recmanid");
 		}
 	},
 	Recmanpath:function(value)		// string
@@ -41,7 +41,7 @@ var Members = AV.Object.extend("Members", {
 		}
 		else
 		{
-			 return this.get("recmanpath");
+			return this.get("recmanpath");
 		}
 	},
 	Recmantotail:function(value)		// Int64
@@ -51,7 +51,7 @@ var Members = AV.Object.extend("Members", {
 		}
 		else
 		{
-			 return this.get("recmantotail");
+			return this.get("recmantotail");
 		}
 	}
 });
@@ -67,7 +67,7 @@ exports.init = function(username,recmanid,recmanpath,recmantotail) {
   };
 
 exports.create = function() {
-    var members = new Members();
+    var members = AV.Object.extend("Members");
     return members;
 };
 

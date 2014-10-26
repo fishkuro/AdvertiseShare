@@ -699,14 +699,14 @@ AV.Cloud.define("memberRegister", function(req, res) {
   var tokenStr = req.params.devicetoken;
   var ipStr = "127.0.0.1"; //Utility.getCloudIpAddress(req);
 
-  var member = MembersCls.create();
-  var query = new AV.Query(member);
+  var mem = MembersCls.create();
+  var query = new AV.Query(mem);
   query.notEqualTo("username",nameStr);
   query.find({
     success:function(members)
     {
-      member.Username(nameStr);
-      member.save();
+      mem.Username(nameStr);
+      mem.save();
       // var dateNow = new Date();
       // var memberinfo = MemberInfoCls.init(member.Signid(),nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
       // memberinfo.save(null,{

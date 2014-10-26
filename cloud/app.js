@@ -695,18 +695,18 @@ AV.Cloud.define("memberRegister", function(req, res) {
     {
       members.Username(nameStr);
       members.save();
-      var dateNow = new Date();
-      var memberinfo = Memberinfo.init(members.Signid(),nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
-      memberinfo.save(null,{
-        success:function(memberinfo)
-        {
+      //var dateNow = new Date();
+      // var memberinfo = Memberinfo.init(members.Signid(),nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
+      // memberinfo.save(null,{
+      //   success:function(memberinfo)
+      //   {
           cloudMsg = "注册成功";
-        },
-        error:function(memberinfo,error)
-        {
-          cloudMsg = error.message;
-        }
-      });
+      //   },
+      //   error:function(memberinfo,error)
+      //   {
+      //     cloudMsg = error.message;
+      //   }
+      // });
     },
     error:function(error)
     {

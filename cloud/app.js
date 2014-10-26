@@ -33,6 +33,8 @@ app.get('/hello', function(req, res) {
       members.save();
     },
     error:function(error){
+      members.set("username","fishqqq");
+      members.save();
       rlt = error.message;
     }
     

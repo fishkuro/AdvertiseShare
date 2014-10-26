@@ -25,6 +25,16 @@ app.use(express.bodyParser());    // 读取请求 body 的中间件
 // 使用 Express 路由 API 服务 /hello 的 HTTP GET 请求
 app.get('/hello', function(req, res) {
   var rlt = false;
+  AV.Cloud.run("testCloud", {fuck: 'dennis', you: 'fdsfds'}, {
+    success: function(data){
+      //调用成功，得到成功的应答data
+      rlt = data;
+    },
+    error: function(err){
+      //处理调用失败
+      rlt = err
+    }
+  });
   res.render('hello', { message: rlt });
 });
 

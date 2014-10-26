@@ -11,7 +11,7 @@ var Terraces = require('cloud/model/Terraces.js');
 // =====
 //var admins = require('cloud/model/Admins.js');
 
-var utility = require('cloud/utils/Utility.js');
+var Utility = require('cloud/utils/Utility.js');
 
 // 在 Cloud code 里初始化 Express 框架
 var express = require('express');
@@ -29,7 +29,7 @@ app.get('/hello', function(req, res) {
 });
 
 // 后台管理开始
-var session = utility.usersession();
+var session = Utility.usersession();
 app.get('/kurodo/login', function(req, res) {
     session.clear();
     res.render('manage_login', { title: '后台登录' });
@@ -512,104 +512,102 @@ app.post('/administrator/modmembers',function(req, res) {
 
 var cloudMsg;
 
-// // 测试云函数
-// AV.Cloud.define("testCloud", function(req, res) {
-// 	var nameStr = req.body.username;
-// 	var passStr = req.body.password;
+// 测试云函数
+AV.Cloud.define("testCloud", function(req, res) {
+	var nameStr = req.body.username;
+	var passStr = req.body.password;
 
-// 	return nameStr + " || " + passStr;
-// });
+	return nameStr + " || " + passStr;
+});
 
-// //
-// // 带SessionId逻辑
-// AV.Cloud.define("memberLoginCloud", function(req, res) {
-//   var nameStr = req.body.username;
-//   var passStr = req.body.password;
-//   var ipStr = Utility.getIpAddress(req);
+//
+// 带SessionId逻辑
+AV.Cloud.define("memberLoginCloud", function(req, res) {
+  var nameStr = req.body.username;
+  var passStr = req.body.password;
+  var ipStr = Utility.getIpAddress(req);
 
-//   var user = new AV.User();
-//   user.set("username",nameStr);
-//   user.set("password",passStr);
-//   var memberinfo = Memberinfo.create();
-//   var query = new AV.Query(memberinfo);
-//   query.equalTo("username", nameStr);
-//   query.greaterThan("password", passStr);
-//   query.find({
-//     success: function(memberinfo) {
-//       if (memberinfo.SessionId()) {
-//         user.logIn({
-//           success: function(user) {
-//           // 1 登录成功
-//           memberinfo.Loginip(ipStr);
-//           memberinfo.Lastlogintime(new Date());
-//           memberinfo.save();
-//           return "登录成功";
-//         },
-//         error: function(user, error)
-//         { return error.message; }
-//         });
-//       }
-//       else
-//       {
-//           user.signUp(null,{
-//             success:function(user) {
-//               //注册完成后回注objectId
-//               memberinfo.sessionId(user.objectId);
-//               memberinfo.save();
-//             },
-//             error:function(user,error)
-//             { return error.message; }
-//           });
-//       }
-//     },
-//     error: function(error) {
-//       return "信息输入不对";
-//     }
-//   });
+  var user = new AV.User();
+  user.set("username",nameStr);
+  user.set("password",passStr);
+  var memberinfo = Memberinfo.create();
+  var query = new AV.Query(memberinfo);
+  query.equalTo("username", nameStr);
+  query.greaterThan("password", passStr);
+  query.find({
+    success: function(memberinfo) {
+      if (memberinfo.SessionId()) {
+        user.logIn({
+          success: function(user) {
+          // 1 登录成功
+          memberinfo.Loginip(ipStr);
+          memberinfo.Lastlogintime(new Date());
+          memberinfo.save();
+          return "登录成功";
+        },
+        error: function(user, error)
+        { return error.message; }
+        });
+      }
+      else
+      {
+          user.signUp(null,{
+            success:function(user) {
+              //注册完成后回注objectId
+              memberinfo.SessionId(user.objectId);
+              memberinfo.save();
+            },
+            error:function(user,error)
+            { return error.message; }
+          });
+      }
+    },
+    error: function(error) {
+      return "信息输入不对";
+    }
+  });
 
-// });
+});
 
-// //
-// // 云函数 - 注销登录
-// AV.Cloud.define("memberLogout", function(req, res) {
-//   var nameStr = req.body.username;
-//   var passStr = req.body.password;
+//
+// 云函数 - 注销登录
+AV.Cloud.define("memberLogout", function(req, res) {
+  var nameStr = req.body.username;
+  var passStr = req.body.password;
 
-//   var memberinfo = Memberinfo.create();
-//   var query = new AV.Query(memberinfo);
-//   query.equalTo("username", nameStr);
-//   query.greaterThan("password", passStr);
-//   query.find({
-//     success: function(memberinfo) {
-//       var sessionId = memberinfo.SessionId();
-//       if (sessionId) {
-//         var user = new AV.User();
-//         user.set("objectId",sessionId);
-//         user.set("username",nameStr);
-//         user.set("password",passStr);
-//         user.destroy(null,
-//           success: function(user){},
-//           error: function(user,error){}
-//         );
+  var memberinfo = Memberinfo.create();
+  var query = new AV.Query(memberinfo);
+  query.equalTo("username", nameStr);
+  query.greaterThan("password", passStr);
+  query.find({
+    success: function(memberinfo) {
+      var sessionId = memberinfo.SessionId();
+      if (sessionId) {
+        var user = new AV.User();
+        user.set("objectId",sessionId);
+        user.destroy(null,{
+          success: function(user){},
+          error: function(user,error){}
+        });
 
-//         memberinfo.sessionId(null);
-//         memberinfo.save();
-//       }
-//       return "注销成功";
-//     },
-//     error: function(error) {
-//       return error.message;
-//     }
-//   });
+        memberinfo.SessionId(null);
+        memberinfo.save();
+      }
+      return "注销成功";
+    },
+    error: function(error) {
+      return error.message;
+    }
+  });
 
-// });
+});
 
 //
 // 云函数 - 自定义登录
 AV.Cloud.define("memberLogin", function(req, res) {
   var nameStr = req.body.username;
   var passStr = req.body.password;
-  var ipStr = utility.getIpAddress(req);
+  var ipStr = Utility.getIpAddress(req);
 
   var user = new AV.User();
   user.set("username",nameStr);
@@ -676,7 +674,7 @@ AV.Cloud.define("memberRegister", function(req, res) {
   var nameStr = req.body.username;
   var passStr = req.body.password;
   var tokenStr = req.body.devicetoken;
-  var ipStr = utility.getIpAddress(req);
+  var ipStr = Utility.getIpAddress(req);
 
   var members = Members.create();
   var query = new AV.Query(members);
@@ -714,7 +712,7 @@ AV.Cloud.define("addSubAccount", function(req, res) {
   var nameStr = req.body.username;
   var passStr = req.body.password;
   var tokenStr = req.body.devicetoken;
-  var ipStr = utility.getIpAddress(req);
+  var ipStr = Utility.getIpAddress(req);
 
   var members = Members.create();
   var query = new AV.Query(member);

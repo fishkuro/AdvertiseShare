@@ -17,18 +17,18 @@ var Terraces = AV.Object.extend("Terraces", {
 	TerraceName:function(value)		// string
 	{
 		if (value) {
-			this.set("TerraceName",value);
+			this.set("terraceName",value);
 		}
 		else
 		{
-			 return this.get("TerraceName");
+			 return this.get("terraceName");
 		}
 	}
 });
 
 exports.init = function(terracename) {
     var terraces = new Terraces();
-	terraces.set("TerraceName",terracename);		//string
+	terraces.set("terraceName",terracename);		//string
 	
     return terraces;
   };

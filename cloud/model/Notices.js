@@ -17,40 +17,40 @@ var Notices = AV.Object.extend("Notices", {
 	Title:function(value)		// string
 	{
 		if (value) {
-			this.set("Title",value);
+			this.set("title",value);
 		}
 		else
 		{
-			 return this.get("Title");
+			 return this.get("title");
 		}
 	},
 	Postdate:function(value)		// DateTime
 	{
 		if (value) {
-			this.set("Postdate",value);
+			this.set("postdate",value);
 		}
 		else
 		{
-			 return this.get("Postdate");
+			 return this.get("postdate");
 		}
 	},
 	Context:function(value)		// string
 	{
 		if (value) {
-			this.set("Context",value);
+			this.set("context",value);
 		}
 		else
 		{
-			 return this.get("Context");
+			 return this.get("context");
 		}
 	}
 });
 
 exports.init = function(title,postdate,context) {
     var notices = new Notices();
-	notices.set("Title",title);		//string
-	notices.set("Postdate",postdate);		//DateTime
-	notices.set("Context",context);		//string
+	notices.set("title",title);		//string
+	notices.set("postdate",postdate);		//DateTime
+	notices.set("context",context);		//string
 	
     return notices;
   };

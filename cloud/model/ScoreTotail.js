@@ -17,40 +17,40 @@ var ScoreTotail = AV.Object.extend("ScoreTotail", {
   	Userid:function(value)		// Int64
 	{
 		if (value) {
-			this.set("Userid",value);
+			this.set("userid",value);
 		}
 		else
 		{
-			 return this.get("Userid");
+			 return this.get("userid");
 		}
 	},
 	Username:function(value)		// string
 	{
 		if (value) {
-			this.set("Username",value);
+			this.set("username",value);
 		}
 		else
 		{
-			 return this.get("Username");
+			 return this.get("username");
 		}
 	},
 	Scorevaluetotail:function(value)		// Decimal
 	{
 		if (value) {
-			this.set("Scorevaluetotail",value);
+			this.set("scorevaluetotail",value);
 		}
 		else
 		{
-			 return this.get("Scorevaluetotail");
+			 return this.get("scorevaluetotail");
 		}
 	}
 });
 
 exports.init = function(uid,username,scorevaluetotail) {
     var scoretotail = new ScoreTotail();
-    scoretotail.set("Userid",uid);		//Int64
-	scoretotail.set("Username",username);		//string
-	scoretotail.set("Scorevaluetotail",scorevaluetotail);		//Decimal
+    scoretotail.set("userid",uid);		//Int64
+	scoretotail.set("username",username);		//string
+	scoretotail.set("scorevaluetotail",scorevaluetotail);		//Decimal
 	
     return scoretotail;
   };

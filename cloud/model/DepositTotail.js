@@ -17,40 +17,40 @@ var DepositTotail = AV.Object.extend("DepositTotail", {
   	Userid:function(value)		// Int64
 	{
 		if (value) {
-			this.set("Userid",value);
+			this.set("userid",value);
 		}
 		else
 		{
-			 return this.get("Userid");
+			 return this.get("userid");
 		}
 	},
 	Username:function(value)		// string
 	{
 		if (value) {
-			this.set("Username",value);
+			this.set("username",value);
 		}
 		else
 		{
-			 return this.get("Username");
+			 return this.get("username");
 		}
 	},
 	Payvaluetotail:function(value)		// Decimal
 	{
 		if (value) {
-			this.set("Payvaluetotail",value);
+			this.set("payvaluetotail",value);
 		}
 		else
 		{
-			 return this.get("Payvaluetotail");
+			 return this.get("payvaluetotail");
 		}
 	}
 });
 
 exports.init = function(userid,username,payvaluetotail) {
     var deposittotail = new DepositTotail();
-    deposittotail.set("Userid",userid);		//Int64
-	deposittotail.set("Username",username);		//string
-	deposittotail.set("Payvaluetotail",payvaluetotail);		//Decimal
+    deposittotail.set("userid",userid);		//Int64
+	deposittotail.set("username",username);		//string
+	deposittotail.set("payvaluetotail",payvaluetotail);		//Decimal
 	
     return deposittotail;
   };

@@ -17,106 +17,106 @@ var MemberInfo = AV.Object.extend("MemberInfo", {
   	Signid:function(value)		// Int64
 	{
 		if (value) {
-			this.set("Signid",value);
+			this.set("signid",value);
 		}
 		else
 		{
-			 return this.get("Signid");
+			 return this.get("signid");
 		}
 	},
 	Username:function(value)		// string
 	{
 		if (value) {
-			this.set("Username",value);
+			this.set("username",value);
 		}
 		else
 		{
-			 return this.get("Username");
+			 return this.get("username");
 		}
 	},
 	Password:function(value)		// string
 	{
 		if (value) {
-			this.set("Password",value);
+			this.set("password",value);
 		}
 		else
 		{
-			 return this.get("Password");
+			 return this.get("password");
 		}
 	},
 	Point:function(value)		// Decimal
 	{
 		if (value) {
-			this.set("Point",value);
+			this.set("point",value);
 		}
 		else
 		{
-			 return this.get("Point");
+			 return this.get("point");
 		}
 	},
 	Registerip:function(value)		// string
 	{
 		if (value) {
-			this.set("Registerip",value);
+			this.set("registerip",value);
 		}
 		else
 		{
-			 return this.get("Registerip");
+			 return this.get("registerip");
 		}
 	},
 	Loginip:function(value)		// string
 	{
 		if (value) {
-			this.set("Loginip",value);
+			this.set("loginip",value);
 		}
 		else
 		{
-			 return this.get("Loginip");
+			 return this.get("loginip");
 		}
 	},
 	Devicetoken:function(value)		// string
 	{
 		if (value) {
-			this.set("Devicetoken",value);
+			this.set("devicetoken",value);
 		}
 		else
 		{
-			 return this.get("Devicetoken");
+			 return this.get("devicetoken");
 		}
 	},
 	Lastlogintime:function(value)		// DateTime
 	{
 		if (value) {
-			this.set("Lastlogintime",value);
+			this.set("lastlogintime",value);
 		}
 		else
 		{
-			 return this.get("Lastlogintime");
+			 return this.get("lastlogintime");
 		}
 	},
 	Registertime:function(value)		// DateTime
 	{
 		if (value) {
-			this.set("Registertime",value);
+			this.set("registertime",value);
 		}
 		else
 		{
-			 return this.get("Registertime");
+			 return this.get("registertime");
 		}
 	}
 });
 
 exports.init = function(signid,username,password,point,registerip,loginip,devicetoken,lastlogintime,registertime) {
     var memberinfo = new MemberInfo();
-    memberinfo.set("Signid",signid);		//Int64
-	memberinfo.set("Username",username);		//string
-	memberinfo.set("Password",password);		//string
-	memberinfo.set("Point",point);		//Decimal
-	memberinfo.set("Registerip",registerip);		//string
-	memberinfo.set("Loginip",loginip);		//string
-	memberinfo.set("Devicetoken",devicetoken);		//string
-	memberinfo.set("Lastlogintime",lastlogintime);		//DateTime
-	memberinfo.set("Registertime",registertime);		//DateTime
+    memberinfo.set("signid",signid);		//Int64
+	memberinfo.set("username",username);		//string
+	memberinfo.set("password",password);		//string
+	memberinfo.set("point",point);		//Decimal
+	memberinfo.set("registerip",registerip);		//string
+	memberinfo.set("loginip",loginip);		//string
+	memberinfo.set("devicetoken",devicetoken);		//string
+	memberinfo.set("lastlogintime",lastlogintime);		//DateTime
+	memberinfo.set("registertime",registertime);		//DateTime
 	
     return memberinfo;
   };

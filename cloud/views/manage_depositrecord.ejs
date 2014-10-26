@@ -10,14 +10,14 @@
         window['g'] = $("#grid").ligerGrid({
             columns:
             [{ display: '编号', name: 'objectId', align: 'center', width: '5%', isSort: true },
-            { display: '用户编号', name: 'Userid', align: 'left', width: '20%', isSort: true },
-			{ display: '用户名称', name: 'Username', align: 'left', width: '20%', isSort: true },
-			{ display: '渠道编号', name: 'Terraceid', align: 'left', width: '20%', isSort: true },
-			{ display: '渠道名称', name: 'Terracename', align: 'left', width: '20%', isSort: true },
-			{ display: '支付金额', name: 'Payvalue', align: 'left', width: '20%', isSort: true },
-			{ display: '支付标识', name: 'Payvalid', align: 'left', width: '20%', isSort: true },
-			{ display: '申请时间', name: 'Applytime', align: 'left', width: '20%', isSort: true },
-			{ display: '支付时间', name: 'Payfortime', align: 'left', width: '20%', isSort: true }],
+            { display: '用户编号', name: 'userid', align: 'left', width: '20%', isSort: true },
+			{ display: '用户名称', name: 'username', align: 'left', width: '20%', isSort: true },
+			{ display: '渠道编号', name: 'terraceid', align: 'left', width: '20%', isSort: true },
+			{ display: '渠道名称', name: 'terracename', align: 'left', width: '20%', isSort: true },
+			{ display: '支付金额', name: 'payvalue', align: 'left', width: '20%', isSort: true },
+			{ display: '支付标识', name: 'payvalid', align: 'left', width: '20%', isSort: true },
+			{ display: '申请时间', name: 'applytime', align: 'left', width: '20%', isSort: true },
+			{ display: '支付时间', name: 'payfortime', align: 'left', width: '20%', isSort: true }],
             width: '98%',
             pageSizeOptions: [10, 30, 50],
             height: '97%',
@@ -28,7 +28,7 @@
             rowHeight: 30,
             headerRowHeight: 30,
             isScroll: false,
-            sortName: 'Applytime',
+            sortName: 'applytime',
             sortOrder: 'desc',
             toolbar: {
                 items: [{ text: '修改', click: ModifyModule, img: '/Content/LigerUI/icons/modify.gif' }] }
@@ -53,7 +53,7 @@
         if (!grid) return null;
 
         var clause = function (rowdata, rowindex) {
-            return rowdata.Username.toString().indexOf(e) > -1;
+            return rowdata.username.toString().indexOf(e) > -1;
         };
         return clause;
     }
@@ -95,16 +95,16 @@
         }
 
         $("#winModify").data("objectId", row.objectId);
-		$("#winModify").data("Userid", row.Userid);
-        $("#winModify").data("Username", row.Username);
-		$("#winModify").data("Terraceid", row.Terraceid);
-		$("#winModify").data("Terracename", row.Terracename);
-		$("#winModify").data("Payvalue", row.Payvalue);
-		$("#winModify").data("Payvalid", row.Payvalid);
-		$("#winModify").data("Applytime", row.Applytime);
-		$("#winModify").data("Payfortime", row.Payfortime);
+		$("#winModify").data("userid", row.userid);
+        $("#winModify").data("username", row.username);
+		$("#winModify").data("terraceid", row.terraceid);
+		$("#winModify").data("terracename", row.terracename);
+		$("#winModify").data("payvalue", row.payvalue);
+		$("#winModify").data("payvalid", row.payvalid);
+		$("#winModify").data("applytime", row.applytime);
+		$("#winModify").data("payfortime", row.payfortime);
 
-        $("#txtModifyPayvalid").val($("#winModify").data("Payvalid"));
+        $("#txtModifyPayvalid").val($("#winModify").data("payvalid"));
 
         if (!window.modifyWin) {
             window.modifyWin = $.ligerDialog.open({
@@ -120,15 +120,15 @@
 
             formPost("#frmModify", false, function () {
                 var objectId = $("#winModify").data("objectId");
-				var userid = $("#winModify").data("Userid");
-				var username = $("#winModify").data("Username");
-				var terraceid = $("#winModify").data("Terraceid");
-				var terracename = $("#winModify").data("Terracename");
-				var payvalue = $("#winModify").data("Payvalue");
+				var userid = $("#winModify").data("userid");
+				var username = $("#winModify").data("username");
+				var terraceid = $("#winModify").data("terraceid");
+				var terracename = $("#winModify").data("terracename");
+				var payvalue = $("#winModify").data("payvalue");
                 var payvalid = $("#txtModifyPayvalid").val();
-				var applytime = $("#winModify").data("Applytime");
-				var payfortime = $("#winModify").data("Payfortime");
-				var row = {objectId: objectId, Userid: userid, Username: username, Terraceid: terraceid, Terracename: terracename, Payvalue: payvalue, Payvalid: payvalid, Applytime: applytime, Payfortime: payfortime};
+				var applytime = $("#winModify").data("applytime");
+				var payfortime = $("#winModify").data("payfortime");
+				var row = {objectId: objectId, userid: userid, username: username, terraceid: terraceid, terracename: terracename, payvalue: payvalue, payvalid: payvalid, applytime: applytime, payfortime: payfortime};
                 $.post(Urlmoddepositrecord, { data: row }, function (e) {
                     if (e.result) {
                         $("#grid").ligerGrid().reload();

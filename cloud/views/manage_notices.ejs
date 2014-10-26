@@ -13,8 +13,8 @@
         window['g'] = $("#grid").ligerGrid({
             columns:
             [{ display: '编号', name: 'objectId', align: 'center', width: '5%', isSort: true },
-            { display: '标题', name: 'Title', align: 'left', width: '20%', isSort: true },
-			{ display: '时间', name: 'Postdate', align: 'left', width: '20%', isSort: true }],
+            { display: '标题', name: 'title', align: 'left', width: '20%', isSort: true },
+			{ display: '时间', name: 'postdate', align: 'left', width: '20%', isSort: true }],
             width: '98%',
             pageSizeOptions: [10, 30, 50],
             height: '97%',
@@ -25,7 +25,7 @@
             rowHeight: 30,
             headerRowHeight: 30,
             isScroll: false,
-            sortName: 'Postdate',
+            sortName: 'postdate',
             sortOrder: 'desc',
             toolbar: {
                 items: [{ text: '增加', click: AddModule, img: '/Content/LigerUI/icons/add.gif' }, { line: true },
@@ -52,7 +52,7 @@
         if (!grid) return null;
 
         var clause = function (rowdata, rowindex) {
-            return rowdata.Title.toString().indexOf(e) > -1;
+            return rowdata.title.toString().indexOf(e) > -1;
         };
         return clause;
     }
@@ -101,7 +101,7 @@
                 var title = $("#txtAddTitle").val();
 				var content = $("#txtAddContent").val();
                 var grid = window['g'];
-                var data = {Title: title, Content: content};
+                var data = {title: title, content: content};
                 $.post(Urladdnotices, data, function (e) {
                     if (e.result) {
                         grid.reload();
@@ -128,13 +128,13 @@
         }
 
         $("#winModify").data("objectId", row.objectId);
-        $("#winModify").data("Title", row.Title);
-		$("#winModify").data("Content", row.Content);
-		$("#winModify").data("PostDate", row.PostDate);
+        $("#winModify").data("title", row.title);
+		$("#winModify").data("content", row.content);
+		$("#winModify").data("postdate", row.postdate);
 
-        $("#txtModifyTitle").val($("#winModify").data("Title"));
-		$("#txtModifyContent").val($("#winModify").data("Content"));
-		$("#txtModifyPostDate").val($("#winModify").data("PostDate"));
+        $("#txtModifyTitle").val($("#winModify").data("title"));
+		$("#txtModifyContent").val($("#winModify").data("content"));
+		$("#txtModifyPostDate").val($("#winModify").data("postdate"));
 
         if (!window.modifyWin) {
             window.modifyWin = $.ligerDialog.open({
@@ -153,7 +153,7 @@
                 var title = $("#txtModifyTitle").val();
 				var content = $("#txtModifyContent").val();
 				var postdate = $("#txtModifyPostDate").val();
-				var row = {objectId: objectId, Title: title, Content: content, PostDate: postdate};
+				var row = {objectId: objectId, title: title, content: content, postdate: postdate};
                 $.post(Urlmodnotices, { data: row }, function (e) {
                     if (e.result) {
                         $("#grid").ligerGrid().reload();

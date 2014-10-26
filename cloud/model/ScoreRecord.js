@@ -17,128 +17,128 @@ var ScoreRecord = AV.Object.extend("ScoreRecord", {
   	Recordtime:function(value)		// DateTime
 	{
 		if (value) {
-			this.set("Recordtime",value);
+			this.set("recordtime",value);
 		}
 		else
 		{
-			 return this.get("Recordtime");
+			 return this.get("recordtime");
 		}
 	},
 	Userid:function(value)		// Int64
 	{
 		if (value) {
-			this.set("Userid",value);
+			this.set("userid",value);
 		}
 		else
 		{
-			 return this.get("Userid");
+			 return this.get("userid");
 		}
 	},
 	Username:function(value)		// string
 	{
 		if (value) {
-			this.set("Username",value);
+			this.set("username",value);
 		}
 		else
 		{
-			 return this.get("Username");
+			 return this.get("username");
 		}
 	},
 	Taskid:function(value)		// Int64
 	{
 		if (value) {
-			this.set("Taskid",value);
+			this.set("taskid",value);
 		}
 		else
 		{
-			 return this.get("Taskid");
+			 return this.get("taskid");
 		}
 	},
 	Taskname:function(value)		// string
 	{
 		if (value) {
-			this.set("Taskname",value);
+			this.set("taskname",value);
 		}
 		else
 		{
-			 return this.get("Taskname");
+			 return this.get("taskname");
 		}
 	},
 	Terraceid:function(value)		// Int64
 	{
 		if (value) {
-			this.set("Terraceid",value);
+			this.set("terraceid",value);
 		}
 		else
 		{
-			 return this.get("Terraceid");
+			 return this.get("terraceid");
 		}
 	},
 	Terracename:function(value)		// string
 	{
 		if (value) {
-			this.set("Terracename",value);
+			this.set("terracename",value);
 		}
 		else
 		{
-			 return this.get("Terracename");
+			 return this.get("terracename");
 		}
 	},
 	Adtype:function(value)		// string
 	{
 		if (value) {
-			this.set("Adtype",value);
+			this.set("adtype",value);
 		}
 		else
 		{
-			 return this.get("Adtype");
+			 return this.get("adtype");
 		}
 	},
 	Adpoint:function(value)		// Decimal
 	{
 		if (value) {
-			this.set("Adpoint",value);
+			this.set("adpoint",value);
 		}
 		else
 		{
-			 return this.get("Adpoint");
+			 return this.get("adpoint");
 		}
 	},
 	Advalid:function(value)		// bool
 	{
 		if (value) {
-			this.set("Advalid",value);
+			this.set("advalid",value);
 		}
 		else
 		{
-			 return this.get("Advalid");
+			 return this.get("advalid");
 		}
 	},
 	Recordip:function(value)		// string
 	{
 		if (value) {
-			this.set("Recordip",value);
+			this.set("recordip",value);
 		}
 		else
 		{
-			 return this.get("Recordip");
+			 return this.get("recordip");
 		}
 	}
 });
 
 exports.init = function(recordtime,uid,username,taskid,taskname,terraceid,terracename,adtype,adpoint,advalid,recordip) {
     var scorerecord = new ScoreRecord();
-    scorerecord.set("Recordtime",recordtime);		//DateTime
-	scorerecord.set("Userid",uid);		//Int64
-	scorerecord.set("Username",username);		//string
-	scorerecord.set("Taskid",taskid);		//Int64
-	scorerecord.set("Taskname",taskname);		//string
-	scorerecord.set("Terraceid",terraceid);		//Int64
-	scorerecord.set("Terracename",terracename);		//string
-	scorerecord.set("Adtype",adtype);		//string
-	scorerecord.set("Adpoint",adpoint);		//Decimal
-	scorerecord.set("Advalid",advalid);		//bool
-	scorerecord.set("Recordip",recordip);		//string
+    scorerecord.set("recordtime",recordtime);		//DateTime
+	scorerecord.set("userid",uid);		//Int64
+	scorerecord.set("username",username);		//string
+	scorerecord.set("taskid",taskid);		//Int64
+	scorerecord.set("taskname",taskname);		//string
+	scorerecord.set("terraceid",terraceid);		//Int64
+	scorerecord.set("terracename",terracename);		//string
+	scorerecord.set("adtype",adtype);		//string
+	scorerecord.set("adpoint",adpoint);		//Decimal
+	scorerecord.set("advalid",advalid);		//bool
+	scorerecord.set("recordip",recordip);		//string
 	
     return scorerecord;
   };

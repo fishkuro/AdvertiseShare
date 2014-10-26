@@ -17,62 +17,62 @@ var Tasks = AV.Object.extend("Tasks", {
 	Taskname:function(value)		// string
 	{
 		if (value) {
-			this.set("Taskname",value);
+			this.set("taskname",value);
 		}
 		else
 		{
-			 return this.get("Taskname");
+			 return this.get("taskname");
 		}
 	},
 	Subtitle:function(value)		// string
 	{
 		if (value) {
-			this.set("Subtitle",value);
+			this.set("subtitle",value);
 		}
 		else
 		{
-			 return this.get("Subtitle");
+			 return this.get("subtitle");
 		}
 	},
 	Terraceid:function(value)		// Int64
 	{
 		if (value) {
-			this.set("Terraceid",value);
+			this.set("terraceid",value);
 		}
 		else
 		{
-			 return this.get("Terraceid");
+			 return this.get("terraceid");
 		}
 	},
 	Enable:function(value)		// bool
 	{
 		if (value) {
-			this.set("Enable",value);
+			this.set("enable",value);
 		}
 		else
 		{
-			 return this.get("Enable");
+			 return this.get("enable");
 		}
 	},
 	Terracename:function(value)		// string
 	{
 		if (value) {
-			this.set("Terracename",value);
+			this.set("terracename",value);
 		}
 		else
 		{
-			 return this.get("Terracename");
+			 return this.get("terracename");
 		}
 	}
 });
 
 exports.init = function(taskname,subtitle,terraceid,enable,terracename) {
     var tasks = new Tasks();
-	tasks.set("Taskname",taskname);			//string
-	tasks.set("Subtitle",subtitle);			//string
-	tasks.set("Terraceid",terraceid);		//Int64
-	tasks.set("Terracename",terracename);	//string
-	tasks.set("Enable",enable);				//bool
+	tasks.set("taskname",taskname);			//string
+	tasks.set("subtitle",subtitle);			//string
+	tasks.set("terraceid",terraceid);		//Int64
+	tasks.set("terracename",terracename);	//string
+	tasks.set("enable",enable);				//bool
 			
 	
     return tasks;

@@ -17,51 +17,51 @@ var Members = AV.Object.extend("Members", {
 	Username:function(value)		// string
 	{
 		if (value) {
-			this.set("Username",value);
+			this.set("username",value);
 		}
 		else
 		{
-			 return this.get("Username");
+			 return this.get("username");
 		}
 	},
 	Recmanid:function(value)		// Int64
 	{
 		if (value) {
-			this.set("Recmanid",value);
+			this.set("recmanid",value);
 		}
 		else
 		{
-			 return this.get("Recmanid");
+			 return this.get("recmanid");
 		}
 	},
 	Recmanpath:function(value)		// string
 	{
 		if (value) {
-			this.set("Recmanpath",value);
+			this.set("recmanpath",value);
 		}
 		else
 		{
-			 return this.get("Recmanpath");
+			 return this.get("recmanpath");
 		}
 	},
 	Recmantotail:function(value)		// Int64
 	{
 		if (value) {
-			this.set("Recmantotail",value);
+			this.set("recmantotail",value);
 		}
 		else
 		{
-			 return this.get("Recmantotail");
+			 return this.get("recmantotail");
 		}
 	}
 });
 
 exports.init = function(username,recmanid,recmanpath,recmantotail) {
     var members = new Members();
-	members.set("Username",username);		//string
-	members.set("Recmanid",recmanid);		//Int64
-	members.set("Recmanpath",recmanpath);		//string
-	members.set("Recmantotail",recmantotail);		//Int64
+	members.set("username",username);		//string
+	members.set("recmanid",recmanid);		//Int64
+	members.set("recmanpath",recmanpath);		//string
+	members.set("recmantotail",recmantotail);		//Int64
 	
     return members;
   };
@@ -72,8 +72,8 @@ exports.create = function() {
 };
 
 exports.find = function(options) {
-    var MemberInfo = AV.Object.extend("MemberInfo");
-    var query = new AV.Query(MemberInfo);
+    var members = AV.Object.extend("Members");
+    var query = new AV.Query(members);
     var reslut = query.find(options);
 	return reslut;
 };

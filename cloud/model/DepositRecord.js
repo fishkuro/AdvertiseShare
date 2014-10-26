@@ -17,95 +17,95 @@ var DepositRecord = AV.Object.extend("DepositRecord", {
 	Userid:function(value)		// Int64
 	{
 		if (value) {
-			this.set("Userid",value);
+			this.set("userid",value);
 		}
 		else
 		{
-			 return this.get("Userid");
+			 return this.get("userid");
 		}
 	},
 	Username:function(value)		// string
 	{
 		if (value) {
-			this.set("Username",value);
+			this.set("username",value);
 		}
 		else
 		{
-			 return this.get("Username");
+			 return this.get("username");
 		}
 	},
 	Terraceid:function(value)		// Int64
 	{
 		if (value) {
-			this.set("Terraceid",value);
+			this.set("terraceid",value);
 		}
 		else
 		{
-			 return this.get("Terraceid");
+			 return this.get("terraceid");
 		}
 	},
 	Terracename:function(value)		// string
 	{
 		if (value) {
-			this.set("Terracename",value);
+			this.set("terracename",value);
 		}
 		else
 		{
-			 return this.get("Terracename");
+			 return this.get("terracename");
 		}
 	},
 	Payvalue:function(value)		// Decimal
 	{
 		if (value) {
-			this.set("Payvalue",value);
+			this.set("payvalue",value);
 		}
 		else
 		{
-			 return this.get("Payvalue");
+			 return this.get("payvalue");
 		}
 	},
 	Payvalid:function(value)		// bool
 	{
 		if (value) {
-			this.set("Payvalid",value);
+			this.set("payvalid",value);
 		}
 		else
 		{
-			 return this.get("Payvalid");
+			 return this.get("payvalid");
 		}
 	},
 	Applytime:function(value)		// DateTime
 	{
 		if (value) {
-			this.set("Applytime",value);
+			this.set("applytime",value);
 		}
 		else
 		{
-			 return this.get("Applytime");
+			 return this.get("applytime");
 		}
 	},
 	Payfortime:function(value)		// DateTime
 	{
 		if (value) {
-			this.set("Payfortime",value);
+			this.set("payfortime",value);
 		}
 		else
 		{
-			 return this.get("Payfortime");
+			 return this.get("payfortime");
 		}
 	}
 });
 
 exports.init = function(uid,username,tid,terracename,payvalue,payvalid,applytime,payfortime) {
     var depositrecord = new DepositRecord();
-	depositrecord.set("Userid",uid);		//Int64
-	depositrecord.set("Username",username);		//string
-	depositrecord.set("Terraceid",tid);		//Int64
-	depositrecord.set("Terracename",terracename);		//string
-	depositrecord.set("Payvalue",payvalue);		//Decimal
-	depositrecord.set("Payvalid",payvalid);		//bool
-	depositrecord.set("Applytime",applytime);		//DateTime
-	depositrecord.set("Payfortime",payfortime);		//DateTime
+	depositrecord.set("userid",uid);		//Int64
+	depositrecord.set("username",username);		//string
+	depositrecord.set("terraceid",tid);		//Int64
+	depositrecord.set("terracename",terracename);		//string
+	depositrecord.set("payvalue",payvalue);		//Decimal
+	depositrecord.set("payvalid",payvalid);		//bool
+	depositrecord.set("applytime",applytime);		//DateTime
+	depositrecord.set("payfortime",payfortime);		//DateTime
 	
     return depositrecord;
   };

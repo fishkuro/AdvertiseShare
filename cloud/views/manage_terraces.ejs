@@ -13,7 +13,7 @@
         window['g'] = $("#grid").ligerGrid({
             columns:
             [{ display: '编号', name: 'objectId', align: 'center', width: '5%', isSort: true },
-            { display: '渠道名称', name: 'Terracename', align: 'left', width: '20%', isSort: true }],
+            { display: '渠道名称', name: 'terracename', align: 'left', width: '20%', isSort: true }],
             width: '98%',
             pageSizeOptions: [10, 30, 50],
             height: '97%',
@@ -24,7 +24,7 @@
             rowHeight: 30,
             headerRowHeight: 30,
             isScroll: false,
-            sortName: 'Terracename',
+            sortName: 'terracename',
             sortOrder: 'desc',
             toolbar: {
                 items: [{ text: '增加', click: AddModule, img: '/Content/LigerUI/icons/add.gif' }, { line: true },
@@ -51,7 +51,7 @@
         if (!grid) return null;
 
         var clause = function (rowdata, rowindex) {
-            return rowdata.Terracename.toString().indexOf(e) > -1;
+            return rowdata.terracename.toString().indexOf(e) > -1;
         };
         return clause;
     }
@@ -99,7 +99,7 @@
             formPost("#frmAdd", true, function () {
                 var tname = $("#txtAddTerrace").val();
                 var grid = window['g'];
-                var parms = { Terracename: tname };
+                var parms = { terracename: tname };
                 $.post(UrlAddTerraces, parms, function (e) {
                     if (e.result) {
                         grid.reload();
@@ -126,9 +126,9 @@
         }
 
         $("#winModify").data("objectId", row.objectId);
-        $("#winModify").data("Terracename", row.Terracename);
+        $("#winModify").data("terracename", row.terracename);
 
-        $("#txtModifyTerrace").val($("#winModify").data("Terracename"));
+        $("#txtModifyTerrace").val($("#winModify").data("terracename"));
 
         if (!window.modifyWin) {
             window.modifyWin = $.ligerDialog.open({
@@ -145,7 +145,7 @@
             formPost("#frmModify", false, function () {
                 var oId = $("#winModify").data("objectId");
                 var tName = $("#txtModifyTerrace").val();
-				var row = { objectId: oId, Terracename: tName };
+				var row = { objectId: oId, terracename: tName };
                 $.post(UrlModTerraces, { data: row }, function (e) {
                     if (e.result) {
                         $("#grid").ligerGrid().reload();

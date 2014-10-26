@@ -17,18 +17,18 @@ var PayConduit = AV.Object.extend("PayConduit", {
 	Payname:function(value)		// string
 	{
 		if (value) {
-			this.set("Payname",value);
+			this.set("payname",value);
 		}
 		else
 		{
-			 return this.get("Payname");
+			 return this.get("payname");
 		}
 	}
 });
 
 exports.init = function(payname) {
     var payconduit = new PayConduit();
-	payconduit.set("Payname",payname);		//string
+	payconduit.set("payname",payname);		//string
 	
     return payconduit;
   };

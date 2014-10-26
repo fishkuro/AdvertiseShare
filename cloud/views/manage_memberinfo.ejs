@@ -10,14 +10,14 @@
         window['g'] = $("#grid").ligerGrid({
             columns:
             [{ display: '编号', name: 'objectId', align: 'center', width: '5%', isSort: true },
-            { display: '用户名称', name: 'Username', align: 'left', width: '20%', isSort: true },
-			{ display: '用户密码', name: 'Password', align: 'left', width: '20%', isSort: true },
-			{ display: '用户积分', name: 'Point', align: 'left', width: '20%', isSort: true },
-			{ display: '注册IP', name: 'Registerip', align: 'left', width: '20%', isSort: true },
-			{ display: '登录IP', name: 'Loginip', align: 'left', width: '20%', isSort: true },
-			{ display: '设备标识', name: 'Devicetoken', align: 'left', width: '20%', isSort: true },
-			{ display: '登录时间', name: 'Lastlogintime', align: 'left', width: '20%', isSort: true },
-			{ display: '注册时间', name: 'Registertime', align: 'left', width: '20%', isSort: true }],
+            { display: '用户名称', name: 'username', align: 'left', width: '20%', isSort: true },
+			{ display: '用户密码', name: 'password', align: 'left', width: '20%', isSort: true },
+			{ display: '用户积分', name: 'point', align: 'left', width: '20%', isSort: true },
+			{ display: '注册IP', name: 'registerip', align: 'left', width: '20%', isSort: true },
+			{ display: '登录IP', name: 'loginip', align: 'left', width: '20%', isSort: true },
+			{ display: '设备标识', name: 'devicetoken', align: 'left', width: '20%', isSort: true },
+			{ display: '登录时间', name: 'lastlogintime', align: 'left', width: '20%', isSort: true },
+			{ display: '注册时间', name: 'registertime', align: 'left', width: '20%', isSort: true }],
             width: '98%',
             pageSizeOptions: [10, 30, 50],
             height: '97%',
@@ -28,7 +28,7 @@
             rowHeight: 30,
             headerRowHeight: 30,
             isScroll: false,
-            sortName: 'Lastlogintime',
+            sortName: 'lastlogintime',
             sortOrder: 'desc',
             toolbar: {
                 items: [{ text: '修改', click: ModifyModule, img: '/Content/LigerUI/icons/modify.gif' }] }
@@ -53,7 +53,7 @@
         if (!grid) return null;
 
         var clause = function (rowdata, rowindex) {
-            return rowdata.Username.toString().indexOf(e) > -1;
+            return rowdata.username.toString().indexOf(e) > -1;
         };
         return clause;
     }
@@ -95,23 +95,23 @@
         }
 
         $("#winModify").data("objectId", row.objectId);
-        $("#winModify").data("Username", row.Username);
-		$("#winModify").data("Password", row.Password);
-		$("#winModify").data("Point", row.Point);
-		$("#winModify").data("Registerip", row.Registerip);
-		$("#winModify").data("Loginip", row.Loginip);
-		$("#winModify").data("Devicetoken", row.Devicetoken);
-		$("#winModify").data("Lastlogintime", row.Lastlogintime);
-		$("#winModify").data("Registertime", row.Registertime);
+        $("#winModify").data("username", row.username);
+		$("#winModify").data("password", row.password);
+		$("#winModify").data("point", row.point);
+		$("#winModify").data("registerip", row.registerip);
+		$("#winModify").data("loginip", row.loginip);
+		$("#winModify").data("devicetoken", row.devicetoken);
+		$("#winModify").data("lastlogintime", row.lastlogintime);
+		$("#winModify").data("registertime", row.registertime);
 
-        $("#txtModifyUsername").val($("#winModify").data("Username"));
-		$("#txtModifyPassword").val($("#winModify").data("Password"));
-		$("#txtModifyPoint").val($("#winModify").data("Point"));
-		$("#txtModifyRegisterip").val($("#winModify").data("Registerip"));
-		$("#txtModifyLoginip").val($("#winModify").data("Loginip"));
-		$("#txtModifyDevicetoken").val($("#winModify").data("Devicetoken"));
-		$("#txtModifyLastlogintime").val($("#winModify").data("Lastlogintime"));
-		$("#txtModifyRegistertime").val($("#winModify").data("Registertime"));
+        $("#txtModifyUsername").val($("#winModify").data("username"));
+		$("#txtModifyPassword").val($("#winModify").data("password"));
+		$("#txtModifyPoint").val($("#winModify").data("point"));
+		$("#txtModifyRegisterip").val($("#winModify").data("registerip"));
+		$("#txtModifyLoginip").val($("#winModify").data("loginip"));
+		$("#txtModifyDevicetoken").val($("#winModify").data("devicetoken"));
+		$("#txtModifyLastlogintime").val($("#winModify").data("lastlogintime"));
+		$("#txtModifyRegistertime").val($("#winModify").data("registertime"));
 
         if (!window.modifyWin) {
             window.modifyWin = $.ligerDialog.open({
@@ -135,8 +135,8 @@
 				var devicetoken = $("#txtModifyDevicetoken").val();
 				var lastlogintime = $("#txtModifyLastlogintime").val();
 				var registertime = $("#txtModifyRegistertime").val();
-				var row = {objectId: objectId,Username: username,Password: password,Point: point,Registerip: registerip,
-				Loginip: loginip,Devicetoken: devicetoken, Lastlogintime: lastlogintime, Registertime: registertime};
+				var row = {objectId: objectId,username: username,password: password,point: point,registerip: registerip,
+				loginip: loginip,devicetoken: devicetoken, lastlogintime: lastlogintime, registertime: registertime};
                 $.post(UrlModifyChannelModule, { data: row }, function (e) {
                     if (e.result) {
                         $("#grid").ligerGrid().reload();

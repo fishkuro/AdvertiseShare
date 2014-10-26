@@ -13,7 +13,7 @@
         window['g'] = $("#grid").ligerGrid({
             columns:
             [{ display: '编号', name: 'objectId', align: 'center', width: '5%', isSort: true },
-            { display: '渠道名称', name: 'Payname', align: 'left', width: '20%', isSort: true }],
+            { display: '渠道名称', name: 'payname', align: 'left', width: '20%', isSort: true }],
             width: '98%',
             pageSizeOptions: [10, 30, 50],
             height: '97%',
@@ -51,7 +51,7 @@
         if (!grid) return null;
 
         var clause = function (rowdata, rowindex) {
-            return rowdata.Payname.toString().indexOf(e) > -1;
+            return rowdata.payname.toString().indexOf(e) > -1;
         };
         return clause;
     }
@@ -99,7 +99,7 @@
             formPost("#frmAdd", true, function () {
                 var payname = $("#txtAddPayname").val();
                 var grid = window['g'];
-                $.post(Urladdpayconduit, { Payname: payname }, function (e) {
+                $.post(Urladdpayconduit, { payname: payname }, function (e) {
                     if (e.result) {
                         grid.reload();
                         window.addWin.hide();
@@ -125,9 +125,9 @@
         }
 
         $("#winModify").data("objectId", row.objectId);
-        $("#winModify").data("Payname", row.Payname);
+        $("#winModify").data("payname", row.payname);
 
-        $("#txtModifyPayname").val($("#winModify").data("Payname"));
+        $("#txtModifyPayname").val($("#winModify").data("payname"));
 
         if (!window.modifyWin) {
             window.modifyWin = $.ligerDialog.open({
@@ -144,7 +144,7 @@
             formPost("#frmModify", false, function () {
                 var objectId = $("#winModify").data("objectId");
                 var payname = $("#txtModifyPayname").val();
-				var row = {objectId: objectId, Payname: payname};
+				var row = {objectId: objectId, payname: payname};
                 $.post(Urlmodpayconduit, { data: row }, function (e) {
                     if (e.result) {
                         $("#grid").ligerGrid().reload();

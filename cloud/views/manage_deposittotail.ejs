@@ -9,9 +9,9 @@
         window['g'] = $("#grid").ligerGrid({
             columns:
             [{ display: '编号', name: 'objectId', align: 'center', width: '5%', isSort: true },
-			{ display: '用户编号', name: 'Userid', align: 'left', width: '20%', isSort: true },
-            { display: '用户名称', name: 'Username', align: 'left', width: '20%', isSort: true },
-			{ display: '支付统计', name: 'Payvaluetotail', align: 'left', width: '20%', isSort: true }],
+			{ display: '用户编号', name: 'userid', align: 'left', width: '20%', isSort: true },
+            { display: '用户名称', name: 'username', align: 'left', width: '20%', isSort: true },
+			{ display: '支付统计', name: 'payvaluetotail', align: 'left', width: '20%', isSort: true }],
             width: '98%',
             pageSizeOptions: [10, 30, 50],
             height: '97%',
@@ -22,7 +22,7 @@
             rowHeight: 30,
             headerRowHeight: 30,
             isScroll: false,
-            sortName: 'Payvaluetotail',
+            sortName: 'payvaluetotail',
             sortOrder: 'desc'
             });
     });
@@ -45,7 +45,7 @@
         if (!grid) return null;
 
         var clause = function (rowdata, rowindex) {
-            return rowdata.Username.toString().indexOf(e) > -1;
+            return rowdata.username.toString().indexOf(e) > -1;
         };
         return clause;
     }

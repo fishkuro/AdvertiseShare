@@ -10,10 +10,10 @@
         window['g'] = $("#grid").ligerGrid({
             columns:
             [{ display: '编号', name: 'objectId', align: 'center', width: '5%', isSort: true },
-            { display: '用户名称', name: 'Username', align: 'left', width: '20%', isSort: true },
-            { display: '推荐人', name: 'Recmid', align: 'left', width: '20%', isSort: true },
-            { display: '推荐关系', name: 'Recmpath', align: 'left', width: '20%', isSort: true },
-            { display: '推荐统计', name: 'Recmtotail', align: 'right', width: '20%', isSort: true }],
+            { display: '用户名称', name: 'username', align: 'left', width: '20%', isSort: true },
+            { display: '推荐人', name: 'recmid', align: 'left', width: '20%', isSort: true },
+            { display: '推荐关系', name: 'recmpath', align: 'left', width: '20%', isSort: true },
+            { display: '推荐统计', name: 'recmtotail', align: 'right', width: '20%', isSort: true }],
             width: '98%',
             pageSizeOptions: [10, 30, 50],
             height: '97%',
@@ -24,7 +24,7 @@
             rowHeight: 30,
             headerRowHeight: 30,
             isScroll: false,
-            sortName: 'Username',
+            sortName: 'username',
             sortOrder: 'desc',
             });
     });
@@ -47,7 +47,7 @@
         if (!grid) return null;
 
         var clause = function (rowdata, rowindex) {
-            return rowdata.Username.toString().indexOf(e) > -1;
+            return rowdata.username.toString().indexOf(e) > -1;
         };
         return clause;
     }
@@ -62,15 +62,15 @@
         }
 
         $("#winModify").data("objectId", row.objectId);
-        $("#winModify").data("Username", row.Username);
-		$("#winModify").data("Recmid", row.Recmid);
-		$("#winModify").data("Recmpath", row.Recmpath);
-		$("#winModify").data("Recmtotail", row.Recmtotail);
+        $("#winModify").data("username", row.username);
+		$("#winModify").data("recmid", row.recmid);
+		$("#winModify").data("recmpath", row.recmpath);
+		$("#winModify").data("recmtotail", row.recmtotail);
 
-        $("#txtModifyUsername").val($("#winModify").data("Username"));
-		$("#txtModifyRecmid").val($("#winModify").data("Recmid"));
-		$("#txtModifyRecmpath").val($("#winModify").data("Recmpath"));
-		$("#txtModifyRecmtotail").val($("#winModify").data("Recmtotail"));
+        $("#txtModifyUsername").val($("#winModify").data("username"));
+		$("#txtModifyRecmid").val($("#winModify").data("recmid"));
+		$("#txtModifyRecmpath").val($("#winModify").data("recmpath"));
+		$("#txtModifyRecmtotail").val($("#winModify").data("recmtotail"));
 
         if (!window.modifyWin) {
             window.modifyWin = $.ligerDialog.open({
@@ -90,7 +90,7 @@
 				var recmid = $("#txtModifyRecmid").val();
 				var recmpath = $("#txtModifyRecmpath").val();
 				var recmtotail = $("#txtModifyRecmtotail").val();
-				var row = {objectId: objectId, Username: username, Recmid: recmid, Recmpath: recmpath, Recmtotail: recmtotail};
+				var row = {objectId: objectId, username: username, recmid: recmid, recmpath: recmpath, recmtotail: recmtotail};
 
                 $.post(Urlmodmembers, { data: row }, function (e) {
                     if (e.result) {

@@ -13,11 +13,11 @@
         window['g'] = $("#grid").ligerGrid({
             columns:
             [{ display: '编号', name: 'objectId', align: 'center', width: '5%', isSort: true },
-            { display: '任务名称', name: 'Taskname', align: 'left', width: '20%', isSort: true },
-			{ display: '副标题', name: 'Subtitle', align: 'left', width: '20%', isSort: true },
-			{ display: '平台编号', name: 'Terraceid', align: 'left', width: '20%', isSort: true },
-			{ display: '平台名称', name: 'Terracename', align: 'left', width: '20%', isSort: true },
-			{ display: '是否启用', name: 'Enable', align: 'left', width: '20%', isSort: true }],
+            { display: '任务名称', name: 'taskname', align: 'left', width: '20%', isSort: true },
+			{ display: '副标题', name: 'subtitle', align: 'left', width: '20%', isSort: true },
+			{ display: '平台编号', name: 'terraceid', align: 'left', width: '20%', isSort: true },
+			{ display: '平台名称', name: 'terracename', align: 'left', width: '20%', isSort: true },
+			{ display: '是否启用', name: 'enable', align: 'left', width: '20%', isSort: true }],
             width: '98%',
             pageSizeOptions: [10, 30, 50],
             height: '97%',
@@ -28,7 +28,7 @@
             rowHeight: 30,
             headerRowHeight: 30,
             isScroll: false,
-            sortName: 'Taskname',
+            sortName: 'taskname',
             sortOrder: 'desc',
             toolbar: {
                 items: [{ text: '增加', click: AddModule, img: '/Content/LigerUI/icons/add.gif' }, { line: true },
@@ -55,7 +55,7 @@
         if (!grid) return null;
 
         var clause = function (rowdata, rowindex) {
-            return rowdata.Taskname.toString().indexOf(e) > -1;
+            return rowdata.taskname.toString().indexOf(e) > -1;
         };
         return clause;
     }
@@ -108,7 +108,7 @@
                 var enable = $("#txtAddEnable").val();
 
                 var grid = window['g'];
-                var row = {Taskname: taskname, Subtitle: subtitle, Terraceid: terraceid, Terracename: terracename, Enable: enable};
+                var row = {taskname: taskname, subtitle: subtitle, terraceid: terraceid, terracename: terracename, Enable: enable};
                 $.post(Urladdtasks, {data: row}, function (e) {
                     if (e.result) {
                         grid.reload();
@@ -135,17 +135,17 @@
         }
 
         $("#winModify").data("objectId", row.objectId);
-        $("#winModify").data("Taskname", row.Taskname);
-		$("#winModify").data("Subtitle", row.Subtitle);
-		$("#winModify").data("Terraceid", row.Terraceid);
-		$("#winModify").data("Terracename", row.Terracename);
-		$("#winModify").data("Enable", row.Enable);
+        $("#winModify").data("taskname", row.taskname);
+		$("#winModify").data("subtitle", row.subtitle);
+		$("#winModify").data("terraceid", row.terraceid);
+		$("#winModify").data("terracename", row.terracename);
+		$("#winModify").data("enable", row.enable);
 
-        $("#txtModifyTaskname").val($("#winModify").data("Taskname"));
-		$("#txtModifySubtitle").val($("#winModify").data("Subtitle"));
-		$("#txtModifyTerraceid").val($("#winModify").data("Terraceid"));
-		$("#txtModifyTerracename").val($("#winModify").data("Terracename"));
-		$("#txtModifyEnable").val($("#winModify").data("Enable"));
+        $("#txtModifyTaskname").val($("#winModify").data("taskname"));
+		$("#txtModifySubtitle").val($("#winModify").data("subtitle"));
+		$("#txtModifyTerraceid").val($("#winModify").data("terraceid"));
+		$("#txtModifyTerracename").val($("#winModify").data("terracename"));
+		$("#txtModifyEnable").val($("#winModify").data("enable"));
 
         if (!window.modifyWin) {
             window.modifyWin = $.ligerDialog.open({
@@ -166,7 +166,7 @@
 				var terraceid = $("#txtModifyTerraceid").val();
 				var terracename = $("#txtModifyTerracename").val();
 				var enable = $("#txtModifyEnable").val();
-				var row = {objectId: objectId, Taskname: taskname, Subtitle: subtitle, Terraceid:terraceid, Terracename:terracename, Enable:enable};
+				var row = {objectId: objectId, taskname: taskname, subtitle: subtitle, terraceid:terraceid, terracename:terracename, enable:enable};
                 $.post(Urlmodtasks, { data: row }, function (e) {
                     if (e.result) {
                         $("#grid").ligerGrid().reload();

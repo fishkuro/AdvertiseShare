@@ -127,8 +127,8 @@ exports.create = function() {
 };
 
 exports.find = function(options) {
-    var MemberInfo = AV.Object.extend("MemberInfo");
-    var query = new AV.Query(MemberInfo);
+    var memberinfo = AV.Object.extend("MemberInfo");
+    var query = new AV.Query(memberinfo);
     var reslut = query.find(options);
 	return reslut;
 };

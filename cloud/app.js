@@ -1,17 +1,17 @@
-var MembersClass = require('cloud/model/Members.js');
-var Memberinfo = require('cloud/model/MemberInfo.js');
-var Depositrecord = require('cloud/model/DepositRecord.js');
-var Deposittotail = require('cloud/model/DepositTotail.js');
-var Notices = require('cloud/model/Notices.js');
-var Payconduit = require('cloud/model/PayConduit.js');
-var Scorerecord = require('cloud/model/ScoreRecord.js');
-var Scoretotail = require('cloud/model/ScoreTotail.js');
-var Tasks = require('cloud/model/Tasks.js');
-var Terraces = require('cloud/model/Terraces.js');
+var MembersCls = require('cloud/model/Members.js');
+var MemberInfoCls = require('cloud/model/MemberInfo.js');
+var DepositrecordCls = require('cloud/model/DepositRecord.js');
+var DeposittotailCls = require('cloud/model/DepositTotail.js');
+var NoticesCls = require('cloud/model/Notices.js');
+var PayconduitCls = require('cloud/model/PayConduit.js');
+var ScorerecordCls = require('cloud/model/ScoreRecord.js');
+var ScoretotailCls = require('cloud/model/ScoreTotail.js');
+var TasksCls = require('cloud/model/Tasks.js');
+var TerracesCls = require('cloud/model/Terraces.js');
 // =====
-//var admins = require('cloud/model/Admins.js');
+var AdminsCls = require('cloud/model/Admins.js');
 
-var Utility = require('cloud/utils/Utility.js');
+var UtilityCls = require('cloud/utils/Utility.js');
 
 // 在 Cloud code 里初始化 Express 框架
 var express = require('express');
@@ -25,7 +25,7 @@ app.use(express.bodyParser());    // 读取请求 body 的中间件
 // 使用 Express 路由 API 服务 /hello 的 HTTP GET 请求
 app.get('/hello', function(req, res) {
   var rlt = false;
-  var members = MembersClass.create();
+  var members = MembersCls.create();
   members.Username("fishwww");
   members.save(null,{
     success: function(members) {
@@ -40,7 +40,7 @@ app.get('/hello', function(req, res) {
 });
 
 // 后台管理开始
-var session = Utility.usersession();
+var session = UtilityCls.usersession();
 app.get('/kurodo/login', function(req, res) {
     session.clear();
     res.render('manage_login', { title: '后台登录' });
@@ -50,7 +50,7 @@ app.post('/administrator/login',function(req, res) {
   var name = req.body.username;
   var pass = req.body.password;
   //var result = manger.login(name, pass);
-  var admin = AV.Object.extend("Admins");
+  var admin = new AdminsCls();
   var query = new AV.Query(admin);
   query.equalTo("username",name);
   query.greaterThan("password", pass);
@@ -117,22 +117,22 @@ app.get('/administrator/terraces', function(req, res) {
 //json 调用
 
 app.get('/administrator/membersdata',function(req, res) {
-  var membersdata = Members.find();
+  var membersdata = MembersCls.find();
   res.json(membersdata);
 });
 
 app.get('/administrator/memberinfodata',function(req, res) {
-  var memberinfodata = Memberinfo.find();
+  var memberinfodata = MemberInfoCls.find();
   res.json(memberinfodata);
 });
 
 app.get('/administrator/depositrecorddata',function(req, res) {
-  var depositrecorddata = Depositrecord.find();
+  var depositrecorddata = DepositrecordCls.find();
   res.json(depositrecorddata);
 });
 
 app.get('/administrator/deposittotaildata',function(req, res) {
-  var deposittotaildata = Deposittotail.find();
+  var deposittotaildata = DeposittotailCls.find();
   res.json(depositrecorddata);
 });
 
@@ -142,27 +142,27 @@ app.get('/administrator/noticesdata',function(req, res) {
 });
 
 app.get('/administrator/payconduitdata',function(req, res) {
-  var payconduitdata = Payconduit.find();
+  var payconduitdata = PayconduitCls.find();
   res.json(payconduitdata);
 });
 
 app.get('/administrator/scorerecorddata',function(req, res) {
-  var scorerecorddata = Scorerecord.find();
+  var scorerecorddata = ScorerecordCls.find();
   res.json(scorerecorddata);
 });
 
 app.get('/administrator/scoretotaildata',function(req, res) {
-  var scoretotaildata = Scoretotail.find();
+  var scoretotaildata = ScoretotailCls.find();
   res.json(scoretotaildata);
 });
 
 app.get('/administrator/tasksdata',function(req, res) {
-  var tasksdata = Tasks.find();
+  var tasksdata = TasksCls.find();
   res.json(tasksdata);
 });
 
 app.get('/administrator/terracesdata',function(req, res) {
-  var terracesdata = Terraces.find();
+  var terracesdata = TerracesCls.find();
   res.json(terracesdata);
 });
 
@@ -171,7 +171,7 @@ var rlt = { result:false, msg:"错误结果!" };
 
 app.post('/administrator/addterraces',function(req, res) {
   var tname = req.body.terracename;
-  var terraces = Terraces.init(tname);
+  var terraces = TerracesCls.init(tname);
 
   terraces.save(null, {
   success: function(terraces) {
@@ -189,7 +189,7 @@ app.post('/administrator/addterraces',function(req, res) {
 app.post('/administrator/modterraces',function(req, res) {
   var oid = req.body.objectId;
   var tname = req.body.terracename;
-  var terraces = Terraces.create();
+  var terraces = TerracesCls.create();
   terraces.objectId(oid);
   terraces.TerraceName(tname);
 
@@ -209,7 +209,7 @@ app.post('/administrator/modterraces',function(req, res) {
 app.post('/administrator/delterraces',function(req, res) {
   var oid = req.body.data.objectId;
   var tname = req.body.data.terracename;
-  var terraces = Terraces.create();
+  var terraces = TerracesCls.create();
   terraces.objectId(oid);
   terraces.Terracename(tname);
 
@@ -230,7 +230,7 @@ app.post('/administrator/addnotices',function(req, res) {
     var title = req.body.data.title;
     var content = req.body.data.content;
     var postdate = new Date();
-    var notice = Notices.init(title,postdate,content);
+    var notice = NoticesCls.init(title,postdate,content);
 
     notice.save(null, {
       success: function(notice) {
@@ -250,7 +250,7 @@ app.post('/administrator/modnotices',function(req, res) {
     var title = req.body.data.title;
     var content = req.body.data.content;
     var postdate = new Date();
-    var notice = Notices.create();
+    var notice = NoticesCls.create();
     notice.objectId(oId);
     notice.Title(title);
     notice.Content(content);
@@ -274,7 +274,7 @@ app.post('/administrator/delnotices',function(req, res) {
     var title = req.body.data.title;
     var content = req.body.data.content;
     var postdate = req.body.data.postdate;
-    var notice = Notices.create();
+    var notice = NoticesCls.create();
     notice.objectId(oId);
     notice.Title(title);
     notice.Content(content);
@@ -295,7 +295,7 @@ app.post('/administrator/delnotices',function(req, res) {
 
 app.post('/administrator/addpayconduit',function(req, res) {
   var pname = req.body.payname;
-  var payconduit = Payconduit.init(pname);
+  var payconduit = PayconduitCls.init(pname);
 
   payconduit.save(null, {
   success: function(payconduit) {
@@ -313,7 +313,7 @@ app.post('/administrator/addpayconduit',function(req, res) {
 app.post('/administrator/modpayconduit',function(req, res) {
   var oid = req.body.data.objectId;
   var pname = req.body.data.payname;
-  var payconduit = Payconduit.create();
+  var payconduit = PayconduitCls.create();
   payconduit.objectId(oid);
   payconduit.Payname(pname);
 
@@ -333,7 +333,7 @@ app.post('/administrator/modpayconduit',function(req, res) {
 app.post('/administrator/delpayconduit',function(req, res) {
   var oid = req.body.data.objectId;
   var pname = req.body.data.payname;
-  var payconduit = Payconduit.create();
+  var payconduit = PayconduitCls.create();
   payconduit.objectId(oid);
   payconduit.Payname(pname);
 
@@ -360,7 +360,7 @@ app.post('/administrator/moddepositrecord',function(req, res) {
   var pvd = req.body.data.payvalid;
   var atime = req.body.data.applytime;
   var ptime = new Date();
-  var depositrecord = Depositrecord.create();
+  var depositrecord = DepositrecordCls.create();
   depositrecord.objectId(oid);
   depositrecord.Userid(userid);
   depositrecord.Username(username);
@@ -390,7 +390,7 @@ app.post('/administrator/addtasks',function(req, res) {
     var tid = req.body.data.terraceid;
     var tname = req.body.data.terracename;
     var enable = req.body.data.enable;
-    var task = Tasks.init(tname,stitle,tid,enable,tname);
+    var task = TasksCls.init(tname,stitle,tid,enable,tname);
 
     task.save(null, {
       success: function(task) {
@@ -412,7 +412,7 @@ app.post('/administrator/modtasks',function(req, res) {
     var tid = req.body.data.terraceid;
     var tname = req.body.data.terracename;
     var enable = req.body.data.enable;
-    var task = Tasks.create();
+    var task = TasksCls.create();
     task.objectId(oId);
     task.Taskname(tname);
     task.Subtitle(stitle);
@@ -440,7 +440,7 @@ app.post('/administrator/deltasks',function(req, res) {
     var tid = req.body.data.terraceid;
     var tname = req.body.data.terracename;
     var enable = req.body.data.enable;
-    var task = Tasks.create();
+    var task = TasksCls.create();
     task.objectId(oId);
     task.Taskname(tname);
     task.Subtitle(stitle);
@@ -471,7 +471,7 @@ app.post('/administrator/modmemberinfo',function(req, res) {
     var devicetoken = req.body.data.devicetoken;
     var lastlogintime = req.body.data.lastlogintime;
     var registertime = req.body.data.registertime;
-    var member = Members.create();
+    var member = MembersCls.create();
     member.objectId(oId);
     member.Username(username);
     member.Password(password);
@@ -501,7 +501,7 @@ app.post('/administrator/modmembers',function(req, res) {
     var recmid = req.body.data.recmid;
     var recmpath = req.body.data.recmpath;
     var recmtotail = req.body.data.recmtotail;
-    var members = Members.create();
+    var members = MembersCls.create();
     members.objectId(oId);
     members.Username(username);
     members.Recmanid(recmid);
@@ -536,12 +536,12 @@ var cloudMsg;
 AV.Cloud.define("memberLogin", function(req, res) {
   var nameStr = req.params.username;
   var passStr = req.params.password;
-  var ipStr = Utility.getIpAddress(req);
+  var ipStr = UtilityCls.getIpAddress(req);
 
   var user = new AV.User();
   user.set("username",nameStr);
   user.set("password",passStr);
-  var meminfo = Memberinfo.create();
+  var meminfo = MemberInfoCls.create();
   var query = new AV.Query(meminfo);
   query.equalTo("username", nameStr);
   query.greaterThan("password", passStr);
@@ -587,7 +587,7 @@ AV.Cloud.define("memberLogout", function(req, res) {
   var nameStr = req.params.username;
   var passStr = req.params.password;
 
-  var meminfo = Memberinfo.create();
+  var meminfo = MemberInfoCls.create();
   var query = new AV.Query(memberinfo);
   query.equalTo("username", nameStr);
   query.greaterThan("password", passStr);
@@ -620,12 +620,12 @@ AV.Cloud.define("memberLogout", function(req, res) {
 AV.Cloud.define("memberLogin22", function(req, res) {
   var nameStr = req.params.username;
   var passStr = req.params.password;
-  var ipStr = Utility.getCloudIpAddress(req);
+  var ipStr = UtilityCls.getCloudIpAddress(req);
 
   var user = new AV.User();
   user.set("username",nameStr);
   user.set("password",passStr);
-  var meminfo = Memberinfo.create();
+  var meminfo = MemberInfoCls.create();
   var query = new AV.Query(memberinfo);
   query.equalTo("username", nameStr);
   query.greaterThan("password", passStr);
@@ -689,7 +689,7 @@ AV.Cloud.define("memberRegister", function(req, res) {
   var tokenStr = req.params.devicetoken;
   var ipStr = "127.0.0.1"; //Utility.getCloudIpAddress(req);
 
-  var mem = Members.create();
+  var mem = MembersCls.create();
   var query = new AV.Query(mem);
   query.notEqualTo("username",nameStr);
   query.find({
@@ -698,7 +698,7 @@ AV.Cloud.define("memberRegister", function(req, res) {
       mem.Username(nameStr);
       mem.save();
       var dateNow = new Date();
-      var meminfo = Memberinfo.init(mem.Signid(),nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
+      var meminfo = MemberInfoCls.init(mem.Signid(),nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
       meminfo.save(null,{
         success:function(memberinfo)
         {
@@ -725,15 +725,15 @@ AV.Cloud.define("addSubAccount", function(req, res) {
   var nameStr = req.params.username;
   var passStr = req.params.password;
   var tokenStr = req.params.devicetoken;
-  var ipStr = Utility.getCloudIpAddress(req);
+  var ipStr = UtilityCls.getCloudIpAddress(req);
 
-  var members = Members.create();
+  var members = MembersCls.create();
   var query = new AV.Query(member);
   query.equalTo("username",nameStr);
   query.find({
     success:function(members)
     {
-      var meminfo = Memberinfo.create();
+      var meminfo = MemberInfoCls.create();
       var aquery = new AV.Query(meminfo);
       aquery.notEqualTo("username",nameStr);
       aquery.greaterThan("password",passStr);

@@ -1,5 +1,5 @@
 var Members = require('cloud/model/Members.js');
-var memberinfoclass = require('cloud/model/MemberInfo.js');
+var Memberinfo = require('cloud/model/MemberInfo.js');
 var Depositrecord = require('cloud/model/DepositRecord.js');
 var Deposittotail = require('cloud/model/DepositTotail.js');
 var Notices = require('cloud/model/Notices.js');
@@ -120,7 +120,7 @@ app.get('/administrator/membersdata',function(req, res) {
 });
 
 app.get('/administrator/memberinfodata',function(req, res) {
-  var memberinfodata = memberinfoclass.find();
+  var memberinfodata = Memberinfo.find();
   res.json(memberinfodata);
 });
 
@@ -539,19 +539,19 @@ AV.Cloud.define("memberLogin", function(req, res) {
   var user = new AV.User();
   user.set("username",nameStr);
   user.set("password",passStr);
-  var memberinfo = memberinfoclass.create();
-  var query = new AV.Query(memberinfo);
+  var meminfo = Memberinfo.create();
+  var query = new AV.Query(meminfo);
   query.equalTo("username", nameStr);
   query.greaterThan("password", passStr);
   query.find({
-    success: function(memberinfo) {
-      if (memberinfo.SessionId()) {
+    success: function(meminfo) {
+      if (meminfo.SessionId()) {
         user.logIn({
           success: function(user) {
           // 1 登录成功
-          memberinfo.Loginip(ipStr);
-          memberinfo.Lastlogintime(new Date());
-          memberinfo.save();
+          meminfo.Loginip(ipStr);
+          meminfo.Lastlogintime(new Date());
+          meminfo.save();
           cloudMsg = "登录成功";
         },
         error: function(user, error)
@@ -563,8 +563,8 @@ AV.Cloud.define("memberLogin", function(req, res) {
           user.signUp(null,{
             success:function(user) {
               //注册完成后回注objectId
-              memberinfo.SessionId(user.objectId);
-              memberinfo.save();
+              meminfo.SessionId(user.objectId);
+              meminfo.save();
             },
             error:function(user,error)
             { cloudMsg = error.message; }
@@ -585,13 +585,13 @@ AV.Cloud.define("memberLogout", function(req, res) {
   var nameStr = req.params.username;
   var passStr = req.params.password;
 
-  var memberinfo = memberinfoclass.create();
+  var meminfo = Memberinfo.create();
   var query = new AV.Query(memberinfo);
   query.equalTo("username", nameStr);
   query.greaterThan("password", passStr);
   query.find({
-    success: function(memberinfo) {
-      var sessionId = memberinfo.SessionId();
+    success: function(meminfo) {
+      var sessionId = meminfo.SessionId();
       if (sessionId) {
         var user = new AV.User();
         user.set("objectId",sessionId);
@@ -600,8 +600,8 @@ AV.Cloud.define("memberLogout", function(req, res) {
           error: function(user,error){}
         });
 
-        memberinfo.SessionId(null);
-        memberinfo.save();
+        meminfo.SessionId(null);
+        meminfo.save();
       }
       cloudMsg = "注销成功";
     },
@@ -623,7 +623,7 @@ AV.Cloud.define("memberLogin22", function(req, res) {
   var user = new AV.User();
   user.set("username",nameStr);
   user.set("password",passStr);
-  var memberinfo = memberinfoclass.create();
+  var meminfo = Memberinfo.create();
   var query = new AV.Query(memberinfo);
   query.equalTo("username", nameStr);
   query.greaterThan("password", passStr);
@@ -667,9 +667,9 @@ AV.Cloud.define("memberLogin22", function(req, res) {
         }
       });
 
-      memberinfo.Loginip(ipStr);
-      memberinfo.Lastlogintime(new Date());
-      memberinfo.save();
+      meminfo.Loginip(ipStr);
+      meminfo.Lastlogintime(new Date());
+      meminfo.save();
     },
     error: function(error) {
       cloudMsg = "信息输入不对";
@@ -685,7 +685,7 @@ AV.Cloud.define("memberRegister", function(req, res) {
   var nameStr = req.params.username;
   var passStr = req.params.password;
   var tokenStr = req.params.devicetoken;
-  //var ipStr = Utility.getCloudIpAddress(req);
+  var ipStr = "127.0.0.1"; //Utility.getCloudIpAddress(req);
 
   var members = Members.create();
   var query = new AV.Query(members);
@@ -696,7 +696,7 @@ AV.Cloud.define("memberRegister", function(req, res) {
       members.Username(nameStr);
       members.save();
       var dateNow = new Date();
-      var memberinfo = memberinfoclass.init(members.Signid(),nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
+      var meminfo = Memberinfo.init(members.Signid(),nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
       memberinfo.save(null,{
         success:function(memberinfo)
         {
@@ -731,20 +731,20 @@ AV.Cloud.define("addSubAccount", function(req, res) {
   query.find({
     success:function(members)
     {
-      var memberinfo = memberinfoclass.create();
-      var aquery = new AV.Query(memberinfo);
+      var meminfo = Memberinfo.create();
+      var aquery = new AV.Query(meminfo);
       aquery.notEqualTo("username",nameStr);
       aquery.greaterThan("password",passStr);
       aquery.find(null,{
         success:function(memberinfo) {
-          memberinfo.Signid(members.Signid())
-          memberinfo.Username(nameStr);
-          memberinfo.Password(passStr);
-          memberinfo.Point(0);
-          memberinfo.Registerip(ipStr);
-          memberinfo.Devicetoken(tokenStr);
-          memberinfo.Registertime(new Date());
-          memberinfo.save(null,{
+          meminfo.Signid(members.Signid())
+          meminfo.Username(nameStr);
+          meminfo.Password(passStr);
+          meminfo.Point(0);
+          meminfo.Registerip(ipStr);
+          meminfo.Devicetoken(tokenStr);
+          meminfo.Registertime(new Date());
+          meminfo.save(null,{
             success:function(memberinfo)
             {
               cloudMsg = "添加成功";

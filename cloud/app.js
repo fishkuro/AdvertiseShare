@@ -11,7 +11,7 @@ var Terraces = require('cloud/model/Terraces.js');
 // =====
 //var admins = require('cloud/model/Admins.js');
 
-var Utility = require('cloud/utils/Utility.js');
+var utility = require('cloud/utils/Utility.js');
 
 // 在 Cloud code 里初始化 Express 框架
 var express = require('express');
@@ -29,7 +29,7 @@ app.get('/hello', function(req, res) {
 });
 
 // 后台管理开始
-var session = Utility.usersession();
+var session = utility.usersession();
 app.get('/kurodo/login', function(req, res) {
     session.clear();
     res.render('manage_login', { title: '后台登录' });
@@ -536,7 +536,7 @@ AV.Cloud.define("memberLoginCloud", function(req, res) {
   query.greaterThan("password", passStr);
   query.find({
     success: function(memberinfo) {
-      if (memberinfo.sessionId()) {
+      if (memberinfo.SessionId()) {
         user.logIn({
           success: function(user) {
           // 1 登录成功
@@ -595,6 +595,7 @@ AV.Cloud.define("memberLogout", function(req, res) {
         memberinfo.sessionId(null);
         memberinfo.save();
       }
+      return "注销成功";
     },
     error: function(error) {
       return error.message;
@@ -608,7 +609,7 @@ AV.Cloud.define("memberLogout", function(req, res) {
 AV.Cloud.define("memberLogin", function(req, res) {
   var nameStr = req.body.username;
   var passStr = req.body.password;
-  var ipStr = Utility.getIpAddress(req);
+  var ipStr = utility.getIpAddress(req);
 
   var user = new AV.User();
   user.set("username",nameStr);
@@ -675,7 +676,7 @@ AV.Cloud.define("memberRegister", function(req, res) {
   var nameStr = req.body.username;
   var passStr = req.body.password;
   var tokenStr = req.body.devicetoken;
-  var ipStr = Utility.getIpAddress(req);
+  var ipStr = utility.getIpAddress(req);
 
   var members = Members.create();
   var query = new AV.Query(members);
@@ -713,7 +714,7 @@ AV.Cloud.define("addSubAccount", function(req, res) {
   var nameStr = req.body.username;
   var passStr = req.body.password;
   var tokenStr = req.body.devicetoken;
-  var ipStr = Utility.getIpAddress(req);
+  var ipStr = utility.getIpAddress(req);
 
   var members = Members.create();
   var query = new AV.Query(member);

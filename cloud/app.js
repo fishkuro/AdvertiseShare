@@ -699,20 +699,20 @@ AV.Cloud.define("memberRegister", function(req, res) {
   var tokenStr = req.params.devicetoken;
   var ipStr = "127.0.0.1"; //Utility.getCloudIpAddress(req);
 
-  var mem = MembersCls.create();
-  var query = new AV.Query(mem);
+  var members = MembersCls.create();
+  var query = new AV.Query(members);
   query.notEqualTo("username",nameStr);
   query.find({
     success:function(members)
     {
-      mem.Username(nameStr);
-      mem.save();
+      members.Username(nameStr);
+      members.save();
       // var dateNow = new Date();
       // var memberinfo = MemberInfoCls.init(member.Signid(),nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
       // memberinfo.save(null,{
       //   success:function(memberinfo)
       //   {
-      //     cloudMsg = "注册成功";
+          cloudMsg = "注册成功";
       //   },
       //   error:function(memberinfo,error)
       //   {

@@ -119,7 +119,7 @@ exports.init = function(signid,username,password,point,registerip,loginip,device
 	memberinfo.set("registertime",registertime);		//DateTime
 	
     return memberinfo;
-  };
+};
 
 exports.create = function() {
     var memberinfo = new MemberInfo();

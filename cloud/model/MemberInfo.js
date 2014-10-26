@@ -11,7 +11,7 @@ var MemberInfo = AV.Object.extend("MemberInfo", {
 		}
 		else
 		{
-		return this.get("objectId");
+			return this.get("objectId");
 		}
 	},
   	Signid:function(value)		// Int64

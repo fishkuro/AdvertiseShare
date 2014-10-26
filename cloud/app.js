@@ -39,12 +39,12 @@ app.get('/hello', function(req, res) {
   AV.Cloud.run('memberRegister', {username:"fishwww",password:"123456",devicetoken:"fdvsdvfd"}, {
     success: function(result) {
     // result is 'Hello world!'
-      rlt = result;
+      rlt = 123123;
     },
     error: function(error) {
       rlt = error.message;
     }
-});
+  });
 
   res.render('hello', { message: rlt });
 });

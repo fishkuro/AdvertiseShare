@@ -521,19 +521,11 @@ app.post('/administrator/modmembers',function(req, res) {
 
 var cloudMsg;
 
-// 测试云函数
-AV.Cloud.define("testCloud", function(req, res) {
-	var nameStr = req.params.fuck;
-	var passStr = req.params.you;
-
-  res.success(nameStr + " | " + passStr);
-});
-
 //
 // 带SessionId逻辑
-AV.Cloud.define("memberLoginCloud", function(req, res) {
-  var nameStr = req.body.username;
-  var passStr = req.body.password;
+AV.Cloud.define("memberLogin", function(req, res) {
+  var nameStr = req.params.username;
+  var passStr = req.params.password;
   var ipStr = Utility.getIpAddress(req);
 
   var user = new AV.User();
@@ -576,14 +568,14 @@ AV.Cloud.define("memberLoginCloud", function(req, res) {
     }
   });
 
-  res.send(cloudMsg);
+  res.success(cloudMsg);
 });
 
 //
 // 云函数 - 注销登录
 AV.Cloud.define("memberLogout", function(req, res) {
-  var nameStr = req.body.username;
-  var passStr = req.body.password;
+  var nameStr = req.params.username;
+  var passStr = req.params.password;
 
   var memberinfo = Memberinfo.create();
   var query = new AV.Query(memberinfo);
@@ -610,14 +602,14 @@ AV.Cloud.define("memberLogout", function(req, res) {
     }
   });
 
-  res.send(cloudMsg);
+  res.success(cloudMsg);
 });
 
 //
 // 云函数 - 自定义登录
-AV.Cloud.define("memberLogin", function(req, res) {
-  var nameStr = req.body.username;
-  var passStr = req.body.password;
+AV.Cloud.define("memberLogin2", function(req, res) {
+  var nameStr = req.params.username;
+  var passStr = req.params.password;
   var ipStr = Utility.getIpAddress(req);
 
   var user = new AV.User();
@@ -676,15 +668,15 @@ AV.Cloud.define("memberLogin", function(req, res) {
     }
   });
 
-  res.send(cloudMsg);
+  res.success(cloudMsg);
 });
 
 //
 // 云函数 - 自定义注册
 AV.Cloud.define("memberRegister", function(req, res) {
-  var nameStr = req.body.username;
-  var passStr = req.body.password;
-  var tokenStr = req.body.devicetoken;
+  var nameStr = req.params.username;
+  var passStr = req.params.password;
+  var tokenStr = req.params.devicetoken;
   var ipStr = Utility.getIpAddress(req);
 
   var members = Members.create();
@@ -714,15 +706,15 @@ AV.Cloud.define("memberRegister", function(req, res) {
     }
   });
 
-  res.send(cloudMsg);
+  res.success(cloudMsg);
 });
 
 //
 // 云函数 - 自定义添加子帐户
 AV.Cloud.define("addSubAccount", function(req, res) {
-  var nameStr = req.body.username;
-  var passStr = req.body.password;
-  var tokenStr = req.body.devicetoken;
+  var nameStr = req.params.username;
+  var passStr = req.params.password;
+  var tokenStr = req.params.devicetoken;
   var ipStr = Utility.getIpAddress(req);
 
   var members = Members.create();
@@ -767,7 +759,7 @@ AV.Cloud.define("addSubAccount", function(req, res) {
     }
   });
 
-  res.send(cloudMsg);
+  res.success(cloudMsg);
 });
 
 // 最后，必须有这行代码来使 express 响应 HTTP 请求

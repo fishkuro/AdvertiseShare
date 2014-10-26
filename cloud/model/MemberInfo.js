@@ -103,6 +103,16 @@ var MemberInfo = AV.Object.extend("MemberInfo", {
 		{
 			 return this.get("Registertime");
 		}
+	},
+	SessionId:function(value)			//_User objectId
+	{
+		if (value) {
+			this.set("SessionId",value);
+		}
+		else
+		{
+			 return this.get("SessionId");
+		}
 	}
 });
 

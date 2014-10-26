@@ -35,14 +35,35 @@ app.get('/hello', function(req, res) {
   //     rlt = error.message;
   //   }
   // });
+  var nameStr = "fishwww";
+  var passStr = "1234567";
+  var tokenStr = "FDSAFDASFDAS";
+  var ipStr = "127.0.0.1";
 
-  AV.Cloud.run('memberRegister', {username:"fishwww",password:"123456",devicetoken:"fdvsdvfd"}, {
-    success: function(result) {
-    // result is 'Hello world!'
-      rlt = 123123;
+  var members = MembersCls.create();
+  var query = new AV.Query(members);
+  query.notEqualTo("username",nameStr);
+  query.find({
+    success:function(members)
+    {
+      members.set('username',nameStr);
+      members.save();
+      var dateNow = new Date();
+      var memberinfo = MemberInfoCls.init(members.get('objectId'),nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
+      memberinfo.save(null,{
+        success:function(memberinfo)
+        {
+          rlt = "注册成功";
+        },
+        error:function(memberinfo,error)
+        {
+          rlt = error.message;
+        }
+      });
     },
-    error: function(error) {
-      rlt = error.message;
+    error:function(error)
+    {
+      rlt = "该账户已存在";
     }
   });
 

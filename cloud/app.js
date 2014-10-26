@@ -685,7 +685,7 @@ AV.Cloud.define("memberRegister", function(req, res) {
   var nameStr = req.params.username;
   var passStr = req.params.password;
   var tokenStr = req.params.devicetoken;
-  var ipStr = Utility.getCloudIpAddress(req);
+  //var ipStr = Utility.getCloudIpAddress(req);
 
   var members = Members.create();
   var query = new AV.Query(members);
@@ -695,18 +695,18 @@ AV.Cloud.define("memberRegister", function(req, res) {
     {
       members.Username(nameStr);
       members.save();
-      //var dateNow = new Date();
-      // var memberinfo = Memberinfo.init(members.Signid(),nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
-      // memberinfo.save(null,{
-      //   success:function(memberinfo)
-      //   {
+      var dateNow = new Date();
+      var memberinfo = Memberinfo.init(members.Signid(),nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
+      memberinfo.save(null,{
+        success:function(memberinfo)
+        {
           cloudMsg = "注册成功";
-      //   },
-      //   error:function(memberinfo,error)
-      //   {
-      //     cloudMsg = error.message;
-      //   }
-      // });
+        },
+        error:function(memberinfo,error)
+        {
+          cloudMsg = error.message;
+        }
+      });
     },
     error:function(error)
     {

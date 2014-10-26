@@ -25,16 +25,26 @@ app.use(express.bodyParser());    // 读取请求 body 的中间件
 // 使用 Express 路由 API 服务 /hello 的 HTTP GET 请求
 app.get('/hello', function(req, res) {
   var rlt = false;
-  var members = MembersCls.create();
-  members.Username("fishwww");
-  members.save(null,{
-    success: function(members) {
-      rlt = members.Username() + " | " + members.Password();
+  // var members = MembersCls.create();
+  // members.Username("fishwww");
+  // members.save(null,{
+  //   success: function(members) {
+  //     rlt = members.Username() + " | " + members.Password();
+  //   },
+  //   error: function(members,error) {
+  //     rlt = error.message;
+  //   }
+  // });
+
+  AV.Cloud.run('memberRegister', {username:"fishwww",password:"123456"}, {
+    success: function(result) {
+    // result is 'Hello world!'
+      rlt = result;
     },
-    error: function(members,error) {
+    error: function(error) {
       rlt = error.message;
     }
-  });
+});
 
   res.render('hello', { message: rlt });
 });
@@ -689,17 +699,17 @@ AV.Cloud.define("memberRegister", function(req, res) {
   var tokenStr = req.params.devicetoken;
   var ipStr = "127.0.0.1"; //Utility.getCloudIpAddress(req);
 
-  var mem = MembersCls.create();
-  var query = new AV.Query(mem);
+  var member = MembersCls.create();
+  var query = new AV.Query(member);
   query.notEqualTo("username",nameStr);
   query.find({
     success:function(members)
     {
-      mem.Username(nameStr);
-      mem.save();
+      member.Username(nameStr);
+      member.save();
       var dateNow = new Date();
-      var meminfo = MemberInfoCls.init(mem.Signid(),nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
-      meminfo.save(null,{
+      var memberinfo = MemberInfoCls.init(member.Signid(),nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
+      memberinfo.save(null,{
         success:function(memberinfo)
         {
           cloudMsg = "注册成功";

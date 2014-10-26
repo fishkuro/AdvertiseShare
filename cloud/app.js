@@ -526,7 +526,7 @@ AV.Cloud.define("testCloud", function(req, res) {
 	var nameStr = req.params.fuck;
 	var passStr = req.params.you;
 
-  response.success(nameStr + " | " + passStr);
+  res.success(nameStr + " | " + passStr);
 });
 
 //
@@ -552,10 +552,10 @@ AV.Cloud.define("memberLoginCloud", function(req, res) {
           memberinfo.Loginip(ipStr);
           memberinfo.Lastlogintime(new Date());
           memberinfo.save();
-          return "登录成功";
+          cloudMsg = "登录成功";
         },
         error: function(user, error)
-        { return error.message; }
+        { cloudMsg = error.message; }
         });
       }
       else
@@ -567,15 +567,16 @@ AV.Cloud.define("memberLoginCloud", function(req, res) {
               memberinfo.save();
             },
             error:function(user,error)
-            { return error.message; }
+            { cloudMsg = error.message; }
           });
       }
     },
     error: function(error) {
-      return "信息输入不对";
+      cloudMsg = "信息输入不对";
     }
   });
 
+  res.send(cloudMsg);
 });
 
 //
@@ -602,13 +603,14 @@ AV.Cloud.define("memberLogout", function(req, res) {
         memberinfo.SessionId(null);
         memberinfo.save();
       }
-      return "注销成功";
+      cloudMsg = "注销成功";
     },
     error: function(error) {
-      return error.message;
+      cloudMsg = error.message;
     }
   });
 
+  res.send(cloudMsg);
 });
 
 //
@@ -674,7 +676,7 @@ AV.Cloud.define("memberLogin", function(req, res) {
     }
   });
 
-  return cloudMsg;
+  res.send(cloudMsg);
 });
 
 //
@@ -712,7 +714,7 @@ AV.Cloud.define("memberRegister", function(req, res) {
     }
   });
 
-  return cloudMsg;
+  res.send(cloudMsg);
 });
 
 //
@@ -764,6 +766,8 @@ AV.Cloud.define("addSubAccount", function(req, res) {
       cloudMsg = "账户异常";
     }
   });
+
+  res.send(cloudMsg);
 });
 
 // 最后，必须有这行代码来使 express 响应 HTTP 请求

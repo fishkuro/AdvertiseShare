@@ -687,17 +687,17 @@ AV.Cloud.define("memberRegister", function(req, res) {
   var tokenStr = req.params.devicetoken;
   var ipStr = "127.0.0.1"; //Utility.getCloudIpAddress(req);
 
-  var members = Members.create();
-  var query = new AV.Query(members);
+  var mem = Members.create();
+  var query = new AV.Query(mem);
   query.notEqualTo("username",nameStr);
   query.find({
     success:function(members)
     {
-      members.Username(nameStr);
-      members.save();
+      mem.Username(nameStr);
+      mem.save();
       var dateNow = new Date();
-      var meminfo = MemberInfoClass.init(members.Signid(),nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
-      memberinfo.save(null,{
+      var meminfo = MemberInfoClass.init(mem.Signid(),nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
+      meminfo.save(null,{
         success:function(memberinfo)
         {
           cloudMsg = "注册成功";

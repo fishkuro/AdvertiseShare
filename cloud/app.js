@@ -23,29 +23,17 @@ app.use(express.bodyParser());    // 读取请求 body 的中间件
 
 // 使用 Express 路由 API 服务 /hello 的 HTTP GET 请求
 app.get('/hello', function(req, res) {
-  var rlt = null;
-  var info = AV.Object.extend("MemberInfo");
-  //var query = new AV.Query(memberinfo);
-  var nameStr = "fishabcd";
-  var passStr = "12345678";
-  info.set("username",nameStr);
-  info.set("password",passStr);
-  info.save();
-  // query.notEqualTo("username", nameStr);
-  // query.greaterThan("password", passStr);
-  // query.find({
-  //   success:function(meminfo)
-  //   {
-  //     meminfo.set("username",nameStr);
-  //     meminfo.set("Password",passStr);
-  //     meminfo.save();
-  //     rlt = meminfo.get("username");
-  //   },
-  //   error:function(error)
-  //   {
-  //     rlt = error.message;
-  //   }
-  // });
+  var rlt = 1234;
+  var nameStr = "fishw";
+  var passStr = "123456";
+  var member = MembersCls.create();
+  member.Username(nameStr);
+  var memberinfo = MemberInfoCls.create();
+  memberinfo.Username(nameStr);
+  memberinfo.Password(passStr);
+  memberinfo.Parent(member);
+  memberinfo.save();
+
   res.render('hello', { message: rlt });
 });
 

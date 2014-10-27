@@ -4,7 +4,7 @@
 /// </summary>
 
 var Members = AV.Object.extend("Members", {
-	Signid:function(value)		// GUID
+	ObjectId:function(value)		// GUID
 	{
 		if(value) {
 			this.set("objectId",value);

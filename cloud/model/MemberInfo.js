@@ -14,14 +14,14 @@ var MemberInfo = AV.Object.extend("MemberInfo", {
 			return this.get("objectId");
 		}
 	},
-  	Signid:function(value)		// Int64
+	Parent:function(value)
 	{
-		if (value) {
-			this.set("signid",value);
+		if(value) {
+			this.set("parent",value);
 		}
 		else
 		{
-			 return this.get("signid");
+			return this.get("parent");
 		}
 	},
 	Username:function(value)		// string
@@ -106,15 +106,15 @@ var MemberInfo = AV.Object.extend("MemberInfo", {
 	}
 });
 
-exports.init = function(signid,username,password,point,registerip,loginip,devicetoken,lastlogintime,registertime) {
+exports.init = function(parent,username,password,point,registerip,loginip,devicetoken,lastlogintime,registertime) {
     var memberinfo = new MemberInfo();
-    memberinfo.set("signid",signid);		//Int64
-	memberinfo.set("username",username);		//string
-	memberinfo.set("password",password);		//string
-	memberinfo.set("point",point);		//Decimal
-	memberinfo.set("registerip",registerip);		//string
-	memberinfo.set("loginip",loginip);		//string
-	memberinfo.set("devicetoken",devicetoken);		//string
+    memberinfo.set("parent",parent);
+	memberinfo.set("username",username);				//string
+	memberinfo.set("password",password);				//string
+	memberinfo.set("point",point);						//Decimal
+	memberinfo.set("registerip",registerip);			//string
+	memberinfo.set("loginip",loginip);					//string
+	memberinfo.set("devicetoken",devicetoken);			//string
 	memberinfo.set("lastlogintime",lastlogintime);		//DateTime
 	memberinfo.set("registertime",registertime);		//DateTime
 	

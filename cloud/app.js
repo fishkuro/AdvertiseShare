@@ -44,7 +44,7 @@ app.get('/hello', function(req, res) {
   // memberinfo.save();
   // Relation Add
 
-  var member = MembersCls.create();
+  var member = AV.Object.extend("Members")
   var query = new AV.Query(member);
   query.equalTo("username",nameStr);
   query.find({
@@ -52,7 +52,7 @@ app.get('/hello', function(req, res) {
         var mem = MembersCls.create();
         mem.Username(nameStr);
         mem.ObjectId(member.get("objectId"));
-        rlt = member.ObjectId();
+        rlt = member.get("objectId");
         var memberinfo = MemberInfoCls.create();
         memberinfo.Username(nameStr);
         memberinfo.Password(passStr);

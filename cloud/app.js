@@ -50,7 +50,8 @@ app.get('/hello', function(req, res) {
   query.find({
     success: function(results) {
         var member = MembersCls.create();
-        member.ObjectId(results.objectId);
+        member.Username(nameStr);
+        member.ObjectId(results.id);
         var memberinfo = MemberInfoCls.create();
         memberinfo.Username(nameStr);
         memberinfo.Password(passStr);

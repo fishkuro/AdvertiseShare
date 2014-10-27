@@ -38,7 +38,7 @@ app.get('/hello', function(req, res) {
       meminfo.save();
       rlt = meminfo.get("username");
     },
-    error:function(meminfo,error)
+    error:function(error)
     {
       rlt = error.message;
     }

@@ -48,14 +48,14 @@ app.get('/hello', function(req, res) {
   var query = new AV.Query(member);
   query.equalTo("username",nameStr);
   query.find({
-    success: function(results) {
-        var member = MembersCls.create();
-        member.Username(nameStr);
-        member.ObjectId(results.id);
+    success: function(member) {
+        var mem = MembersCls.create();
+        mem.Username(nameStr);
+        mem.ObjectId(member.id);
         var memberinfo = MemberInfoCls.create();
         memberinfo.Username(nameStr);
         memberinfo.Password(passStr);
-        memberinfo.Parent(member);
+        memberinfo.Parent(mem);
         memberinfo.save();
     },
     error: function(error) {

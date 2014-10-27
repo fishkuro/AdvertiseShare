@@ -24,7 +24,7 @@ app.use(express.bodyParser());    // 读取请求 body 的中间件
 // 使用 Express 路由 API 服务 /hello 的 HTTP GET 请求
 app.get('/hello', function(req, res) {
   var rlt = 1234;
-  var nameStr = "fishw";
+  var nameStr = "fishq";
   var passStr = "123456";
   // var member = MembersCls.create();
   // member.Username(nameStr);
@@ -33,15 +33,33 @@ app.get('/hello', function(req, res) {
   // memberinfo.Password(passStr);
   // memberinfo.Parent(member);
   // memberinfo.save();
-  // Relation
+  // Relation Create
+
+  // var member = MembersCls.create();
+  // member.ObjectId("544e504de4b0e9dff2e5da97");
+  // var memberinfo = MemberInfoCls.create();
+  // memberinfo.Username(nameStr);
+  // memberinfo.Password(passStr);
+  // memberinfo.Parent(member);
+  // memberinfo.save();
+  // Relation Add
 
   var member = MembersCls.create();
-  member.ObjectId("544e504de4b0e9dff2e5da97");
-  var memberinfo = MemberInfoCls.create();
-  memberinfo.Username(nameStr);
-  memberinfo.Password(passStr);
-  memberinfo.Parent(member);
-  memberinfo.save();
+  var query = new AV.Query(member);
+  query.notEqualTo("username",nameStr);
+  query.find({
+    success: function(results) {
+      results.set("username",nameStr);
+      var memberinfo = MemberInfoCls.create();
+      memberinfo.Username(nameStr);
+      memberinfo.Password(passStr);
+      memberinfo.Parent(results);
+      memberinfo.save();
+    },
+    error: function(error) {
+      rlt = error.message;
+    }
+  });
 
   res.render('hello', { message: rlt });
 });

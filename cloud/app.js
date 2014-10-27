@@ -37,7 +37,7 @@ app.get('/hello', function(req, res) {
 
   var member = MembersCls.create();
   member.ObjectId("544e504de4b0e9dff2e5da97");
-  var memberinfo = MembersCls.create();
+  var memberinfo = MemberInfoCls.create();
   memberinfo.Username(nameStr);
   memberinfo.Password(passStr);
   memberinfo.Parent(member);

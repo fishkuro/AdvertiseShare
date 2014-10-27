@@ -94,7 +94,7 @@ app.post('/administrator/login',function(req, res) {
   var name = req.body.username;
   var pass = req.body.password;
   //var result = manger.login(name, pass);
-  var admin = new AdminsCls();
+  var admin = AdminsCls.create();
   var query = new AV.Query(admin);
   query.equalTo("username",name);
   query.greaterThan("password", pass);

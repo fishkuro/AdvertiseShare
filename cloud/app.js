@@ -26,16 +26,15 @@ app.get('/hello', function(req, res) {
   var rlt = null;
   var members = AV.Object.extend("Members");
   var query = new AV.Query(members);
-  query.notEqualTo("username","fishwww");
+  query.equalTo("username","fishwww");
   query.find({
     success:function(members){
-      members.set("username","fishwww");
-      members.save();
       rlt = "saved..";
     },
     error:function(error){
-      members.set("username","fishqqq");
+      members.set("username","fishwww");
       members.save();
+
       rlt = error.message;
     }
     

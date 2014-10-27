@@ -23,11 +23,11 @@ var Admins = AV.Object.extend("Admins", {
 
 exports.init = function(username,password) {
     var admin = new Admins();
-	admin.set("username",username);		//string
-	admin.set("password",password);		//string
+	admin.username(username);		//string
+	admin.password(password);		//string
 	
     return admin;
-  };
+};
 
 exports.create = function() {
     var admin = new Admins();

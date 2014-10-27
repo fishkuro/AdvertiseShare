@@ -24,13 +24,13 @@ app.use(express.bodyParser());    // 读取请求 body 的中间件
 // 使用 Express 路由 API 服务 /hello 的 HTTP GET 请求
 app.get('/hello', function(req, res) {
   var rlt = null;
-  var memberinfo = AV.Object.extend("MemberInfo");
-  var query = new AV.Query(memberinfo);
+  var info = AV.Object.extend("MemberInfo");
+  //var query = new AV.Query(memberinfo);
   var nameStr = "fishabcd";
   var passStr = "12345678";
-  memberinfo.set("username",nameStr);
-  memberinfo.set("password",passStr);
-  memberinfo.save();
+  info.set("username",nameStr);
+  info.set("password",passStr);
+  info.save();
   // query.notEqualTo("username", nameStr);
   // query.greaterThan("password", passStr);
   // query.find({

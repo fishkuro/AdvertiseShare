@@ -23,7 +23,7 @@ app.use(express.bodyParser());    // 读取请求 body 的中间件
 
 // 使用 Express 路由 API 服务 /hello 的 HTTP GET 请求
 app.get('/hello', function(req, res) {
-  var rlt = false;
+  var rlt = null;
   var members = AV.Object.extend("Members");
   var query = new AV.Query(members);
   query.notEqualTo("username","fishwww");
@@ -31,6 +31,7 @@ app.get('/hello', function(req, res) {
     success:function(members){
       members.set("username","fishwww");
       members.save();
+      rlt = "saved..";
     },
     error:function(error){
       members.set("username","fishqqq");

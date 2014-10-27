@@ -24,54 +24,25 @@ app.use(express.bodyParser());    // 读取请求 body 的中间件
 // 使用 Express 路由 API 服务 /hello 的 HTTP GET 请求
 app.get('/hello', function(req, res) {
   var rlt = null;
-  var members = AV.Object.extend("Members");
-  var query = new AV.Query(members);
-  query.equalTo("username","fishwww");
+  var memberinfo = AV.Object.extend("MemberInfo");
+  var query = new AV.Query(memberinfo);
+  var nameStr = "fishabcd";
+  var passStr = "12345678";
+  query.notEqualTo("username", nameStr);
+  query.greaterThan("password", passStr);
   query.find({
-    success:function(members){
-      rlt = "saved..";
+    success:function(meminfo)
+    {
+      meminfo.set("username",nameStr);
+      meminfo.set("Password",passStr);
+      meminfo.save();
+      rlt = meminfo.get("username");
     },
-    error:function(error){
-      members.set("username","fishwww");
-      members.save();
-
+    error:function(meminfo,error)
+    {
       rlt = error.message;
     }
-    
   });
-  
-  // var nameStr = "fishwww";
-  // var passStr = "1234567";
-  // var tokenStr = "FDSAFDASFDAS";
-  // var ipStr = "127.0.0.1";
-
-  // var members = MembersCls.create();
-  // var query = new AV.Query(members);
-  // query.notEqualTo("username",nameStr);
-  // query.find({
-  //   success:function(members)
-  //   {
-  //     members.set('username',nameStr);
-  //     members.save();
-  //     var dateNow = new Date();
-  //     var memberinfo = MemberInfoCls.init(members.get('objectId'),nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
-  //     memberinfo.save(null,{
-  //       success:function(memberinfo)
-  //       {
-  //         rlt = "注册成功";
-  //       },
-  //       error:function(memberinfo,error)
-  //       {
-  //         rlt = error.message;
-  //       }
-  //     });
-  //   },
-  //   error:function(error)
-  //   {
-  //     rlt = "该账户已存在";
-  //   }
-  // });
-
   res.render('hello', { message: rlt });
 });
 

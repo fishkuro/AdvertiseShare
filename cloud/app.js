@@ -580,7 +580,7 @@ var cloudMsg;
 AV.Cloud.define("testCloud", function(req, res) {
 	var nameStr = req.params.fuck;
 	var passStr = req.params.you;
-  var ipStr = Utility.getIpAddress(req);
+  var ipStr = UtilityCls.getIpAddress(req);
 
   res.success(nameStr + " | " + passStr);
 });

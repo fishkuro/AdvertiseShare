@@ -49,15 +49,15 @@ app.get('/hello', function(req, res) {
   query.equalTo("username",nameStr);
   query.find({
     success: function(member) {
-        var mem = MembersCls.create();
-        mem.Username(nameStr);
-        mem.ObjectId(member.get("objectId"));
+        // var mem = MembersCls.create();
+        // mem.Username(nameStr);
+        // mem.ObjectId(member.get("objectId"));
         rlt = member.get("objectId");
-        var memberinfo = MemberInfoCls.create();
-        memberinfo.Username(nameStr);
-        memberinfo.Password(passStr);
-        memberinfo.Parent(mem);
-        memberinfo.save();
+        // var memberinfo = MemberInfoCls.create();
+        // memberinfo.Username(nameStr);
+        // memberinfo.Password(passStr);
+        // memberinfo.Parent(mem);
+        // memberinfo.save();
     },
     error: function(error) {
       rlt = error.message;

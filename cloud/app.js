@@ -26,9 +26,18 @@ app.get('/hello', function(req, res) {
   var rlt = 1234;
   var nameStr = "fishw";
   var passStr = "123456";
+  // var member = MembersCls.create();
+  // member.Username(nameStr);
+  // var memberinfo = MemberInfoCls.create();
+  // memberinfo.Username(nameStr);
+  // memberinfo.Password(passStr);
+  // memberinfo.Parent(member);
+  // memberinfo.save();
+  // Relation
+
   var member = MembersCls.create();
-  member.Username(nameStr);
-  var memberinfo = MemberInfoCls.create();
+  member.ObjectId("544e504de4b0e9dff2e5da97");
+  var memberinfo = MembersCls.create();
   memberinfo.Username(nameStr);
   memberinfo.Password(passStr);
   memberinfo.Parent(member);

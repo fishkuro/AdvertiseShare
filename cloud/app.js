@@ -76,6 +76,22 @@ app.get('/hello', function(req, res) {
   res.render('hello', { message: rlt });
 });
 
+app.get('/cloud', function(req, res) {
+  var rlt = null;
+  AV.Cloud.run("testCloud", {username: 'dennis',password: '123456'}, {
+    success: function(data){
+      //调用成功，得到成功的应答data
+      rlt = data;
+    },
+    error: function(err){
+      //处理调用失败
+      rlt = err.message;
+    }
+  });
+
+  res.render('hello', { message: rlt });
+});
+
 // 后台管理开始
 var session = UtilityCls.usersession();
 app.get('/kurodo/login', function(req, res) {
@@ -561,12 +577,13 @@ app.post('/administrator/modmembers',function(req, res) {
 var cloudMsg;
 
 // 测试云函数
-// AV.Cloud.define("testCloud", function(req, res) {
-// 	var nameStr = req.params.fuck;
-// 	var passStr = req.params.you;
+AV.Cloud.define("testCloud", function(req, res) {
+	var nameStr = req.params.fuck;
+	var passStr = req.params.you;
+  var ipStr = Utility.getIpAddress(req);
 
-//   res.success(nameStr + " | " + passStr);
-// });
+  res.success(nameStr + " | " + passStr);
+});
 
 //
 // 带SessionId逻辑

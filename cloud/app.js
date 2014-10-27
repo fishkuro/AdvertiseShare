@@ -49,12 +49,13 @@ app.get('/hello', function(req, res) {
   query.equalTo("username",nameStr);
   query.find({
     success: function(results) {
-      results.set("username",nameStr);
-      var memberinfo = AV.Object.extend("MemberInfo");
-      memberinfo.set("username",nameStr);
-      memberinfo.set("password",passStr);
-      memberinfo.set("parent",results);
-      memberinfo.save();
+        var member = MembersCls.create();
+        member.ObjectId(results.objectId);
+        var memberinfo = MemberInfoCls.create();
+        memberinfo.Username(nameStr);
+        memberinfo.Password(passStr);
+        memberinfo.Parent(member);
+        memberinfo.save();
     },
     error: function(error) {
       rlt = error.message;

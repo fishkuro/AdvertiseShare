@@ -38,9 +38,14 @@ exports.create = function() {
     return payconduit;
 };
 
+exports.query = function() {
+    var payconduit = AV.Object.extend("PayConduit");
+    return payconduit;
+};
+
 exports.find = function(options) {
-    var PayConduit = AV.Object.extend("PayConduit");
-    var query = new AV.Query(PayConduit);
+    var payconduit = AV.Object.extend("PayConduit");
+    var query = new AV.Query(payconduit);
     var reslut = query.find(options);
 	return reslut;
 };

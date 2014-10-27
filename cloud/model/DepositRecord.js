@@ -115,9 +115,14 @@ exports.create = function() {
     return depositrecord;
 };
 
+exports.query = function() {
+	var depositrecord = AV.Object.extend("DepositRecord");
+	return depositrecord;
+};
+
 exports.find = function(options) {
-    var DepositRecord = AV.Object.extend("DepositRecord");
-    var query = new AV.Query(DepositRecord);
+    var depositrecord = AV.Object.extend("DepositRecord");
+    var query = new AV.Query(depositrecord);
     var reslut = query.find(options);
 	return reslut;
 };

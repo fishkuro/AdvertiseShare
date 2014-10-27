@@ -126,6 +126,11 @@ exports.create = function() {
     return memberinfo;
 };
 
+exports.query = function() {
+	var memberinfo = AV.Object.extend("MemberInfo");
+	return memberinfo;
+};
+
 exports.find = function(options) {
     var memberinfo = AV.Object.extend("MemberInfo");
     var query = new AV.Query(memberinfo);

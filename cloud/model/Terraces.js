@@ -38,9 +38,14 @@ exports.create = function() {
     return terraces;
 };
 
+exports.query = function() {
+	var terraces = AV.Object.extend("Terraces");
+	return terraces;
+};
+
 exports.find = function(options) {
-    var Terraces = AV.Object.extend("Terraces");
-    var query = new AV.Query(Terraces);
+    var terraces = AV.Object.extend("Terraces");
+    var query = new AV.Query(terraces);
     var reslut = query.find(options);
 	return reslut;
 };

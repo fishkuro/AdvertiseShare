@@ -234,7 +234,7 @@ app.post('/administrator/modterraces',function(req, res) {
   var oid = req.body.objectId;
   var tname = req.body.terracename;
   var terraces = TerracesCls.create();
-  terraces.objectId(oid);
+  terraces.ObjectId(oid);
   terraces.TerraceName(tname);
 
   terraces.save(null, {
@@ -254,7 +254,7 @@ app.post('/administrator/delterraces',function(req, res) {
   var oid = req.body.data.objectId;
   var tname = req.body.data.terracename;
   var terraces = TerracesCls.create();
-  terraces.objectId(oid);
+  terraces.ObjectId(oid);
   terraces.Terracename(tname);
 
   terraces.destroy({
@@ -295,7 +295,7 @@ app.post('/administrator/modnotices',function(req, res) {
     var content = req.body.data.content;
     var postdate = new Date();
     var notice = NoticesCls.create();
-    notice.objectId(oId);
+    notice.ObjectId(oId);
     notice.Title(title);
     notice.Content(content);
     notice.PostDate(postdate);
@@ -319,7 +319,7 @@ app.post('/administrator/delnotices',function(req, res) {
     var content = req.body.data.content;
     var postdate = req.body.data.postdate;
     var notice = NoticesCls.create();
-    notice.objectId(oId);
+    notice.ObjectId(oId);
     notice.Title(title);
     notice.Content(content);
     notice.PostDate(postdate);
@@ -358,7 +358,7 @@ app.post('/administrator/modpayconduit',function(req, res) {
   var oid = req.body.data.objectId;
   var pname = req.body.data.payname;
   var payconduit = PayconduitCls.create();
-  payconduit.objectId(oid);
+  payconduit.ObjectId(oid);
   payconduit.Payname(pname);
 
   payconduit.save(null, {
@@ -378,7 +378,7 @@ app.post('/administrator/delpayconduit',function(req, res) {
   var oid = req.body.data.objectId;
   var pname = req.body.data.payname;
   var payconduit = PayconduitCls.create();
-  payconduit.objectId(oid);
+  payconduit.ObjectId(oid);
   payconduit.Payname(pname);
 
   payconduit.destroy({
@@ -405,7 +405,7 @@ app.post('/administrator/moddepositrecord',function(req, res) {
   var atime = req.body.data.applytime;
   var ptime = new Date();
   var depositrecord = DepositrecordCls.create();
-  depositrecord.objectId(oid);
+  depositrecord.ObjectId(oid);
   depositrecord.Userid(userid);
   depositrecord.Username(username);
   depositrecord.Terraceid(tid);
@@ -457,7 +457,7 @@ app.post('/administrator/modtasks',function(req, res) {
     var tname = req.body.data.terracename;
     var enable = req.body.data.enable;
     var task = TasksCls.create();
-    task.objectId(oId);
+    task.ObjectId(oId);
     task.Taskname(tname);
     task.Subtitle(stitle);
     task.Terraceid(tid);
@@ -485,7 +485,7 @@ app.post('/administrator/deltasks',function(req, res) {
     var tname = req.body.data.terracename;
     var enable = req.body.data.enable;
     var task = TasksCls.create();
-    task.objectId(oId);
+    task.ObjectId(oId);
     task.Taskname(tname);
     task.Subtitle(stitle);
     task.Terraceid(tid);
@@ -516,7 +516,7 @@ app.post('/administrator/modmemberinfo',function(req, res) {
     var lastlogintime = req.body.data.lastlogintime;
     var registertime = req.body.data.registertime;
     var member = MembersCls.create();
-    member.objectId(oId);
+    member.ObjectId(oId);
     member.Username(username);
     member.Password(password);
     member.Point(point);
@@ -546,7 +546,7 @@ app.post('/administrator/modmembers',function(req, res) {
     var recmpath = req.body.data.recmpath;
     var recmtotail = req.body.data.recmtotail;
     var members = MembersCls.create();
-    members.objectId(oId);
+    members.ObjectId(oId);
     members.Username(username);
     members.Recmanid(recmid);
     members.Recmanpath(recmpath);
@@ -581,12 +581,12 @@ AV.Cloud.define("testCloud", function(req, res) {
 AV.Cloud.define("memberLogin", function(req, res) {
   var nameStr = req.params.username;
   var passStr = req.params.password;
-  var ipStr = UtilityCls.getIpAddress(req);
+  var ipStr = "127.0.0.1";//UtilityCls.getIpAddress(req);
 
   var user = new AV.User();
   user.set("username",nameStr);
   user.set("password",passStr);
-  var meminfo = MemberInfoCls.create();
+  var meminfo = MemberInfoCls.query();
   var query = new AV.Query(meminfo);
   query.equalTo("username", nameStr);
   query.greaterThan("password", passStr);
@@ -632,7 +632,7 @@ AV.Cloud.define("memberLogout", function(req, res) {
   var nameStr = req.params.username;
   var passStr = req.params.password;
 
-  var meminfo = MemberInfoCls.create();
+  var meminfo = MemberInfoCls.query();
   var query = new AV.Query(memberinfo);
   query.equalTo("username", nameStr);
   query.greaterThan("password", passStr);
@@ -665,12 +665,12 @@ AV.Cloud.define("memberLogout", function(req, res) {
 AV.Cloud.define("memberLogin22", function(req, res) {
   var nameStr = req.params.username;
   var passStr = req.params.password;
-  var ipStr = UtilityCls.getCloudIpAddress(req);
+  var ipStr = 127.0.0.1;//UtilityCls.getCloudIpAddress(req);
 
   var user = new AV.User();
   user.set("username",nameStr);
   user.set("password",passStr);
-  var meminfo = MemberInfoCls.create();
+  var meminfo = MemberInfoCls.query();
   var query = new AV.Query(memberinfo);
   query.equalTo("username", nameStr);
   query.greaterThan("password", passStr);
@@ -734,7 +734,7 @@ AV.Cloud.define("memberRegister", function(req, res) {
   var tokenStr = req.params.devicetoken;
   var ipStr = "127.0.0.1"; //Utility.getCloudIpAddress(req);
 
-  var members = MembersCls.create();
+  var members = MembersCls.query();
   var query = new AV.Query(members);
   query.notEqualTo("username",nameStr);
   query.find({
@@ -770,10 +770,10 @@ AV.Cloud.define("addSubAccount", function(req, res) {
   var nameStr = req.params.username;
   var passStr = req.params.password;
   var tokenStr = req.params.devicetoken;
-  var ipStr = UtilityCls.getCloudIpAddress(req);
+  var ipStr = 127.0.0.1;//UtilityCls.getCloudIpAddress(req);
 
-  var members = MembersCls.create();
-  var query = new AV.Query(member);
+  var members = MembersCls.query();
+  var query = new AV.Query(members);
   query.equalTo("username",nameStr);
   query.find({
     success:function(members)

@@ -60,9 +60,14 @@ exports.create = function() {
     return scoretotail;
 };
 
+exports.query = function() {
+	var scoretotail = AV.Object.extend("ScoreTotail");
+	return scoretotail;
+};
+
 exports.find = function(options) {
-    var ScoreTotail = AV.Object.extend("ScoreTotail");
-    var query = new AV.Query(ScoreTotail);
+    var scoretotail = AV.Object.extend("ScoreTotail");
+    var query = new AV.Query(scoretotail);
     var reslut = query.find(options);
 	return reslut;
 };

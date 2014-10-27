@@ -60,9 +60,14 @@ exports.create = function() {
     return deposittotail;
 };
 
+exports.query = function() {
+	var deposittotail = AV.Object.extend("DepositTotail");
+	return deposittotail;
+};
+
 exports.find = function(options) {
-    var DepositTotail = AV.Object.extend("DepositTotail");
-    var query = new AV.Query(DepositTotail);
+    var deposittotail = AV.Object.extend("DepositTotail");
+    var query = new AV.Query(deposittotail);
     var reslut = query.find(options);
 	return reslut;
 };

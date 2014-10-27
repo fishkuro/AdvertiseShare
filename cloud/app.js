@@ -28,21 +28,24 @@ app.get('/hello', function(req, res) {
   var query = new AV.Query(memberinfo);
   var nameStr = "fishabcd";
   var passStr = "12345678";
-  query.notEqualTo("username", nameStr);
-  query.greaterThan("password", passStr);
-  query.find({
-    success:function(meminfo)
-    {
-      meminfo.set("username",nameStr);
-      meminfo.set("Password",passStr);
-      meminfo.save();
-      rlt = meminfo.get("username");
-    },
-    error:function(error)
-    {
-      rlt = error.message;
-    }
-  });
+  memberinfo.set("username",nameStr);
+  memberinfo.set("password",passStr);
+  memberinfo.save();
+  // query.notEqualTo("username", nameStr);
+  // query.greaterThan("password", passStr);
+  // query.find({
+  //   success:function(meminfo)
+  //   {
+  //     meminfo.set("username",nameStr);
+  //     meminfo.set("Password",passStr);
+  //     meminfo.save();
+  //     rlt = meminfo.get("username");
+  //   },
+  //   error:function(error)
+  //   {
+  //     rlt = error.message;
+  //   }
+  // });
   res.render('hello', { message: rlt });
 });
 

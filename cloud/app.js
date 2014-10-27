@@ -44,16 +44,16 @@ app.get('/hello', function(req, res) {
   // memberinfo.save();
   // Relation Add
 
-  var member = MembersCls.create();
+  var member = AV.Object.extend("Members");
   var query = new AV.Query(member);
   query.notEqualTo("username",nameStr);
   query.find({
     success: function(results) {
       results.set("username",nameStr);
-      var memberinfo = MemberInfoCls.create();
-      memberinfo.Username(nameStr);
-      memberinfo.Password(passStr);
-      memberinfo.Parent(results);
+      var memberinfo = AV.Object.extend("MemberInfo");
+      memberinfo.set("username",nameStr);
+      memberinfo.set("password",passStr);
+      memberinfo.set("parent",results);
       memberinfo.save();
     },
     error: function(error) {

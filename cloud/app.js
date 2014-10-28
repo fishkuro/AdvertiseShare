@@ -180,16 +180,16 @@ app.get('/administrator/terraces', function(req, res) {
   
 // });
 
-// app.get('/administrator/memberinfodata',function(req, res) {
-//   //var memberinfodata = null;
-//   MemberInfoCls.find({
-//     success:function(data)
-//     res.json(data);},
-//     error:function(error)
-//     {}
-//   });
+app.get('/administrator/memberinfodata',function(req, res) {
+  //var memberinfodata = null;
+  MemberInfoCls.find({
+    success:function(data)
+    res.json(data);},
+    error:function(error)
+    {}
+  });
   
-// });
+});
 
 app.get('/administrator/depositrecorddata',function(req, res) {
   //var depositrecorddata = null;

@@ -190,7 +190,7 @@ app.get('/administrator/deposittotaildata',function(req, res) {
 });
 
 app.get('/administrator/noticesdata',function(req, res) {
-  var noticesdata = Notices.find();
+  var noticesdata = NoticesCls.find();
   res.json(noticesdata);
 });
 

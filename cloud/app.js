@@ -172,99 +172,100 @@ app.get('/administrator/terraces', function(req, res) {
 app.get('/administrator/membersdata',function(req, res) {
   var membersdata = null;
   MembersCls.find({
-    success:function(data)
-    {membersdata = data},
+    success:function(membersdata)
+    {res.json(membersdata);},
     error:function(error)
     {}
   });
-  res.json(membersdata);
+  
 });
 
 app.get('/administrator/memberinfodata',function(req, res) {
   var memberinfodata = null;
   MemberInfoCls.find({
-    success:function(data)
-    {memberinfodata = data},
+    success:function(memberinfodata)
+    res.json(memberinfodata);},
     error:function(error)
     {}
   });
-  res.json(memberinfodata);
+  
 });
 
 app.get('/administrator/depositrecorddata',function(req, res) {
   var depositrecorddata = null;
   DepositrecordCls.find({
-    success:function(data)
-    {depositrecorddata = data},
+    success:function(depositrecorddata)
+    {res.json(depositrecorddata);},
     error:function(error)
     {}
   });
-  res.json(depositrecorddata);
+  
 });
 
 app.get('/administrator/deposittotaildata',function(req, res) {
   var deposittotaildata = null;
   DeposittotailCls.find({
-    success:function(data)
-    {deposittotaildata = data},
+    success:function(deposittotaildata)
+    {res.json(depositrecorddata);},
     error:function(error)
     {}
   });
-  res.json(depositrecorddata);
+  
 });
 
 app.get('/administrator/noticesdata',function(req, res) {
   var noticesdata = null;
   NoticesCls.find({
-    success:function(data)
-    {noticesdata = data},
+    success:function(noticesdata)
+    {res.json(noticesdata);},
     error:function(error)
     {}
   });
-  res.json(noticesdata);
+  
 });
 
 app.get('/administrator/payconduitdata',function(req, res) {
   var payconduitdata = null;
   PayconduitCls.find({
-    success:function(data)
-    {payconduitdata = data},
+    success:function(payconduitdata)
+    {res.json(payconduitdata);},
     error:function(error)
     {}
   });
-  res.json(payconduitdata);
+  
 });
 
 app.get('/administrator/scorerecorddata',function(req, res) {
-  var scorerecorddata = ScorerecordCls.find({
-    success:function(data)
-    {scorerecorddata = data},
+  var scorerecorddata = null;
+  ScorerecordCls.find({
+    success:function(scorerecorddata)
+    {res.json(scorerecorddata);},
     error:function(error)
     {}
   });
-  res.json(scorerecorddata);
+  
 });
 
 app.get('/administrator/scoretotaildata',function(req, res) {
   var scoretotaildata = null;
   ScoretotailCls.find({
-    success:function(data)
-    {scoretotaildata = data},
+    success:function(scoretotaildata)
+    {res.json(scoretotaildata);},
     error:function(error)
     {}
   });
-  res.json(scoretotaildata);
+  
 });
 
 app.get('/administrator/tasksdata',function(req, res) {
   var tasksdata = null;
   TasksCls.find({
-    success:function(data)
-    {tasksdata = data},
+    success:function(tasksdata)
+    {res.json(tasksdata);},
     error:function(error)
     {}
   });
-  res.json(tasksdata);
+  
 });
 
 app.get('/administrator/tasksdatalist',function(req, res) {
@@ -272,22 +273,23 @@ app.get('/administrator/tasksdatalist',function(req, res) {
   var query = new AV.Query(tasks);
   var result = null;
   query.find({
-    success:function(data)
-    {result = data},
+    success:function(result)
+    {res.json(result);},
     error:function(error)
     {}
   });
-  res.json(result);
+  
 });
 
 app.get('/administrator/terracesdata',function(req, res) {
-  var terracesdata = TerracesCls.find({
-    success:function(data)
-    {terracesdata = data},
+  var terracesdata = null;
+  TerracesCls.find({
+    success:function(terracesdata)
+    {res.json(terracesdata);},
     error:function(error)
     {}
   });
-  res.json(terracesdata);
+  
 });
 
 //各种增删改

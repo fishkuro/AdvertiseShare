@@ -170,12 +170,19 @@ app.get('/administrator/terraces', function(req, res) {
 //json 调用
 
 app.get('/administrator/membersdata',function(req, res) {
-  var membersdata = MembersCls.find();
+  var membersdata = null;
+  MembersCls.find({
+    success:function(data)
+    {membersdata = data},
+    error:function(error)
+    {}
+  });
   res.json(membersdata);
 });
 
 app.get('/administrator/memberinfodata',function(req, res) {
-  var memberinfodata = MemberInfoCls.find({
+  var memberinfodata = null;
+  MemberInfoCls.find({
     success:function(data)
     {memberinfodata = data},
     error:function(error)
@@ -185,7 +192,8 @@ app.get('/administrator/memberinfodata',function(req, res) {
 });
 
 app.get('/administrator/depositrecorddata',function(req, res) {
-  var depositrecorddata = DepositrecordCls.find({
+  var depositrecorddata = null;
+  DepositrecordCls.find({
     success:function(data)
     {depositrecorddata = data},
     error:function(error)
@@ -195,7 +203,8 @@ app.get('/administrator/depositrecorddata',function(req, res) {
 });
 
 app.get('/administrator/deposittotaildata',function(req, res) {
-  var deposittotaildata = DeposittotailCls.find({
+  var deposittotaildata = null;
+  DeposittotailCls.find({
     success:function(data)
     {deposittotaildata = data},
     error:function(error)
@@ -205,7 +214,8 @@ app.get('/administrator/deposittotaildata',function(req, res) {
 });
 
 app.get('/administrator/noticesdata',function(req, res) {
-  var noticesdata = NoticesCls.find({
+  var noticesdata = null;
+  NoticesCls.find({
     success:function(data)
     {noticesdata = data},
     error:function(error)
@@ -215,7 +225,8 @@ app.get('/administrator/noticesdata',function(req, res) {
 });
 
 app.get('/administrator/payconduitdata',function(req, res) {
-  var payconduitdata = PayconduitCls.find({
+  var payconduitdata = null;
+  PayconduitCls.find({
     success:function(data)
     {payconduitdata = data},
     error:function(error)
@@ -235,7 +246,8 @@ app.get('/administrator/scorerecorddata',function(req, res) {
 });
 
 app.get('/administrator/scoretotaildata',function(req, res) {
-  var scoretotaildata = ScoretotailCls.find({
+  var scoretotaildata = null;
+  ScoretotailCls.find({
     success:function(data)
     {scoretotaildata = data},
     error:function(error)
@@ -245,7 +257,8 @@ app.get('/administrator/scoretotaildata',function(req, res) {
 });
 
 app.get('/administrator/tasksdata',function(req, res) {
-  var tasksdata = TasksCls.find({
+  var tasksdata = null;
+  TasksCls.find({
     success:function(data)
     {tasksdata = data},
     error:function(error)
@@ -254,10 +267,16 @@ app.get('/administrator/tasksdata',function(req, res) {
   res.json(tasksdata);
 });
 
-app.get('/administrator/tasksdatatest',function(req, res) {
+app.get('/administrator/tasksdatalist',function(req, res) {
   var tasks = AV.Object.extend("Tasks");
   var query = new AV.Query(tasks);
-  var result = query.find();
+  var result = null;
+  query.find({
+    success:function(data)
+    {result = data},
+    error:function(error)
+    {}
+  });
   res.json(result);
 });
 

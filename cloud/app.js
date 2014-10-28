@@ -169,85 +169,85 @@ app.get('/administrator/terraces', function(req, res) {
 
 //json 调用
 
-app.get('/administrator/membersdata',function(req, res) {
-  var membersdata = null;
-  MembersCls.find({
-    success:function(data)
-    {res.json(data);},
-    error:function(error)
-    {}
-  });
+// app.get('/administrator/membersdata',function(req, res) {
+//   //var membersdata = null;
+//   MembersCls.find({
+//     success:function(data)
+//     {res.json(data);},
+//     error:function(error)
+//     {}
+//   });
   
-});
+// });
 
-app.get('/administrator/memberinfodata',function(req, res) {
-  var memberinfodata = null;
-  MemberInfoCls.find({
-    success:function(data)
-    res.json(data);},
-    error:function(error)
-    {}
-  });
+// app.get('/administrator/memberinfodata',function(req, res) {
+//   //var memberinfodata = null;
+//   MemberInfoCls.find({
+//     success:function(data)
+//     res.json(data);},
+//     error:function(error)
+//     {}
+//   });
   
-});
+// });
 
-app.get('/administrator/depositrecorddata',function(req, res) {
-  var depositrecorddata = null;
-  DepositrecordCls.find({
-    success:function(data)
-    {res.json(data);},
-    error:function(error)
-    {}
-  });
+// app.get('/administrator/depositrecorddata',function(req, res) {
+//   //var depositrecorddata = null;
+//   DepositrecordCls.find({
+//     success:function(data)
+//     {res.json(data);},
+//     error:function(error)
+//     {}
+//   });
   
-});
+// });
 
-app.get('/administrator/deposittotaildata',function(req, res) {
-  var deposittotaildata = null;
-  DeposittotailCls.find({
-    success:function(data)
-    {res.json(data);},
-    error:function(error)
-    {}
-  });
+// app.get('/administrator/deposittotaildata',function(req, res) {
+//   //var deposittotaildata = null;
+//   DeposittotailCls.find({
+//     success:function(data)
+//     {res.json(data);},
+//     error:function(error)
+//     {}
+//   });
   
-});
+// });
 
-app.get('/administrator/noticesdata',function(req, res) {
-  var noticesdata = null;
-  NoticesCls.find({
-    success:function(data)
-    {res.json(data);},
-    error:function(error)
-    {}
-  });
+// app.get('/administrator/noticesdata',function(req, res) {
+//   //var noticesdata = null;
+//   NoticesCls.find({
+//     success:function(data)
+//     {res.json(data);},
+//     error:function(error)
+//     {}
+//   });
   
-});
+// });
 
-app.get('/administrator/payconduitdata',function(req, res) {
-  var payconduitdata = null;
-  PayconduitCls.find({
-    success:function(data)
-    {res.json(data);},
-    error:function(error)
-    {}
-  });
+// app.get('/administrator/payconduitdata',function(req, res) {
+//   //var payconduitdata = null;
+//   PayconduitCls.find({
+//     success:function(data)
+//     {res.json(data);},
+//     error:function(error)
+//     {}
+//   });
   
-});
+// });
 
-app.get('/administrator/scorerecorddata',function(req, res) {
-  var scorerecorddata = null;
-  ScorerecordCls.find({
-    success:function(data)
-    {res.json(data);},
-    error:function(error)
-    {}
-  });
+// app.get('/administrator/scorerecorddata',function(req, res) {
+//   //var scorerecorddata = null;
+//   ScorerecordCls.find({
+//     success:function(data)
+//     {res.json(data);},
+//     error:function(error)
+//     {}
+//   });
   
-});
+// });
 
 app.get('/administrator/scoretotaildata',function(req, res) {
-  var scoretotaildata = null;
+  //var scoretotaildata = null;
   ScoretotailCls.find({
     success:function(data)
     {res.json(data);},
@@ -258,7 +258,7 @@ app.get('/administrator/scoretotaildata',function(req, res) {
 });
 
 app.get('/administrator/tasksdata',function(req, res) {
-  var tasksdata = null;
+  //var tasksdata = null;
   TasksCls.find({
     success:function(data)
     {res.json(data);},
@@ -281,16 +281,16 @@ app.get('/administrator/tasksdatalist',function(req, res) {
   
 });
 
-// app.get('/administrator/terracesdata',function(req, res) {
-//   var terracesdata = null;
-//   TerracesCls.find({
-//     success:function(data)
-//     {res.json(data);},
-//     error:function(error)
-//     {}
-//   });
+app.get('/administrator/terracesdata',function(req, res) {
+  //var terracesdata = null;
+  TerracesCls.find({
+    success:function(data)
+    {res.json(data);},
+    error:function(error)
+    {}
+  });
   
-// });
+});
 
 //各种增删改
 var rlt = { result:false, msg:"错误结果!" };

@@ -34,16 +34,16 @@ var Tasks = AV.Object.extend("Tasks", {
 			 return this.get("subtitle");
 		}
 	},
-	Terraceid:function(value)		// Int64
-	{
-		if (value) {
-			this.set("terraceid",value);
-		}
-		else
-		{
-			 return this.get("terraceid");
-		}
-	},
+	// Terraceid:function(value)		// Int64
+	// {
+	// 	if (value) {
+	// 		this.set("terraceid",value);
+	// 	}
+	// 	else
+	// 	{
+	// 		 return this.get("terraceid");
+	// 	}
+	// },
 	Enable:function(value)		// bool
 	{
 		if (value) {
@@ -53,25 +53,25 @@ var Tasks = AV.Object.extend("Tasks", {
 		{
 			 return this.get("enable");
 		}
-	},
-	Terracename:function(value)		// string
-	{
-		if (value) {
-			this.set("terracename",value);
-		}
-		else
-		{
-			 return this.get("terracename");
-		}
 	}
+	// Terracename:function(value)		// string
+	// {
+	// 	if (value) {
+	// 		this.set("terracename",value);
+	// 	}
+	// 	else
+	// 	{
+	// 		 return this.get("terracename");
+	// 	}
+	// }
 });
 
 exports.init = function(taskname,subtitle,terraceid,enable,terracename) {
     var tasks = new Tasks();
 	tasks.set("taskname",taskname);			//string
 	tasks.set("subtitle",subtitle);			//string
-	tasks.set("terraceid",terraceid);		//Int64
-	tasks.set("terracename",terracename);	//string
+	// tasks.set("terraceid",terraceid);		//Int64
+	// tasks.set("terracename",terracename);	//string
 	tasks.set("enable",enable);				//bool
 	
     return tasks;

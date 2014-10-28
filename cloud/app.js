@@ -191,16 +191,16 @@ app.get('/administrator/terraces', function(req, res) {
   
 // });
 
-// app.get('/administrator/depositrecorddata',function(req, res) {
-//   //var depositrecorddata = null;
-//   DepositrecordCls.find({
-//     success:function(data)
-//     {res.json(data);},
-//     error:function(error)
-//     {}
-//   });
+app.get('/administrator/depositrecorddata',function(req, res) {
+  //var depositrecorddata = null;
+  DepositrecordCls.find({
+    success:function(data)
+    {res.json(data);},
+    error:function(error)
+    {}
+  });
   
-// });
+});
 
 app.get('/administrator/deposittotaildata',function(req, res) {
   //var deposittotaildata = null;

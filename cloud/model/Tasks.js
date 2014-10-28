@@ -73,7 +73,6 @@ exports.init = function(taskname,subtitle,terraceid,enable,terracename) {
 	tasks.set("terraceid",terraceid);		//Int64
 	tasks.set("terracename",terracename);	//string
 	tasks.set("enable",enable);				//bool
-			
 	
     return tasks;
   };

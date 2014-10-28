@@ -205,6 +205,13 @@ app.get('/administrator/tasksdata',function(req, res) {
   res.json(tasksdata);
 });
 
+app.get('/administrator/tasksdatatest',function(req, res) {
+  var tasks = AV.Object.extend("Tasks");
+  var query = new AV.Query(tasks);
+  var tasksdata = query.find();
+  res.json(tasksdata);
+});
+
 app.get('/administrator/terracesdata',function(req, res) {
   var terracesdata = TerracesCls.find();
   res.json(terracesdata);

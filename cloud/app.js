@@ -169,104 +169,104 @@ app.get('/administrator/terraces', function(req, res) {
 
 //json 调用
 
-app.get('/administrator/membersdata',function(req, res) {
-  var membersdata = null;
-  MembersCls.find({
-    success:function(data)
-    {res.json(data);},
-    error:function(error)
-    {}
-  });
+// app.get('/administrator/membersdata',function(req, res) {
+//   var membersdata = null;
+//   MembersCls.find({
+//     success:function(data)
+//     {res.json(data);},
+//     error:function(error)
+//     {}
+//   });
   
-});
+// });
 
-app.get('/administrator/memberinfodata',function(req, res) {
-  var memberinfodata = null;
-  MemberInfoCls.find({
-    success:function(data)
-    res.json(data);},
-    error:function(error)
-    {}
-  });
+// app.get('/administrator/memberinfodata',function(req, res) {
+//   var memberinfodata = null;
+//   MemberInfoCls.find({
+//     success:function(data)
+//     res.json(data);},
+//     error:function(error)
+//     {}
+//   });
   
-});
+// });
 
-app.get('/administrator/depositrecorddata',function(req, res) {
-  var depositrecorddata = null;
-  DepositrecordCls.find({
-    success:function(data)
-    {res.json(data);},
-    error:function(error)
-    {}
-  });
+// app.get('/administrator/depositrecorddata',function(req, res) {
+//   var depositrecorddata = null;
+//   DepositrecordCls.find({
+//     success:function(data)
+//     {res.json(data);},
+//     error:function(error)
+//     {}
+//   });
   
-});
+// });
 
-app.get('/administrator/deposittotaildata',function(req, res) {
-  var deposittotaildata = null;
-  DeposittotailCls.find({
-    success:function(data)
-    {res.json(data);},
-    error:function(error)
-    {}
-  });
+// app.get('/administrator/deposittotaildata',function(req, res) {
+//   var deposittotaildata = null;
+//   DeposittotailCls.find({
+//     success:function(data)
+//     {res.json(data);},
+//     error:function(error)
+//     {}
+//   });
   
-});
+// });
 
-app.get('/administrator/noticesdata',function(req, res) {
-  var noticesdata = null;
-  NoticesCls.find({
-    success:function(data)
-    {res.json(data);},
-    error:function(error)
-    {}
-  });
+// app.get('/administrator/noticesdata',function(req, res) {
+//   var noticesdata = null;
+//   NoticesCls.find({
+//     success:function(data)
+//     {res.json(data);},
+//     error:function(error)
+//     {}
+//   });
   
-});
+// });
 
-app.get('/administrator/payconduitdata',function(req, res) {
-  var payconduitdata = null;
-  PayconduitCls.find({
-    success:function(data)
-    {res.json(data);},
-    error:function(error)
-    {}
-  });
+// app.get('/administrator/payconduitdata',function(req, res) {
+//   var payconduitdata = null;
+//   PayconduitCls.find({
+//     success:function(data)
+//     {res.json(data);},
+//     error:function(error)
+//     {}
+//   });
   
-});
+// });
 
-app.get('/administrator/scorerecorddata',function(req, res) {
-  var scorerecorddata = null;
-  ScorerecordCls.find({
-    success:function(data)
-    {res.json(data);},
-    error:function(error)
-    {}
-  });
+// app.get('/administrator/scorerecorddata',function(req, res) {
+//   var scorerecorddata = null;
+//   ScorerecordCls.find({
+//     success:function(data)
+//     {res.json(data);},
+//     error:function(error)
+//     {}
+//   });
   
-});
+// });
 
-app.get('/administrator/scoretotaildata',function(req, res) {
-  var scoretotaildata = null;
-  ScoretotailCls.find({
-    success:function(data)
-    {res.json(data);},
-    error:function(error)
-    {}
-  });
+// app.get('/administrator/scoretotaildata',function(req, res) {
+//   var scoretotaildata = null;
+//   ScoretotailCls.find({
+//     success:function(data)
+//     {res.json(data);},
+//     error:function(error)
+//     {}
+//   });
   
-});
+// });
 
-app.get('/administrator/tasksdata',function(req, res) {
-  var tasksdata = null;
-  TasksCls.find({
-    success:function(data)
-    {res.json(data);},
-    error:function(error)
-    {}
-  });
+// app.get('/administrator/tasksdata',function(req, res) {
+//   var tasksdata = null;
+//   TasksCls.find({
+//     success:function(data)
+//     {res.json(data);},
+//     error:function(error)
+//     {}
+//   });
   
-});
+// });
 
 app.get('/administrator/tasksdatalist',function(req, res) {
   var tasks = AV.Object.extend("Tasks");
@@ -281,386 +281,386 @@ app.get('/administrator/tasksdatalist',function(req, res) {
   
 });
 
-app.get('/administrator/terracesdata',function(req, res) {
-  var terracesdata = null;
-  TerracesCls.find({
-    success:function(data)
-    {res.json(data);},
-    error:function(error)
-    {}
-  });
+// app.get('/administrator/terracesdata',function(req, res) {
+//   var terracesdata = null;
+//   TerracesCls.find({
+//     success:function(data)
+//     {res.json(data);},
+//     error:function(error)
+//     {}
+//   });
   
-});
+// });
 
 //各种增删改
 var rlt = { result:false, msg:"错误结果!" };
 
-app.post('/administrator/addterraces',function(req, res) {
-  var tname = req.body.terracename;
-  var terraces = TerracesCls.init(tname);
+// app.post('/administrator/addterraces',function(req, res) {
+//   var tname = req.body.terracename;
+//   var terraces = TerracesCls.init(tname);
 
-  terraces.save(null, {
-  success: function(terraces) {
-    rlt.result = true;
-    res.send(rlt);
-  },
-  error: function(terraces, error) {
-    rlt.result = false;
-    rlt.msg = error.description;
-    res.send(rlt);
-    }
-  });
+//   terraces.save(null, {
+//   success: function(terraces) {
+//     rlt.result = true;
+//     res.send(rlt);
+//   },
+//   error: function(terraces, error) {
+//     rlt.result = false;
+//     rlt.msg = error.description;
+//     res.send(rlt);
+//     }
+//   });
 
-});
+// });
 
-app.post('/administrator/modterraces',function(req, res) {
-  var oid = req.body.objectId;
-  var tname = req.body.terracename;
-  var terraces = TerracesCls.create();
-  terraces.ObjectId(oid);
-  terraces.TerraceName(tname);
+// app.post('/administrator/modterraces',function(req, res) {
+//   var oid = req.body.objectId;
+//   var tname = req.body.terracename;
+//   var terraces = TerracesCls.create();
+//   terraces.ObjectId(oid);
+//   terraces.TerraceName(tname);
 
-  terraces.save(null, {
-  success: function(terraces) {
-    rlt.result = true;
-    res.send(rlt);
-  },
-  error: function(terraces, error) {
-    rlt.result = false;
-    rlt.msg = error.description;
-    res.send(rlt);
-    }
-  });
+//   terraces.save(null, {
+//   success: function(terraces) {
+//     rlt.result = true;
+//     res.send(rlt);
+//   },
+//   error: function(terraces, error) {
+//     rlt.result = false;
+//     rlt.msg = error.description;
+//     res.send(rlt);
+//     }
+//   });
 
-});
+// });
 
-app.post('/administrator/delterraces',function(req, res) {
-  var oid = req.body.data.objectId;
-  var tname = req.body.data.terracename;
-  var terraces = TerracesCls.create();
-  terraces.ObjectId(oid);
-  terraces.Terracename(tname);
+// app.post('/administrator/delterraces',function(req, res) {
+//   var oid = req.body.data.objectId;
+//   var tname = req.body.data.terracename;
+//   var terraces = TerracesCls.create();
+//   terraces.ObjectId(oid);
+//   terraces.Terracename(tname);
 
-  terraces.destroy({
-    success: function(terraces) {
-      rlt.result = true;
-      res.send(rlt);
-    },
-    error: function(terraces, error) {
-      rlt.result = false;
-      rlt.msg = error.description;
-      res.send(rlt);
-    }
-  });
+//   terraces.destroy({
+//     success: function(terraces) {
+//       rlt.result = true;
+//       res.send(rlt);
+//     },
+//     error: function(terraces, error) {
+//       rlt.result = false;
+//       rlt.msg = error.description;
+//       res.send(rlt);
+//     }
+//   });
 
-});
+// });
 
-app.post('/administrator/addnotices',function(req, res) {
-  var title = req.body.data.title;
-  var content = req.body.data.content;
-  var postdate = new Date();
-  var notice = NoticesCls.init(title,postdate,content);
+// app.post('/administrator/addnotices',function(req, res) {
+//   var title = req.body.data.title;
+//   var content = req.body.data.content;
+//   var postdate = new Date();
+//   var notice = NoticesCls.init(title,postdate,content);
 
-  notice.save(null, {
-    success: function(notice) {
-      rlt.result = true;
-      res.send(rlt);
-    },
-    error: function(notice, error) {
-      rlt.result = false;
-      rlt.msg = error.description;
-      res.send(rlt);
-    }
-  });
+//   notice.save(null, {
+//     success: function(notice) {
+//       rlt.result = true;
+//       res.send(rlt);
+//     },
+//     error: function(notice, error) {
+//       rlt.result = false;
+//       rlt.msg = error.description;
+//       res.send(rlt);
+//     }
+//   });
 
-});
+// });
 
-app.post('/administrator/modnotices',function(req, res) {
-  var oId = req.body.data.objectId;
-  var title = req.body.data.title;
-  var content = req.body.data.content;
-  var postdate = new Date();
-  var notice = NoticesCls.create();
-  notice.ObjectId(oId);
-  notice.Title(title);
-  notice.Content(content);
-  notice.PostDate(postdate);
+// app.post('/administrator/modnotices',function(req, res) {
+//   var oId = req.body.data.objectId;
+//   var title = req.body.data.title;
+//   var content = req.body.data.content;
+//   var postdate = new Date();
+//   var notice = NoticesCls.create();
+//   notice.ObjectId(oId);
+//   notice.Title(title);
+//   notice.Content(content);
+//   notice.PostDate(postdate);
 
-  notice.save(null, {
-    success: function(notice) {
-      rlt.result = true;
-      res.send(rlt);
-    },
-    error: function(notice, error) {
-      rlt.result = false;
-      rlt.msg = error.description;
-      res.send(rlt);
-    }
-  });
+//   notice.save(null, {
+//     success: function(notice) {
+//       rlt.result = true;
+//       res.send(rlt);
+//     },
+//     error: function(notice, error) {
+//       rlt.result = false;
+//       rlt.msg = error.description;
+//       res.send(rlt);
+//     }
+//   });
 
-});
+// });
 
-app.post('/administrator/delnotices',function(req, res) {
-  var oId = req.body.data.objectId;
-  var title = req.body.data.title;
-  var content = req.body.data.content;
-  var postdate = req.body.data.postdate;
-  var notice = NoticesCls.create();
-  notice.ObjectId(oId);
-  notice.Title(title);
-  notice.Content(content);
-  notice.PostDate(postdate);
+// app.post('/administrator/delnotices',function(req, res) {
+//   var oId = req.body.data.objectId;
+//   var title = req.body.data.title;
+//   var content = req.body.data.content;
+//   var postdate = req.body.data.postdate;
+//   var notice = NoticesCls.create();
+//   notice.ObjectId(oId);
+//   notice.Title(title);
+//   notice.Content(content);
+//   notice.PostDate(postdate);
 
-  terraces.destroy({
-    success: function(terraces) {
-      rlt.result = true;
-      res.send(rlt);
-    },
-    error: function(terraces, error) {
-      rlt.result = false;
-      rlt.msg = error.description;
-      res.send(rlt);
-    }
-  });
+//   terraces.destroy({
+//     success: function(terraces) {
+//       rlt.result = true;
+//       res.send(rlt);
+//     },
+//     error: function(terraces, error) {
+//       rlt.result = false;
+//       rlt.msg = error.description;
+//       res.send(rlt);
+//     }
+//   });
 
-});
+// });
 
-app.post('/administrator/addpayconduit',function(req, res) {
-  var pname = req.body.payname;
-  var payconduit = PayconduitCls.init(pname);
+// app.post('/administrator/addpayconduit',function(req, res) {
+//   var pname = req.body.payname;
+//   var payconduit = PayconduitCls.init(pname);
 
-  payconduit.save(null, {
-    success: function(payconduit) {
-      rlt.result = true;
-      res.send(rlt);
-    },
-    error: function(payconduit, error) {
-      rlt.result = false;
-      rlt.msg = error.description;
-      res.send(rlt);
-    }
-  });
+//   payconduit.save(null, {
+//     success: function(payconduit) {
+//       rlt.result = true;
+//       res.send(rlt);
+//     },
+//     error: function(payconduit, error) {
+//       rlt.result = false;
+//       rlt.msg = error.description;
+//       res.send(rlt);
+//     }
+//   });
 
-});
+// });
 
-app.post('/administrator/modpayconduit',function(req, res) {
-  var oid = req.body.data.objectId;
-  var pname = req.body.data.payname;
-  var payconduit = PayconduitCls.create();
-  payconduit.ObjectId(oid);
-  payconduit.Payname(pname);
+// app.post('/administrator/modpayconduit',function(req, res) {
+//   var oid = req.body.data.objectId;
+//   var pname = req.body.data.payname;
+//   var payconduit = PayconduitCls.create();
+//   payconduit.ObjectId(oid);
+//   payconduit.Payname(pname);
 
-  payconduit.save(null, {
-    success: function(payconduit) {
-      rlt.result = true;
-      res.send(rlt);
-    },
-    error: function(payconduit, error) {
-      rlt.result = false;
-      rlt.msg = error.description;
-      res.send(rlt);
-    }
-  });
+//   payconduit.save(null, {
+//     success: function(payconduit) {
+//       rlt.result = true;
+//       res.send(rlt);
+//     },
+//     error: function(payconduit, error) {
+//       rlt.result = false;
+//       rlt.msg = error.description;
+//       res.send(rlt);
+//     }
+//   });
 
-});
+// });
 
-app.post('/administrator/delpayconduit',function(req, res) {
-  var oid = req.body.data.objectId;
-  var pname = req.body.data.payname;
-  var payconduit = PayconduitCls.create();
-  payconduit.ObjectId(oid);
-  payconduit.Payname(pname);
+// app.post('/administrator/delpayconduit',function(req, res) {
+//   var oid = req.body.data.objectId;
+//   var pname = req.body.data.payname;
+//   var payconduit = PayconduitCls.create();
+//   payconduit.ObjectId(oid);
+//   payconduit.Payname(pname);
 
-  payconduit.destroy({
-    success: function(payconduit) {
-      rlt.result = true;
-      res.send(rlt);
-    },
-    error: function(payconduit, error) {
-      rlt.result = false;
-      rlt.msg = error.description;
-      res.send(rlt);
-    }
-  });
+//   payconduit.destroy({
+//     success: function(payconduit) {
+//       rlt.result = true;
+//       res.send(rlt);
+//     },
+//     error: function(payconduit, error) {
+//       rlt.result = false;
+//       rlt.msg = error.description;
+//       res.send(rlt);
+//     }
+//   });
 
-});
+// });
 
-app.post('/administrator/moddepositrecord',function(req, res) {
-  var oid = req.body.data.objectId;
-  var userid = req.body.data.userid;
-  var username = req.body.data.username;
-  var tid = req.body.data.terracesid;
-  var tname = req.body.data.terracename;
-  var pve = req.body.data.payvalue;
-  var pvd = req.body.data.payvalid;
-  var atime = req.body.data.applytime;
-  var ptime = new Date();
-  var depositrecord = DepositrecordCls.create();
-  depositrecord.ObjectId(oid);
-  depositrecord.Userid(userid);
-  depositrecord.Username(username);
-  depositrecord.Terraceid(tid);
-  depositrecord.Terracename(tname);
-  depositrecord.Payvalue(pve);
-  depositrecord.Payvalid(pvd);
-  depositrecord.Applytime(atime);
-  depositrecord.Payfortime(ptime);
+// app.post('/administrator/moddepositrecord',function(req, res) {
+//   var oid = req.body.data.objectId;
+//   var userid = req.body.data.userid;
+//   var username = req.body.data.username;
+//   var tid = req.body.data.terracesid;
+//   var tname = req.body.data.terracename;
+//   var pve = req.body.data.payvalue;
+//   var pvd = req.body.data.payvalid;
+//   var atime = req.body.data.applytime;
+//   var ptime = new Date();
+//   var depositrecord = DepositrecordCls.create();
+//   depositrecord.ObjectId(oid);
+//   depositrecord.Userid(userid);
+//   depositrecord.Username(username);
+//   depositrecord.Terraceid(tid);
+//   depositrecord.Terracename(tname);
+//   depositrecord.Payvalue(pve);
+//   depositrecord.Payvalid(pvd);
+//   depositrecord.Applytime(atime);
+//   depositrecord.Payfortime(ptime);
 
-  depositrecord.save(null,{
-    success: function(depositrecord) {
-      rlt.result = true;
-      res.send(rlt);
-    },
-    error: function(depositrecord, error) {
-      rlt.result = false;
-      rlt.msg = error.description;
-      res.send(rlt);
-    }
-  });
+//   depositrecord.save(null,{
+//     success: function(depositrecord) {
+//       rlt.result = true;
+//       res.send(rlt);
+//     },
+//     error: function(depositrecord, error) {
+//       rlt.result = false;
+//       rlt.msg = error.description;
+//       res.send(rlt);
+//     }
+//   });
   
-});
+// });
 
-app.post('/administrator/addtasks',function(req, res) {
-  var tname = req.body.data.taskname;
-  var stitle = req.body.data.subtitle;
-  var tid = req.body.data.terraceid;
-  var tname = req.body.data.terracename;
-  var enable = req.body.data.enable;
-  var task = TasksCls.init(tname,stitle,tid,enable,tname);
+// app.post('/administrator/addtasks',function(req, res) {
+//   var tname = req.body.data.taskname;
+//   var stitle = req.body.data.subtitle;
+//   var tid = req.body.data.terraceid;
+//   var tname = req.body.data.terracename;
+//   var enable = req.body.data.enable;
+//   var task = TasksCls.init(tname,stitle,tid,enable,tname);
 
-  task.save(null, {
-    success: function(task) {
-      rlt.result = true;
-      res.send(rlt);
-    },
-    error: function(task, error) {
-      rlt.result = false;
-      rlt.msg = error.description;
-      res.send(rlt);
-    }
-  });
+//   task.save(null, {
+//     success: function(task) {
+//       rlt.result = true;
+//       res.send(rlt);
+//     },
+//     error: function(task, error) {
+//       rlt.result = false;
+//       rlt.msg = error.description;
+//       res.send(rlt);
+//     }
+//   });
 
-});
+// });
 
-app.post('/administrator/modtasks',function(req, res) {
-  var oId = req.body.data.objectId;
-  var tname = req.body.data.taskname;
-  var stitle = req.body.data.subtitle;
-  var tid = req.body.data.terraceid;
-  var tname = req.body.data.terracename;
-  var enable = req.body.data.enable;
-  var task = TasksCls.create();
-  task.ObjectId(oId);
-  task.Taskname(tname);
-  task.Subtitle(stitle);
-  task.Terraceid(tid);
-  task.Terracename(tname);
-  task.Enable(enable);
+// app.post('/administrator/modtasks',function(req, res) {
+//   var oId = req.body.data.objectId;
+//   var tname = req.body.data.taskname;
+//   var stitle = req.body.data.subtitle;
+//   var tid = req.body.data.terraceid;
+//   var tname = req.body.data.terracename;
+//   var enable = req.body.data.enable;
+//   var task = TasksCls.create();
+//   task.ObjectId(oId);
+//   task.Taskname(tname);
+//   task.Subtitle(stitle);
+//   task.Terraceid(tid);
+//   task.Terracename(tname);
+//   task.Enable(enable);
 
-  task.save(null, {
-    success: function(task) {
-      rlt.result = true;
-      res.send(rlt);
-    },
-    error: function(task, error) {
-      rlt.result = false;
-      rlt.msg = error.description;
-      res.send(rlt);
-    }
-  });
+//   task.save(null, {
+//     success: function(task) {
+//       rlt.result = true;
+//       res.send(rlt);
+//     },
+//     error: function(task, error) {
+//       rlt.result = false;
+//       rlt.msg = error.description;
+//       res.send(rlt);
+//     }
+//   });
 
-});
+// });
 
-app.post('/administrator/deltasks',function(req, res) {
-  var oId = req.body.data.objectId;
-  var tname = req.body.data.taskname;
-  var stitle = req.body.data.subtitle;
-  var tid = req.body.data.terraceid;
-  var tname = req.body.data.terracename;
-  var enable = req.body.data.enable;
-  var task = TasksCls.create();
-  task.ObjectId(oId);
-  task.Taskname(tname);
-  task.Subtitle(stitle);
-  task.Terraceid(tid);
-  task.Terracename(tname);
-  task.Enable(enable);
+// app.post('/administrator/deltasks',function(req, res) {
+//   var oId = req.body.data.objectId;
+//   var tname = req.body.data.taskname;
+//   var stitle = req.body.data.subtitle;
+//   var tid = req.body.data.terraceid;
+//   var tname = req.body.data.terracename;
+//   var enable = req.body.data.enable;
+//   var task = TasksCls.create();
+//   task.ObjectId(oId);
+//   task.Taskname(tname);
+//   task.Subtitle(stitle);
+//   task.Terraceid(tid);
+//   task.Terracename(tname);
+//   task.Enable(enable);
 
-  task.save(null,{
-    success: function(task) {
-      rlt.result = true;
-      res.send(rlt);
-    },
-    error: function(task, error) {
-      rlt.result = false;
-      rlt.msg = error.description;
-      res.send(rlt);
-    }
-  });
+//   task.save(null,{
+//     success: function(task) {
+//       rlt.result = true;
+//       res.send(rlt);
+//     },
+//     error: function(task, error) {
+//       rlt.result = false;
+//       rlt.msg = error.description;
+//       res.send(rlt);
+//     }
+//   });
 
-});
+// });
 
-app.post('/administrator/modmemberinfo',function(req, res) {
-  var oId = req.body.data.objectId;
-  var username = req.body.data.username;
-  var password = req.body.data.password;
-  var point = req.body.data.point;
-  var registerip = req.body.data.registerip;
-  var loginip = req.body.data.loginip;
-  var devicetoken = req.body.data.devicetoken;
-  var lastlogintime = req.body.data.lastlogintime;
-  var registertime = req.body.data.registertime;
-  var member = MembersCls.create();
-  member.ObjectId(oId);
-  member.Username(username);
-  member.Password(password);
-  member.Point(point);
-  member.Registerip(registerip);
-  member.Loginip(loginip);
-  member.Devicetoken(devicetoken);
-  member.Lastlogintime(lastlogintime);
-  member.Registertime(registertime);
+// app.post('/administrator/modmemberinfo',function(req, res) {
+//   var oId = req.body.data.objectId;
+//   var username = req.body.data.username;
+//   var password = req.body.data.password;
+//   var point = req.body.data.point;
+//   var registerip = req.body.data.registerip;
+//   var loginip = req.body.data.loginip;
+//   var devicetoken = req.body.data.devicetoken;
+//   var lastlogintime = req.body.data.lastlogintime;
+//   var registertime = req.body.data.registertime;
+//   var member = MembersCls.create();
+//   member.ObjectId(oId);
+//   member.Username(username);
+//   member.Password(password);
+//   member.Point(point);
+//   member.Registerip(registerip);
+//   member.Loginip(loginip);
+//   member.Devicetoken(devicetoken);
+//   member.Lastlogintime(lastlogintime);
+//   member.Registertime(registertime);
 
-  member.save(null, {
-    success: function(member) {
-      rlt.result = true;
-      res.send(rlt);
-    },
-    error: function(member, error) {
-      rlt.result = false;
-      rlt.msg = error.description;
-      res.send(rlt);
-    }
-  });
+//   member.save(null, {
+//     success: function(member) {
+//       rlt.result = true;
+//       res.send(rlt);
+//     },
+//     error: function(member, error) {
+//       rlt.result = false;
+//       rlt.msg = error.description;
+//       res.send(rlt);
+//     }
+//   });
 
-});
+// });
 
-app.post('/administrator/modmembers',function(req, res) {
-  var oId = req.body.data.objectId;
-  var username = req.body.data.username;
-  var recmid = req.body.data.recmid;
-  var recmpath = req.body.data.recmpath;
-  var recmtotail = req.body.data.recmtotail;
-  var members = MembersCls.create();
-  members.ObjectId(oId);
-  members.Username(username);
-  members.Recmanid(recmid);
-  members.Recmanpath(recmpath);
-  members.Recmantotail(recmtotail);
+// app.post('/administrator/modmembers',function(req, res) {
+//   var oId = req.body.data.objectId;
+//   var username = req.body.data.username;
+//   var recmid = req.body.data.recmid;
+//   var recmpath = req.body.data.recmpath;
+//   var recmtotail = req.body.data.recmtotail;
+//   var members = MembersCls.create();
+//   members.ObjectId(oId);
+//   members.Username(username);
+//   members.Recmanid(recmid);
+//   members.Recmanpath(recmpath);
+//   members.Recmantotail(recmtotail);
 
-  members.save(null, {
-    success: function(members) {
-      rlt.result = true;
-      res.send(rlt);
-    },
-    error: function(members, error) {
-      rlt.result = false;
-      rlt.msg = error.description;
-      res.send(rlt);
-    }
-  });
+//   members.save(null, {
+//     success: function(members) {
+//       rlt.result = true;
+//       res.send(rlt);
+//     },
+//     error: function(members, error) {
+//       rlt.result = false;
+//       rlt.msg = error.description;
+//       res.send(rlt);
+//     }
+//   });
 
-});
+// });
 
 var cloudMsg;
 

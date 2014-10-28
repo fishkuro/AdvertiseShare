@@ -213,16 +213,16 @@ app.get('/administrator/terraces', function(req, res) {
   
 // });
 
-// app.get('/administrator/noticesdata',function(req, res) {
-//   //var noticesdata = null;
-//   NoticesCls.find({
-//     success:function(data)
-//     {res.json(data);},
-//     error:function(error)
-//     {}
-//   });
+app.get('/administrator/noticesdata',function(req, res) {
+  //var noticesdata = null;
+  NoticesCls.find({
+    success:function(data)
+    {res.json(data);},
+    error:function(error)
+    {}
+  });
   
-// });
+});
 
 app.get('/administrator/payconduitdata',function(req, res) {
   //var payconduitdata = null;

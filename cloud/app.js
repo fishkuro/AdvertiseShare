@@ -172,8 +172,8 @@ app.get('/administrator/terraces', function(req, res) {
 app.get('/administrator/membersdata',function(req, res) {
   var membersdata = null;
   MembersCls.find({
-    success:function(membersdata)
-    {res.json(membersdata);},
+    success:function(data)
+    {res.json(data);},
     error:function(error)
     {}
   });
@@ -183,8 +183,8 @@ app.get('/administrator/membersdata',function(req, res) {
 app.get('/administrator/memberinfodata',function(req, res) {
   var memberinfodata = null;
   MemberInfoCls.find({
-    success:function(memberinfodata)
-    res.json(memberinfodata);},
+    success:function(data)
+    res.json(data);},
     error:function(error)
     {}
   });
@@ -194,8 +194,8 @@ app.get('/administrator/memberinfodata',function(req, res) {
 app.get('/administrator/depositrecorddata',function(req, res) {
   var depositrecorddata = null;
   DepositrecordCls.find({
-    success:function(depositrecorddata)
-    {res.json(depositrecorddata);},
+    success:function(data)
+    {res.json(data);},
     error:function(error)
     {}
   });
@@ -205,8 +205,8 @@ app.get('/administrator/depositrecorddata',function(req, res) {
 app.get('/administrator/deposittotaildata',function(req, res) {
   var deposittotaildata = null;
   DeposittotailCls.find({
-    success:function(deposittotaildata)
-    {res.json(depositrecorddata);},
+    success:function(data)
+    {res.json(data);},
     error:function(error)
     {}
   });
@@ -216,8 +216,8 @@ app.get('/administrator/deposittotaildata',function(req, res) {
 app.get('/administrator/noticesdata',function(req, res) {
   var noticesdata = null;
   NoticesCls.find({
-    success:function(noticesdata)
-    {res.json(noticesdata);},
+    success:function(data)
+    {res.json(data);},
     error:function(error)
     {}
   });
@@ -227,8 +227,8 @@ app.get('/administrator/noticesdata',function(req, res) {
 app.get('/administrator/payconduitdata',function(req, res) {
   var payconduitdata = null;
   PayconduitCls.find({
-    success:function(payconduitdata)
-    {res.json(payconduitdata);},
+    success:function(data)
+    {res.json(data);},
     error:function(error)
     {}
   });
@@ -238,8 +238,8 @@ app.get('/administrator/payconduitdata',function(req, res) {
 app.get('/administrator/scorerecorddata',function(req, res) {
   var scorerecorddata = null;
   ScorerecordCls.find({
-    success:function(scorerecorddata)
-    {res.json(scorerecorddata);},
+    success:function(data)
+    {res.json(data);},
     error:function(error)
     {}
   });
@@ -249,8 +249,8 @@ app.get('/administrator/scorerecorddata',function(req, res) {
 app.get('/administrator/scoretotaildata',function(req, res) {
   var scoretotaildata = null;
   ScoretotailCls.find({
-    success:function(scoretotaildata)
-    {res.json(scoretotaildata);},
+    success:function(data)
+    {res.json(data);},
     error:function(error)
     {}
   });
@@ -260,8 +260,8 @@ app.get('/administrator/scoretotaildata',function(req, res) {
 app.get('/administrator/tasksdata',function(req, res) {
   var tasksdata = null;
   TasksCls.find({
-    success:function(tasksdata)
-    {res.json(tasksdata);},
+    success:function(data)
+    {res.json(data);},
     error:function(error)
     {}
   });
@@ -284,8 +284,8 @@ app.get('/administrator/tasksdatalist',function(req, res) {
 app.get('/administrator/terracesdata',function(req, res) {
   var terracesdata = null;
   TerracesCls.find({
-    success:function(terracesdata)
-    {res.json(terracesdata);},
+    success:function(data)
+    {res.json(data);},
     error:function(error)
     {}
   });
@@ -430,14 +430,14 @@ app.post('/administrator/addpayconduit',function(req, res) {
   var payconduit = PayconduitCls.init(pname);
 
   payconduit.save(null, {
-  success: function(payconduit) {
-    rlt.result = true;
-    res.send(rlt);
-  },
-  error: function(payconduit, error) {
-    rlt.result = false;
-    rlt.msg = error.description;
-    res.send(rlt);
+    success: function(payconduit) {
+      rlt.result = true;
+      res.send(rlt);
+    },
+    error: function(payconduit, error) {
+      rlt.result = false;
+      rlt.msg = error.description;
+      res.send(rlt);
     }
   });
 
@@ -451,15 +451,15 @@ app.post('/administrator/modpayconduit',function(req, res) {
   payconduit.Payname(pname);
 
   payconduit.save(null, {
-  success: function(payconduit) {
-    rlt.result = true;
-    res.send(rlt);
-  },
-  error: function(payconduit, error) {
-    rlt.result = false;
-    rlt.msg = error.description;
-    res.send(rlt);
-  }
+    success: function(payconduit) {
+      rlt.result = true;
+      res.send(rlt);
+    },
+    error: function(payconduit, error) {
+      rlt.result = false;
+      rlt.msg = error.description;
+      res.send(rlt);
+    }
   });
 
 });

@@ -52,7 +52,16 @@ app.get('/hello', function(req, res) {
         // var mem = MembersCls.create();
         // mem.Username(nameStr);
         // mem.ObjectId(member.get("objectId"));
-        rlt = member.get("objectId");
+        member.each(null,{
+          success:function()
+          {
+            rlt = member.get("objectId");
+          },
+          error: function(error) {
+            rlt = error.message;
+          }
+        });
+        
         // var memberinfo = MemberInfoCls.create();
         // memberinfo.Username(nameStr);
         // memberinfo.Password(passStr);

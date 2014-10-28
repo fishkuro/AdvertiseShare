@@ -235,16 +235,16 @@ app.get('/administrator/terraces', function(req, res) {
   
 // });
 
-// app.get('/administrator/scorerecorddata',function(req, res) {
-//   //var scorerecorddata = null;
-//   ScorerecordCls.find({
-//     success:function(data)
-//     {res.json(data);},
-//     error:function(error)
-//     {}
-//   });
+app.get('/administrator/scorerecorddata',function(req, res) {
+  //var scorerecorddata = null;
+  ScorerecordCls.find({
+    success:function(data)
+    {res.json(data);},
+    error:function(error)
+    {}
+  });
   
-// });
+});
 
 app.get('/administrator/scoretotaildata',function(req, res) {
   //var scoretotaildata = null;

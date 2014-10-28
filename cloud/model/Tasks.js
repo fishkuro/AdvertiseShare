@@ -82,10 +82,10 @@ exports.create = function() {
     return tasks;
 };
 
-exports.query = function() {
-	var tasks = AV.Object.extend("Tasks");
-	return tasks;
-};
+// exports.query = function() {
+// 	var tasks = AV.Object.extend("Tasks");
+// 	return tasks;
+// };
 
 exports.find = function(options) {
     var tasks = AV.Object.extend("Tasks");

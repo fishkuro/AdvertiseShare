@@ -38,10 +38,10 @@ exports.create = function() {
     return terraces;
 };
 
-exports.query = function() {
-	var terraces = AV.Object.extend("Terraces");
-	return terraces;
-};
+// exports.query = function() {
+// 	var terraces = AV.Object.extend("Terraces");
+// 	return terraces;
+// };
 
 exports.find = function(options) {
     var terraces = AV.Object.extend("Terraces");

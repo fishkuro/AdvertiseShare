@@ -115,10 +115,10 @@ exports.create = function() {
     return depositrecord;
 };
 
-exports.query = function() {
-	var depositrecord = AV.Object.extend("DepositRecord");
-	return depositrecord;
-};
+// exports.query = function() {
+// 	var depositrecord = AV.Object.extend("DepositRecord");
+// 	return depositrecord;
+// };
 
 exports.find = function(options) {
     var depositrecord = AV.Object.extend("DepositRecord");

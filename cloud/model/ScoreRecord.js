@@ -148,10 +148,10 @@ exports.create = function() {
     return scorerecord;
 };
 
-exports.query = function() {
-    var scorerecord = AV.Object.extend("ScoreRecord");
-    return scorerecord;
-};
+// exports.query = function() {
+//     var scorerecord = AV.Object.extend("ScoreRecord");
+//     return scorerecord;
+// };
 
 exports.find = function(options) {
     var scorerecord = AV.Object.extend("ScoreRecord");

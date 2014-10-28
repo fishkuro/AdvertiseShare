@@ -176,8 +176,8 @@ app.get('/administrator/membersdata',function(req, res) {
 
 app.get('/administrator/memberinfodata',function(req, res) {
   var memberinfodata = MemberInfoCls.find({
-    success:function(memberinfodata)
-    {},
+    success:function(data)
+    {memberinfodata = data},
     error:function(error)
     {}
   });
@@ -186,8 +186,8 @@ app.get('/administrator/memberinfodata',function(req, res) {
 
 app.get('/administrator/depositrecorddata',function(req, res) {
   var depositrecorddata = DepositrecordCls.find({
-    success:function(depositrecorddata)
-    {},
+    success:function(data)
+    {depositrecorddata = data},
     error:function(error)
     {}
   });
@@ -196,8 +196,8 @@ app.get('/administrator/depositrecorddata',function(req, res) {
 
 app.get('/administrator/deposittotaildata',function(req, res) {
   var deposittotaildata = DeposittotailCls.find({
-    success:function(deposittotaildata)
-    {},
+    success:function(data)
+    {deposittotaildata = data},
     error:function(error)
     {}
   });
@@ -206,8 +206,8 @@ app.get('/administrator/deposittotaildata',function(req, res) {
 
 app.get('/administrator/noticesdata',function(req, res) {
   var noticesdata = NoticesCls.find({
-    success:function(noticesdata)
-    {},
+    success:function(data)
+    {noticesdata = data},
     error:function(error)
     {}
   });
@@ -216,8 +216,8 @@ app.get('/administrator/noticesdata',function(req, res) {
 
 app.get('/administrator/payconduitdata',function(req, res) {
   var payconduitdata = PayconduitCls.find({
-    success:function(payconduitdata)
-    {},
+    success:function(data)
+    {payconduitdata = data},
     error:function(error)
     {}
   });
@@ -226,8 +226,8 @@ app.get('/administrator/payconduitdata',function(req, res) {
 
 app.get('/administrator/scorerecorddata',function(req, res) {
   var scorerecorddata = ScorerecordCls.find({
-    success:function(scorerecorddata)
-    {},
+    success:function(data)
+    {scorerecorddata = data},
     error:function(error)
     {}
   });
@@ -236,8 +236,8 @@ app.get('/administrator/scorerecorddata',function(req, res) {
 
 app.get('/administrator/scoretotaildata',function(req, res) {
   var scoretotaildata = ScoretotailCls.find({
-    success:function(scoretotaildata)
-    {},
+    success:function(data)
+    {scoretotaildata = data},
     error:function(error)
     {}
   });
@@ -246,8 +246,8 @@ app.get('/administrator/scoretotaildata',function(req, res) {
 
 app.get('/administrator/tasksdata',function(req, res) {
   var tasksdata = TasksCls.find({
-    success:function(tasksdata)
-    {},
+    success:function(data)
+    {tasksdata = data},
     error:function(error)
     {}
   });
@@ -263,8 +263,8 @@ app.get('/administrator/tasksdatatest',function(req, res) {
 
 app.get('/administrator/terracesdata',function(req, res) {
   var terracesdata = TerracesCls.find({
-    success:function(terracesdata)
-    {},
+    success:function(data)
+    {terracesdata = data},
     error:function(error)
     {}
   });

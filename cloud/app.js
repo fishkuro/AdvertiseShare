@@ -257,16 +257,16 @@ app.get('/administrator/terraces', function(req, res) {
   
 // });
 
-// app.get('/administrator/tasksdata',function(req, res) {
-//   var tasksdata = null;
-//   TasksCls.find({
-//     success:function(data)
-//     {res.json(data);},
-//     error:function(error)
-//     {}
-//   });
+app.get('/administrator/tasksdata',function(req, res) {
+  var tasksdata = null;
+  TasksCls.find({
+    success:function(data)
+    {res.json(data);},
+    error:function(error)
+    {}
+  });
   
-// });
+});
 
 app.get('/administrator/tasksdatalist',function(req, res) {
   var tasks = AV.Object.extend("Tasks");

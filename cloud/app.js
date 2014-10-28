@@ -302,14 +302,15 @@ app.post('/administrator/addterraces',function(req, res) {
   terraces.save(null, {
   success: function(terraces) {
     rlt.result = true;
+    res.send(rlt);
   },
   error: function(terraces, error) {
     rlt.result = false;
     rlt.msg = error.description;
+    res.send(rlt);
     }
   });
 
-  res.send(rlt);
 });
 
 app.post('/administrator/modterraces',function(req, res) {
@@ -322,14 +323,15 @@ app.post('/administrator/modterraces',function(req, res) {
   terraces.save(null, {
   success: function(terraces) {
     rlt.result = true;
+    res.send(rlt);
   },
   error: function(terraces, error) {
     rlt.result = false;
     rlt.msg = error.description;
+    res.send(rlt);
     }
   });
 
-  res.send(rlt);
 });
 
 app.post('/administrator/delterraces',function(req, res) {
@@ -342,14 +344,15 @@ app.post('/administrator/delterraces',function(req, res) {
   terraces.destroy({
     success: function(terraces) {
       rlt.result = true;
+      res.send(rlt);
     },
     error: function(terraces, error) {
       rlt.result = false;
       rlt.msg = error.description;
+      res.send(rlt);
     }
   });
 
-  res.send(rlt);
 });
 
 app.post('/administrator/addnotices',function(req, res) {
@@ -361,14 +364,15 @@ app.post('/administrator/addnotices',function(req, res) {
   notice.save(null, {
     success: function(notice) {
       rlt.result = true;
+      res.send(rlt);
     },
     error: function(notice, error) {
       rlt.result = false;
       rlt.msg = error.description;
+      res.send(rlt);
     }
   });
 
-  res.send(rlt);
 });
 
 app.post('/administrator/modnotices',function(req, res) {
@@ -385,14 +389,15 @@ app.post('/administrator/modnotices',function(req, res) {
   notice.save(null, {
     success: function(notice) {
       rlt.result = true;
+      res.send(rlt);
     },
     error: function(notice, error) {
       rlt.result = false;
       rlt.msg = error.description;
+      res.send(rlt);
     }
   });
 
-  res.send(rlt);
 });
 
 app.post('/administrator/delnotices',function(req, res) {
@@ -409,14 +414,15 @@ app.post('/administrator/delnotices',function(req, res) {
   terraces.destroy({
     success: function(terraces) {
       rlt.result = true;
+      res.send(rlt);
     },
     error: function(terraces, error) {
       rlt.result = false;
       rlt.msg = error.description;
+      res.send(rlt);
     }
   });
 
-  res.send(rlt);
 });
 
 app.post('/administrator/addpayconduit',function(req, res) {
@@ -426,14 +432,15 @@ app.post('/administrator/addpayconduit',function(req, res) {
   payconduit.save(null, {
   success: function(payconduit) {
     rlt.result = true;
+    res.send(rlt);
   },
   error: function(payconduit, error) {
     rlt.result = false;
     rlt.msg = error.description;
+    res.send(rlt);
     }
   });
 
-  res.send(rlt);
 });
 
 app.post('/administrator/modpayconduit',function(req, res) {
@@ -446,14 +453,15 @@ app.post('/administrator/modpayconduit',function(req, res) {
   payconduit.save(null, {
   success: function(payconduit) {
     rlt.result = true;
+    res.send(rlt);
   },
   error: function(payconduit, error) {
     rlt.result = false;
     rlt.msg = error.description;
-    }
+    res.send(rlt);
+  }
   });
 
-  res.send(rlt);
 });
 
 app.post('/administrator/delpayconduit',function(req, res) {
@@ -466,14 +474,15 @@ app.post('/administrator/delpayconduit',function(req, res) {
   payconduit.destroy({
     success: function(payconduit) {
       rlt.result = true;
+      res.send(rlt);
     },
     error: function(payconduit, error) {
       rlt.result = false;
       rlt.msg = error.description;
+      res.send(rlt);
     }
   });
 
-  res.send(rlt);
 });
 
 app.post('/administrator/moddepositrecord',function(req, res) {
@@ -500,14 +509,15 @@ app.post('/administrator/moddepositrecord',function(req, res) {
   depositrecord.save(null,{
     success: function(depositrecord) {
       rlt.result = true;
+      res.send(rlt);
     },
     error: function(depositrecord, error) {
       rlt.result = false;
       rlt.msg = error.description;
+      res.send(rlt);
     }
   });
-
-  res.send(rlt);
+  
 });
 
 app.post('/administrator/addtasks',function(req, res) {
@@ -521,14 +531,15 @@ app.post('/administrator/addtasks',function(req, res) {
   task.save(null, {
     success: function(task) {
       rlt.result = true;
+      res.send(rlt);
     },
     error: function(task, error) {
       rlt.result = false;
       rlt.msg = error.description;
+      res.send(rlt);
     }
   });
 
-  res.send(rlt);
 });
 
 app.post('/administrator/modtasks',function(req, res) {
@@ -549,14 +560,15 @@ app.post('/administrator/modtasks',function(req, res) {
   task.save(null, {
     success: function(task) {
       rlt.result = true;
+      res.send(rlt);
     },
     error: function(task, error) {
       rlt.result = false;
       rlt.msg = error.description;
+      res.send(rlt);
     }
   });
 
-  res.send(rlt);
 });
 
 app.post('/administrator/deltasks',function(req, res) {
@@ -577,14 +589,15 @@ app.post('/administrator/deltasks',function(req, res) {
   task.save(null,{
     success: function(task) {
       rlt.result = true;
+      res.send(rlt);
     },
     error: function(task, error) {
       rlt.result = false;
       rlt.msg = error.description;
+      res.send(rlt);
     }
   });
 
-  res.send(rlt);
 });
 
 app.post('/administrator/modmemberinfo',function(req, res) {
@@ -611,14 +624,15 @@ app.post('/administrator/modmemberinfo',function(req, res) {
   member.save(null, {
     success: function(member) {
       rlt.result = true;
+      res.send(rlt);
     },
     error: function(member, error) {
       rlt.result = false;
       rlt.msg = error.description;
+      res.send(rlt);
     }
   });
 
-  res.send(rlt);
 });
 
 app.post('/administrator/modmembers',function(req, res) {
@@ -637,14 +651,15 @@ app.post('/administrator/modmembers',function(req, res) {
   members.save(null, {
     success: function(members) {
       rlt.result = true;
+      res.send(rlt);
     },
     error: function(members, error) {
       rlt.result = false;
       rlt.msg = error.description;
+      res.send(rlt);
     }
   });
 
-  res.send(rlt);
 });
 
 var cloudMsg;

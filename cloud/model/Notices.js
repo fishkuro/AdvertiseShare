@@ -60,14 +60,14 @@ exports.create = function() {
     return notices;
 };
 
-// exports.query = function() {
-// 	var notices = AV.Object.extend("Notices");
-// 	return notices;
-// };
+exports.query = function() {
+	var Notices = AV.Object.extend("Notices");
+	return Notices;
+};
 
 exports.find = function(options) {
-    var notices = AV.Object.extend("Notices");
-    var query = new AV.Query(notices);
+    var Notices = AV.Object.extend("Notices");
+    var query = new AV.Query(Notices);
     var reslut = query.find(options);
 	return reslut;
 };

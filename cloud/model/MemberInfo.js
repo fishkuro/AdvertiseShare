@@ -126,14 +126,14 @@ exports.create = function() {
     return memberinfo;
 };
 
-// exports.query = function() {
-// 	var memberinfo = AV.Object.extend("MemberInfo");
-// 	return memberinfo;
-// };
+exports.query = function() {
+	var MemberInfo = AV.Object.extend("MemberInfo");
+	return MemberInfo;
+};
 
 exports.find = function(options) {
-    var memberinfo = AV.Object.extend("MemberInfo");
-    var query = new AV.Query(memberinfo);
+    var MemberInfo = AV.Object.extend("MemberInfo");
+    var query = new AV.Query(MemberInfo);
     var reslut = query.find(options);
 	return reslut;
 };

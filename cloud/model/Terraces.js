@@ -38,14 +38,14 @@ exports.create = function() {
     return terraces;
 };
 
-// exports.query = function() {
-// 	var terraces = AV.Object.extend("Terraces");
-// 	return terraces;
-// };
+exports.query = function() {
+	var Terraces = AV.Object.extend("Terraces");
+	return Terraces;
+};
 
 exports.find = function(options) {
-    var terraces = AV.Object.extend("Terraces");
-    var query = new AV.Query(terraces);
+    var Terraces = AV.Object.extend("Terraces");
+    var query = new AV.Query(Terraces);
     var reslut = query.find(options);
 	return reslut;
 };

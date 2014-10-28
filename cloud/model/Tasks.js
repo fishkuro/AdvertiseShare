@@ -82,14 +82,14 @@ exports.create = function() {
     return tasks;
 };
 
-// exports.query = function() {
-// 	var tasks = AV.Object.extend("Tasks");
-// 	return tasks;
-// };
+exports.query = function() {
+	var Tasks = AV.Object.extend("Tasks");
+	return Tasks;
+};
 
 exports.find = function(options) {
-    var tasks = AV.Object.extend("Tasks");
-    var query = new AV.Query(tasks);
+    var Tasks = AV.Object.extend("Tasks");
+    var query = new AV.Query(Tasks);
     var reslut = query.find(options);
 	return reslut;
 };

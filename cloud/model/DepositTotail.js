@@ -53,21 +53,21 @@ exports.init = function(userid,username,payvaluetotail) {
 	deposittotail.set("payvaluetotail",payvaluetotail);		//Decimal
 	
     return deposittotail;
-  };
+};
 
 exports.create = function() {
     var deposittotail = new DepositTotail();
     return deposittotail;
 };
 
-// exports.query = function() {
-// 	var deposittotail = AV.Object.extend("DepositTotail");
-// 	return deposittotail;
-// };
+exports.query = function() {
+	var DepositTotail = AV.Object.extend("DepositTotail");
+	return DepositTotail;
+};
 
 exports.find = function(options) {
-    var deposittotail = AV.Object.extend("DepositTotail");
-    var query = new AV.Query(deposittotail);
+    var DepositTotail = AV.Object.extend("DepositTotail");
+    var query = new AV.Query(DepositTotail);
     var reslut = query.find(options);
 	return reslut;
 };

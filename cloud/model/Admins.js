@@ -36,8 +36,8 @@ exports.create = function() {
 
 exports.check = function(username,password)
 {
-	var admin = new Admins();
-	var query = new AV.Query(admin);
+	var Admins = AV.Object.extend("Admins");
+	var query = new AV.Query(Admins);
 	query.equalTo("username",username);
 	query.greaterThan("password", password);
 	query.find({
@@ -61,8 +61,8 @@ exports.check = function(username,password)
  // });
 
 exports.find = function(options) {
-    var admin = AV.Object.extend("Admins");
-    var query = new AV.Query(admin);
+    var Admins = AV.Object.extend("Admins");
+    var query = new AV.Query(Admins);
 	var reslut = query.find(options);
 	return reslut;
 };

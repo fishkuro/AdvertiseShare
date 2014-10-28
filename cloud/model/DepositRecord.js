@@ -108,21 +108,21 @@ exports.init = function(uid,username,tid,terracename,payvalue,payvalid,applytime
 	depositrecord.set("payfortime",payfortime);		//DateTime
 	
     return depositrecord;
-  };
+};
 
 exports.create = function() {
     var depositrecord = new DepositRecord();
     return depositrecord;
 };
 
-// exports.query = function() {
-// 	var depositrecord = AV.Object.extend("DepositRecord");
-// 	return depositrecord;
-// };
+exports.query = function() {
+	var DepositRecord = AV.Object.extend("DepositRecord");
+	return DepositRecord;
+};
 
 exports.find = function(options) {
-    var depositrecord = AV.Object.extend("DepositRecord");
-    var query = new AV.Query(depositrecord);
+    var DepositRecord = AV.Object.extend("DepositRecord");
+    var query = new AV.Query(DepositRecord);
     var reslut = query.find(options);
 	return reslut;
 };

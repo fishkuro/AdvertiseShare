@@ -205,12 +205,12 @@ app.get('/administrator/tasksdata',function(req, res) {
   res.json(tasksdata);
 });
 
-// app.get('/administrator/tasksdatatest',function(req, res) {
-//   var tasks = AV.Object.extend("Tasks");
-//   var query = new AV.Query(tasks);
-//   var result = query.find();
-//   res.json(result);
-// });
+app.get('/administrator/tasksdatatest',function(req, res) {
+  var tasks = AV.Object.extend("Tasks");
+  var query = new AV.Query(tasks);
+  var result = query.find();
+  res.json(result);
+});
 
 app.get('/administrator/terracesdata',function(req, res) {
   var terracesdata = TerracesCls.find();
@@ -266,11 +266,11 @@ app.post('/administrator/delterraces',function(req, res) {
 
   terraces.destroy({
     success: function(terraces) {
-        rlt.result = true;
+      rlt.result = true;
     },
     error: function(terraces, error) {
-        rlt.result = false;
-        rlt.msg = error.description;
+      rlt.result = false;
+      rlt.msg = error.description;
     }
   });
 
@@ -278,70 +278,70 @@ app.post('/administrator/delterraces',function(req, res) {
 });
 
 app.post('/administrator/addnotices',function(req, res) {
-    var title = req.body.data.title;
-    var content = req.body.data.content;
-    var postdate = new Date();
-    var notice = NoticesCls.init(title,postdate,content);
+  var title = req.body.data.title;
+  var content = req.body.data.content;
+  var postdate = new Date();
+  var notice = NoticesCls.init(title,postdate,content);
 
-    notice.save(null, {
-      success: function(notice) {
-        rlt.result = true;
-      },
-      error: function(notice, error) {
-        rlt.result = false;
-        rlt.msg = error.description;
-      }
-    });
+  notice.save(null, {
+    success: function(notice) {
+      rlt.result = true;
+    },
+    error: function(notice, error) {
+      rlt.result = false;
+      rlt.msg = error.description;
+    }
+  });
 
-    res.send(rlt);
+  res.send(rlt);
 });
 
 app.post('/administrator/modnotices',function(req, res) {
-    var oId = req.body.data.objectId;
-    var title = req.body.data.title;
-    var content = req.body.data.content;
-    var postdate = new Date();
-    var notice = NoticesCls.create();
-    notice.ObjectId(oId);
-    notice.Title(title);
-    notice.Content(content);
-    notice.PostDate(postdate);
+  var oId = req.body.data.objectId;
+  var title = req.body.data.title;
+  var content = req.body.data.content;
+  var postdate = new Date();
+  var notice = NoticesCls.create();
+  notice.ObjectId(oId);
+  notice.Title(title);
+  notice.Content(content);
+  notice.PostDate(postdate);
 
-    notice.save(null, {
-      success: function(notice) {
-        rlt.result = true;
-      },
-      error: function(notice, error) {
-        rlt.result = false;
-        rlt.msg = error.description;
-      }
-    });
+  notice.save(null, {
+    success: function(notice) {
+      rlt.result = true;
+    },
+    error: function(notice, error) {
+      rlt.result = false;
+      rlt.msg = error.description;
+    }
+  });
 
-    res.send(rlt);
+  res.send(rlt);
 });
 
 app.post('/administrator/delnotices',function(req, res) {
-    var oId = req.body.data.objectId;
-    var title = req.body.data.title;
-    var content = req.body.data.content;
-    var postdate = req.body.data.postdate;
-    var notice = NoticesCls.create();
-    notice.ObjectId(oId);
-    notice.Title(title);
-    notice.Content(content);
-    notice.PostDate(postdate);
+  var oId = req.body.data.objectId;
+  var title = req.body.data.title;
+  var content = req.body.data.content;
+  var postdate = req.body.data.postdate;
+  var notice = NoticesCls.create();
+  notice.ObjectId(oId);
+  notice.Title(title);
+  notice.Content(content);
+  notice.PostDate(postdate);
 
-    terraces.destroy({
-      success: function(terraces) {
-          rlt.result = true;
-      },
-      error: function(terraces, error) {
-          rlt.result = false;
-          rlt.msg = error.description;
-      }
-    });
+  terraces.destroy({
+    success: function(terraces) {
+      rlt.result = true;
+    },
+    error: function(terraces, error) {
+      rlt.result = false;
+      rlt.msg = error.description;
+    }
+  });
 
-    res.send(rlt);
+  res.send(rlt);
 });
 
 app.post('/administrator/addpayconduit',function(req, res) {
@@ -390,11 +390,11 @@ app.post('/administrator/delpayconduit',function(req, res) {
 
   payconduit.destroy({
     success: function(payconduit) {
-        rlt.result = true;
+      rlt.result = true;
     },
     error: function(payconduit, error) {
-        rlt.result = false;
-        rlt.msg = error.description;
+      rlt.result = false;
+      rlt.msg = error.description;
     }
   });
 
@@ -424,11 +424,11 @@ app.post('/administrator/moddepositrecord',function(req, res) {
 
   depositrecord.save(null,{
     success: function(depositrecord) {
-        rlt.result = true;
+      rlt.result = true;
     },
     error: function(depositrecord, error) {
-        rlt.result = false;
-        rlt.msg = error.description;
+      rlt.result = false;
+      rlt.msg = error.description;
     }
   });
 
@@ -436,76 +436,76 @@ app.post('/administrator/moddepositrecord',function(req, res) {
 });
 
 app.post('/administrator/addtasks',function(req, res) {
-    var tname = req.body.data.taskname;
-    var stitle = req.body.data.subtitle;
-    var tid = req.body.data.terraceid;
-    var tname = req.body.data.terracename;
-    var enable = req.body.data.enable;
-    var task = TasksCls.init(tname,stitle,tid,enable,tname);
+  var tname = req.body.data.taskname;
+  var stitle = req.body.data.subtitle;
+  var tid = req.body.data.terraceid;
+  var tname = req.body.data.terracename;
+  var enable = req.body.data.enable;
+  var task = TasksCls.init(tname,stitle,tid,enable,tname);
 
-    task.save(null, {
-      success: function(task) {
-        rlt.result = true;
-      },
-      error: function(task, error) {
-        rlt.result = false;
-        rlt.msg = error.description;
-        }
-      });
+  task.save(null, {
+    success: function(task) {
+      rlt.result = true;
+    },
+    error: function(task, error) {
+      rlt.result = false;
+      rlt.msg = error.description;
+    }
+  });
 
   res.send(rlt);
 });
 
 app.post('/administrator/modtasks',function(req, res) {
-    var oId = req.body.data.objectId;
-    var tname = req.body.data.taskname;
-    var stitle = req.body.data.subtitle;
-    var tid = req.body.data.terraceid;
-    var tname = req.body.data.terracename;
-    var enable = req.body.data.enable;
-    var task = TasksCls.create();
-    task.ObjectId(oId);
-    task.Taskname(tname);
-    task.Subtitle(stitle);
-    task.Terraceid(tid);
-    task.Terracename(tname);
-    task.Enable(enable);
+  var oId = req.body.data.objectId;
+  var tname = req.body.data.taskname;
+  var stitle = req.body.data.subtitle;
+  var tid = req.body.data.terraceid;
+  var tname = req.body.data.terracename;
+  var enable = req.body.data.enable;
+  var task = TasksCls.create();
+  task.ObjectId(oId);
+  task.Taskname(tname);
+  task.Subtitle(stitle);
+  task.Terraceid(tid);
+  task.Terracename(tname);
+  task.Enable(enable);
 
-    task.save(null, {
-      success: function(task) {
-        rlt.result = true;
-      },
-      error: function(task, error) {
-        rlt.result = false;
-        rlt.msg = error.description;
-        }
-      });
+  task.save(null, {
+    success: function(task) {
+      rlt.result = true;
+    },
+    error: function(task, error) {
+      rlt.result = false;
+      rlt.msg = error.description;
+    }
+  });
 
   res.send(rlt);
 });
 
 app.post('/administrator/deltasks',function(req, res) {
-    var oId = req.body.data.objectId;
-    var tname = req.body.data.taskname;
-    var stitle = req.body.data.subtitle;
-    var tid = req.body.data.terraceid;
-    var tname = req.body.data.terracename;
-    var enable = req.body.data.enable;
-    var task = TasksCls.create();
-    task.ObjectId(oId);
-    task.Taskname(tname);
-    task.Subtitle(stitle);
-    task.Terraceid(tid);
-    task.Terracename(tname);
-    task.Enable(enable);
+  var oId = req.body.data.objectId;
+  var tname = req.body.data.taskname;
+  var stitle = req.body.data.subtitle;
+  var tid = req.body.data.terraceid;
+  var tname = req.body.data.terracename;
+  var enable = req.body.data.enable;
+  var task = TasksCls.create();
+  task.ObjectId(oId);
+  task.Taskname(tname);
+  task.Subtitle(stitle);
+  task.Terraceid(tid);
+  task.Terracename(tname);
+  task.Enable(enable);
 
   task.save(null,{
     success: function(task) {
-        rlt.result = true;
+      rlt.result = true;
     },
     error: function(task, error) {
-        rlt.result = false;
-        rlt.msg = error.description;
+      rlt.result = false;
+      rlt.msg = error.description;
     }
   });
 
@@ -513,61 +513,61 @@ app.post('/administrator/deltasks',function(req, res) {
 });
 
 app.post('/administrator/modmemberinfo',function(req, res) {
-    var oId = req.body.data.objectId;
-    var username = req.body.data.username;
-    var password = req.body.data.password;
-    var point = req.body.data.point;
-    var registerip = req.body.data.registerip;
-    var loginip = req.body.data.loginip;
-    var devicetoken = req.body.data.devicetoken;
-    var lastlogintime = req.body.data.lastlogintime;
-    var registertime = req.body.data.registertime;
-    var member = MembersCls.create();
-    member.ObjectId(oId);
-    member.Username(username);
-    member.Password(password);
-    member.Point(point);
-    member.Registerip(registerip);
-    member.Loginip(loginip);
-    member.Devicetoken(devicetoken);
-    member.Lastlogintime(lastlogintime);
-    member.Registertime(registertime);
+  var oId = req.body.data.objectId;
+  var username = req.body.data.username;
+  var password = req.body.data.password;
+  var point = req.body.data.point;
+  var registerip = req.body.data.registerip;
+  var loginip = req.body.data.loginip;
+  var devicetoken = req.body.data.devicetoken;
+  var lastlogintime = req.body.data.lastlogintime;
+  var registertime = req.body.data.registertime;
+  var member = MembersCls.create();
+  member.ObjectId(oId);
+  member.Username(username);
+  member.Password(password);
+  member.Point(point);
+  member.Registerip(registerip);
+  member.Loginip(loginip);
+  member.Devicetoken(devicetoken);
+  member.Lastlogintime(lastlogintime);
+  member.Registertime(registertime);
 
-    member.save(null, {
-      success: function(member) {
-        rlt.result = true;
-      },
-      error: function(member, error) {
-        rlt.result = false;
-        rlt.msg = error.description;
-        }
-      });
+  member.save(null, {
+    success: function(member) {
+      rlt.result = true;
+    },
+    error: function(member, error) {
+      rlt.result = false;
+      rlt.msg = error.description;
+    }
+  });
 
   res.send(rlt);
 });
 
 app.post('/administrator/modmembers',function(req, res) {
-    var oId = req.body.data.objectId;
-    var username = req.body.data.username;
-    var recmid = req.body.data.recmid;
-    var recmpath = req.body.data.recmpath;
-    var recmtotail = req.body.data.recmtotail;
-    var members = MembersCls.create();
-    members.ObjectId(oId);
-    members.Username(username);
-    members.Recmanid(recmid);
-    members.Recmanpath(recmpath);
-    members.Recmantotail(recmtotail);
+  var oId = req.body.data.objectId;
+  var username = req.body.data.username;
+  var recmid = req.body.data.recmid;
+  var recmpath = req.body.data.recmpath;
+  var recmtotail = req.body.data.recmtotail;
+  var members = MembersCls.create();
+  members.ObjectId(oId);
+  members.Username(username);
+  members.Recmanid(recmid);
+  members.Recmanpath(recmpath);
+  members.Recmantotail(recmtotail);
 
-    members.save(null, {
-      success: function(members) {
-        rlt.result = true;
-      },
-      error: function(members, error) {
-        rlt.result = false;
-        rlt.msg = error.description;
-        }
-      });
+  members.save(null, {
+    success: function(members) {
+      rlt.result = true;
+    },
+    error: function(members, error) {
+      rlt.result = false;
+      rlt.msg = error.description;
+    }
+  });
 
   res.send(rlt);
 });
@@ -578,7 +578,6 @@ var cloudMsg;
 AV.Cloud.define("testCloud", function(req, res) {
 	var nameStr = req.params.fuck;
 	var passStr = req.params.you;
-  var ipStr = UtilityCls.getIpAddress(req);
 
   res.success(nameStr + " | " + passStr);
 });
@@ -748,9 +747,8 @@ AV.Cloud.define("memberRegister", function(req, res) {
     success:function(members)
     {
       members.set('username',nameStr);
-      members.save();
       var dateNow = new Date();
-      var memberinfo = MemberInfoCls.init(members.get('signid'),nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
+      var memberinfo = MemberInfoCls.init(members,nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
       memberinfo.save(null,{
         success:function(memberinfo)
         {
@@ -785,13 +783,13 @@ AV.Cloud.define("addSubAccount", function(req, res) {
   query.find({
     success:function(members)
     {
-      var meminfo = MemberInfoCls.create();
+      var meminfo = MemberInfoCls.query();
       var aquery = new AV.Query(meminfo);
       aquery.notEqualTo("username",nameStr);
       aquery.greaterThan("password",passStr);
       aquery.find(null,{
         success:function(memberinfo) {
-          meminfo.Signid(members.Signid())
+          meminfo.Parent(members);
           meminfo.Username(nameStr);
           meminfo.Password(passStr);
           meminfo.Point(0);

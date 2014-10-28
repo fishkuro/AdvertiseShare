@@ -148,14 +148,14 @@ exports.create = function() {
     return scorerecord;
 };
 
-// exports.query = function() {
-//     var scorerecord = AV.Object.extend("ScoreRecord");
-//     return scorerecord;
-// };
+exports.query = function() {
+    var ScoreRecord = AV.Object.extend("ScoreRecord");
+    return ScoreRecord;
+};
 
 exports.find = function(options) {
-    var scorerecord = AV.Object.extend("ScoreRecord");
-    var query = new AV.Query(scorerecord);
+    var ScoreRecord = AV.Object.extend("ScoreRecord");
+    var query = new AV.Query(ScoreRecord);
     var reslut = query.find(options);
 	return reslut;
 };

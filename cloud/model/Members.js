@@ -71,14 +71,14 @@ exports.create = function() {
     return members;
 };
 
-// exports.query = function() {
-// 	var members = AV.Object.extend("Members");
-// 	return members;
-// };
+exports.query = function() {
+	var Members = AV.Object.extend("Members");
+	return Members;
+};
 
 exports.find = function(options) {
-    var members = AV.Object.extend("Members");
-    var query = new AV.Query(members);
+    var Members = AV.Object.extend("Members");
+    var query = new AV.Query(Members);
     var reslut = query.find(options);
 	return reslut;
 };

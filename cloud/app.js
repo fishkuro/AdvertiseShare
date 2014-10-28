@@ -175,42 +175,82 @@ app.get('/administrator/membersdata',function(req, res) {
 });
 
 app.get('/administrator/memberinfodata',function(req, res) {
-  var memberinfodata = MemberInfoCls.find();
+  var memberinfodata = MemberInfoCls.find({
+    success:function(memberinfodata)
+    {},
+    error:function(error)
+    {}
+  });
   res.json(memberinfodata);
 });
 
 app.get('/administrator/depositrecorddata',function(req, res) {
-  var depositrecorddata = DepositrecordCls.find();
+  var depositrecorddata = DepositrecordCls.find({
+    success:function(depositrecorddata)
+    {},
+    error:function(error)
+    {}
+  });
   res.json(depositrecorddata);
 });
 
 app.get('/administrator/deposittotaildata',function(req, res) {
-  var deposittotaildata = DeposittotailCls.find();
+  var deposittotaildata = DeposittotailCls.find({
+    success:function(deposittotaildata)
+    {},
+    error:function(error)
+    {}
+  });
   res.json(depositrecorddata);
 });
 
 app.get('/administrator/noticesdata',function(req, res) {
-  var noticesdata = NoticesCls.find();
+  var noticesdata = NoticesCls.find({
+    success:function(noticesdata)
+    {},
+    error:function(error)
+    {}
+  });
   res.json(noticesdata);
 });
 
 app.get('/administrator/payconduitdata',function(req, res) {
-  var payconduitdata = PayconduitCls.find();
+  var payconduitdata = PayconduitCls.find({
+    success:function(payconduitdata)
+    {},
+    error:function(error)
+    {}
+  });
   res.json(payconduitdata);
 });
 
 app.get('/administrator/scorerecorddata',function(req, res) {
-  var scorerecorddata = ScorerecordCls.find();
+  var scorerecorddata = ScorerecordCls.find({
+    success:function(scorerecorddata)
+    {},
+    error:function(error)
+    {}
+  });
   res.json(scorerecorddata);
 });
 
 app.get('/administrator/scoretotaildata',function(req, res) {
-  var scoretotaildata = ScoretotailCls.find();
+  var scoretotaildata = ScoretotailCls.find({
+    success:function(scoretotaildata)
+    {},
+    error:function(error)
+    {}
+  });
   res.json(scoretotaildata);
 });
 
 app.get('/administrator/tasksdata',function(req, res) {
-  var tasksdata = TasksCls.find();
+  var tasksdata = TasksCls.find({
+    success:function(tasksdata)
+    {},
+    error:function(error)
+    {}
+  });
   res.json(tasksdata);
 });
 
@@ -222,7 +262,12 @@ app.get('/administrator/tasksdatatest',function(req, res) {
 });
 
 app.get('/administrator/terracesdata',function(req, res) {
-  var terracesdata = TerracesCls.find();
+  var terracesdata = TerracesCls.find({
+    success:function(terracesdata)
+    {},
+    error:function(error)
+    {}
+  });
   res.json(terracesdata);
 });
 

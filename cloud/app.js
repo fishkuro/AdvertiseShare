@@ -22,75 +22,75 @@ app.set('view engine', 'ejs');    // 设置 template 引擎
 app.use(express.bodyParser());    // 读取请求 body 的中间件
 
 // 使用 Express 路由 API 服务 /hello 的 HTTP GET 请求
-app.get('/hello', function(req, res) {
-  var rlt = 1234;
-  var nameStr = "fishw";
-  var passStr = "456789";
-  // var member = MembersCls.create();
-  // member.Username(nameStr);
-  // var memberinfo = MemberInfoCls.create();
-  // memberinfo.Username(nameStr);
-  // memberinfo.Password(passStr);
-  // memberinfo.Parent(member);
-  // memberinfo.save();
-  // Relation Create
+// app.get('/hello', function(req, res) {
+//   var rlt = 1234;
+//   var nameStr = "fishw";
+//   var passStr = "456789";
+//   // var member = MembersCls.create();
+//   // member.Username(nameStr);
+//   // var memberinfo = MemberInfoCls.create();
+//   // memberinfo.Username(nameStr);
+//   // memberinfo.Password(passStr);
+//   // memberinfo.Parent(member);
+//   // memberinfo.save();
+//   // Relation Create
 
-  // var member = MembersCls.create();
-  // member.ObjectId("544e504de4b0e9dff2e5da97");
-  // var memberinfo = MemberInfoCls.create();
-  // memberinfo.Username(nameStr);
-  // memberinfo.Password(passStr);
-  // memberinfo.Parent(member);
-  // memberinfo.save();
-  // Relation Add
+//   // var member = MembersCls.create();
+//   // member.ObjectId("544e504de4b0e9dff2e5da97");
+//   // var memberinfo = MemberInfoCls.create();
+//   // memberinfo.Username(nameStr);
+//   // memberinfo.Password(passStr);
+//   // memberinfo.Parent(member);
+//   // memberinfo.save();
+//   // Relation Add
 
-  var member = AV.Object.extend("Members")
-  var query = new AV.Query(member);
-  query.equalTo("username",nameStr);
-  query.find({
-    success: function(member) {
-        // var mem = MembersCls.create();
-        // mem.Username(nameStr);
-        // mem.ObjectId(member.get("objectId"));
-        member.each(null,{
-          success:function()
-          {
-            rlt = member.get("objectId");
-          },
-          error: function(error) {
-            rlt = error.message;
-          }
-        });
+//   var member = AV.Object.extend("Members")
+//   var query = new AV.Query(member);
+//   query.equalTo("username",nameStr);
+//   query.find({
+//     success: function(member) {
+//         // var mem = MembersCls.create();
+//         // mem.Username(nameStr);
+//         // mem.ObjectId(member.get("objectId"));
+//         member.each(null,{
+//           success:function()
+//           {
+//             rlt = member.get("objectId");
+//           },
+//           error: function(error) {
+//             rlt = error.message;
+//           }
+//         });
         
-        // var memberinfo = MemberInfoCls.create();
-        // memberinfo.Username(nameStr);
-        // memberinfo.Password(passStr);
-        // memberinfo.Parent(mem);
-        // memberinfo.save();
-    },
-    error: function(error) {
-      rlt = error.message;
-    }
-  });
+//         // var memberinfo = MemberInfoCls.create();
+//         // memberinfo.Username(nameStr);
+//         // memberinfo.Password(passStr);
+//         // memberinfo.Parent(mem);
+//         // memberinfo.save();
+//     },
+//     error: function(error) {
+//       rlt = error.message;
+//     }
+//   });
 
-  res.render('hello', { message: rlt });
-});
+//   res.render('hello', { message: rlt });
+// });
 
-app.get('/cloud', function(req, res) {
-  var rlt = null;
-  AV.Cloud.run("testCloud", {username: 'dennis',password: '123456'}, {
-    success: function(data){
-      //调用成功，得到成功的应答data
-      rlt = data;
-    },
-    error: function(err){
-      //处理调用失败
-      rlt = err.message;
-    }
-  });
+// app.get('/cloud', function(req, res) {
+//   var rlt = null;
+//   AV.Cloud.run("testCloud", {username: 'dennis',password: '123456'}, {
+//     success: function(data){
+//       //调用成功，得到成功的应答data
+//       rlt = data;
+//     },
+//     error: function(err){
+//       //处理调用失败
+//       rlt = err.message;
+//     }
+//   });
 
-  res.render('hello', { message: rlt });
-});
+//   res.render('hello', { message: rlt });
+// });
 
 // 后台管理开始
 var session = UtilityCls.usersession();
@@ -583,253 +583,253 @@ app.post('/administrator/modmembers',function(req, res) {
 
 var cloudMsg;
 
-// 测试云函数
-AV.Cloud.define("testCloud", function(req, res) {
-	var nameStr = req.params.fuck;
-	var passStr = req.params.you;
+// // 测试云函数
+// AV.Cloud.define("testCloud", function(req, res) {
+// 	var nameStr = req.params.fuck;
+// 	var passStr = req.params.you;
 
-  res.success(nameStr + " | " + passStr);
-});
+//   res.success(nameStr + " | " + passStr);
+// });
 
-//
-// 带SessionId逻辑
-AV.Cloud.define("memberLogin", function(req, res) {
-  var nameStr = req.params.username;
-  var passStr = req.params.password;
-  var ipStr = "127.0.0.1";//UtilityCls.getIpAddress(req);
+// //
+// // 带SessionId逻辑
+// AV.Cloud.define("memberLogin", function(req, res) {
+//   var nameStr = req.params.username;
+//   var passStr = req.params.password;
+//   var ipStr = "127.0.0.1";//UtilityCls.getIpAddress(req);
 
-  var user = new AV.User();
-  user.set("username",nameStr);
-  user.set("password",passStr);
-  var meminfo = MemberInfoCls.query();
-  var query = new AV.Query(meminfo);
-  query.equalTo("username", nameStr);
-  query.greaterThan("password", passStr);
-  query.find({
-    success: function(meminfo) {
-      if (meminfo.SessionId()) {
-        user.logIn({
-          success: function(user) {
-          // 1 登录成功
-          meminfo.Loginip(ipStr);
-          meminfo.Lastlogintime(new Date());
-          meminfo.save();
-          cloudMsg = "登录成功";
-        },
-        error: function(user, error)
-        { cloudMsg = error.message; }
-        });
-      }
-      else
-      {
-          user.signUp(null,{
-            success:function(user) {
-              //注册完成后回注objectId
-              meminfo.SessionId(user.objectId);
-              meminfo.save();
-            },
-            error:function(user,error)
-            { cloudMsg = error.message; }
-          });
-      }
-    },
-    error: function(error) {
-      cloudMsg = "信息输入不对";
-    }
-  });
+//   var user = new AV.User();
+//   user.set("username",nameStr);
+//   user.set("password",passStr);
+//   var meminfo = MemberInfoCls.query();
+//   var query = new AV.Query(meminfo);
+//   query.equalTo("username", nameStr);
+//   query.greaterThan("password", passStr);
+//   query.find({
+//     success: function(meminfo) {
+//       if (meminfo.SessionId()) {
+//         user.logIn({
+//           success: function(user) {
+//           // 1 登录成功
+//           meminfo.Loginip(ipStr);
+//           meminfo.Lastlogintime(new Date());
+//           meminfo.save();
+//           cloudMsg = "登录成功";
+//         },
+//         error: function(user, error)
+//         { cloudMsg = error.message; }
+//         });
+//       }
+//       else
+//       {
+//           user.signUp(null,{
+//             success:function(user) {
+//               //注册完成后回注objectId
+//               meminfo.SessionId(user.objectId);
+//               meminfo.save();
+//             },
+//             error:function(user,error)
+//             { cloudMsg = error.message; }
+//           });
+//       }
+//     },
+//     error: function(error) {
+//       cloudMsg = "信息输入不对";
+//     }
+//   });
 
-  res.success(cloudMsg);
-});
+//   res.success(cloudMsg);
+// });
 
-//
-// 云函数 - 注销登录
-AV.Cloud.define("memberLogout", function(req, res) {
-  var nameStr = req.params.username;
-  var passStr = req.params.password;
+// //
+// // 云函数 - 注销登录
+// AV.Cloud.define("memberLogout", function(req, res) {
+//   var nameStr = req.params.username;
+//   var passStr = req.params.password;
 
-  var meminfo = MemberInfoCls.query();
-  var query = new AV.Query(memberinfo);
-  query.equalTo("username", nameStr);
-  query.greaterThan("password", passStr);
-  query.find({
-    success: function(meminfo) {
-      var sessionId = meminfo.SessionId();
-      if (sessionId) {
-        var user = new AV.User();
-        user.set("objectId",sessionId);
-        user.destroy(null,{
-          success: function(user){},
-          error: function(user,error){}
-        });
+//   var meminfo = MemberInfoCls.query();
+//   var query = new AV.Query(memberinfo);
+//   query.equalTo("username", nameStr);
+//   query.greaterThan("password", passStr);
+//   query.find({
+//     success: function(meminfo) {
+//       var sessionId = meminfo.SessionId();
+//       if (sessionId) {
+//         var user = new AV.User();
+//         user.set("objectId",sessionId);
+//         user.destroy(null,{
+//           success: function(user){},
+//           error: function(user,error){}
+//         });
 
-        meminfo.SessionId(null);
-        meminfo.save();
-      }
-      cloudMsg = "注销成功";
-    },
-    error: function(error) {
-      cloudMsg = error.message;
-    }
-  });
+//         meminfo.SessionId(null);
+//         meminfo.save();
+//       }
+//       cloudMsg = "注销成功";
+//     },
+//     error: function(error) {
+//       cloudMsg = error.message;
+//     }
+//   });
 
-  res.success(cloudMsg);
-});
+//   res.success(cloudMsg);
+// });
 
-//
-// 云函数 - 自定义登录 暂时不用
-AV.Cloud.define("memberLogin22", function(req, res) {
-  var nameStr = req.params.username;
-  var passStr = req.params.password;
-  var ipStr = 127.0.0.1;//UtilityCls.getCloudIpAddress(req);
+// //
+// // 云函数 - 自定义登录 暂时不用
+// AV.Cloud.define("memberLogin22", function(req, res) {
+//   var nameStr = req.params.username;
+//   var passStr = req.params.password;
+//   var ipStr = 127.0.0.1;//UtilityCls.getCloudIpAddress(req);
 
-  var user = new AV.User();
-  user.set("username",nameStr);
-  user.set("password",passStr);
-  var meminfo = MemberInfoCls.query();
-  var query = new AV.Query(memberinfo);
-  query.equalTo("username", nameStr);
-  query.greaterThan("password", passStr);
-  query.find({
-    success: function(memberinfo) {
-      //try av.user login
-      user.logIn({
-        success: function(user) {
-          // 1 登录成功
-          cloudMsg = "登录成功";
-        },
-        error: function(user,error) {
-          //补充注册 先重置再注册
-          user.destroy({
-            success: function(user)
-            {},
-            error: function(user,error)
-            {}
-          });
-          //注册
-          user.set("username",nameStr);
-          user.set("password",passStr);
-          user.signUp(null,{
-            success:function(user) {
-              //注册完成后登录
-              user.set("username",nameStr);
-              user.set("password",passStr);
-              user.logIn({
-                  success: function(user) {
-                    cloudMsg = "登录成功";
-                  },
-                  error: function(user, error) {
-                    cloudMsg = error.message;
-                  }
-              });
-            },
-            error:function(user,error){
-              cloudMsg = error.message;
-            }
-          });
-        }
-      });
+//   var user = new AV.User();
+//   user.set("username",nameStr);
+//   user.set("password",passStr);
+//   var meminfo = MemberInfoCls.query();
+//   var query = new AV.Query(memberinfo);
+//   query.equalTo("username", nameStr);
+//   query.greaterThan("password", passStr);
+//   query.find({
+//     success: function(memberinfo) {
+//       //try av.user login
+//       user.logIn({
+//         success: function(user) {
+//           // 1 登录成功
+//           cloudMsg = "登录成功";
+//         },
+//         error: function(user,error) {
+//           //补充注册 先重置再注册
+//           user.destroy({
+//             success: function(user)
+//             {},
+//             error: function(user,error)
+//             {}
+//           });
+//           //注册
+//           user.set("username",nameStr);
+//           user.set("password",passStr);
+//           user.signUp(null,{
+//             success:function(user) {
+//               //注册完成后登录
+//               user.set("username",nameStr);
+//               user.set("password",passStr);
+//               user.logIn({
+//                   success: function(user) {
+//                     cloudMsg = "登录成功";
+//                   },
+//                   error: function(user, error) {
+//                     cloudMsg = error.message;
+//                   }
+//               });
+//             },
+//             error:function(user,error){
+//               cloudMsg = error.message;
+//             }
+//           });
+//         }
+//       });
 
-      meminfo.Loginip(ipStr);
-      meminfo.Lastlogintime(new Date());
-      meminfo.save();
-    },
-    error: function(error) {
-      cloudMsg = "信息输入不对";
-    }
-  });
+//       meminfo.Loginip(ipStr);
+//       meminfo.Lastlogintime(new Date());
+//       meminfo.save();
+//     },
+//     error: function(error) {
+//       cloudMsg = "信息输入不对";
+//     }
+//   });
 
-  res.success(cloudMsg);
-});
+//   res.success(cloudMsg);
+// });
 
-//
-// 云函数 - 自定义注册
-AV.Cloud.define("memberRegister", function(req, res) {
-  var nameStr = req.params.username;
-  var passStr = req.params.password;
-  var tokenStr = req.params.devicetoken;
-  var ipStr = "127.0.0.1"; //Utility.getCloudIpAddress(req);
+// //
+// // 云函数 - 自定义注册
+// AV.Cloud.define("memberRegister", function(req, res) {
+//   var nameStr = req.params.username;
+//   var passStr = req.params.password;
+//   var tokenStr = req.params.devicetoken;
+//   var ipStr = "127.0.0.1"; //Utility.getCloudIpAddress(req);
 
-  var members = MembersCls.query();
-  var query = new AV.Query(members);
-  query.notEqualTo("username",nameStr);
-  query.find({
-    success:function(members)
-    {
-      members.set('username',nameStr);
-      var dateNow = new Date();
-      var memberinfo = MemberInfoCls.init(members,nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
-      memberinfo.save(null,{
-        success:function(memberinfo)
-        {
-          cloudMsg = "注册成功";
-        },
-        error:function(memberinfo,error)
-        {
-          cloudMsg = error.message;
-        }
-      });
-    },
-    error:function(error)
-    {
-      cloudMsg = "该账户已存在";
-    }
-  });
+//   var members = MembersCls.query();
+//   var query = new AV.Query(members);
+//   query.notEqualTo("username",nameStr);
+//   query.find({
+//     success:function(members)
+//     {
+//       members.set('username',nameStr);
+//       var dateNow = new Date();
+//       var memberinfo = MemberInfoCls.init(members,nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
+//       memberinfo.save(null,{
+//         success:function(memberinfo)
+//         {
+//           cloudMsg = "注册成功";
+//         },
+//         error:function(memberinfo,error)
+//         {
+//           cloudMsg = error.message;
+//         }
+//       });
+//     },
+//     error:function(error)
+//     {
+//       cloudMsg = "该账户已存在";
+//     }
+//   });
 
-  res.success(cloudMsg);
-});
+//   res.success(cloudMsg);
+// });
 
-//
-// 云函数 - 自定义添加子帐户
-AV.Cloud.define("addSubAccount", function(req, res) {
-  var nameStr = req.params.username;
-  var passStr = req.params.password;
-  var tokenStr = req.params.devicetoken;
-  var ipStr = 127.0.0.1;//UtilityCls.getCloudIpAddress(req);
+// //
+// // 云函数 - 自定义添加子帐户
+// AV.Cloud.define("addSubAccount", function(req, res) {
+//   var nameStr = req.params.username;
+//   var passStr = req.params.password;
+//   var tokenStr = req.params.devicetoken;
+//   var ipStr = 127.0.0.1;//UtilityCls.getCloudIpAddress(req);
 
-  var members = MembersCls.query();
-  var query = new AV.Query(members);
-  query.equalTo("username",nameStr);
-  query.find({
-    success:function(members)
-    {
-      var meminfo = MemberInfoCls.query();
-      var aquery = new AV.Query(meminfo);
-      aquery.notEqualTo("username",nameStr);
-      aquery.greaterThan("password",passStr);
-      aquery.find(null,{
-        success:function(memberinfo) {
-          meminfo.Parent(members);
-          meminfo.Username(nameStr);
-          meminfo.Password(passStr);
-          meminfo.Point(0);
-          meminfo.Registerip(ipStr);
-          meminfo.Devicetoken(tokenStr);
-          meminfo.Registertime(new Date());
-          meminfo.save(null,{
-            success:function(memberinfo)
-            {
-              cloudMsg = "添加成功";
-            },
-            error:function(memberinfo,error)
-            {
-              cloudMsg = error.message;
-            }
-          });
-        },
-        error:function(memberinfo,error)
-        {
-          cloudMsg = "该账户已存在"
-        }
-      });
-    },
-    error:function(members,error)
-    {
-      cloudMsg = "账户异常";
-    }
-  });
+//   var members = MembersCls.query();
+//   var query = new AV.Query(members);
+//   query.equalTo("username",nameStr);
+//   query.find({
+//     success:function(members)
+//     {
+//       var meminfo = MemberInfoCls.query();
+//       var aquery = new AV.Query(meminfo);
+//       aquery.notEqualTo("username",nameStr);
+//       aquery.greaterThan("password",passStr);
+//       aquery.find(null,{
+//         success:function(memberinfo) {
+//           meminfo.Parent(members);
+//           meminfo.Username(nameStr);
+//           meminfo.Password(passStr);
+//           meminfo.Point(0);
+//           meminfo.Registerip(ipStr);
+//           meminfo.Devicetoken(tokenStr);
+//           meminfo.Registertime(new Date());
+//           meminfo.save(null,{
+//             success:function(memberinfo)
+//             {
+//               cloudMsg = "添加成功";
+//             },
+//             error:function(memberinfo,error)
+//             {
+//               cloudMsg = error.message;
+//             }
+//           });
+//         },
+//         error:function(memberinfo,error)
+//         {
+//           cloudMsg = "该账户已存在"
+//         }
+//       });
+//     },
+//     error:function(members,error)
+//     {
+//       cloudMsg = "账户异常";
+//     }
+//   });
 
-  res.success(cloudMsg);
-});
+//   res.success(cloudMsg);
+// });
 
 // 最后，必须有这行代码来使 express 响应 HTTP 请求
 app.listen();

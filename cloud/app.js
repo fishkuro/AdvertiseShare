@@ -202,16 +202,16 @@ app.get('/administrator/terraces', function(req, res) {
   
 // });
 
-// app.get('/administrator/deposittotaildata',function(req, res) {
-//   //var deposittotaildata = null;
-//   DeposittotailCls.find({
-//     success:function(data)
-//     {res.json(data);},
-//     error:function(error)
-//     {}
-//   });
+app.get('/administrator/deposittotaildata',function(req, res) {
+  //var deposittotaildata = null;
+  DeposittotailCls.find({
+    success:function(data)
+    {res.json(data);},
+    error:function(error)
+    {}
+  });
   
-// });
+});
 
 app.get('/administrator/noticesdata',function(req, res) {
   //var noticesdata = null;

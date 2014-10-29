@@ -197,7 +197,7 @@ app.get('/administrator/membersdata',function(req, res) {
   //var membersdata = null;
   MembersCls.find({
     success:function(data)
-    {res.json({Rows:data,Total:data.length});},
+    {res.send({Rows:data,Total:data.length});},
     error:function(error)
     {}
   });
@@ -207,7 +207,7 @@ app.get('/administrator/membersdata',function(req, res) {
 app.get('/administrator/memberinfodata',function(req, res) {
   MemberInfoCls.find({
     success:function(data)
-    {res.json({Rows:data,Total:data.length});},
+    {res.send({Rows:data,Total:data.length});},
     error:function(error)
     {}
   });
@@ -218,7 +218,7 @@ app.get('/administrator/depositrecorddata',function(req, res) {
   //var depositrecorddata = null;
   DepositrecordCls.find({
     success:function(data)
-    {res.json({Rows:data,Total:data.length});},
+    {res.send({Rows:data,Total:data.length});},
     error:function(error)
     {}
   });
@@ -229,7 +229,7 @@ app.get('/administrator/deposittotaildata',function(req, res) {
   //var deposittotaildata = null;
   DeposittotailCls.find({
     success:function(data)
-    {res.json({Rows:data,Total:data.length});},
+    {res.send({Rows:data,Total:data.length});},
     error:function(error)
     {}
   });
@@ -240,7 +240,7 @@ app.get('/administrator/noticesdata',function(req, res) {
   //var noticesdata = null;
   NoticesCls.find({
     success:function(data)
-    {res.json({Rows:data,Total:data.length});},
+    {res.send({Rows:data,Total:data.length});},
     error:function(error)
     {}
   });
@@ -251,7 +251,7 @@ app.get('/administrator/payconduitdata',function(req, res) {
   //var payconduitdata = null;
   PayconduitCls.find({
     success:function(data)
-    {res.json({Rows:data,Total:data.length});},
+    {res.send({Rows:data,Total:data.length});},
     error:function(error)
     {}
   });
@@ -262,7 +262,7 @@ app.get('/administrator/scorerecorddata',function(req, res) {
   //var scorerecorddata = null;
   ScorerecordCls.find({
     success:function(data)
-    {res.json({Rows:data,Total:data.length});},
+    {res.send({Rows:data,Total:data.length});},
     error:function(error)
     {}
   });
@@ -273,7 +273,7 @@ app.get('/administrator/scoretotaildata',function(req, res) {
   //var scoretotaildata = null;
   ScoretotailCls.find({
     success:function(data)
-    {res.json({Rows:data,Total:data.length});},
+    {res.send({Rows:data,Total:data.length});},
     error:function(error)
     {}
   });
@@ -297,7 +297,7 @@ app.get('/administrator/tasksdatalist',function(req, res) {
   var result = null;
   query.find({
     success:function(data)
-    {res.json({Rows:data,Total:data.length});},
+    {res.send({Rows:data,Total:data.length});},
     error:function(error)
     {}
   });

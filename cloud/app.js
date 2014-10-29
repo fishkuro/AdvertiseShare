@@ -370,7 +370,7 @@ app.post('/administrator/delterraces',function(req, res) {
 app.post('/administrator/addnotices',function(req, res) {
   var title = req.body.data.title;
   var content = req.body.data.content;
-  var postdate = new Date();
+  var postdate = UtilityCls.dataToString(new Date());
   var notice = NoticesCls.init(title,postdate,content);
 
   notice.save(null, {
@@ -391,7 +391,7 @@ app.post('/administrator/modnotices',function(req, res) {
   var oId = req.body.data.objectId;
   var title = req.body.data.title;
   var content = req.body.data.content;
-  var postdate = new Date();
+  var postdate = UtilityCls.dataToString(new Date());
   var notice = NoticesCls.create();
   notice.ObjectId(oId);
   notice.Title(title);
@@ -506,7 +506,7 @@ app.post('/administrator/moddepositrecord',function(req, res) {
   var pve = req.body.data.payvalue;
   var pvd = req.body.data.payvalid;
   var atime = req.body.data.applytime;
-  var ptime = new Date();
+  var ptime = UtilityCls.dataToString(new Date());
   var depositrecord = DepositrecordCls.create();
   depositrecord.ObjectId(oid);
   depositrecord.Userid(userid);
@@ -704,7 +704,8 @@ AV.Cloud.define("memberLogin", function(req, res) {
         // 1 登录成功
         var memberinfo = result[0];
         memberinfo.set("loginip",ipStr);
-        memberinfo.set("lastlogintime",(new Date());
+        var dateNow = UtilityCls.dataToString(new Date());
+        memberinfo.set("lastlogintime",dateNow);
         memberinfo.save();
         cloudMsg = "登录成功";
         res.success(cloudMsg);
@@ -739,7 +740,7 @@ AV.Cloud.define("memberRegister", function(req, res) {
       if (result.length == 0) {
         var member = MembersCls.create();
         members.Username(nameStr);
-        var dateNow = new Date();
+        var dateNow = UtilityCls.dataToString(new Date());
         var memberinfo = MemberInfoCls.init(members,nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
         memberinfo.save(null,{
           success:function(memberinfo)
@@ -786,7 +787,7 @@ AV.Cloud.define("addSubAccount", function(req, res) {
       if (result.length == 0) {
         var member = MembersCls.create();
         members.Username(nameStr);
-        var dateNow = new Date();
+        var dateNow = UtilityCls.dataToString(new Date());
         var memberinfo = MemberInfoCls.init(members,nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
         memberinfo.save(null,{
           success:function(memberinfo)

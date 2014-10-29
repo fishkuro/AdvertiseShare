@@ -97,7 +97,9 @@ app.get('/ajaxs', function(req, res) {
     {
       //res.send({Rows:data,Total:data.length});
       var result = {Rows:data,Total:data.length};
-      res.render('manage_json', { json: result });
+      res.writeHead(200, {"Content-Type": "application/json"});    
+      res.write(result);    
+      res.end();
     },
     error:function(error)
     {}

@@ -52,7 +52,7 @@ app.get('/hello', function(req, res) {
         // var mem = MembersCls.create();
         // mem.Username(nameStr);
         // mem.ObjectId(member.get("objectId"));
-        var str = "len: " + members.length + " oId: " + members[0].get("objectId");
+        var str = "len: " + members.length; //" oId: " + members[0].get("objectId");
         res.render('hello', { message: str});
         // member.each(null,{
         //   success:function()

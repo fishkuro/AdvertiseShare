@@ -285,7 +285,7 @@ app.get('/administrator/tasksdatalist',function(req, res) {
   var query = new AV.Query(tasks);
   var result = null;
   query.find({
-    success:function(result)
+    success:function(data)
     {res.json({Rows:data,Total:data.length});},
     error:function(error)
     {}
@@ -297,7 +297,7 @@ app.get('/administrator/terracesdata',function(req, res) {
   //var terracesdata = null;
   TerracesCls.find({
     success:function(data)
-    {res.json({Rows:data,Total:data.length});},
+    {res.send({Rows:data,Total:data.length});},
     error:function(error)
     {}
   });

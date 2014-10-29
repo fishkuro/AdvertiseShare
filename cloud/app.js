@@ -192,16 +192,16 @@ app.get('/administrator/membersdata',function(req, res) {
   
 });
 
-app.get('/administrator/memberinfodata',function(req, res) {
-  //var memberinfodata = null;
-  MemberInfoCls.find({
-    success:function(data)
-    {res.json({Rows:data,Total:data.length});},
-    error:function(error)
-    {}
-  });
+// app.get('/administrator/memberinfodata',function(req, res) {
+//   //var memberinfodata = null;
+//   MemberInfoCls.find({
+//     success:function(data)
+//     {res.json({Rows:data,Total:data.length});},
+//     error:function(error)
+//     {}
+//   });
   
-});
+// });
 
 app.get('/administrator/depositrecorddata',function(req, res) {
   //var depositrecorddata = null;

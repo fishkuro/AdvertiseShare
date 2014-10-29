@@ -91,7 +91,13 @@ app.get('/hello', function(req, res) {
 var ajaxdata = {name: 'aaa',sex: false,age: 20};
 
 app.get('/ajaxs', function(req, res) {
-	res.send(ajaxdata);
+	//res.send(ajaxdata);
+	NoticesCls.find({
+    success:function(data)
+    {res.send({Rows:data,Total:data.length});},
+    error:function(error)
+    {}
+  });
 });
 
 // app.get('/cloud', function(req, res) {

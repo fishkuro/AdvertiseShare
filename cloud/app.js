@@ -97,7 +97,7 @@ app.get('/ajaxs', function(req, res) {
     {
       //res.send({Rows:data,Total:data.length});
       var result = {Rows:data,Total:data.length};
-      res.writeHead(200, {"Content-Type": "application/json"});    
+      res.writeHead(200, {"Content-Type": "text/html;charset=utf-8"});    
       res.write(result);    
       res.end();
     },

@@ -95,11 +95,7 @@ app.get('/ajaxs', function(req, res) {
 	NoticesCls.find({
     success:function(data)
     {
-      //res.send({Rows:data,Total:data.length});
-      var result = {Rows:data,Total:data.length};
-      //res.writeHead(200, {"Content-Type": "text/html;charset=utf-8"});    
-      res.write(result);    
-      res.end();
+      res.send({Rows:data,Total:data.length});
     },
     error:function(error)
     {}

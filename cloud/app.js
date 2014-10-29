@@ -22,51 +22,52 @@ app.set('view engine', 'ejs');    // 设置 template 引擎
 app.use(express.bodyParser());    // 读取请求 body 的中间件
 
 // 使用 Express 路由 API 服务 /hello 的 HTTP GET 请求
-// app.get('/hello', function(req, res) {
-//   var rlt = 1234;
-//   var nameStr = "fishw";
-//   var passStr = "456789";
-//   // var member = MembersCls.create();
-//   // member.Username(nameStr);
-//   // var memberinfo = MemberInfoCls.create();
-//   // memberinfo.Username(nameStr);
-//   // memberinfo.Password(passStr);
-//   // memberinfo.Parent(member);
-//   // memberinfo.save();
-//   // Relation Create
+app.get('/hello', function(req, res) {
+  var rlt = 1234;
+  var nameStr = "fishw";
+  var passStr = "456789";
+  // var member = MembersCls.create();
+  // member.Username(nameStr);
+  // var memberinfo = MemberInfoCls.create();
+  // memberinfo.Username(nameStr);
+  // memberinfo.Password(passStr);
+  // memberinfo.Parent(member);
+  // memberinfo.save();
+  // Relation Create
 
-//   // var member = MembersCls.create();
-//   // member.ObjectId("544e504de4b0e9dff2e5da97");
-//   // var memberinfo = MemberInfoCls.create();
-//   // memberinfo.Username(nameStr);
-//   // memberinfo.Password(passStr);
-//   // memberinfo.Parent(member);
-//   // memberinfo.save();
-//   // Relation Add
+  // var member = MembersCls.create();
+  // member.ObjectId("544e504de4b0e9dff2e5da97");
+  // var memberinfo = MemberInfoCls.create();
+  // memberinfo.Username(nameStr);
+  // memberinfo.Password(passStr);
+  // memberinfo.Parent(member);
+  // memberinfo.save();
+  // Relation Add
 
-//   var member = AV.Object.extend("Members")
-//   var query = new AV.Query(member);
-//   query.equalTo("username",nameStr);
-//   query.find({
-//     success: function(member) {
-//         // var mem = MembersCls.create();
-//         // mem.Username(nameStr);
-//         // mem.ObjectId(member.get("objectId"));
-//         res.render('hello', { message: error.member });
-//         // member.each(null,{
-//         //   success:function()
-//         //   {
-//         //     rlt = member.get("objectId");
-//         //   },
-//         //   error: function(error) {
-//         //     rlt = error.message;
-//         //   }
-//         // });
-//     },
-//     error: function(error) {
-//       res.render('hello', { message: error.message });
-//     }
-//   });
+  var member = AV.Object.extend("Members")
+  var query = new AV.Query(member);
+  query.equalTo("username",nameStr);
+  query.find({
+    success: function(members) {
+        // var mem = MembersCls.create();
+        // mem.Username(nameStr);
+        // mem.ObjectId(member.get("objectId"));
+        var str = "len: " + members.length + " oId: " + members[0].get("objectId");
+        res.render('hello', { message: str});
+        // member.each(null,{
+        //   success:function()
+        //   {
+        //     rlt = member.get("objectId");
+        //   },
+        //   error: function(error) {
+        //     rlt = error.message;
+        //   }
+        // });
+    },
+    error: function(error) {
+      res.render('hello', { message: error.message });
+    }
+  });
 
   
 // });
@@ -256,7 +257,7 @@ app.get('/administrator/tasksdata',function(req, res) {
   //var tasksdata = null;
   TasksCls.find({
     success:function(data)
-    {res.json({Rows:data,Total:data.length});},
+    {res.send({Rows:data,Total:data.length});},
     error:function(error)
     {}
   });

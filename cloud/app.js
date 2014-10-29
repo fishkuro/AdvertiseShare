@@ -65,7 +65,7 @@ app.get('/hello', function(req, res) {
         info.Username(nameStr);
         info.save();
 
-        str += info.ObjectId();
+        str = info.get("objectId");
 
         res.render('hello', { message: str});
         // member.each(null,{

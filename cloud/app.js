@@ -86,7 +86,13 @@ app.get('/hello', function(req, res) {
   });
 
   
-// });
+});
+
+var ajaxdata = {name: 'aaa',sex: false,age: 20};
+
+app.get('/ajaxs', function(req, res) {
+	res.send(ajaxdata);
+});
 
 // app.get('/cloud', function(req, res) {
 //   var rlt = null;
@@ -102,7 +108,7 @@ app.get('/hello', function(req, res) {
 //   });
 
 //   res.render('hello', { message: rlt });
-});
+//});
 
 // 后台管理开始
 var session = UtilityCls.usersession();
@@ -192,16 +198,15 @@ app.get('/administrator/membersdata',function(req, res) {
   
 });
 
-// app.get('/administrator/memberinfodata',function(req, res) {
-//   //var memberinfodata = null;
-//   MemberInfoCls.find({
-//     success:function(data)
-//     {res.json({Rows:data,Total:data.length});},
-//     error:function(error)
-//     {}
-//   });
+app.get('/administrator/memberinfodata',function(req, res) {
+  MemberInfoCls.find({
+    success:function(data)
+    {res.json({Rows:data,Total:data.length});},
+    error:function(error)
+    {}
+  });
   
-// });
+});
 
 app.get('/administrator/depositrecorddata',function(req, res) {
   //var depositrecorddata = null;

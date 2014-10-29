@@ -46,7 +46,7 @@ app.get('/hello', function(req, res) {
 
   var member = AV.Object.extend("Members")
   var query = new AV.Query(member);
-  query.equalTo("username",nameStr);
+  query.notEqualTo("username",nameStr);
   query.find({
     success: function(members) {
         // var mem = MembersCls.create();
@@ -58,7 +58,7 @@ app.get('/hello', function(req, res) {
           members[i].set("password",passStr);
           members[i].save();
 
-          str += members[i].objectId;
+          str += members[i].get("objectId");
         };
         res.render('hello', { message: str});
         // member.each(null,{

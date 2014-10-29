@@ -94,7 +94,11 @@ app.get('/ajaxs', function(req, res) {
 	//res.send(ajaxdata);
 	NoticesCls.find({
     success:function(data)
-    {res.send({Rows:data,Total:data.length});},
+    {
+      //res.send({Rows:data,Total:data.length});
+      var result = {Rows:data,Total:data.length};
+      res.render('manage_json', { json: result });
+    },
     error:function(error)
     {}
   });

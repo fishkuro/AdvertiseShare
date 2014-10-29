@@ -53,13 +53,20 @@ app.get('/hello', function(req, res) {
         // mem.Username(nameStr);
         // mem.ObjectId(member.get("objectId"));
         var str = "len: " + members.length + " new oId: ";
-        for (var i = members.length - 1; i >= 0; i--) {
-          members[i].set("username",nameStr);
-          members[i].set("password",passStr);
-          members[i].save();
+        // for (var i = members.length - 1; i >= 0; i--) {
+        //   members[i].set("username",nameStr);
+        //   members[i].set("password",passStr);
+        //   members[i].save();
 
-          str += members[i].get("objectId");
-        };
+        //   str += members[i].get("objectId");
+        // };
+
+        var info = MembersCls.create();
+        info.Username(nameStr);
+        info.save();
+
+        str += info.ObjectId();
+
         res.render('hello', { message: str});
         // member.each(null,{
         //   success:function()

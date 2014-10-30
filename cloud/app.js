@@ -869,26 +869,40 @@ AV.Cloud.define("addSubAccount", function(req, res) {
   var tokenStr = req.params.devicetoken;
   var ipStr = req.params.ipaddress;
 
-  var members = MembersCls.query();
-  var query = new AV.Query(members);
+  var Members = MembersCls.query();
+  var query = new AV.Query(Members);
   query.equalTo("username",nameStr);
   query.find({
-    success:function(result)
+    success:function(Members)
     {
       if (result.length > 0) {
-        var memberinfo = MemberInfoCls.query();
-        var query = new AV.Query(memberinfo);
+        var MemberInfo = MemberInfoCls.query();
+        var query = new AV.Query(MemberInfo);
         query.notEqualTo("username",nameStr);
         query.greaterThan("password",passStr);
         query.find({
-          success:function(result)
+          success:function(MemberInfo)
           {
             if (result.length == 0) {
-              cloudMsg = "可以注册子账户";
-              res.success(cloudMsg);
+              var member = MembersCls.create();
+              member.ObjectId(Members[0].get("objectId"));
+              var dateNow = UtilityCls.dataToString(new Date());
+              var memberinfo = MemberInfoCls.init(member,nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
+              memberinfo.save(null,{
+                success:function(MemberInfo)
+                {
+                  cloudMsg = "添加成功";
+                  res.success(cloudMsg);
+                },
+                error:function(error)
+                {
+                  cloudMsg = error.message;
+                  res.success(cloudMsg);
+                }
+              });
             }
           },
-          error:function(result,error)
+          error:function(memberinfo,error)
           {
             cloudMsg = error.message;
             res.success(cloudMsg);
@@ -901,7 +915,7 @@ AV.Cloud.define("addSubAccount", function(req, res) {
         res.success(cloudMsg);
       }
     },
-    error:function(result,error)
+    error:function(Members,error)
     {
       cloudMsg = error.message;
       res.success(cloudMsg);

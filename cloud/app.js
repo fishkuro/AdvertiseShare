@@ -85,7 +85,6 @@ app.get('/hello', function(req, res) {
     }
   });
 
-  
 });
 
 app.get('/cloudLogin', function(req, res) {
@@ -874,7 +873,7 @@ AV.Cloud.define("addSubAccount", function(req, res) {
   var query = new AV.Query(memberinfo);
   query.equalTo("username",nameStr);
   query.greaterThan("password",passStr);
-  query.find(null,{
+  query.find({
     success:function(result)
     {
       if (result.length == 0) {
@@ -894,6 +893,7 @@ AV.Cloud.define("addSubAccount", function(req, res) {
             res.success(cloudMsg);
           }
         });
+        
       }
       else
       {

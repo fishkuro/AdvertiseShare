@@ -770,7 +770,7 @@
                 url: p.url,
                 data: param,
                 async: p.async,
-                dataType: 'json',
+                dataType: 'jsonp',
                 beforeSend: function ()
                 {
                     if (g.hasBind('loading'))

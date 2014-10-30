@@ -95,7 +95,8 @@ app.get('/ajaxs', function(req, res) {
 	NoticesCls.find({
     success:function(data)
     {
-      res.jsonp({Rows:data,Total:data.length});
+      res.set('Content-Type', 'text/plain');
+      res.send({Rows:data,Total:data.length});
     },
     error:function(error)
     {}
@@ -253,7 +254,11 @@ app.get('/administrator/payconduitdata',function(req, res) {
   //var payconduitdata = null;
   PayconduitCls.find({
     success:function(data)
-    {res.jsonp({Rows:data,Total:data.length});},
+    {
+      var json = {Rows:data,Total:data.length};
+      var jsonStr = JSON.stringify(json);
+      res.send(jsonStr);
+    },
     error:function(error)
     {}
   });

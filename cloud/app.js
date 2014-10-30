@@ -95,6 +95,7 @@ app.get('/ajaxs', function(req, res) {
 	NoticesCls.find({
     success:function(data)
     {
+      res.set('Content-Type', 'text/plain');
       res.send({Rows:data,Total:data.length});
     },
     error:function(error)

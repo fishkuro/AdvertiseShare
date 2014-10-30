@@ -90,6 +90,19 @@ app.get('/hello', function(req, res) {
 
 var ajaxdata = {name: 'aaa',sex: false,age: 20};
 
+app.get('/jq',function(req, res) {
+    var Notices = AV.Object.extend("Notices");
+    var query = new AV.Query(Notices);
+    query.find({
+      success:function(data)
+      {
+        res.jsonp({Rows:data,Total:data.length});
+      },
+      error:function(error)
+      {}
+    });
+});
+
 app.get('/ajaxs', function(req, res) {
 	//res.send(ajaxdata);
 	NoticesCls.find({
@@ -239,13 +252,13 @@ app.get('/administrator/deposittotaildata',function(req, res) {
   
 });
 
-app.set('jsonp callback name', 'callback');
 app.get('/administrator/noticesdata',function(req, res) {
   //var noticesdata = null;
   NoticesCls.find({
     success:function(data)
     {
-      res.jsonp({Rows:data,Total:data.length});
+      res.send(JSON.stringify({Rows:data, Total:data.length}));
+      //res.jsonp({Rows:data,Total:data.length});
     },
     error:function(error)
     {}

@@ -726,15 +726,21 @@ AV.Cloud.define("memberLogin2", function(req, res) {
   var user = new AV.User();
   user.set("username",nameStr);
   user.set("password",passStr);
-  var memberinfo = MemberInfoCls.query();
-  var query = new AV.Query(memberinfo);
-  query.equalTo("username", nameStr);
-  query.greaterThan("password", passStr);
+
+  var MemberInfo = MemberInfoCls.query();
+  var query = new AV.Query(MemberInfo);
+  query.equalTo("username",nameStr);
+  query.greaterThan("password",passStr);
   query.find({
-    success: function(result) {
-      if (result.length > 0) {
+    success: function(MemberInfo) {
+
+      console.log("memberLogin2 MemberInfo n: " +
+        MemberInfo[0].get("username") + " p: " + 
+        MemberInfo[0].get("password") + " len: " + MemberInfo.length);
+
+      if (MemberInfo.length > 0) {
         // 1 登录成功
-        var memberinfo = result[0];
+        var memberinfo = MemberInfo[0];
         memberinfo.set("loginip",ipStr);
         var dateNow = UtilityCls.dataToString(new Date());
         memberinfo.set("lastlogintime",dateNow);
@@ -751,7 +757,6 @@ AV.Cloud.define("memberLogin2", function(req, res) {
             res.success("Error: " + error.code + " " + error.message);
           }
         });
-        
       }
       else
       {
@@ -775,15 +780,20 @@ AV.Cloud.define("memberLogin", function(req, res) {
   var user = new AV.User();
   user.set("username",nameStr);
   user.set("password",passStr);
-  var memberinfo = MemberInfoCls.query();
-  var query = new AV.Query(memberinfo);
+  var MemberInfo = MemberInfoCls.query();
+  var query = new AV.Query(MemberInfo);
   query.equalTo("username", nameStr);
   query.greaterThan("password", passStr);
   query.find({
-    success: function(result) {
-      if (result.length > 0) {
+    success: function(MemberInfo) {
+
+      console.log("memberLogin MemberInfo n: " +
+        MemberInfo[0].get("username") + " p: " + 
+        MemberInfo[0].get("password") + " len: " + MemberInfo.length);
+
+      if (MemberInfo.length > 0) {
         // 1 登录成功
-        var memberinfo = result[0];
+        var memberinfo = MemberInfo[0];
         memberinfo.set("loginip",ipStr);
         var dateNow = UtilityCls.dataToString(new Date());
         memberinfo.set("lastlogintime",dateNow);
@@ -876,7 +886,7 @@ AV.Cloud.define("addSubAccount", function(req, res) {
     success:function(Members)
     {
       if (Members.length > 0) {
-        console.log("addSubAccount Members id : " + Members[0].id);
+        //console.log("addSubAccount Members id : " + Members[0].id);
         var MemberInfo = MemberInfoCls.query();
         var query = new AV.Query(MemberInfo);
         query.notEqualTo("username",nameStr);

@@ -876,7 +876,7 @@ AV.Cloud.define("addSubAccount", function(req, res) {
     success:function(Members)
     {
       if (Members.length > 0) {
-        res.success("oId: " + Members[0].get("objectId") + " | name: " + Members[0].get("name"));
+        res.success("oId: " + Members[0].objectId + " | name: " + Members[0].get("username"));
         // var MemberInfo = MemberInfoCls.query();
         // var query = new AV.Query(MemberInfo);
         // query.notEqualTo("username",nameStr);

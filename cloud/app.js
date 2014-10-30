@@ -733,22 +733,18 @@ AV.Cloud.define("memberLogin2", function(req, res) {
   query.equalTo("password",passStr);
   query.find({
     success: function(MemberInfo) {
-
-      console.log("memberLogin2 MemberInfo len: " + MemberInfo.length);
-
       if (MemberInfo.length > 0) {
-        // 1 登录成功
         var memberinfo = MemberInfo[0];
         memberinfo.set("loginip",ipStr);
         var dateNow = UtilityCls.dataToString(new Date());
         memberinfo.set("lastlogintime",dateNow);
         memberinfo.save();
 
-        user.set("memberId",memberinfo[0].get("objectId"));
+        user.set("memberId",memberinfo.id);
         user.signUp(null, {
           success: function(user) {
-            // Hooray! Let them use the app now.
-            cloudMsg = "注册成功";
+            // 这边自表验证成功后注册到系统，再去登录
+            cloudMsg = "登录成功";
             res.success(cloudMsg);
           },
           error: function(user, error) {
@@ -784,11 +780,7 @@ AV.Cloud.define("memberLogin", function(req, res) {
   query.equalTo("password", passStr);
   query.find({
     success: function(MemberInfo) {
-
-      console.log("memberLogin MemberInfo len: " + MemberInfo.length);
-
       if (MemberInfo.length > 0) {
-        // 1 登录成功
         var memberinfo = MemberInfo[0];
         memberinfo.set("loginip",ipStr);
         var dateNow = UtilityCls.dataToString(new Date());

@@ -876,39 +876,37 @@ AV.Cloud.define("addSubAccount", function(req, res) {
     success:function(Members)
     {
       if (Members.length > 0) {
-        res.success("oId: " + Members[0].objectId + " | name: " + Members[0].get("username"));
-        // var MemberInfo = MemberInfoCls.query();
-        // var query = new AV.Query(MemberInfo);
-        // query.notEqualTo("username",nameStr);
-        // query.greaterThan("password",passStr);
-        // query.find({
-        //   success:function(MemberInfo)
-        //   {
-        //     if (MemberInfo.length == 0) {
-        //       var member = MembersCls.create();
-        //       member.ObjectId(Members[0].get("objectId"));
-        //       var dateNow = UtilityCls.dataToString(new Date());
-        //       var memberinfo = MemberInfoCls.init(member,nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
-        //       memberinfo.save(null,{
-        //         success:function(memberinfo)
-        //         {
-        //           cloudMsg = "添加成功";
-        //           res.success(cloudMsg);
-        //         },
-        //         error:function(error)
-        //         {
-        //           cloudMsg = error.message;
-        //           res.success(cloudMsg);
-        //         }
-        //       });
-        //     }
-        //   },
-        //   error:function(memberinfo,error)
-        //   {
-        //     cloudMsg = error.message;
-        //     res.success(cloudMsg);
-        //   }
-        // });
+        console.log("addSubAccount Members id : " + Members[0].id);
+        var MemberInfo = MemberInfoCls.query();
+        var query = new AV.Query(MemberInfo);
+        query.notEqualTo("username",nameStr);
+        query.greaterThan("password",passStr);
+        query.find({
+          success:function(MemberInfo)
+          {
+            if (MemberInfo.length == 0) {
+              var dateNow = UtilityCls.dataToString(new Date());
+              var memberinfo = MemberInfoCls.init(Members[0],nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
+              memberinfo.save(null,{
+                success:function(memberinfo)
+                {
+                  cloudMsg = "添加成功";
+                  res.success(cloudMsg);
+                },
+                error:function(error)
+                {
+                  cloudMsg = error.message;
+                  res.success(cloudMsg);
+                }
+              });
+            }
+          },
+          error:function(memberinfo,error)
+          {
+            cloudMsg = error.message;
+            res.success(cloudMsg);
+          }
+        });
       }
       else
       {

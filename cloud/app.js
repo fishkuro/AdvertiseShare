@@ -245,7 +245,7 @@ app.get('/administrator/noticesdata',function(req, res) {
   NoticesCls.find({
     success:function(data)
     {
-      res.jsonp(null,{Rows:data,Total:data.length});
+      res.jsonp({Rows:data,Total:data.length});
     },
     error:function(error)
     {}

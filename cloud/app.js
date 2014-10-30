@@ -730,7 +730,7 @@ AV.Cloud.define("memberLogin2", function(req, res) {
   var MemberInfo = MemberInfoCls.query();
   var query = new AV.Query(MemberInfo);
   query.equalTo("username",nameStr);
-  query.greaterThan("password",passStr);
+  query.equalTo("password",passStr);
   query.find({
     success: function(MemberInfo) {
 
@@ -781,7 +781,7 @@ AV.Cloud.define("memberLogin", function(req, res) {
   var MemberInfo = MemberInfoCls.query();
   var query = new AV.Query(MemberInfo);
   query.equalTo("username", nameStr);
-  query.greaterThan("password", passStr);
+  query.equalTo("password", passStr);
   query.find({
     success: function(MemberInfo) {
 

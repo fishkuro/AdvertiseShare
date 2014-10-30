@@ -241,6 +241,7 @@ app.get('/administrator/deposittotaildata',function(req, res) {
 
 app.get('/administrator/noticesdata',function(req, res) {
   //var noticesdata = null;
+  req.body.callback = null;
   NoticesCls.find({
     success:function(data)
     {

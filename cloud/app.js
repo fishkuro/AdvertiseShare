@@ -88,21 +88,23 @@ app.get('/hello', function(req, res) {
   
 });
 
-// app.get('/cloud', function(req, res) {
-//   var rlt = null;
-//   AV.Cloud.run("testCloud", {username: 'dennis',password: '123456'}, {
-//     success: function(data){
-//       //调用成功，得到成功的应答data
-//       rlt = data;
-//     },
-//     error: function(err){
-//       //处理调用失败
-//       rlt = err.message;
-//     }
-//   });
+app.get('/cloud', function(req, res) {
+  var rlt = null;
+  AV.Cloud.run("memberRegister", {username: 'dennis',password: '123456',devicetoken:'tokentst',ipaddress:'127.0.0.1'}, {
+    success: function(data){
+      //调用成功，得到成功的应答data
+      rlt = data;
+      res.render('hello', { message: rlt });
+    },
+    error: function(err){
+      //处理调用失败
+      rlt = err.message;
+      res.render('hello', { message: rlt });
+    }
+  });
 
-//   res.render('hello', { message: rlt });
-//});
+  
+});
 
 // 后台管理开始
 var session = UtilityCls.usersession();

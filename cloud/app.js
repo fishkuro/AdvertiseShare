@@ -724,9 +724,9 @@ AV.Cloud.define("memberRegister", function(req, res) {
     {
       if (result.length == 0) {
         var member = MembersCls.create();
-        members.Username(nameStr);
+        member.Username(nameStr);
         var dateNow = UtilityCls.dataToString(new Date());
-        var memberinfo = MemberInfoCls.init(members,nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
+        var memberinfo = MemberInfoCls.init(member,nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
         memberinfo.save(null,{
           success:function(memberinfo)
           {

@@ -89,7 +89,7 @@ app.get('/hello', function(req, res) {
 
 app.get('/cloudLogin', function(req, res) {
   var rlt = null;
-  AV.Cloud.run("memberLogin", {username: 'dennis',password: '123456',ipaddress:'127.0.0.1'}, {
+  AV.Cloud.run("memberLogin", {username: 'dennis',password: '456789',ipaddress:'127.0.0.1'}, {
     success: function(data){
       //调用成功，得到成功的应答data
       rlt = data;
@@ -734,13 +734,13 @@ AV.Cloud.define("memberLogin2", function(req, res) {
   query.find({
     success: function(MemberInfo) {
       if (MemberInfo.length > 0) {
-        var memberinfo = MemberInfo[0];
-        memberinfo.set("loginip",ipStr);
-        var dateNow = UtilityCls.dataToString(new Date());
-        memberinfo.set("lastlogintime",dateNow);
-        memberinfo.save();
+        // var memberinfo = MemberInfo[0];
+        // memberinfo.set("loginip",ipStr);
+        // var dateNow = UtilityCls.dataToString(new Date());
+        // memberinfo.set("lastlogintime",dateNow);
+        // memberinfo.save();
 
-        user.set("memberId",memberinfo.id);
+        user.set("memberId",MemberInfo[0].id);
         user.signUp(null, {
           success: function(user) {
             // 这边自表验证成功后注册到系统，再去登录
@@ -783,8 +783,8 @@ AV.Cloud.define("memberLogin", function(req, res) {
       if (MemberInfo.length > 0) {
         var memberinfo = MemberInfo[0];
         memberinfo.set("loginip",ipStr);
-        var dateNow = UtilityCls.dataToString(new Date());
-        memberinfo.set("lastlogintime",dateNow);
+        // var dateNow = UtilityCls.dataToString(new Date());
+        // memberinfo.set("lastlogintime",dateNow);
         memberinfo.save();
 
         user.logIn(null, {

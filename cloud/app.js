@@ -252,13 +252,13 @@ app.get('/administrator/deposittotaildata',function(req, res) {
   
 });
 
-app.get('/administrator/noticesdata',function(req, res) {
+app.post('/administrator/noticesdata',function(req, res) {
   //var noticesdata = null;
   NoticesCls.find({
     success:function(data)
     {
-      res.send(JSON.stringify({Rows:data, Total:data.length}));
-      //res.jsonp({Rows:data,Total:data.length});
+      //res.send(JSON.stringify({Rows:data, Total:data.length}));
+      res.jsonp({Rows:data,Total:data.length});
     },
     error:function(error)
     {}

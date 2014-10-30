@@ -242,7 +242,7 @@ app.get('/administrator/noticesdata',function(req, res) {
   //var noticesdata = null;
   NoticesCls.find({
     success:function(data)
-    {res.jsonp({Rows:data,Total:data.length});},
+    {res.send({Rows:data,Total:data.length});},
     error:function(error)
     {}
   });

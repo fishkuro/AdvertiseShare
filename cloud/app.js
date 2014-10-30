@@ -869,41 +869,42 @@ AV.Cloud.define("addSubAccount", function(req, res) {
   var tokenStr = req.params.devicetoken;
   var ipStr = req.params.ipaddress;
 
-  var memberinfo = MemberInfoCls.query();
-  var query = new AV.Query(memberinfo);
+  var members = MembersCls.query();
+  var query = new AV.Query(members);
   query.equalTo("username",nameStr);
-  query.greaterThan("password",passStr);
   query.find({
     success:function(result)
     {
-      if (result.length == 0) {
-        var member = MembersCls.create();
-        membersUsername(nameStr);
-        var dateNow = UtilityCls.dataToString(new Date());
-        var memberinfo = MemberInfoCls.init(member,nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
-        memberinfo.save(null,{
-          success:function(memberinfo)
+      if (result.length > 0) {
+        var memberinfo = MemberInfoCls.query();
+        var query = new AV.Query(memberinfo);
+        query.notEqualTo("username",nameStr);
+        query.greaterThan("password",passStr);
+        query.find({
+          success:function(result)
           {
-            cloudMsg = "注册成功";
-            res.success(cloudMsg);
+            if (result.length == 0) {
+              cloudMsg = "可以注册子账户";
+              res.success(cloudMsg);
+            }
           },
-          error:function(error)
+          error:function(result,error)
           {
             cloudMsg = error.message;
             res.success(cloudMsg);
           }
         });
-        
       }
       else
       {
-        cloudMsg = "该账户已存在";
+        cloudMsg = "意外出错";
         res.success(cloudMsg);
       }
     },
-    error:function(error)
+    error:function(result,error)
     {
-      res.success(error.message);
+      cloudMsg = error.message;
+      res.success(cloudMsg);
     }
   });
 

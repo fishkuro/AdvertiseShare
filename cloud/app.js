@@ -88,34 +88,6 @@ app.get('/hello', function(req, res) {
   
 });
 
-var ajaxdata = {name: 'aaa',sex: false,age: 20};
-
-app.get('/jq',function(req, res) {
-    var Notices = AV.Object.extend("Notices");
-    var query = new AV.Query(Notices);
-    query.find({
-      success:function(data)
-      {
-        res.jsonp({Rows:data,Total:data.length});
-      },
-      error:function(error)
-      {}
-    });
-});
-
-app.get('/ajaxs', function(req, res) {
-	//res.send(ajaxdata);
-	NoticesCls.find({
-    success:function(data)
-    {
-      res.set('Content-Type', 'text/plain');
-      res.send({Rows:data,Total:data.length});
-    },
-    error:function(error)
-    {}
-  });
-});
-
 // app.get('/cloud', function(req, res) {
 //   var rlt = null;
 //   AV.Cloud.run("testCloud", {username: 'dennis',password: '123456'}, {
@@ -209,8 +181,7 @@ app.get('/administrator/terraces', function(req, res) {
 
 //json 调用
 
-app.get('/administrator/membersdata',function(req, res) {
-  //var membersdata = null;
+app.post('/administrator/membersdata',function(req, res) {
   MembersCls.find({
     success:function(data)
     {res.jsonp({Rows:data,Total:data.length});},
@@ -220,7 +191,7 @@ app.get('/administrator/membersdata',function(req, res) {
   
 });
 
-app.get('/administrator/memberinfodata',function(req, res) {
+app.post('/administrator/memberinfodata',function(req, res) {
   MemberInfoCls.find({
     success:function(data)
     {res.jsonp({Rows:data,Total:data.length});},
@@ -230,8 +201,7 @@ app.get('/administrator/memberinfodata',function(req, res) {
   
 });
 
-app.get('/administrator/depositrecorddata',function(req, res) {
-  //var depositrecorddata = null;
+app.post('/administrator/depositrecorddata',function(req, res) {
   DepositrecordCls.find({
     success:function(data)
     {res.jsonp({Rows:data,Total:data.length});},
@@ -241,8 +211,7 @@ app.get('/administrator/depositrecorddata',function(req, res) {
   
 });
 
-app.get('/administrator/deposittotaildata',function(req, res) {
-  //var deposittotaildata = null;
+app.post('/administrator/deposittotaildata',function(req, res) {
   DeposittotailCls.find({
     success:function(data)
     {res.jsonp({Rows:data,Total:data.length});},
@@ -253,11 +222,9 @@ app.get('/administrator/deposittotaildata',function(req, res) {
 });
 
 app.post('/administrator/noticesdata',function(req, res) {
-  //var noticesdata = null;
   NoticesCls.find({
     success:function(data)
     {
-      //res.send(JSON.stringify({Rows:data, Total:data.length}));
       res.jsonp({Rows:data,Total:data.length});
     },
     error:function(error)
@@ -266,8 +233,7 @@ app.post('/administrator/noticesdata',function(req, res) {
   
 });
 
-app.get('/administrator/payconduitdata',function(req, res) {
-  //var payconduitdata = null;
+app.post('/administrator/payconduitdata',function(req, res) {
   PayconduitCls.find({
     success:function(data)
     {
@@ -281,8 +247,7 @@ app.get('/administrator/payconduitdata',function(req, res) {
   
 });
 
-app.get('/administrator/scorerecorddata',function(req, res) {
-  //var scorerecorddata = null;
+app.post('/administrator/scorerecorddata',function(req, res) {
   ScorerecordCls.find({
     success:function(data)
     {res.jsonp({Rows:data,Total:data.length});},
@@ -292,8 +257,7 @@ app.get('/administrator/scorerecorddata',function(req, res) {
   
 });
 
-app.get('/administrator/scoretotaildata',function(req, res) {
-  //var scoretotaildata = null;
+app.post('/administrator/scoretotaildata',function(req, res) {
   ScoretotailCls.find({
     success:function(data)
     {res.jsonp({Rows:data,Total:data.length});},
@@ -303,8 +267,7 @@ app.get('/administrator/scoretotaildata',function(req, res) {
   
 });
 
-app.get('/administrator/tasksdata',function(req, res) {
-  //var tasksdata = null;
+app.post('/administrator/tasksdata',function(req, res) {
   TasksCls.find({
     success:function(data)
     {res.jsonp({Rows:data,Total:data.length});},
@@ -314,21 +277,7 @@ app.get('/administrator/tasksdata',function(req, res) {
   
 });
 
-app.get('/administrator/tasksdatalist',function(req, res) {
-  var tasks = AV.Object.extend("Tasks");
-  var query = new AV.Query(tasks);
-  var result = null;
-  query.find({
-    success:function(data)
-    {res.jsonp({Rows:data,Total:data.length});},
-    error:function(error)
-    {}
-  });
-  
-});
-
-app.get('/administrator/terracesdata',function(req, res) {
-  //var terracesdata = null;
+app.post('/administrator/terracesdata',function(req, res) {
   TerracesCls.find({
     success:function(data)
     {res.jsonp({Rows:data,Total:data.length});},

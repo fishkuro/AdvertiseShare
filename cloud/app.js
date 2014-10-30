@@ -88,6 +88,57 @@ app.get('/hello', function(req, res) {
   
 });
 
+app.get('/cloudLogin', function(req, res) {
+  var rlt = null;
+  AV.Cloud.run("memberLogin", {username: 'dennis',password: '123456',ipaddress:'127.0.0.1'}, {
+    success: function(data){
+      //调用成功，得到成功的应答data
+      rlt = data;
+      res.render('hello', { message: rlt });
+    },
+    error: function(err){
+      //处理调用失败
+      rlt = err.message;
+      res.render('hello', { message: rlt });
+    }
+  });
+
+});
+
+app.get('/cloudLogin2', function(req, res) {
+  var rlt = null;
+  AV.Cloud.run("memberLogin2", {username: 'dennis',password: '456789',ipaddress:'127.0.0.1'}, {
+    success: function(data){
+      //调用成功，得到成功的应答data
+      rlt = data;
+      res.render('hello', { message: rlt });
+    },
+    error: function(err){
+      //处理调用失败
+      rlt = err.message;
+      res.render('hello', { message: rlt });
+    }
+  });
+
+});
+
+app.get('/addcloud', function(req, res) {
+  var rlt = null;
+  AV.Cloud.run("addSubAccount", {username: 'dennis',password: '456789',devicetoken:'tokentst',ipaddress:'127.0.0.1'}, {
+    success: function(data){
+      //调用成功，得到成功的应答data
+      rlt = data;
+      res.render('hello', { message: rlt });
+    },
+    error: function(err){
+      //处理调用失败
+      rlt = err.message;
+      res.render('hello', { message: rlt });
+    }
+  });
+
+});
+
 app.get('/cloud', function(req, res) {
   var rlt = null;
   AV.Cloud.run("memberRegister", {username: 'dennis',password: '123456',devicetoken:'tokentst',ipaddress:'127.0.0.1'}, {
@@ -103,7 +154,6 @@ app.get('/cloud', function(req, res) {
     }
   });
 
-  
 });
 
 // 后台管理开始
@@ -669,6 +719,53 @@ var cloudMsg;
 //   res.success(nameStr + " | " + passStr);
 // });
 
+AV.Cloud.define("memberLogin2", function(req, res) {
+  var nameStr = req.params.username;
+  var passStr = req.params.password;
+  var ipStr = req.params.ipaddress;
+
+  var user = new AV.User();
+  user.set("username",nameStr);
+  user.set("password",passStr);
+  var memberinfo = MemberInfoCls.query();
+  var query = new AV.Query(memberinfo);
+  query.equalTo("username", nameStr);
+  query.greaterThan("password", passStr);
+  query.find({
+    success: function(result) {
+      if (result.length > 0) {
+        // 1 登录成功
+        var memberinfo = result[0];
+        memberinfo.set("loginip",ipStr);
+        var dateNow = UtilityCls.dataToString(new Date());
+        memberinfo.set("lastlogintime",dateNow);
+        memberinfo.save();
+
+        user.set("memberId",memberinfo[0].get("objectId"));
+        user.signUp(null, {
+          success: function(user) {
+            // Hooray! Let them use the app now.
+            cloudMsg = "注册成功";
+            res.success(cloudMsg);
+          },
+          error: function(user, error) {
+            res.success("Error: " + error.code + " " + error.message);
+          }
+        });
+        
+      }
+      else
+      {
+        cloudMsg = "信息输入不对，登录失败";
+        res.success(cloudMsg);
+      }
+    },
+    error: function(error) {
+      res.success(error.message);
+    }
+  });
+});
+
 //
 // 云函数 - 自定义登录
 AV.Cloud.define("memberLogin", function(req, res) {
@@ -692,8 +789,19 @@ AV.Cloud.define("memberLogin", function(req, res) {
         var dateNow = UtilityCls.dataToString(new Date());
         memberinfo.set("lastlogintime",dateNow);
         memberinfo.save();
-        cloudMsg = "登录成功";
-        res.success(cloudMsg);
+
+        user.logIn(null, {
+          success: function(user) {
+            // Do stuff after successful login.
+            cloudMsg = "登录成功";
+            res.success(cloudMsg);
+          },
+          error: function(user, error) {
+            // The login failed. Check error to see why.
+            res.success(error.message);
+          }
+        });
+        
       }
       else
       {
@@ -771,9 +879,9 @@ AV.Cloud.define("addSubAccount", function(req, res) {
     {
       if (result.length == 0) {
         var member = MembersCls.create();
-        members.Username(nameStr);
+        membersUsername(nameStr);
         var dateNow = UtilityCls.dataToString(new Date());
-        var memberinfo = MemberInfoCls.init(members,nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
+        var memberinfo = MemberInfoCls.init(member,nameStr,passStr,0,ipStr,ipStr,tokenStr,dateNow,dateNow);
         memberinfo.save(null,{
           success:function(memberinfo)
           {

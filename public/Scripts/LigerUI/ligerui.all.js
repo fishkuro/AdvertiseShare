@@ -3041,7 +3041,7 @@
                 $("div", containerBtn1).ligerButton({
                     text: p.Search, width: 40,
                     click: function () {
-                        //fix search
+                        //fix search winlong at here
                         var rules = g.condition.toConditions();                
                         var key = rules[0].field;
                         var val = rules[0].value;
@@ -7953,7 +7953,7 @@
                 url: p.url,
                 data: param,
                 async: p.async,
-                dataType: 'json',
+                dataType: 'jsonp',
                 beforeSend: function ()
                 {
                     if (g.hasBind('loading'))

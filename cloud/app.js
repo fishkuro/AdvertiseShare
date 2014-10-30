@@ -243,7 +243,9 @@ app.get('/administrator/noticesdata',function(req, res) {
   //var noticesdata = null;
   NoticesCls.find({
     success:function(data)
-    {res.send({Rows:data,Total:data.length});},
+    {
+      res.jsonp(null,{Rows:data,Total:data.length});
+    },
     error:function(error)
     {}
   });

@@ -734,9 +734,7 @@ AV.Cloud.define("memberLogin2", function(req, res) {
   query.find({
     success: function(MemberInfo) {
 
-      console.log("memberLogin2 MemberInfo n: " +
-        MemberInfo[0].get("username") + " p: " + 
-        MemberInfo[0].get("password") + " len: " + MemberInfo.length);
+      console.log("memberLogin2 MemberInfo len: " + MemberInfo.length);
 
       if (MemberInfo.length > 0) {
         // 1 登录成功
@@ -787,9 +785,7 @@ AV.Cloud.define("memberLogin", function(req, res) {
   query.find({
     success: function(MemberInfo) {
 
-      console.log("memberLogin MemberInfo n: " +
-        MemberInfo[0].get("username") + " p: " + 
-        MemberInfo[0].get("password") + " len: " + MemberInfo.length);
+      console.log("memberLogin MemberInfo len: " + MemberInfo.length);
 
       if (MemberInfo.length > 0) {
         // 1 登录成功

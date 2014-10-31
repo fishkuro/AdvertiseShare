@@ -111,11 +111,11 @@ function signUpUser(username,password,memberid)
 };
 
 app.get('/cloudLogin', function(req, res) {
-  var nameStr = req.body.username;
-  var passStr = req.body.password;
+  var nameStr = "dennis";//req.body.username;
+  var passStr = "456789";//req.body.password;
   var ipStr = "127.0.0.1";
 
-  console.log("nameStr: " + nameStr + "passStr: " +  passStr + "ipStr: " + ipStr);
+  console.log("nameStr: " + nameStr + " passStr: " +  passStr + " ipStr: " + ipStr);
 
   var MemberInfo = MemberInfoCls.query();
   var query = new AV.Query(MemberInfo);
@@ -130,11 +130,11 @@ app.get('/cloudLogin', function(req, res) {
         memberinfo.set("lastlogintime",dateNow);
         memberinfo.save();
 
-        console.log("MemberInfo query memberinfoid : " + Members[0].id);
+        console.log("MemberInfo query memberinfoid : " + memberinfo.id);
 
         var USER = AV.Object.extend("_User");
         var query = new AV.Query(USER);
-        query.equalTo("username","dennis");
+        query.equalTo("username",nameStr);
         query.find({
           success: function(USER) {
             if (USER.length > 0) {
@@ -159,7 +159,7 @@ app.get('/cloudLogin', function(req, res) {
           },
           error:function(error)
           {
-            console.log("user error : " + nameStr + "mid : " + memberinfo.id);
+            console.log("user error : " + nameStr + " mid : " + memberinfo.id);
 
             cloudMsg = signUpUser(nameStr,passStr,memberinfo.id);
             res.render('hello', { message: cloudMsg });

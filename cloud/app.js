@@ -87,18 +87,93 @@ app.get('/hello', function(req, res) {
 
 });
 
-app.get('/cloudLogin', function(req, res) {
-  var rlt = null;
-  AV.Cloud.run("memberLogin", {username: 'dennis',password: '456789',ipaddress:'127.0.0.1'}, {
-    success: function(data){
-      //调用成功，得到成功的应答data
-      rlt = data;
-      res.render('hello', { message: rlt });
+function signUpUser(username,password,memberid)
+{
+  var result = null;
+  var user = new AV.User();
+  user.set("username",username);
+  user.set("password",password);
+  user.set("memberId",memberid);
+  user.signUp(null, {
+    success: function(user) {
+
+      console.log("user injectionUser : " + username + "mid : " + memberid);
+
+      result = "登录成功";
+      return result;
     },
-    error: function(err){
-      //处理调用失败
-      rlt = err.message;
-      res.render('hello', { message: rlt });
+    error: function(user, error) {
+      result = "Error: " + error.code + " " + error.message;
+      return result; 
+    }
+  });
+
+};
+
+app.get('/cloudLogin', function(req, res) {
+  var nameStr = req.body.username;
+  var passStr = req.body.password;
+  var ipStr = "127.0.0.1";
+
+  console.log("nameStr: " + nameStr + "passStr: " +  passStr + "ipStr: " + ipStr);
+
+  var MemberInfo = MemberInfoCls.query();
+  var query = new AV.Query(MemberInfo);
+  query.equalTo("username",nameStr);
+  query.equalTo("password",passStr);
+  query.find({
+    success: function(MemberInfo) {
+      if (MemberInfo.length > 0) {
+        var memberinfo = MemberInfo[0];
+        memberinfo.set("loginip",ipStr);
+        var dateNow = UtilityCls.dataToString(new Date());
+        memberinfo.set("lastlogintime",dateNow);
+        memberinfo.save();
+
+        console.log("MemberInfo query memberinfoid : " + Members[0].id);
+
+        var USER = AV.Object.extend("_User");
+        var query = new AV.Query(USER);
+        query.equalTo("username","dennis");
+        query.find({
+          success: function(USER) {
+            if (USER.length > 0) {
+
+              console.log("USER query length : " + USER.length);
+
+              var user = USER[0];
+              user.destroy({
+                success: function(user) {
+
+                  console.log("user destroy : ");
+
+                  cloudMsg = signUpUser(nameStr,passStr,memberinfo.id);
+                  res.render('hello', { message: cloudMsg });
+                },
+                error: function(user, error) {
+                  // The delete failed.
+                  // error is a AV.Error with an error code and description.
+                }
+              });
+            }
+          },
+          error:function(error)
+          {
+            console.log("user error : " + nameStr + "mid : " + memberinfo.id);
+
+            cloudMsg = signUpUser(nameStr,passStr,memberinfo.id);
+            res.render('hello', { message: cloudMsg });
+          }
+        });
+      }
+      else
+      {
+        cloudMsg = "信息输入不对，登录失败";
+        res.render('hello', { message: cloudMsg });
+      }
+    },
+    error: function(error) {
+      res.render('hello', { message: error.message });
     }
   });
 
@@ -169,7 +244,7 @@ app.post('/administrator/login',function(req, res) {
   var admin = AV.Object.extend("Admins");
   var query = new AV.Query(admin);
   query.equalTo("username",name);
-  query.greaterThan("password", pass);
+  query.equalTo("password", pass);
   query.find({
     success: function(result) {
       session.username(name);
@@ -180,6 +255,7 @@ app.post('/administrator/login',function(req, res) {
       res.send("登录失败!");
     }
   });
+
 });
 
 app.get('/administrator/index', function(req, res) {
@@ -718,7 +794,7 @@ var cloudMsg;
 //   res.success(nameStr + " | " + passStr);
 // });
 
-AV.Cloud.define("memberLogin2", function(req, res) {
+AV.Cloud.define("memberLogin", function(req, res) {
   var nameStr = req.params.username;
   var passStr = req.params.password;
   var ipStr = req.params.ipaddress;
@@ -762,11 +838,12 @@ AV.Cloud.define("memberLogin2", function(req, res) {
       res.success(error.message);
     }
   });
+
 });
 
 //
 // 云函数 - 自定义登录 云登录弃用，客户端不识别
-AV.Cloud.define("memberLogin", function(req, res) {
+AV.Cloud.define("memberLogin_fail", function(req, res) {
   var nameStr = req.params.username;
   var passStr = req.params.password;
   var ipStr = req.params.ipaddress;

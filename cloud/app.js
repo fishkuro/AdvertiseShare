@@ -743,6 +743,8 @@ AV.Cloud.define("memberLogin", function(req, res) {
   var passStr = req.params.password;
   var ipStr = req.params.ipaddress;
 
+  console.log("memberLogin username : " + nameStr);
+
   var MemberInfo = MemberInfoCls.query();
   var query = new AV.Query(MemberInfo);
   query.equalTo("username",nameStr);
@@ -757,6 +759,8 @@ AV.Cloud.define("memberLogin", function(req, res) {
         memberinfo.set("lastlogintime",dateNow);
         memberinfo.save();
 
+        console.log("MemberInfo query : " + memberId);
+
         var USER = AV.Object.extend("_User");
         var query = new AV.Query(USER);
         query.equalTo("username",nameStr);
@@ -765,8 +769,14 @@ AV.Cloud.define("memberLogin", function(req, res) {
             if (USER.length > 0) {
               var user = USER[0];
               //有的话，删除再注册
+
+              console.log("USER query : " + nameStr);
+
               user.destroy({
                 success: function(user) {
+
+                  console.log("user destroy : " + passStr);
+
                   signUpUser(nameStr,passStr,memberId,res);
                 },
                 error: function(user, error) {
@@ -777,6 +787,9 @@ AV.Cloud.define("memberLogin", function(req, res) {
             }
             else
             {
+
+              console.log("user add : " + passStr);
+
               //没有的话，直接注册
               signUpUser(nameStr,passStr,memberId,res);
             }

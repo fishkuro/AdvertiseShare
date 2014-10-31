@@ -87,7 +87,7 @@ app.get('/hello', function(req, res) {
 
 });
 
-function signUpUser(username,password,memberid)
+function signUpUser(username,password,memberid,res)
 {
   var result = null;
   var user = new AV.User();
@@ -100,11 +100,11 @@ function signUpUser(username,password,memberid)
       console.log("user injectionUser : " + username + "mid : " + memberid);
 
       result = "登录成功";
-      return result;
+      res.render('hello', { message: result });
     },
     error: function(user, error) {
       result = "Error: " + error.code + " " + error.message;
-      return result; 
+      res.render('hello', { message: result });
     }
   });
 
@@ -154,11 +154,9 @@ app.get('/cloudLogin', function(req, res) {
                 success: function(user) {
 
                   console.log("user destroy : ");
-
-                  testUpUser();
                   
-                  rltStr = signUpUser(nameStr,passStr,memberinfo.id);
-                  res.render('hello', { message: rltStr });
+                  signUpUser(nameStr,passStr,memberinfo.id,res);
+                  
                 },
                 error: function(user, error) {
                   // The delete failed.
@@ -171,8 +169,7 @@ app.get('/cloudLogin', function(req, res) {
           {
             console.log("user error : " + nameStr + " mid : " + memberinfo.id);
 
-            rltStr = signUpUser(nameStr,passStr,memberinfo.id);
-            res.render('hello', { message: rltStr });
+            signUpUser(nameStr,passStr,memberinfo.id,res);
           }
         });
       }

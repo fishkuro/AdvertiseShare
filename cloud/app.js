@@ -166,8 +166,8 @@ app.get('/cloudLogin', function(req, res) {
             }
             else
             {
-              console.log("no user");
-              res.render('hello', { message: "没有这个用户" });
+              //没有的话，补充注册
+              signUpUser(nameStr,passStr,memberinfo.id,res);
             }
           },
           error:function(error)

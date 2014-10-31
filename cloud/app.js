@@ -87,127 +87,6 @@ app.get('/hello', function(req, res) {
 
 });
 
-function signUpUser(username,password,memberid,res)
-{
-  var result = null;
-  var user = new AV.User();
-  user.set("username",username);
-  user.set("password",password);
-  user.set("memberId",memberid);
-  user.signUp(null, {
-    success: function(user) {
-
-      console.log("user injectionUser : " + username + "mid : " + memberid);
-
-      result = "登录成功";
-      res.render('hello', { message: result });
-    },
-    error: function(user, error) {
-      result = "Error: " + error.code + " " + error.message;
-      res.render('hello', { message: result });
-    }
-  });
-
-};
-
-function testUpUser()
-{
-  console.log("testUpUser method log!");
-
-}
-
-app.get('/cloudLogin', function(req, res) {
-  var nameStr = "dennis";//req.body.username;
-  var passStr = "456789";//req.body.password;
-  var ipStr = "127.0.0.1";
-
-  var rltStr = null;
-
-  console.log("nameStr: " + nameStr + " passStr: " +  passStr + " ipStr: " + ipStr);
-
-  var MemberInfo = MemberInfoCls.query();
-  var query = new AV.Query(MemberInfo);
-  query.equalTo("username",nameStr);
-  query.equalTo("password",passStr);
-  query.find({
-    success: function(MemberInfo) {
-      if (MemberInfo.length > 0) {
-        var memberinfo = MemberInfo[0];
-        memberinfo.set("loginip",ipStr);
-        var dateNow = UtilityCls.dataToString(new Date());
-        memberinfo.set("lastlogintime",dateNow);
-        memberinfo.save();
-
-        console.log("MemberInfo query memberinfoid : " + memberinfo.id);
-
-        var USER = AV.Object.extend("_User");
-        var query = new AV.Query(USER);
-        query.equalTo("username",nameStr);
-        query.find({
-          success: function(USER) {
-            if (USER.length > 0) {
-
-              console.log("USER query length : " + USER.length);
-
-              var user = USER[0];
-              user.destroy({
-                success: function(user) {
-
-                  console.log("user destroy : ");
-                  
-                  signUpUser(nameStr,passStr,memberinfo.id,res);
-                  
-                },
-                error: function(user, error) {
-                  // The delete failed.
-                  // error is a AV.Error with an error code and description.
-                }
-              });
-            }
-            else
-            {
-              //没有的话，补充注册
-              signUpUser(nameStr,passStr,memberinfo.id,res);
-            }
-          },
-          error:function(error)
-          {
-            console.log("user error : " + nameStr + " mid : " + memberinfo.id);
-
-            signUpUser(nameStr,passStr,memberinfo.id,res);
-          }
-        });
-      }
-      else
-      {
-        rltStr = "信息输入不对，登录失败";
-        res.render('hello', { message: rltStr });
-      }
-    },
-    error: function(error) {
-      res.render('hello', { message: error.message });
-    }
-  });
-
-});
-
-app.get('/cloudLogin2', function(req, res) {
-  var rlt = null;
-  AV.Cloud.run("memberLogin2", {username: 'dennis',password: '456789',ipaddress:'127.0.0.1'}, {
-    success: function(data){
-      //调用成功，得到成功的应答data
-      rlt = data;
-      res.render('hello', { message: rlt });
-    },
-    error: function(err){
-      //处理调用失败
-      rlt = err.message;
-      res.render('hello', { message: rlt });
-    }
-  });
-
-});
-
 app.get('/addcloud', function(req, res) {
   var rlt = null;
   AV.Cloud.run("addSubAccount", {username: 'dennis',password: '456789',devicetoken:'tokentst',ipaddress:'127.0.0.1'}, {
@@ -806,14 +685,63 @@ var cloudMsg;
 //   res.success(nameStr + " | " + passStr);
 // });
 
+AV.Cloud.define("memberLogOut", function(req, res) {
+  var nameStr = req.params.username;
+  var USER = AV.Object.extend("_User");
+  var query = new AV.Query(USER);
+  query.equalTo("username",nameStr);
+  query.find({
+    success: function(USER) {
+      if (USER.length > 0) {
+        var user = USER[0];
+        //注销等于删除
+        user.destroy({
+          success: function(user) {
+            signUpUser(nameStr,passStr,memberId,res);
+          },
+          error: function(user, error) {
+          // The delete failed.
+          res.success(error.message);
+          }
+        });
+      }
+      else
+      {
+        res.success("用户丢失");
+      }
+    },
+    error:function(error)
+    {
+      res.success(error.message);
+    }
+  });
+
+});
+
+function signUpUser(username,password,memberid,res)
+{
+  var msg = null;
+  var user = new AV.User();
+  user.set("username",username);
+  user.set("password",password);
+  user.set("memberId",memberid);
+  user.signUp(null, {
+    success: function(user) {
+      msg = "登录成功";
+      res.success(msg);
+    },
+    error: function(user, error) {
+      var msg = "Error: " + error.code + " " + error.message;
+      res.success(msg);
+    }
+  });
+
+};
+
 AV.Cloud.define("memberLogin", function(req, res) {
   var nameStr = req.params.username;
   var passStr = req.params.password;
   var ipStr = req.params.ipaddress;
-
-  var user = new AV.User();
-  user.set("username",nameStr);
-  user.set("password",passStr);
 
   var MemberInfo = MemberInfoCls.query();
   var query = new AV.Query(MemberInfo);
@@ -823,27 +751,45 @@ AV.Cloud.define("memberLogin", function(req, res) {
     success: function(MemberInfo) {
       if (MemberInfo.length > 0) {
         var memberinfo = MemberInfo[0];
+        var memberId = memberinfo.id;
         memberinfo.set("loginip",ipStr);
         var dateNow = UtilityCls.dataToString(new Date());
         memberinfo.set("lastlogintime",dateNow);
         memberinfo.save();
 
-        user.set("memberId",MemberInfo[0].id);
-        user.signUp(null, {
-          success: function(user) {
-            // 这边自表验证成功后注册到系统，再去登录
-            cloudMsg = "登录成功";
-            res.success(cloudMsg);
+        var USER = AV.Object.extend("_User");
+        var query = new AV.Query(USER);
+        query.equalTo("username",nameStr);
+        query.find({
+          success: function(USER) {
+            if (USER.length > 0) {
+              var user = USER[0];
+              //有的话，删除再注册
+              user.destroy({
+                success: function(user) {
+                  signUpUser(nameStr,passStr,memberId,res);
+                },
+                error: function(user, error) {
+                  // The delete failed.
+                  res.success(error.message);
+                }
+              });
+            }
+            else
+            {
+              //没有的话，直接注册
+              signUpUser(nameStr,passStr,memberId,res);
+            }
           },
-          error: function(user, error) {
-            res.success("Error: " + error.code + " " + error.message);
+          error:function(error)
+          {
+            res.success(error.message);
           }
         });
       }
       else
       {
-        cloudMsg = "信息输入不对，登录失败";
-        res.success(cloudMsg);
+        res.success("信息输入不对，登录失败");
       }
     },
     error: function(error) {

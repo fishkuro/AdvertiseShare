@@ -110,10 +110,18 @@ function signUpUser(username,password,memberid)
 
 };
 
+function testUpUser()
+{
+  console.log("testUpUser method log!");
+
+}
+
 app.get('/cloudLogin', function(req, res) {
   var nameStr = "dennis";//req.body.username;
   var passStr = "456789";//req.body.password;
   var ipStr = "127.0.0.1";
+
+  var rltStr = null;
 
   console.log("nameStr: " + nameStr + " passStr: " +  passStr + " ipStr: " + ipStr);
 
@@ -147,8 +155,10 @@ app.get('/cloudLogin', function(req, res) {
 
                   console.log("user destroy : ");
 
-                  cloudMsg = signUpUser(nameStr,passStr,memberinfo.id);
-                  res.render('hello', { message: cloudMsg });
+                  testUpUser();
+                  
+                  rltStr = signUpUser(nameStr,passStr,memberinfo.id);
+                  res.render('hello', { message: rltStr });
                 },
                 error: function(user, error) {
                   // The delete failed.
@@ -161,15 +171,15 @@ app.get('/cloudLogin', function(req, res) {
           {
             console.log("user error : " + nameStr + " mid : " + memberinfo.id);
 
-            cloudMsg = signUpUser(nameStr,passStr,memberinfo.id);
-            res.render('hello', { message: cloudMsg });
+            rltStr = signUpUser(nameStr,passStr,memberinfo.id);
+            res.render('hello', { message: rltStr });
           }
         });
       }
       else
       {
-        cloudMsg = "信息输入不对，登录失败";
-        res.render('hello', { message: cloudMsg });
+        rltStr = "信息输入不对，登录失败";
+        res.render('hello', { message: rltStr });
       }
     },
     error: function(error) {

@@ -765,7 +765,7 @@ AV.Cloud.define("memberLogin2", function(req, res) {
 });
 
 //
-// 云函数 - 自定义登录 云登录弃用，客户端不正常
+// 云函数 - 自定义登录 云登录弃用，客户端不识别
 AV.Cloud.define("memberLogin", function(req, res) {
   var nameStr = req.params.username;
   var passStr = req.params.password;
@@ -775,54 +775,42 @@ AV.Cloud.define("memberLogin", function(req, res) {
   user.set("username",nameStr);
   user.set("password",passStr);
 
-  AV.User.logIn(nameStr,passStr,{
-      success: function(user) {
-        // Do stuff after successful login.
-        cloudMsg = "登录成功";
-        res.success(cloudMsg);
-      },
-      error: function(user, error) {
-        // The login failed. Check error to see why.
-        res.success(error.message);
-      }
-   });
+  var MemberInfo = MemberInfoCls.query();
+  var query = new AV.Query(MemberInfo);
+  query.equalTo("username", nameStr);
+  query.equalTo("password", passStr);
+  query.find({
+    success: function(MemberInfo) {
+      if (MemberInfo.length > 0) {
+        var memberinfo = MemberInfo[0];
+        memberinfo.set("loginip",ipStr);
+        var dateNow = UtilityCls.dataToString(new Date());
+        memberinfo.set("lastlogintime",dateNow);
+        memberinfo.save();
 
-  // var MemberInfo = MemberInfoCls.query();
-  // var query = new AV.Query(MemberInfo);
-  // query.equalTo("username", nameStr);
-  // query.equalTo("password", passStr);
-  // query.find({
-  //   success: function(MemberInfo) {
-  //     if (MemberInfo.length > 0) {
-  //       var memberinfo = MemberInfo[0];
-  //       memberinfo.set("loginip",ipStr);
-  //       var dateNow = UtilityCls.dataToString(new Date());
-  //       memberinfo.set("lastlogintime",dateNow);
-  //       memberinfo.save();
-
-  //       user.logIn(null, {
-  //         success: function(user) {
-  //           // Do stuff after successful login.
-  //           cloudMsg = "登录成功";
-  //           res.success(cloudMsg);
-  //         },
-  //         error: function(user, error) {
-  //           // The login failed. Check error to see why.
-  //           res.success(error.message);
-  //         }
-  //       });
+        user.logIn({
+          success: function(user) {
+            // Do stuff after successful login.
+            cloudMsg = "登录成功";
+            res.success(cloudMsg);
+          },
+          error: function(user, error) {
+            // The login failed. Check error to see why.
+            res.success(error.message);
+          }
+        });
         
-  //     }
-  //     else
-  //     {
-  //       cloudMsg = "信息输入不对，登录失败";
-  //       res.success(cloudMsg);
-  //     }
-  //   },
-  //   error: function(error) {
-  //     res.success(error.message);
-  //   }
-  // });
+      }
+      else
+      {
+        cloudMsg = "信息输入不对，登录失败";
+        res.success(cloudMsg);
+      }
+    },
+    error: function(error) {
+      res.success(error.message);
+    }
+  });
 
 });
 

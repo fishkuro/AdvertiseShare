@@ -89,7 +89,7 @@ app.get('/hello', function(req, res) {
 
 app.get('/addcloud', function(req, res) {
   var rlt = null;
-  AV.Cloud.run("addSubAccount", {username: 'dennis',password: '456789',devicetoken:'tokentst',ipaddress:'127.0.0.1'}, {
+  AV.Cloud.run("memberLogin", {username: 'dennis',password: '456789',devicetoken:'tokentst',ipaddress:'127.0.0.1'}, {
     success: function(data){
       //调用成功，得到成功的应答data
       rlt = data;
@@ -106,7 +106,7 @@ app.get('/addcloud', function(req, res) {
 
 app.get('/cloud', function(req, res) {
   var rlt = null;
-  AV.Cloud.run("memberRegister", {username: 'dennis',password: '123456',devicetoken:'tokentst',ipaddress:'127.0.0.1'}, {
+  AV.Cloud.run("memberLogin", {username: 'dennis',password: '123456',devicetoken:'tokentst',ipaddress:'127.0.0.1'}, {
     success: function(data){
       //调用成功，得到成功的应答data
       rlt = data;
@@ -766,6 +766,9 @@ AV.Cloud.define("memberLogin", function(req, res) {
         query.equalTo("username",nameStr);
         query.find({
           success: function(USER) {
+
+            console.log("USER Length : " + USER.length);
+
             if (USER.length > 0) {
               var user = USER[0];
               //有的话，删除再注册

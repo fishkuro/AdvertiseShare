@@ -164,6 +164,11 @@ app.get('/cloudLogin', function(req, res) {
                 }
               });
             }
+            else
+            {
+              console.log("no user");
+              res.render('hello', { message: "没有这个用户" });
+            }
           },
           error:function(error)
           {

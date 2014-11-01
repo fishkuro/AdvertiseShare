@@ -299,14 +299,14 @@ app.post('/administrator/tasksdata',function(req, res) {
 app.get('/administrator/tasksdata',function(req, res) {
   var Tasks = TasksCls.query();
   var query = new AV.Query(Tasks);
-  query.include(["Terraces.terracename"]);
+  query.include(["parent.terracename"]);
   query.find({
     success:function(data)
     {
-      // for (var i = data.length - 1; i >= 0; i--) {
-      //   var terrace = data[i].get("parent");
-      //   console.log("get tasksdata : " + terrace.get("terraceName"));
-      // };
+      for (var i = data.length - 1; i >= 0; i--) {
+        var terrace = data[i].get("parent");
+        console.log("get tasksdata : " + terrace.get("terraceName"));
+      };
       res.jsonp({Rows:data,Total:data.length});
     },
     error:function(error)

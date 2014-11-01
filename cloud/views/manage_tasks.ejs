@@ -196,7 +196,7 @@
                 var taskname = $("#txtModifyTaskname").val();
 				var subtitle = $("#txtModifySubtitle").val();
 				var terraceid = $("#txtModifyTerraceid").val();
-				var enable = $("#txtModifyEnable").val();
+				var enable = $("#txtModifyEnable").val() == "true" ? true : false;
 				var parms = {objectId: objectId, taskname: taskname, subtitle: subtitle, terraceid: terraceid,
                 enable: enable};
                 $.post(Urlmodtasks, { data: parms }, function (e) {

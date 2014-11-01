@@ -304,7 +304,13 @@ app.get('/administrator/tasksdata',function(req, res) {
   query.include("parent");
   query.find({
     success:function(data)
-    {res.jsonp({Rows:data,Total:data.length});},
+    {
+      for (var i = data.length - 1; i >= 0; i--) {
+        var terrace = data[i].get("parent");
+        data[i].parent = terrace;
+      };
+      res.jsonp({Rows:data,Total:data.length});
+    },
     error:function(error)
     {}
   });

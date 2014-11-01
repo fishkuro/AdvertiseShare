@@ -563,11 +563,19 @@ app.post('/administrator/modtasks',function(req, res) {
   var taceid = req.body.data.terraceid;
   var enable = req.body.data.enable;
 
+  console.log(
+    "od : " + oId +
+    "tn" + taskname +
+    "st" + subtitle +
+    "pd" + taceid + 
+    "en" + enable
+    );
+
   var terrace = TerracesCls.create();
   terrace.ObjectId(taceid);
   var task = TasksCls.create();
   task.ObjectId(oId);
-  task.Parent(terrace);
+  //task.Parent(terrace);
   task.Taskname(taskname);
   task.Subtitle(subtitle);
   task.Enable(enable);

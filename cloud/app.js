@@ -304,13 +304,15 @@ app.get('/administrator/tasksdata',function(req, res) {
   query.find({
     success:function(data)
     {
-      var terraceArr = new Array();
+      var arr = new Array();
 
       for (var i = data.length - 1; i >= 0; i--) {
         var terrace = data[i].get("parent");
-        //terraceArr[i] = terrace.objectId;
-        console.log("terraceArr : " + terrace.get('terracename'));
-        terraceArr[i] = terrace;
+        // //terraceArr[i] = terrace.objectId;
+        // console.log("terraceArr : " + terrace.get('terracename'));
+        // arr[i] = terrace;
+        var task = { model: data[i], parent: terrace };
+        arr[i] = task;
       }
 
       // var Terraces = TerracesCls.query();
@@ -319,7 +321,7 @@ app.get('/administrator/tasksdata',function(req, res) {
       // query.find({
       //   success:function(data)
       //   {
-           res.jsonp({Rows:terraceArr,Total:terraceArr.length});
+      res.jsonp({Rows:arr,Total:arr.length});
       //   },
       //   error:function(error)
       //   {}

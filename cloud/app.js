@@ -570,7 +570,7 @@ app.post('/administrator/modtasks',function(req, res) {
   task.Parent(terrace);
   task.set(taskname);
   task.Subtitle(subtitle);
-  task.Enable(Boolean(enable));
+  task.Enable(enable);
 
   task.save(null, {
     success: function(task) {

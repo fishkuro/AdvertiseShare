@@ -46,7 +46,7 @@ var Notices = AV.Object.extend("Notices", {
 	}
 });
 
-exports.init = function(title,postdate,context) {
+exports.init = function(title,context,postdate) {
     var notices = new Notices();
 	notices.set("title",title);		//string
 	notices.set("postdate",postdate);		//DateTime

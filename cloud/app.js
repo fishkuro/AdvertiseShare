@@ -379,7 +379,7 @@ app.post('/administrator/addnotices',function(req, res) {
   var title = req.body.data.title;
   var content = req.body.data.content;
   var postdate = UtilityCls.dataToString(new Date());
-  var notice = NoticesCls.init(title,postdate,content);
+  var notice = NoticesCls.init(title,content,postdate);
 
   notice.save(null, {
     success: function(notice) {

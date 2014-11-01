@@ -304,11 +304,27 @@ app.get('/administrator/tasksdata',function(req, res) {
   query.find({
     success:function(data)
     {
+      var terraceArr = new Array();
+
       for (var i = data.length - 1; i >= 0; i--) {
         var terrace = data[i].get("parent");
-        console.log("get tasksdata : " + terrace.get("terraceName"));
+        terraceArr[i] = terrace.objectId;
+        console.log("get tasksdata : " + terrace.objectId;;
       };
-      res.jsonp({Rows:data,Total:data.length});
+
+      var Terraces = TerracesCls.query();
+      var query = new AV.Query(Terraces);
+      query.containsAll("objectId", terraceArr);
+      query.find({
+        success:function(data)
+        {
+          res.jsonp({Rows:data,Total:data.length});
+        },
+        error:function(error)
+        {}
+      });
+
+      
     },
     error:function(error)
     {}

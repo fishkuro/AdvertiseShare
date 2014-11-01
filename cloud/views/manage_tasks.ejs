@@ -140,7 +140,7 @@
                 var enable = $("#txtAddEnable").val();
 
                 var grid = window['g'];
-                var row = {taskname: taskname, subtitle: subtitle, terraceid: terraceid, terracename: terracename, Enable: enable};
+                var row = {taskname: taskname, subtitle: subtitle, terraceid: terraceid, terracename: terracename, enable: enable};
                 $.post(Urladdtasks, {data: row}, function (e) {
                     if (e.result) {
                         grid.reload();
@@ -169,7 +169,7 @@
         bindTerracesInfo("#txtModifyTerraceid");
 
         $("#winModify").data("objectId", row.model.objectId);
-        $("#winModify").data("taskname", row.modeltaskname);
+        $("#winModify").data("taskname", row.model.taskname);
 		$("#winModify").data("subtitle", row.model.subtitle);
 		$("#winModify").data("terraceid", row.parent.objectId);
 		$("#winModify").data("enable", row.model.enable);
@@ -221,8 +221,9 @@
             alert("请选择一条数据");
             return;
         }
+
         if (confirm("是否确定删除？")) {
-            $.post(Urldeltasks, { data: row }, function (e) {
+            $.post(Urldeltasks, { data: row.model.objectId }, function (e) {
                 if (e.result) {
                     alert("删除成功！");
                     $("#grid").ligerGrid().reload();

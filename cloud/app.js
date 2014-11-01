@@ -599,14 +599,8 @@ app.post('/administrator/modtasks',function(req, res) {
 
 app.post('/administrator/deltasks',function(req, res) {
   var oId = req.body.data.objectId;
-  var taskname = req.body.data.taskname;
-  var subtitle = req.body.data.subtitle;
-  var enable = req.body.data.enable;
   var task = TasksCls.create();
   task.ObjectId(oId);
-  task.Taskname(taskname);
-  task.Subtitle(subtitle);
-  task.Enable(enable);
 
   task.destroy({
     success: function(task) {

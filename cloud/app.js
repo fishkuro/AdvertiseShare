@@ -87,6 +87,21 @@ app.get('/hello', function(req, res) {
 
 });
 
+app.get('/helloworld', function(req, res) {
+  var Tasks = TasksCls.query();
+  var query = new AV.Query(Tasks);
+  query.include("parent");
+  query.find({
+    success:function(data)
+    {
+      res.send(data);
+    },
+    error:function(error)
+    {}
+  });
+
+});
+
 // 后台管理开始
 var session = UtilityCls.usersession();
 app.get('/kurodo/login', function(req, res) {

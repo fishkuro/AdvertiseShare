@@ -568,9 +568,9 @@ app.post('/administrator/modtasks',function(req, res) {
   var task = TasksCls.create();
   task.ObjectId(oId);
   task.Parent(terrace);
-  task.set(taskname);
+  task.Taskname(taskname);
   task.Subtitle(subtitle);
-  task.set("enable",false);
+  task.Enable(enable);
 
   task.save(null, {
     success: function(task) {
@@ -580,9 +580,6 @@ app.post('/administrator/modtasks',function(req, res) {
     error: function(task, error) {
       rlt.result = false;
       rlt.msg = error.description;
-
-      console.log(error.description);
-
       res.send(rlt);
     }
   });

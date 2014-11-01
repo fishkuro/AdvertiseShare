@@ -255,9 +255,7 @@ app.post('/administrator/payconduitdata',function(req, res) {
   PayconduitCls.find({
     success:function(data)
     {
-      var json = {Rows:data,Total:data.length};
-      var jsonStr = JSON.stringify(json);
-      res.send(jsonStr);
+      res.jsonp({Rows:data,Total:data.length});
     },
     error:function(error)
     {}
@@ -301,14 +299,14 @@ app.post('/administrator/tasksdata',function(req, res) {
 app.get('/administrator/tasksdata',function(req, res) {
   var Tasks = TasksCls.query();
   var query = new AV.Query(Tasks);
-  query.include("parent");
+  query.include("parent.terracename");
   query.find({
     success:function(data)
     {
-      for (var i = data.length - 1; i >= 0; i--) {
-        var terrace = data[i].get("parent");
-        console.log("get tasksdata : " + terrace.get("terraceName"));
-      };
+      // for (var i = data.length - 1; i >= 0; i--) {
+      //   var terrace = data[i].get("parent");
+      //   console.log("get tasksdata : " + terrace.get("terraceName"));
+      // };
       res.jsonp({Rows:data,Total:data.length});
     },
     error:function(error)

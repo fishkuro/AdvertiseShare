@@ -44,6 +44,16 @@ var Tasks = AV.Object.extend("Tasks", {
 			return this.get("subtitle");
 		}
 	},
+	Taskpoint:function(value)
+	{
+		if (value) {
+			this.set("taskpoint",value);
+		}
+		else
+		{
+			return this.get("taskpoint");
+		}
+	},
 	Enable:function(value)		// bool
 	{
 		if (value) {
@@ -56,11 +66,12 @@ var Tasks = AV.Object.extend("Tasks", {
 	}
 });
 
-exports.init = function(parent,taskname,subtitle,enable) {
+exports.init = function(parent,taskname,subtitle,taskpoint,enable) {
     var tasks = new Tasks();
     tasks.set("parent",parent);
 	tasks.set("taskname",taskname);			//string
 	tasks.set("subtitle",subtitle);			//string
+	tasks.set("taskpoint",taskpoint);		//string
 	tasks.set("enable",enable);				//bool
 	
     return tasks;

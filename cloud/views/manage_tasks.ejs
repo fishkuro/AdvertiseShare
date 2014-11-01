@@ -17,6 +17,7 @@
             [{ display: '编号', name: 'model.objectId', align: 'center', width: '5%', isSort: true },
             { display: '任务名称', name: 'model.taskname', align: 'left', width: '20%', isSort: true },
             { display: '副标题', name: 'model.subtitle', align: 'left', width: '20%', isSort: true },
+            { display: '奖值', name: 'model.taskpoint', align: 'left', width: '20%', isSort: true },
             { display: '平台编号', name: 'parent.objectId', align: 'left', width: '20%', isAllowHide: true },
             { display: '平台', name: 'parent.terracename', align: 'left', width: '20%', isSort: true },
             { display: '是否启用', name: 'model.enable', align: 'left', width: '20%', isSort: true }],
@@ -135,12 +136,13 @@
             formPost("#frmAdd", true, function () {
                 var taskname = $("#txtAddTaskname").val();
                 var subtitle = $("#txtAddSubtitle").val();
+                var taskpoint = $("#txtAddTaskpoint").val();
                 var terraceid = $("#txtAddTerraceid").val();
                 var terracename = $("#txtAddTerracename").val();
                 var enable = $("#txtAddEnable").val();
 
                 var grid = window['g'];
-                var parms = {taskname: taskname, subtitle: subtitle, terraceid: terraceid, terracename: terracename, enable: enable};
+                var parms = {taskname: taskname, subtitle: subtitle, taskpoint: taskpoint, terraceid: terraceid, terracename: terracename, enable: enable};
                 $.post(Urladdtasks, {data: parms}, function (e) {
                     if (e.result) {
                         grid.reload();
@@ -171,11 +173,13 @@
         $("#winModify").data("objectId", row.model.objectId);
         $("#winModify").data("taskname", row.model.taskname);
 		$("#winModify").data("subtitle", row.model.subtitle);
+        $("#winModify").data("taskpoint", row.model.taskpoint);
 		$("#winModify").data("terraceid", row.parent.objectId);
-		$("#winModify").data("enable", row.model.enable);
+        $("#winModify").data("enable", row.model.enable);
 
         $("#txtModifyTaskname").val($("#winModify").data("taskname"));
 		$("#txtModifySubtitle").val($("#winModify").data("subtitle"));
+        $("#txtModifyTaskpoint").val($("#winModify").data("taskpoint"));
 		$("#txtModifyTerraceid").val($("#winModify").data("terraceid"));
 		$("#txtModifyEnable").val($("#winModify").data("enable"));
 
@@ -195,10 +199,11 @@
                 var objectId = $("#winModify").data("objectId");
                 var taskname = $("#txtModifyTaskname").val();
 				var subtitle = $("#txtModifySubtitle").val();
+                var taskpoint = $("#txtModifyTaskpoint").val();
 				var terraceid = $("#txtModifyTerraceid").val();
 				var enable = $("#txtModifyEnable").val() == "true" ? true : false;
 				var parms = {objectId: objectId, taskname: taskname, subtitle: subtitle, terraceid: terraceid,
-                enable: enable};
+                taskpoint: taskpoint,enable: enable};
                 $.post(Urlmodtasks, { data: parms }, function (e) {
                     if (e.result) {
                         $("#grid").ligerGrid().reload();
@@ -262,6 +267,10 @@
             <td align="left" class="inputd"><input type="text" name="txtAddTerraceid" id="txtAddTerraceid" class="required k-text-bg k-text-field" /></td>
         </tr>
         <tr class="tr">
+            <td class="td">奖值：</td>
+            <td align="left" class="inputd"><input type="text" name="txtAddTaskpoint" id="txtAddTaskpoint" class="required k-text-bg k-text-field" /></td>
+        </tr>
+        <tr class="tr">
             <td class="td">是否启用：</td>
             <td align="left" class="inputd"><input type="text" name="txtAddEnable" id="txtAddEnable" class="required k-text-bg k-text-field" /></td>
         </tr>
@@ -289,6 +298,10 @@
         <tr class="tr">
             <td class="td">平台编号：</td>
             <td align="left" class="inputd"><input type="text" name="txtModifyTerraceid" id="txtModifyTerraceid" class="required k-text-bg k-text-field" /></td>
+        </tr>
+        <tr class="tr">
+            <td class="td">奖值：</td>
+            <td align="left" class="inputd"><input type="text" name="txtModifyTaskpoint" id="txtModifyTaskpoint" class="required k-text-bg k-text-field" /></td>
         </tr>
         <tr class="tr">
             <td class="td">是否启用：</td>

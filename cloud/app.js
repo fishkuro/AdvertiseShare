@@ -505,12 +505,13 @@ app.post('/administrator/moddepositrecord',function(req, res) {
 app.post('/administrator/addtasks',function(req, res) {
   var taskname = req.body.data.taskname;
   var subtitle = req.body.data.subtitle;
+  var taskpoint = req.body.data.taskpoint;
   var taceid = req.body.data.terraceid;
   var enable = req.body.data.enable;
 
   var terrace = TerracesCls.create();
   terrace.ObjectId(taceid);
-  var task = TasksCls.init(terrace,taskname,subtitle,enable);
+  var task = TasksCls.init(terrace,taskname,subtitle,taskpoint,enable);
 
   task.save(null, {
     success: function(task) {
@@ -530,6 +531,7 @@ app.post('/administrator/modtasks',function(req, res) {
   var oId = req.body.data.objectId;
   var taskname = req.body.data.taskname;
   var subtitle = req.body.data.subtitle;
+  var taskpoint = req.body.data.taskpoint;
   var taceid = req.body.data.terraceid;
   var enable = req.body.data.enable;
 
@@ -540,6 +542,7 @@ app.post('/administrator/modtasks',function(req, res) {
   task.Parent(terrace);
   task.Taskname(taskname);
   task.Subtitle(subtitle);
+  task.Taskpoint(taskpoint);
   task.Enable(enable);
 
   task.save(null, {

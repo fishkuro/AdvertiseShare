@@ -566,19 +566,11 @@ app.post('/administrator/modtasks',function(req, res) {
   var terrace = TerracesCls.create();
   terrace.ObjectId(taceid);
   var task = TasksCls.create();
-  //task.ObjectId(oId);
-  task.set("objectId","5454a814e4b091b0347cef98");
+  task.ObjectId(oId);
   task.Parent(terrace);
-  task.set("Taskname","超级肯德基");
-  task.Subtitle("subtitle","炸鸡");
+  task.set(taskname);
+  task.Subtitle(subtitle);
   task.Enable(Boolean(enable));
-
-  console.log(
-    "od : " + task.ObjectId() +
-    " tn " + task.Taskname() +
-    " st " + task.Subtitle() +
-    " en " + task.Enable()
-    );
 
   task.save(null, {
     success: function(task) {

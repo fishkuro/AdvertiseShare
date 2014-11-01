@@ -301,14 +301,15 @@ app.get('/administrator/tasksdata',function(req, res) {
   var query = new AV.Query(Tasks);
   query.include("parent");
   // query.include(["parent.terracename"]);
+  var json = {Rows:null}
   query.find({
     success:function(data)
     {
       for (var i = data.length - 1; i >= 0; i--) {
         var terrace = data[i].get("parent");
         //terraceArr[i] = terrace.objectId;
-        console.log("get tasksdata q7: " + terrace.get('terracename'));
-        data[i].parent = terrace;
+        console.log("get tasksdata null: " + terrace.get('terracename'));
+        data[i].parent = null;
       }
 
       // var Terraces = TerracesCls.query();

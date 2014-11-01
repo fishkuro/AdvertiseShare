@@ -135,9 +135,9 @@
 				var devicetoken = $("#txtModifyDevicetoken").val();
 				var lastlogintime = $("#txtModifyLastlogintime").val();
 				var registertime = $("#txtModifyRegistertime").val();
-				var row = {objectId: objectId,username: username,password: password,point: point,registerip: registerip,
-				loginip: loginip,devicetoken: devicetoken, lastlogintime: lastlogintime, registertime: registertime};
-                $.post(UrlModifyChannelModule, { data: row }, function (e) {
+				var parms = { objectId: objectId,username: username,password: password,point: point,registerip: registerip,
+				loginip: loginip,devicetoken: devicetoken, lastlogintime: lastlogintime, registertime: registertime };
+                $.post(UrlModifyChannelModule, { data: parms }, function (e) {
                     if (e.result) {
                         $("#grid").ligerGrid().reload();
                         window.modifyWin.hide();

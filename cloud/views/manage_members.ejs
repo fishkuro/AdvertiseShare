@@ -90,9 +90,9 @@
 				var recmid = $("#txtModifyRecmid").val();
 				var recmpath = $("#txtModifyRecmpath").val();
 				var recmtotail = $("#txtModifyRecmtotail").val();
-				var row = {objectId: objectId, username: username, recmid: recmid, recmpath: recmpath, recmtotail: recmtotail};
+				var parms = { objectId: objectId, username: username, recmid: recmid, recmpath: recmpath, recmtotail: recmtotail };
 
-                $.post(Urlmodmembers, { data: row }, function (e) {
+                $.post(Urlmodmembers, { data: parms }, function (e) {
                     if (e.result) {
                         $("#grid").ligerGrid().reload();
                         window.modifyWin.hide();

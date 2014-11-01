@@ -144,8 +144,8 @@
             formPost("#frmModify", false, function () {
                 var objectId = $("#winModify").data("objectId");
                 var payname = $("#txtModifyPayname").val();
-				var row = {objectId: objectId, payname: payname};
-                $.post(Urlmodpayconduit, { data: row }, function (e) {
+				var parms = {objectId: objectId, payname: payname};
+                $.post(Urlmodpayconduit, { data: parms }, function (e) {
                     if (e.result) {
                         $("#grid").ligerGrid().reload();
                         window.modifyWin.hide();
@@ -167,8 +167,10 @@
             alert("请选择一条数据");
             return;
         }
+
+        var parms = { objectId: row.objectId };
         if (confirm("是否确定删除？")) {
-            $.post(Urldelpayconduit, { data: row }, function (e) {
+            $.post(Urldelpayconduit, { data: parms }, function (e) {
                 if (e.result) {
                     alert("删除成功！");
                     $("#grid").ligerGrid().reload();

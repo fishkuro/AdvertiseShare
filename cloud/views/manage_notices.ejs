@@ -153,8 +153,8 @@
                 var title = $("#txtModifyTitle").val();
 				var content = $("#txtModifyContent").val();
 				var postdate = $("#txtModifyPostDate").val();
-				var row = {objectId: objectId, title: title, content: content, postdate: postdate};
-                $.post(Urlmodnotices, { data: row }, function (e) {
+				var parms = { objectId: objectId, title: title, content: content, postdate: postdate };
+                $.post(Urlmodnotices, { data: parms }, function (e) {
                     if (e.result) {
                         $("#grid").ligerGrid().reload();
                         window.modifyWin.hide();
@@ -176,8 +176,10 @@
             alert("请选择一条数据");
             return;
         }
+
+        var parms = { objectId: row.objectId };
         if (confirm("是否确定删除？")) {
-            $.post(Urldelnotices, { data: row }, function (e) {
+            $.post(Urldelnotices, { data: parms }, function (e) {
                 if (e.result) {
                     alert("删除成功！");
                     $("#grid").ligerGrid().reload();

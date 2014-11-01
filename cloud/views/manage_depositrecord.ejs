@@ -128,8 +128,8 @@
                 var payvalid = $("#txtModifyPayvalid").val();
 				var applytime = $("#winModify").data("applytime");
 				var payfortime = $("#winModify").data("payfortime");
-				var row = {objectId: objectId, userid: userid, username: username, terraceid: terraceid, terracename: terracename, payvalue: payvalue, payvalid: payvalid, applytime: applytime, payfortime: payfortime};
-                $.post(Urlmoddepositrecord, { data: row }, function (e) {
+				var parms = { objectId: objectId, userid: userid, username: username, terraceid: terraceid, terracename: terracename, payvalue: payvalue, payvalid: payvalid, applytime: applytime, payfortime: payfortime };
+                $.post(Urlmoddepositrecord, { data: parms }, function (e) {
                     if (e.result) {
                         $("#grid").ligerGrid().reload();
                         window.modifyWin.hide();

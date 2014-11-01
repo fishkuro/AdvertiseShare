@@ -145,8 +145,8 @@
             formPost("#frmModify", false, function () {
                 var oId = $("#winModify").data("objectId");
                 var tName = $("#txtModifyTerrace").val();
-				var row = { objectId: oId, terracename: tName };
-                $.post(UrlModTerraces, { data: row }, function (e) {
+				var parms = { objectId: oId, terracename: tName };
+                $.post(UrlModTerraces, { data: parms }, function (e) {
                     if (e.result) {
                         $("#grid").ligerGrid().reload();
                         window.modifyWin.hide();
@@ -168,8 +168,10 @@
             alert("请选择一条数据");
             return;
         }
+
+        var parms = { objectId: row.objectId };
         if (confirm("是否确定删除？")) {
-            $.post(UrlDelTerraces, { data: row }, function (e) {
+            $.post(UrlDelTerraces, { data: parms }, function (e) {
                 if (e.result) {
                     alert("删除成功！");
                     $("#grid").ligerGrid().reload();

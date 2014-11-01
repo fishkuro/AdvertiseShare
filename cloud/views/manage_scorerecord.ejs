@@ -34,7 +34,7 @@
             sortName: 'recordtime',
             sortOrder: 'desc',
             toolbar: {
-                items: [{ text: '增加', click: UrlscorerecordTrans, img: '/Content/LigerUI/icons/add.gif' }] }
+                items: [{ text: '增加', click: ScorerecordTrans, img: '/Content/LigerUI/icons/add.gif' }] }
             });
     });
 
@@ -86,6 +86,10 @@
                 f();
             }
         });
+    }
+
+    function ScorerecordTrans() {
+        alert("得分确认功能暂无!");
     }
 
     function AddChannelModule() {

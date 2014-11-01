@@ -359,10 +359,7 @@ app.post('/administrator/modterraces',function(req, res) {
 
 app.post('/administrator/delterraces',function(req, res) {
   var oid = req.body.data.objectId;
-  var tname = req.body.data.terracename;
-  var terraces = TerracesCls.create();
   terraces.ObjectId(oid);
-  terraces.Terracename(tname);
 
   terraces.destroy({
     success: function(terraces) {
@@ -425,14 +422,8 @@ app.post('/administrator/modnotices',function(req, res) {
 
 app.post('/administrator/delnotices',function(req, res) {
   var oId = req.body.data.objectId;
-  var title = req.body.data.title;
-  var content = req.body.data.content;
-  var postdate = req.body.data.postdate;
   var notice = NoticesCls.create();
   notice.ObjectId(oId);
-  notice.Title(title);
-  notice.Content(content);
-  notice.PostDate(postdate);
 
   terraces.destroy({
     success: function(terraces) {
@@ -489,10 +480,8 @@ app.post('/administrator/modpayconduit',function(req, res) {
 
 app.post('/administrator/delpayconduit',function(req, res) {
   var oid = req.body.data.objectId;
-  var pname = req.body.data.payname;
   var payconduit = PayconduitCls.create();
   payconduit.ObjectId(oid);
-  payconduit.Payname(pname);
 
   payconduit.destroy({
     success: function(payconduit) {

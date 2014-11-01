@@ -288,7 +288,7 @@ app.post('/administrator/scoretotaildata',function(req, res) {
 app.post('/administrator/tasksdata',function(req, res) {
   var Tasks = TasksCls.query();
   var query = new AV.Query(Tasks);
-  query.include("post");
+  query.include("parent");
   query.find({
     success:function(data)
     {res.jsonp({Rows:data,Total:data.length});},
@@ -297,6 +297,20 @@ app.post('/administrator/tasksdata',function(req, res) {
   });
   
 });
+
+app.get('/administrator/tasksdata',function(req, res) {
+  var Tasks = TasksCls.query();
+  var query = new AV.Query(Tasks);
+  query.include("parent");
+  query.find({
+    success:function(data)
+    {res.jsonp({Rows:data,Total:data.length});},
+    error:function(error)
+    {}
+  });
+  
+});
+
 
 app.post('/administrator/terracesdata',function(req, res) {
   TerracesCls.find({

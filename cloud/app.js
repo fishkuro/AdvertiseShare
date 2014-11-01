@@ -574,9 +574,9 @@ app.post('/administrator/modtasks',function(req, res) {
 
   console.log(
     "od : " + task.ObjectId() +
-    "tn " + task.Taskname() +
-    "st " + task.Subtitle() +
-    "en " + task.Enable()
+    " tn " + task.Taskname() +
+    " st " + task.Subtitle() +
+    " en " + task.Enable()
     );
 
   task.save(null, {
@@ -587,6 +587,9 @@ app.post('/administrator/modtasks',function(req, res) {
     error: function(task, error) {
       rlt.result = false;
       rlt.msg = error.description;
+
+      console.log(error.description);
+
       res.send(rlt);
     }
   });

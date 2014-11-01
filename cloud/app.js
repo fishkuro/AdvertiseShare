@@ -87,40 +87,6 @@ app.get('/hello', function(req, res) {
 
 });
 
-app.get('/addcloud', function(req, res) {
-  var rlt = null;
-  AV.Cloud.run("memberLogin", {username: 'dennis',password: '456789',devicetoken:'tokentst',ipaddress:'127.0.0.1'}, {
-    success: function(data){
-      //调用成功，得到成功的应答data
-      rlt = data;
-      res.render('hello', { message: rlt });
-    },
-    error: function(err){
-      //处理调用失败
-      rlt = err.message;
-      res.render('hello', { message: rlt });
-    }
-  });
-
-});
-
-app.get('/cloud', function(req, res) {
-  var rlt = null;
-  AV.Cloud.run("memberLogin", {username: 'dennis',password: '123456',devicetoken:'tokentst',ipaddress:'127.0.0.1'}, {
-    success: function(data){
-      //调用成功，得到成功的应答data
-      rlt = data;
-      res.render('hello', { message: rlt });
-    },
-    error: function(err){
-      //处理调用失败
-      rlt = err.message;
-      res.render('hello', { message: rlt });
-    }
-  });
-
-});
-
 // 后台管理开始
 var session = UtilityCls.usersession();
 app.get('/kurodo/login', function(req, res) {
@@ -319,8 +285,9 @@ app.post('/administrator/terracesdata',function(req, res) {
 var rlt = { result:false, msg:"错误结果!" };
 
 app.post('/administrator/addterraces',function(req, res) {
-  var tname = req.body.terracename;
-  var terraces = TerracesCls.init(tname);
+  var tacename = req.body.terracename;
+  var flag = req.body.data.flag;
+  var terraces = TerracesCls.init(tacename,flag);
 
   terraces.save(null, {
   success: function(terraces) {
@@ -338,10 +305,12 @@ app.post('/administrator/addterraces',function(req, res) {
 
 app.post('/administrator/modterraces',function(req, res) {
   var oid = req.body.objectId;
-  var tname = req.body.terracename;
+  var tacename = req.body.terracename;
+  var flag = req.body.data.flag;
   var terraces = TerracesCls.create();
   terraces.ObjectId(oid);
-  terraces.TerraceName(tname);
+  terraces.TerraceName(tacename);
+  terraces.Flag(flag);
 
   terraces.save(null, {
   success: function(terraces) {

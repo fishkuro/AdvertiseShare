@@ -11,7 +11,7 @@ var Terraces = AV.Object.extend("Terraces", {
 		}
 		else
 		{
-		return this.get("objectId");
+			return this.get("objectId");
 		}
 	},
 	TerraceName:function(value)		// string
@@ -21,15 +21,25 @@ var Terraces = AV.Object.extend("Terraces", {
 		}
 		else
 		{
-			 return this.get("terracename");
+			return this.get("terracename");
+		}
+	},
+	Flag:function(value)
+	{
+		if (value) {
+			this.set("flag",value);
+		}
+		else
+		{
+			return this.get("flag");
 		}
 	}
 });
 
-exports.init = function(terracename) {
+exports.init = function(terracename,flag) {
     var terraces = new Terraces();
 	terraces.set("terracename",terracename);		//string
-	
+	this.set("flag",flag);
     return terraces;
   };
 

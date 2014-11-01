@@ -561,7 +561,7 @@ app.post('/administrator/modtasks',function(req, res) {
   var taskname = req.body.data.taskname;
   var subtitle = req.body.data.subtitle;
   var taceid = req.body.data.terraceid;
-  var enable = req.body.data.enable == "true" ? true : false;
+  var enable = req.body.data.enable;
 
   var terrace = TerracesCls.create();
   terrace.ObjectId(taceid);
@@ -570,7 +570,7 @@ app.post('/administrator/modtasks',function(req, res) {
   task.Parent(terrace);
   task.set(taskname);
   task.Subtitle(subtitle);
-  task.Enable(false);
+  task.set("enable",false);
 
   task.save(null, {
     success: function(task) {

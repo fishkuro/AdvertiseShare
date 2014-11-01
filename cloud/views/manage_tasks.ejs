@@ -17,6 +17,7 @@
             [{ display: '编号', name: 'model.objectId', align: 'center', width: '5%', isSort: true },
             { display: '任务名称', name: 'model.taskname', align: 'left', width: '20%', isSort: true },
             { display: '副标题', name: 'model.subtitle', align: 'left', width: '20%', isSort: true },
+            { display: '平台编号', name: 'parent.objectId', align: 'left', width: '20%', isAllowHide: true },
             { display: '平台', name: 'parent.terracename', align: 'left', width: '20%', isSort: true },
             { display: '是否启用', name: 'model.enable', align: 'left', width: '20%', isSort: true }],
             width: '98%',
@@ -92,7 +93,7 @@
         var options = {
             columns : [
                 { display: '编号', name: 'objectId', align: 'center', width: '5%', isSort: true },
-                { display: '渠道名称', name: 'terracename', align: 'left', width: '20%', isSort: true }
+                { display: '平台名称', name: 'terracename', align: 'left', width: '20%', isSort: true }
             ], switchPageSizeApplyComboBox: false,
                 url: Urlterraces,
                 dataAction: 'local',
@@ -109,10 +110,10 @@
             slide: false,
             selectBoxWidth: 500,
             selectBoxHeight: 240,
-            valueField: 'terraceid',
-            textField: 'terraceid',
+            valueField: 'objectId',
+            textField: 'objectId',
             grid: bindTerraces(),
-                condition: { fields: [{ name: 'terracename', label: '渠道名称', width: 90, type: 'text' }] }
+                condition: { fields: [{ name: 'terracename', label: '平台名称', width: 90, type: 'text' }] }
         });
     }
 
@@ -165,17 +166,17 @@
             return;
         }
 
-        $("#winModify").data("objectId", row.objectId);
-        $("#winModify").data("taskname", row.taskname);
-		$("#winModify").data("subtitle", row.subtitle);
-		$("#winModify").data("terraceid", row.terraceid);
-		$("#winModify").data("terracename", row.terracename);
-		$("#winModify").data("enable", row.enable);
+        bindTerracesInfo("#txtModifyTerraceid");
+
+        $("#winModify").data("objectId", row.model.objectId);
+        $("#winModify").data("taskname", row.modeltaskname);
+		$("#winModify").data("subtitle", row.model.subtitle);
+		$("#winModify").data("terraceid", row.parent.objectId);
+		$("#winModify").data("enable", row.model.enable);
 
         $("#txtModifyTaskname").val($("#winModify").data("taskname"));
 		$("#txtModifySubtitle").val($("#winModify").data("subtitle"));
 		$("#txtModifyTerraceid").val($("#winModify").data("terraceid"));
-		$("#txtModifyTerracename").val($("#winModify").data("terracename"));
 		$("#txtModifyEnable").val($("#winModify").data("enable"));
 
         if (!window.modifyWin) {
@@ -195,9 +196,9 @@
                 var taskname = $("#txtModifyTaskname").val();
 				var subtitle = $("#txtModifySubtitle").val();
 				var terraceid = $("#txtModifyTerraceid").val();
-				var terracename = $("#txtModifyTerracename").val();
 				var enable = $("#txtModifyEnable").val();
-				var row = {objectId: objectId, taskname: taskname, subtitle: subtitle, terraceid:terraceid, terracename:terracename, enable:enable};
+				var row = {objectId: objectId, taskname: taskname, subtitle: subtitle, terraceid: terraceid,
+                enable: enable};
                 $.post(Urlmodtasks, { data: row }, function (e) {
                     if (e.result) {
                         $("#grid").ligerGrid().reload();
@@ -260,10 +261,6 @@
             <td align="left" class="inputd"><input type="text" name="txtAddTerraceid" id="txtAddTerraceid" class="required k-text-bg k-text-field" /></td>
         </tr>
         <tr class="tr">
-            <td class="td">平台名称：</td>
-            <td align="left" class="inputd"><input type="text" name="txtAddTerracename" id="txtAddTerracename" class="required k-text-bg k-text-field" /></td>
-        </tr>
-        <tr class="tr">
             <td class="td">是否启用：</td>
             <td align="left" class="inputd"><input type="text" name="txtAddEnable" id="txtAddEnable" class="required k-text-bg k-text-field" /></td>
         </tr>
@@ -291,10 +288,6 @@
         <tr class="tr">
             <td class="td">平台编号：</td>
             <td align="left" class="inputd"><input type="text" name="txtModifyTerraceid" id="txtModifyTerraceid" class="required k-text-bg k-text-field" /></td>
-        </tr>
-        <tr class="tr">
-            <td class="td">平台名称：</td>
-            <td align="left" class="inputd"><input type="text" name="txtModifyTerracename" id="txtModifyTerracename" class="required k-text-bg k-text-field" /></td>
         </tr>
         <tr class="tr">
             <td class="td">是否启用：</td>

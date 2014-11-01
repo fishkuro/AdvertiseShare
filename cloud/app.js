@@ -289,50 +289,21 @@ app.post('/administrator/tasksdata',function(req, res) {
   query.include("parent");
   query.find({
     success:function(data)
-    {res.jsonp({Rows:data,Total:data.length});},
-    error:function(error)
-    {}
-  });
-  
-});
-
-app.get('/administrator/tasksdata',function(req, res) {
-  var Tasks = TasksCls.query();
-  var query = new AV.Query(Tasks);
-  query.include("parent");
-  // query.include(["parent.terracename"]);
-  query.find({
-    success:function(data)
     {
       var arr = new Array();
-
       for (var i = data.length - 1; i >= 0; i--) {
         var terrace = data[i].get("parent");
-        // //terraceArr[i] = terrace.objectId;
-        // console.log("terraceArr : " + terrace.get('terracename'));
-        // arr[i] = terrace;
-        var task = { model: data[i], parent: terrace };
-        arr[i] = task;
+        var tasks = { model: data[i], parent: terrace };
+        arr[i] = tasks;
       }
 
-      // var Terraces = TerracesCls.query();
-      // var query = new AV.Query(Terraces);
-      // query.containsAll("objectId", terraceArr);
-      // query.find({
-      //   success:function(data)
-      //   {
       res.jsonp({Rows:arr,Total:arr.length});
-      //   },
-      //   error:function(error)
-      //   {}
-      // });
     },
     error:function(error)
     {}
   });
   
 });
-
 
 app.post('/administrator/terracesdata',function(req, res) {
   TerracesCls.find({

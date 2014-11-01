@@ -299,32 +299,32 @@ app.post('/administrator/tasksdata',function(req, res) {
 app.get('/administrator/tasksdata',function(req, res) {
   var Tasks = TasksCls.query();
   var query = new AV.Query(Tasks);
-  query.include("parent");
-  query.include(["parent.terracename"]);
+  //query.include("parent");
+  //query.include(["parent.terracename"]);
+  query.include("Terraces");
   query.find({
     success:function(data)
     {
-      var terraceArr = new Array();
+      // var terraceArr = new Array();
+      // for (var i = data.length - 1; i >= 0; i--) {
+      //   var terrace = data[i].get("parent");
+      //   terraceArr[i] = terrace.objectId;
+      //   console.log("get tasksdata : " + terrace.objectId;;
+      // };
 
-      for (var i = data.length - 1; i >= 0; i--) {
-        var terrace = data[i].get("parent");
-        terraceArr[i] = terrace.objectId;
-        console.log("get tasksdata : " + terrace.objectId;;
-      };
+      // var Terraces = TerracesCls.query();
+      // var query = new AV.Query(Terraces);
+      // query.containsAll("objectId", terraceArr);
+      // query.find({
+      //   success:function(data)
+      //   {
+      //     res.jsonp({Rows:data,Total:data.length});
+      //   },
+      //   error:function(error)
+      //   {}
+      // });
 
-      var Terraces = TerracesCls.query();
-      var query = new AV.Query(Terraces);
-      query.containsAll("objectId", terraceArr);
-      query.find({
-        success:function(data)
-        {
-          res.jsonp({Rows:data,Total:data.length});
-        },
-        error:function(error)
-        {}
-      });
-
-      
+      res.jsonp({Rows:data,Total:data.length});
     },
     error:function(error)
     {}

@@ -306,9 +306,9 @@ app.get('/administrator/tasksdata',function(req, res) {
     {
       var terraceArr = new Array();
       for (var i = data.length - 1; i >= 0; i--) {
-        var terrace = data[i].get("Terraces");
+        var terrace = data[i].get("parent");
         //terraceArr[i] = terrace.objectId;
-        console.log("get tasksdata 3: " + terrace.get('terracename'));
+        console.log("get tasksdata 5: " + terrace.get('terracename'));
       }
 
       // var Terraces = TerracesCls.query();

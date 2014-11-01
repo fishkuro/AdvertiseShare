@@ -307,7 +307,7 @@ app.get('/administrator/tasksdata',function(req, res) {
     {
       for (var i = data.length - 1; i >= 0; i--) {
         var terrace = data[i].get("parent");
-        data[i].parent = terrace;
+        console.log("get tasksdata : " + terrace.get("terraceName"));
       };
       res.jsonp({Rows:data,Total:data.length});
     },

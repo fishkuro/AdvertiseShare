@@ -308,20 +308,20 @@ app.get('/administrator/tasksdata',function(req, res) {
       for (var i = data.length - 1; i >= 0; i--) {
         var terrace = data[i].get("parent");
         terraceArr[i] = terrace.objectId;
-        console.log("get tasksdata : " + terrace.objectId;;
-      };
+        console.log("get tasksdata : " + terrace.objectId);
+      }
 
-      var Terraces = TerracesCls.query();
-      var query = new AV.Query(Terraces);
-      query.containsAll("objectId", terraceArr);
-      query.find({
-        success:function(data)
-        {
-          res.jsonp({Rows:data,Total:data.length});
-        },
-        error:function(error)
-        {}
-      });
+      // var Terraces = TerracesCls.query();
+      // var query = new AV.Query(Terraces);
+      // query.containsAll("objectId", terraceArr);
+      // query.find({
+      //   success:function(data)
+      //   {
+      //     res.jsonp({Rows:data,Total:data.length});
+      //   },
+      //   error:function(error)
+      //   {}
+      // });
     },
     error:function(error)
     {}

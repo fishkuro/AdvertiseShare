@@ -299,6 +299,7 @@ app.post('/administrator/tasksdata',function(req, res) {
 app.get('/administrator/tasksdata',function(req, res) {
   var Tasks = TasksCls.query();
   var query = new AV.Query(Tasks);
+  query.include("parent");
   query.include(["parent.terracename"]);
   query.find({
     success:function(data)

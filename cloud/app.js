@@ -285,7 +285,7 @@ app.post('/administrator/terracesdata',function(req, res) {
 var rlt = { result:false, msg:"错误结果!" };
 
 app.post('/administrator/addterraces',function(req, res) {
-  var tacename = req.body.terracename;
+  var tacename = req.body.data.terracename;
   var flag = req.body.data.flag;
   var terraces = TerracesCls.init(tacename,flag);
 
@@ -304,8 +304,8 @@ app.post('/administrator/addterraces',function(req, res) {
 });
 
 app.post('/administrator/modterraces',function(req, res) {
-  var oid = req.body.objectId;
-  var tacename = req.body.terracename;
+  var oid = req.body.data.objectId;
+  var tacename = req.body.data.terracename;
   var flag = req.body.data.flag;
   var terraces = TerracesCls.create();
   terraces.ObjectId(oid);
@@ -328,6 +328,7 @@ app.post('/administrator/modterraces',function(req, res) {
 
 app.post('/administrator/delterraces',function(req, res) {
   var oid = req.body.data.objectId;
+  var terraces = TerracesCls.create();
   terraces.ObjectId(oid);
 
   terraces.destroy({

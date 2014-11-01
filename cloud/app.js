@@ -304,11 +304,11 @@ app.get('/administrator/tasksdata',function(req, res) {
   query.find({
     success:function(data)
     {
-      var terraceArr = new Array();
       for (var i = data.length - 1; i >= 0; i--) {
         var terrace = data[i].get("parent");
         //terraceArr[i] = terrace.objectId;
-        console.log("get tasksdata 5: " + terrace.get('terracename'));
+        console.log("get tasksdata q7: " + terrace.get('terracename'));
+        data[i].parent = terrace;
       }
 
       // var Terraces = TerracesCls.query();

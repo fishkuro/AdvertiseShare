@@ -78,6 +78,7 @@ var Tasks = AV.Object.extend("Tasks", {
 
 exports.init = function(parent,taskname,subtitle,enable) {
     var tasks = new Tasks();
+    tasks.set("parent",parent);
 	tasks.set("taskname",taskname);			//string
 	tasks.set("subtitle",subtitle);			//string
 	// tasks.set("terraceid",terraceid);		//Int64

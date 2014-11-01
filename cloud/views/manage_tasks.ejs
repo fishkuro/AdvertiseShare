@@ -6,6 +6,8 @@
     var Urlmodtasks = "/administrator/modtasks";
     var Urldeltasks = "/administrator/deltasks";
 
+    var Urlterraces = "/administrator/terracesdata";
+
     var ValidateMsg = " <span style='color:red'>必填</span>";
     var data = null;
     //var grid = null;
@@ -85,6 +87,34 @@
         });
     }
 
+    function bindTerraces() {
+        var options = {
+            columns = [
+                { display: '编号', name: 'objectId', align: 'center', width: '5%', isSort: true },
+                { display: '渠道名称', name: 'terracename', align: 'left', width: '20%', isSort: true }
+            ], switchPageSizeApplyComboBox: false,
+                url: Urlterraces,
+                dataAction: 'local',
+                pageSize: 10,
+                checkbox: false
+            };
+            return options;
+    }
+
+    function bindTerracesInfo(e)
+    {
+        $(e).ligerComboBox({
+            width: 250,
+            slide: false,
+            selectBoxWidth: 500,
+            selectBoxHeight: 240,
+            valueField: 'terraceid',
+            textField: 'terraceid',
+            grid: bindTerraces(),
+                condition: { fields: [{ name: 'terracename', label: '渠道名称', width: 90, type: 'text' }] }
+        });
+    }
+
     function AddModule() {
         if (!window.addWin) {
             window.addWin = $.ligerDialog.open({
@@ -93,6 +123,8 @@
                 width: 500,
                 title: "增加"
             });
+
+            bindTerracesInfo("#txtAddTerraceid");
 
             $("#btnCancel").click(function () {
                 window.addWin.hide();

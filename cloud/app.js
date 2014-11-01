@@ -65,7 +65,7 @@ app.get('/hello', function(req, res) {
         };
         var info = MembersCls.create();
         info.Username(nameStr);
-        info.save();
+        //info.save();
 
         str = info.get("objectId");
 
@@ -286,7 +286,10 @@ app.post('/administrator/scoretotaildata',function(req, res) {
 });
 
 app.post('/administrator/tasksdata',function(req, res) {
-  TasksCls.find({
+  var Tasks = TasksCls.query();
+  var query = new AV.Query(Tasks);
+  query.include("post");
+  query.find({
     success:function(data)
     {res.jsonp({Rows:data,Total:data.length});},
     error:function(error)
@@ -534,12 +537,14 @@ app.post('/administrator/moddepositrecord',function(req, res) {
 });
 
 app.post('/administrator/addtasks',function(req, res) {
-  var tname = req.body.data.taskname;
-  var stitle = req.body.data.subtitle;
-  var tid = req.body.data.terraceid;
-  var tname = req.body.data.terracename;
+  var taskname = req.body.data.taskname;
+  var subtitle = req.body.data.subtitle;
+  var taceid = req.body.data.terraceid;
   var enable = req.body.data.enable;
-  var task = TasksCls.init(tname,stitle,tid,enable,tname);
+
+  var terrace = TerracesCls.create();
+  terrace.ObjectId(taceid);
+  var task = TasksCls.init(terrace,taskname,subtitle,enable);
 
   task.save(null, {
     success: function(task) {
@@ -557,17 +562,18 @@ app.post('/administrator/addtasks',function(req, res) {
 
 app.post('/administrator/modtasks',function(req, res) {
   var oId = req.body.data.objectId;
-  var tname = req.body.data.taskname;
-  var stitle = req.body.data.subtitle;
-  var tid = req.body.data.terraceid;
-  var tname = req.body.data.terracename;
+  var taskname = req.body.data.taskname;
+  var subtitle = req.body.data.subtitle;
+  var taceid = req.body.data.terraceid;
   var enable = req.body.data.enable;
+
+  var terrace = TerracesCls.create();
+  terrace.ObjectId(taceid);
   var task = TasksCls.create();
   task.ObjectId(oId);
-  task.Taskname(tname);
-  task.Subtitle(stitle);
-  task.Terraceid(tid);
-  task.Terracename(tname);
+  task.Parent(terrace);
+  task.Taskname(taskname);
+  task.Subtitle(subtitle);
   task.Enable(enable);
 
   task.save(null, {
@@ -586,20 +592,16 @@ app.post('/administrator/modtasks',function(req, res) {
 
 app.post('/administrator/deltasks',function(req, res) {
   var oId = req.body.data.objectId;
-  var tname = req.body.data.taskname;
-  var stitle = req.body.data.subtitle;
-  var tid = req.body.data.terraceid;
-  var tname = req.body.data.terracename;
+  var taskname = req.body.data.taskname;
+  var subtitle = req.body.data.subtitle;
   var enable = req.body.data.enable;
   var task = TasksCls.create();
   task.ObjectId(oId);
-  task.Taskname(tname);
-  task.Subtitle(stitle);
-  task.Terraceid(tid);
-  task.Terracename(tname);
+  task.Taskname(taskname);
+  task.Subtitle(subtitle);
   task.Enable(enable);
 
-  task.save(null,{
+  task.destroy({
     success: function(task) {
       rlt.result = true;
       res.send(rlt);

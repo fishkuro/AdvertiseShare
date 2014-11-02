@@ -11,13 +11,6 @@ exports.getIpAddress = function(request) {
         request.connection.socket.remoteAddress;
 };
 
-exports.getCloudIpAddress = function(request) {
-	return request.headers['x-forwarded-for'] ||
-        request.connection.remoteAddress ||
-        request.socket.remoteAddress ||
-        request.connection.socket.remoteAddress;
-};
-
 exports.usersession = function() {
 	var model = { username: null, password: null };
 	return {

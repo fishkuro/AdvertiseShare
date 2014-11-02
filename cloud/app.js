@@ -102,6 +102,11 @@ app.get('/helloworld', function(req, res) {
 
 });
 
+app.get('/ipaddress', function(req, res) {
+  var ipStr = UtilityCls.getIpAddress(req);
+  res.send(ipStr);
+});
+
 // 后台管理开始
 var session = UtilityCls.usersession();
 app.get('/kurodo/login', function(req, res) {

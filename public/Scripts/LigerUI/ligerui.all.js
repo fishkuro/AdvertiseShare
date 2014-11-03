@@ -3045,10 +3045,15 @@
                         var rules = g.condition.toConditions();                
                         var key = rules[0].field;
                         var val = rules[0].value;
-
-                        g.grid.loadData(function (rowdata, rowindex) {
-                            return rowdata[key].toString().indexOf(val) > -1;
-                        });
+                        if (val == "") {
+                            g.grid.reload();
+                        }
+                        else
+                        {
+                            g.grid.loadData(function (rowdata, rowindex) {
+                                return rowdata[key].toString().indexOf(val) > -1;
+                            });
+                        }
 
                         //var rules = g.condition.toConditions();
                         //g.grid.setParm(grid.conditionParmName || 'condition', $.ligerui.toJSON(rules));
@@ -7841,7 +7846,7 @@
             if (typeof (loadDataParm) == "function")
             {
                 clause = loadDataParm;
-                //fix reload
+                //fix search winlong at here
                 //if (g.lastData)
                 //{
                     //g.data = g.lastData;

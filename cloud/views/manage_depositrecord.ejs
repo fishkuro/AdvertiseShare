@@ -12,8 +12,8 @@
             [{ display: '编号', name: 'objectId', align: 'center', width: '5%', isSort: true },
             { display: '用户编号', name: 'userid', align: 'left', width: '20%', isSort: true },
 			{ display: '用户名称', name: 'username', align: 'left', width: '20%', isSort: true },
-			{ display: '渠道编号', name: 'terraceid', align: 'left', width: '20%', isSort: true },
-			{ display: '渠道名称', name: 'terracename', align: 'left', width: '20%', isSort: true },
+			{ display: '渠道编号', name: 'payconduitId', align: 'left', width: '20%', isSort: true },
+			{ display: '渠道名称', name: 'payname', align: 'left', width: '20%', isSort: true },
 			{ display: '支付金额', name: 'payvalue', align: 'left', width: '20%', isSort: true },
 			{ display: '支付标识', name: 'payvalid', align: 'left', width: '20%', isSort: true },
 			{ display: '申请时间', name: 'applytime', align: 'left', width: '20%', isSort: true },
@@ -97,8 +97,8 @@
         $("#winModify").data("objectId", row.objectId);
 		$("#winModify").data("userid", row.userid);
         $("#winModify").data("username", row.username);
-		$("#winModify").data("terraceid", row.terraceid);
-		$("#winModify").data("terracename", row.terracename);
+		$("#winModify").data("payconduitId", row.payconduitId);
+		$("#winModify").data("payname", row.payname);
 		$("#winModify").data("payvalue", row.payvalue);
 		$("#winModify").data("payvalid", row.payvalid);
 		$("#winModify").data("applytime", row.applytime);
@@ -120,15 +120,13 @@
 
             formPost("#frmModify", false, function () {
                 var objectId = $("#winModify").data("objectId");
-				var userid = $("#winModify").data("userid");
+				var userId = $("#winModify").data("userid");
 				var username = $("#winModify").data("username");
-				var terraceid = $("#winModify").data("terraceid");
-				var terracename = $("#winModify").data("terracename");
+				var payconduitId = $("#winModify").data("payconduitId");
+				var payname = $("#winModify").data("payname");
 				var payvalue = $("#winModify").data("payvalue");
-                var payvalid = $("#txtModifyPayvalid").val();
-				var applytime = $("#winModify").data("applytime");
-				var payfortime = $("#winModify").data("payfortime");
-				var parms = { objectId: objectId, userid: userid, username: username, terraceid: terraceid, terracename: terracename, payvalue: payvalue, payvalid: payvalid, applytime: applytime, payfortime: payfortime };
+                var payvalid = $("#txtModifyPayvalid").val() == "true";
+				var parms = { objectId: objectId, userId: userId, payvalid: payvalid };
                 $.post(Urlmoddepositrecord, { data: parms }, function (e) {
                     if (e.result) {
                         $("#grid").ligerGrid().reload();

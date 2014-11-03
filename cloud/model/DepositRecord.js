@@ -34,24 +34,24 @@ var DepositRecord = AV.Object.extend("DepositRecord", {
 			 return this.get("username");
 		}
 	},
-	Terraceid:function(value)		// Int64
+	PayconduitId:function(value)		// Int64
 	{
 		if (value) {
-			this.set("terraceid",value);
+			this.set("payconduitId",value);
 		}
 		else
 		{
-			 return this.get("terraceid");
+			 return this.get("payconduitId");
 		}
 	},
-	Terracename:function(value)		// string
+	Payname:function(value)		// string
 	{
 		if (value) {
-			this.set("terracename",value);
+			this.set("payname",value);
 		}
 		else
 		{
-			 return this.get("terracename");
+			 return this.get("payname");
 		}
 	},
 	Payvalue:function(value)		// Decimal
@@ -96,12 +96,12 @@ var DepositRecord = AV.Object.extend("DepositRecord", {
 	}
 });
 
-exports.init = function(uid,username,tid,terracename,payvalue,payvalid,applytime,payfortime) {
+exports.init = function(uid,username,payconduitId,payname,payvalue,payvalid,applytime,payfortime) {
     var depositrecord = new DepositRecord();
 	depositrecord.set("userid",uid);		//Int64
 	depositrecord.set("username",username);		//string
-	depositrecord.set("terraceid",tid);		//Int64
-	depositrecord.set("terracename",terracename);		//string
+	depositrecord.set("payconduitId",payconduitId);		//string
+	depositrecord.set("payname",payname);		//string
 	depositrecord.set("payvalue",payvalue);		//Decimal
 	depositrecord.set("payvalid",payvalid);		//bool
 	depositrecord.set("applytime",applytime);		//DateTime

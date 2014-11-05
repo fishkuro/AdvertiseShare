@@ -103,7 +103,7 @@
                 var title = $("#txtAddTitle").val();
 				var content = $("#txtAddContent").val();
                 var grid = window['g'];
-                var parms = {title: title, content: content;
+                var parms = {title: title, content: content};
                 $.post(Urladdnotices, {data: parms}, function (e) {
                     if (e.result) {
                         grid.reload();

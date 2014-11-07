@@ -103,10 +103,60 @@ var MemberInfo = AV.Object.extend("MemberInfo", {
 		{
 			 return this.get("registertime");
 		}
+	},
+	QQ:function(value)
+	{
+		if (value) {
+			this.set("qq",value);
+		}
+		else
+		{
+			 return this.get("qq");
+		}
+	},
+	Mobile:function(value)
+	{
+		if (value) {
+			this.set("mobile",value);
+		}
+		else
+		{
+			 return this.get("mobile");
+		}
+	},
+	Alipay:function(value)
+	{
+		if (value) {
+			this.set("alipay",value);
+		}
+		else
+		{
+			 return this.get("alipay");
+		}
+	},
+	Nickname:function(value)
+	{
+		if (value) {
+			this.set("nickname",value);
+		}
+		else
+		{
+			 return this.get("nickname");
+		}
+	},
+	Mail:function(value)
+	{
+		if (value) {
+			this.set("mail",value);
+		}
+		else
+		{
+			 return this.get("mail");
+		}
 	}
 });
 
-exports.init = function(parent,username,password,point,registerip,loginip,devicetoken,lastlogintime,registertime) {
+exports.init = function(parent,username,password,point,registerip,loginip,devicetoken,lastlogintime,registertime,qq,mobile,alipay,nickname,mail) {
     var memberinfo = new MemberInfo();
     memberinfo.set("parent",parent);
 	memberinfo.set("username",username);				//string
@@ -117,6 +167,11 @@ exports.init = function(parent,username,password,point,registerip,loginip,device
 	memberinfo.set("devicetoken",devicetoken);			//string
 	memberinfo.set("lastlogintime",lastlogintime);		//DateTime
 	memberinfo.set("registertime",registertime);		//DateTime
+	memberinfo.set("qq",qq);
+	memberinfo.set("mobile",mobile);
+	memberinfo.set("alipay",alipay);
+	memberinfo.set("nickname",nickname);
+	memberinfo.set("mail",mail);
 	
     return memberinfo;
 };

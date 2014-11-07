@@ -8,6 +8,7 @@ var ScorerecordCls = require('cloud/model/ScoreRecord.js');
 var ScoretotailCls = require('cloud/model/ScoreTotail.js');
 var TasksCls = require('cloud/model/Tasks.js');
 var TerracesCls = require('cloud/model/Terraces.js');
+var FeedBackCls = require('cloud/model/FeedBack.js');
 // =====
 var AdminsCls = require('cloud/model/Admins.js');
 var UtilityCls = require('cloud/utils/Utility.js');
@@ -973,6 +974,91 @@ AV.Cloud.define("addSubAccount", function(req, res) {
     }
   });
 
+});
+
+function nowDate() {
+	var date = new Date();
+	var day = date.getDate();
+	var month = date.getMonth() + 1;
+	var year = date.getFullYear();
+	return year + "-" + month + "-" + day;
+};
+
+function addDate(date,days) { 
+	var d = new Date(date); 
+	d.setDate(d.getDate() + days); 
+	var m = d.getMonth() + 1; 
+	return d.getFullYear() + '-' + m + '-' + d.getDate(); 
+}; 
+
+AV.Cloud.define("addScorerecord", function(req, res) {
+	var useridStr = req.params.userid;
+	var nameStr = req.params.username;
+	var ipStr = req.params.ipaddress;
+	var today = newDate();
+	//var nextday = addDate(today,1);
+
+	var ScoreRecord = ScorerecordCls.Query();
+	var query = new AV.Query(ScoreRecord);
+	query.equalTo("userid",useridStr);
+	query.equalTo("recordip",ipStr);
+	query.greaterThan("createAt", today); // >
+	query.find({
+		success:function(ScoreRecord)
+		{
+			var len = ScoreRecord.length;
+			var msg = "添加成功";
+			if (len > 0) {
+				msg = "您的ip已使用 " + len + " 次";
+			}
+
+			var scorerecord = ScorerecordCls.create();
+				scorerecord.Userid(useridStr);
+				scorerecord.Username(nameStr);
+				scorerecord.save(null,{
+					success:function(scorerecord){
+						cloudMsg = msg;
+        				res.success(cloudMsg);
+					},
+					error:function(error) {
+
+					}
+				});
+		},
+		error:function()
+		{}
+	});
+});
+
+//
+// 添加反馈
+AV.Cloud.define("addFeedBack", function(req, res) {
+  var useridStr = req.params.userid;
+  var nameStr = req.params.username;
+  var titleStr = req.params.title;
+  var contentStr = req.params.content;
+  var ipStr = req.params.ipaddress;
+
+  var memberinfo = MemberInfoCls.create();
+  memberinfo.ObjectId(useridStr);
+  var feedback = FeedBackCls.create();
+  feedback.Userid(memberinfo);
+  feedback.Username(nameStr);
+  feedback.Title(titleStr);
+  feedback.Content(contentStr);
+  feedback.FeedbackIp(ipStr);
+  feedback.save(null,{
+  	success:function(feedback)
+  	{
+  		cloudMsg = "添加成功";
+        res.success(cloudMsg);
+  	},
+  	error:function(error)
+  	{
+  		cloudMsg = error.message;
+        res.success(cloudMsg);
+  	}
+  });
 });
 
 // 最后，必须有这行代码来使 express 响应 HTTP 请求

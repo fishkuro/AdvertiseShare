@@ -992,8 +992,13 @@ function addDate(date,days) {
 }; 
 
 AV.Cloud.define("addScorerecord", function(req, res) {
-	var useridStr = req.params.userid;
-	var nameStr = req.params.username;
+	var useridVal = req.params.userid;
+	var usernameVal = req.params.username;
+  var taskidVal = req.params.taskid;
+  var tasknameVal = req.params.taskname;
+  var terraceidVal = req.params.terraceid;
+  var terracenameVal = req.params.terracename;
+  var adpointVal = req.params.adpoint;
 	var ipStr = req.params.ipaddress;
 	var today = newDate();
 	//var nextday = addDate(today,1);
@@ -1011,17 +1016,34 @@ AV.Cloud.define("addScorerecord", function(req, res) {
 			if (len > 0) {
 				msg = "您的ip已使用 " + len + " 次";
 			}
+      var dateNow = UtilityCls.dataToString(new Date());
+
+      var memberinfo = MemberInfoCls.create();
+      memberinfo.ObjectId(useridVal);
+      var tasks = TasksCls.create();
+      tasks.ObjectId(taskidVal);
+      var terrace = TerracesCls.create();
+      terrace.ObjectId(terraceidVal);
 
 			var scorerecord = ScorerecordCls.create();
-				scorerecord.Userid(useridStr);
-				scorerecord.Username(nameStr);
+        scorerecord.Recordtime(dateNow);
+				scorerecord.Userid(memberinfo);
+				scorerecord.Username(usernameVal);
+        scorerecord.Taskid(tasks);
+        scorerecord.Taskname(tasknameVal);
+        scorerecord.Terraceid(terrace);
+        scorerecord.Terracename(terracenameVal);
+        scorerecord.Adpoint(adpointVal);
+        scorerecord.Advalid(false);
+        scorerecord.Recordip(ipStr);
 				scorerecord.save(null,{
 					success:function(scorerecord){
 						cloudMsg = msg;
-        				res.success(cloudMsg);
+        		res.success(cloudMsg);
 					},
 					error:function(error) {
-
+            cloudMsg = error.message;
+            res.success(cloudMsg);
 					}
 				});
 		},
@@ -1051,12 +1073,12 @@ AV.Cloud.define("addFeedBack", function(req, res) {
   	success:function(feedback)
   	{
   		cloudMsg = "添加成功";
-        res.success(cloudMsg);
+      res.success(cloudMsg);
   	},
   	error:function(error)
   	{
   		cloudMsg = error.message;
-        res.success(cloudMsg);
+      res.success(cloudMsg);
   	}
   });
 });

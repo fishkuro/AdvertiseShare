@@ -84,6 +84,16 @@ var ScoreRecord = AV.Object.extend("ScoreRecord", {
 			 return this.get("terracename");
 		}
 	},
+	Appname:function(value)
+	{
+		if (value) {
+			this.set("appname",value);
+		}
+		else
+		{
+			 return this.get("appname");
+		}
+	},
 	Adtype:function(value)		// string
 	{
 		if (value) {
@@ -126,7 +136,7 @@ var ScoreRecord = AV.Object.extend("ScoreRecord", {
 	}
 });
 
-exports.init = function(recordtime,uid,username,taskid,taskname,terraceid,terracename,adtype,adpoint,advalid,recordip) {
+exports.init = function(recordtime,uid,username,taskid,taskname,terraceid,terracename,appname,adtype,adpoint,advalid,recordip) {
     var scorerecord = new ScoreRecord();
     scorerecord.set("recordtime",recordtime);		//DateTime
 	scorerecord.set("userid",uid);		//Int64
@@ -135,6 +145,7 @@ exports.init = function(recordtime,uid,username,taskid,taskname,terraceid,terrac
 	scorerecord.set("taskname",taskname);		//string
 	scorerecord.set("terraceid",terraceid);		//Int64
 	scorerecord.set("terracename",terracename);		//string
+	scorerecord.set("appname",appname);
 	scorerecord.set("adtype",adtype);		//string
 	scorerecord.set("adpoint",adpoint);		//Decimal
 	scorerecord.set("advalid",advalid);		//bool

@@ -998,6 +998,7 @@ AV.Cloud.define("addScorerecord", function(req, res) {
   var tasknameVal = req.params.taskname;
   var terraceidVal = req.params.terraceid;
   var terracenameVal = req.params.terracename;
+  var appnameVal = req.params.appname;
   var adpointVal = req.params.adpoint;
 	var ipStr = req.params.ipaddress;
 	var today = newDate();
@@ -1033,6 +1034,7 @@ AV.Cloud.define("addScorerecord", function(req, res) {
         scorerecord.Taskname(tasknameVal);
         scorerecord.Terraceid(terrace);
         scorerecord.Terracename(terracenameVal);
+        scorerecord.Appname(appnameVal);
         scorerecord.Adpoint(adpointVal);
         scorerecord.Advalid(false);
         scorerecord.Recordip(ipStr);

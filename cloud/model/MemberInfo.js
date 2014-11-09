@@ -156,39 +156,39 @@ var MemberInfo = AV.Object.extend("MemberInfo", {
 	}
 });
 
-// exports.init = function(parent,username,password,point,registerip,loginip,devicetoken,lastlogintime,registertime,qq,mobile,alipay,nickname,mail) {
-//     var memberinfo = new MemberInfo();
-//     memberinfo.set("parent",parent);
-// 	memberinfo.set("username",username);				//string
-// 	memberinfo.set("password",password);				//string
-// 	memberinfo.set("point",point);						//Decimal
-// 	memberinfo.set("registerip",registerip);			//string
-// 	memberinfo.set("loginip",loginip);					//string
-// 	memberinfo.set("devicetoken",devicetoken);			//string
-// 	memberinfo.set("lastlogintime",lastlogintime);		//DateTime
-// 	memberinfo.set("registertime",registertime);		//DateTime
-// 	memberinfo.set("qq",qq);
-// 	memberinfo.set("mobile",mobile);
-// 	memberinfo.set("alipay",alipay);
-// 	memberinfo.set("nickname",nickname);
-// 	memberinfo.set("mail",mail);
+exports.init = function(parent,username,password,point,registerip,loginip,devicetoken,lastlogintime,registertime,qq,mobile,alipay,nickname,mail) {
+    var memberinfo = new MemberInfo();
+    memberinfo.set("parent",parent);
+	memberinfo.set("username",username);				//string
+	memberinfo.set("password",password);				//string
+	memberinfo.set("point",point);						//Decimal
+	memberinfo.set("registerip",registerip);			//string
+	memberinfo.set("loginip",loginip);					//string
+	memberinfo.set("devicetoken",devicetoken);			//string
+	memberinfo.set("lastlogintime",lastlogintime);		//DateTime
+	memberinfo.set("registertime",registertime);		//DateTime
+	memberinfo.set("qq",qq);
+	memberinfo.set("mobile",mobile);
+	memberinfo.set("alipay",alipay);
+	memberinfo.set("nickname",nickname);
+	memberinfo.set("mail",mail);
 	
-//     return memberinfo;
-// };
+    return memberinfo;
+};
 
-// exports.create = function() {
-//     var memberinfo = new MemberInfo();
-//     return memberinfo;
-// };
+exports.create = function() {
+    var memberinfo = new MemberInfo();
+    return memberinfo;
+};
 
-// exports.query = function() {
-// 	var MemberInfo = AV.Object.extend("MemberInfo");
-// 	return MemberInfo;
-// };
+exports.query = function() {
+	var MemberInfo = AV.Object.extend("MemberInfo");
+	return MemberInfo;
+};
 
-// exports.find = function(options) {
-//     var MemberInfo = AV.Object.extend("MemberInfo");
-//     var query = new AV.Query(MemberInfo);
-//     var reslut = query.find(options);
-// 	return reslut;
-// };
+exports.find = function(options) {
+    var MemberInfo = AV.Object.extend("MemberInfo");
+    var query = new AV.Query(MemberInfo);
+    var reslut = query.find(options);
+	return reslut;
+};

@@ -44,27 +44,27 @@ var DepositRecord = AV.Object.extend("DepositRecord", {
 			 return this.get("payconduitid");
 		}
 	},
-	// Payname:function(value)		// string
-	// {
-	// 	if (value) {
-	// 		this.set("payname",value);
-	// 	}
-	// 	else
-	// 	{
-	// 		return this.get("payname");
-	// 	}
-	// },
-	// Realname:function(value)
-	// {
-	// 	if(value)
-	// 	{
-	// 		this.set("realname",value);
-	// 	}
-	// 	else
-	// 	{
-	// 		return this.get("realname");
-	// 	}
-	// },
+	Payname:function(value)		// string
+	{
+		if (value) {
+			this.set("payname",value);
+		}
+		else
+		{
+			return this.get("payname");
+		}
+	},
+	Realname:function(value)
+	{
+		if(value)
+		{
+			this.set("realname",value);
+		}
+		else
+		{
+			return this.get("realname");
+		}
+	},
 	Payaccount:function(value)
 	{
 		if (value) {
@@ -117,14 +117,14 @@ var DepositRecord = AV.Object.extend("DepositRecord", {
 	}
 });
 
-exports.init = function(uid,username,payconduitId,payname,payvalue,payvalid,applytime,payfortime) {
+exports.init = function(uid,username,payconduitId,payname,realname,payaccount,payvalue,payvalid,applytime,payfortime) {
     var depositrecord = new DepositRecord();
 	depositrecord.set("userid",uid);					//Int64
 	depositrecord.set("username",username);				//string
 	depositrecord.set("payconduitid",payconduitId);		//string
 	depositrecord.set("payname",payname);				//string
-	// depositrecord.set("realname",realname);				//string
-	// depositrecord.set("payaccount",payaccount);			//string
+	depositrecord.set("realname",realname);				//string
+	depositrecord.set("payaccount",payaccount);			//string
 	depositrecord.set("payvalue",payvalue);				//Decimal
 	depositrecord.set("payvalid",payvalid);				//bool
 	depositrecord.set("applytime",applytime);			//DateTime

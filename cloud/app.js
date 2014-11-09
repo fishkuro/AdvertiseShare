@@ -985,14 +985,14 @@ function nowDate() {
 	var month = date.getMonth() + 1;
 	var year = date.getFullYear();
 	return year + "-" + month + "-" + day;
-};
+}
 
 function addDate(date,days) { 
 	var d = new Date(date); 
 	d.setDate(d.getDate() + days); 
 	var m = d.getMonth() + 1; 
 	return d.getFullYear() + '-' + m + '-' + d.getDate(); 
-}; 
+}
 
 AV.Cloud.define("addScorerecord", function(req, res) {
 	var useridVal = req.params.userid;

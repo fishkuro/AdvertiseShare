@@ -1059,34 +1059,34 @@ AV.Cloud.define("addSubAccount", function(req, res) {
 
 //
 // 添加反馈
-AV.Cloud.define("addFeedBack", function(req, res) {
-  var useridStr = req.params.userid;
-  var nameStr = req.params.username;
-  var titleStr = req.params.title;
-  var contentStr = req.params.content;
-  var ipStr = req.params.ipaddress;
+// AV.Cloud.define("addFeedBack", function(req, res) {
+//   var useridStr = req.params.userid;
+//   var nameStr = req.params.username;
+//   var titleStr = req.params.title;
+//   var contentStr = req.params.content;
+//   var ipStr = req.params.ipaddress;
 
-  var memberinfo = MemberInfoCls.create();
-  memberinfo.ObjectId(useridStr);
-  var feedback = FeedBackCls.create();
-  feedback.Userid(memberinfo);
-  feedback.Username(nameStr);
-  feedback.Title(titleStr);
-  feedback.Content(contentStr);
-  feedback.FeedbackIp(ipStr);
-  feedback.save(null,{
-  	success:function(feedback)
-  	{
-  		cloudMsg = "添加成功";
-      res.success(cloudMsg);
-  	},
-  	error:function(error)
-  	{
-  		cloudMsg = error.message;
-      res.success(cloudMsg);
-  	}
-  });
-});
+//   var memberinfo = MemberInfoCls.create();
+//   memberinfo.ObjectId(useridStr);
+//   var feedback = FeedBackCls.create();
+//   feedback.Userid(memberinfo);
+//   feedback.Username(nameStr);
+//   feedback.Title(titleStr);
+//   feedback.Content(contentStr);
+//   feedback.FeedbackIp(ipStr);
+//   feedback.save(null,{
+//   	success:function(feedback)
+//   	{
+//   		cloudMsg = "添加成功";
+//       res.success(cloudMsg);
+//   	},
+//   	error:function(error)
+//   	{
+//   		cloudMsg = error.message;
+//       res.success(cloudMsg);
+//   	}
+//   });
+// });
 
 // 最后，必须有这行代码来使 express 响应 HTTP 请求
 app.listen();

@@ -88,20 +88,20 @@ app.use(express.bodyParser());    // 读取请求 body 的中间件
 
 // });
 
-// app.get('/helloworld', function(req, res) {
-//   var Tasks = TasksCls.query();
-//   var query = new AV.Query(Tasks);
-//   query.include("parent");
-//   query.find({
-//     success:function(data)
-//     {
-//       res.send(data);
-//     },
-//     error:function(error)
-//     {}
-//   });
+app.get('/helloworld', function(req, res) {
+  var Tasks = TasksCls.query();
+  var query = new AV.Query(Tasks);
+  query.include("parent");
+  query.find({
+    success:function(data)
+    {
+      res.send(data);
+    },
+    error:function(error)
+    {}
+  });
 
-// });
+});
 
 // app.get('/ipaddress', function(req, res) {
 //   var ipStr = UtilityCls.getIpAddress(req);
@@ -1059,34 +1059,34 @@ app.use(express.bodyParser());    // 读取请求 body 的中间件
 
 //
 // 添加反馈
-// AV.Cloud.define("addFeedBack", function(req, res) {
-//   var useridStr = req.params.userid;
-//   var nameStr = req.params.username;
-//   var titleStr = req.params.title;
-//   var contentStr = req.params.content;
-//   var ipStr = req.params.ipaddress;
+AV.Cloud.define("addFeedBack", function(req, res) {
+  var useridStr = req.params.userid;
+  var nameStr = req.params.username;
+  var titleStr = req.params.title;
+  var contentStr = req.params.content;
+  var ipStr = req.params.ipaddress;
 
-//   var memberinfo = MemberInfoCls.create();
-//   memberinfo.ObjectId(useridStr);
-//   var feedback = FeedBackCls.create();
-//   feedback.Userid(memberinfo);
-//   feedback.Username(nameStr);
-//   feedback.Title(titleStr);
-//   feedback.Content(contentStr);
-//   feedback.FeedbackIp(ipStr);
-//   feedback.save(null,{
-//   	success:function(feedback)
-//   	{
-//   		cloudMsg = "添加成功";
-//       res.success(cloudMsg);
-//   	},
-//   	error:function(error)
-//   	{
-//   		cloudMsg = error.message;
-//       res.success(cloudMsg);
-//   	}
-//   });
-// });
+  var memberinfo = MemberInfoCls.create();
+  memberinfo.ObjectId(useridStr);
+  var feedback = FeedBackCls.create();
+  feedback.Userid(memberinfo);
+  feedback.Username(nameStr);
+  feedback.Title(titleStr);
+  feedback.Content(contentStr);
+  feedback.FeedbackIp(ipStr);
+  feedback.save(null,{
+  	success:function(feedback)
+  	{
+  		cloudMsg = "添加成功";
+      res.success(cloudMsg);
+  	},
+  	error:function(error)
+  	{
+  		cloudMsg = error.message;
+      res.success(cloudMsg);
+  	}
+  });
+});
 
 // 最后，必须有这行代码来使 express 响应 HTTP 请求
 app.listen();

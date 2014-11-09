@@ -66,7 +66,7 @@ var FeedBack = AV.Object.extend("FeedBack", {
 	}
 });
 
-exports.init = function(userid,username,title,context,postdate,feedbackip) {
+exports.init = function(userid,username,title,context,feedbackip) {
     var feedback = new FeedBack();
     feedback.set("userid",userid);
     feedback.set("username",username);

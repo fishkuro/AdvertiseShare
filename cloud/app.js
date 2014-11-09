@@ -207,10 +207,16 @@ app.post('/administrator/memberinfodata',function(req, res) {
 });
 
 app.post('/administrator/depositrecorddata',function(req, res) {
-  var DepositRecord = DepositrecordCls.query();
-  var query = new AV.Query(DepositRecord);
-  query.equalTo("payvalid", false);
-  query.find({
+  // var DepositRecord = DepositrecordCls.query();
+  // var query = new AV.Query(DepositRecord);
+  // query.equalTo("payvalid", false);
+  // query.find({
+  //   success:function(data)
+  //   {res.jsonp({Rows:data,Total:data.length});},
+  //   error:function(error)
+  //   {}
+  // });
+  DepositrecordCls.find({
     success:function(data)
     {res.jsonp({Rows:data,Total:data.length});},
     error:function(error)

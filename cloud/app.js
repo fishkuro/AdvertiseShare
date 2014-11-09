@@ -1034,9 +1034,9 @@ AV.Cloud.define("addScorerecord", function(req, res) {
 
 	var ScoreRecord = ScorerecordCls.Query();
 	var query = new AV.Query(ScoreRecord);
-	// query.equalTo("userid",useridVal);
-	// query.equalTo("recordip",ipStr);
-	// query.greaterThan("createAt", today); // >
+	query.equalTo("userid",useridVal);
+	query.equalTo("recordip",ipStr);
+	query.greaterThan("createAt", today); // >
 	query.find({
 		success:function(ScoreRecord)
 		{

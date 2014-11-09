@@ -66,30 +66,30 @@ var FeedBack = AV.Object.extend("FeedBack", {
 	}
 });
 
-exports.init = function(userid,username,title,context,feedbackip) {
-    var feedback = new FeedBack();
-    feedback.set("userid",userid);
-    feedback.set("username",username);
-	feedback.set("title",title);			//string
-	feedback.set("context",context);		//string
-	feedback.set("feedbackip",feedbackip);
+// exports.init = function(userid,username,title,context,feedbackip) {
+//     var feedback = new FeedBack();
+//     feedback.set("userid",userid);
+//     feedback.set("username",username);
+// 	feedback.set("title",title);			//string
+// 	feedback.set("context",context);		//string
+// 	feedback.set("feedbackip",feedbackip);
 	
-    return feedback;
-  };
+//     return feedback;
+// };
 
-exports.create = function() {
-    var feedback = new FeedBack();
-    return feedback;
-};
+// exports.create = function() {
+//     var feedback = new FeedBack();
+//     return feedback;
+// };
 
-exports.query = function() {
-	var FeedBack = AV.Object.extend("FeedBack");
-	return FeedBack;
-};
+// exports.query = function() {
+// 	var FeedBack = AV.Object.extend("FeedBack");
+// 	return FeedBack;
+// };
 
-exports.find = function(options) {
-    var FeedBack = AV.Object.extend("FeedBack");
-    var query = new AV.Query(FeedBack);
-    var reslut = query.find(options);
-	return reslut;
-};
+// exports.find = function(options) {
+//     var FeedBack = AV.Object.extend("FeedBack");
+//     var query = new AV.Query(FeedBack);
+//     var reslut = query.find(options);
+// 	return reslut;
+// };

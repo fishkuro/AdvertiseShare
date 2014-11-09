@@ -53,7 +53,7 @@ exports.init = function(title,context,postdate) {
 	notices.set("context",context);		//string
 	
     return notices;
-  };
+};
 
 exports.create = function() {
     var notices = new Notices();

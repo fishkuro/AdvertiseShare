@@ -41,7 +41,7 @@ exports.init = function(terracename,flag) {
 	terraces.set("terracename",terracename);		//string
 	this.set("flag",flag);
     return terraces;
-  };
+};
 
 exports.create = function() {
     var terraces = new Terraces();

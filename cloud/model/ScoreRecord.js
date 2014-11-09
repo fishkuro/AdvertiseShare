@@ -152,7 +152,7 @@ exports.init = function(recordtime,uid,username,taskid,taskname,terraceid,terrac
 	scorerecord.set("recordip",recordip);			//string
 	
     return scorerecord;
-  };
+};
 
 exports.create = function() {
     var scorerecord = new ScoreRecord();

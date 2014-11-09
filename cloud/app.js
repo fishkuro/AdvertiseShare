@@ -512,20 +512,35 @@ app.post('/administrator/moddepositrecord',function(req, res) {
     //支付确认
     var MemberInfo = MemberInfoCls.query();
     var query = new AV.Query(MemberInfo);
+
+    console.log("moddepositrecord userid : " + userId);
+
     query.get(userId,{
       success: function(memberinfo) {
         // The object was retrieved successfully.
         var point = memberinfo.get("point");
+
+        console.log("moddepositrecord point : " + point);
+
         point -= payvalue * 100;
+
+        console.log("moddepositrecord pointed : " + point);
+
         memberinfo.set("point",point);
         memberinfo.save(null,{
           success: function(memberinfo) {
+
+            console.log("moddepositrecord memberinfo saved");
+
             var depositrecord = DepositrecordCls.create();
             depositrecord.ObjectId(oid);
             depositrecord.Payvalid(2);
             depositrecord.Payfortime(ptime);
             depositrecord.save(null,{
               success: function(depositrecord) {
+                
+                console.log("moddepositrecord depositrecord saved");
+
                 rlt.result = true;
                 res.send(rlt);
               },

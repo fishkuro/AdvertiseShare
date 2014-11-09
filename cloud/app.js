@@ -206,6 +206,19 @@ app.post('/administrator/memberinfodata',function(req, res) {
   
 });
 
+app.get('/administrator/depositrecorddata',function(req, res) {
+  var DepositRecord = DepositrecordCls.query();
+  var query = new AV.Query(DepositRecord);
+  //query.equalTo("payvalid", 0);
+  query.find({
+    success:function(data)
+    {res.jsonp({Rows:data,Total:data.length});},
+    error:function(error)
+    {}
+  });
+  
+});
+
 app.post('/administrator/depositrecorddata',function(req, res) {
   var DepositRecord = DepositrecordCls.query();
   var query = new AV.Query(DepositRecord);

@@ -10,7 +10,7 @@ var TasksCls = require('cloud/model/Tasks.js');
 var TerracesCls = require('cloud/model/Terraces.js');
 var FeedBackCls = require('cloud/model/FeedBack.js');
 // ====
-=var AdminsCls = require('cloud/model/Admins.js');
+var AdminsCls = require('cloud/model/Admins.js');
 var UtilityCls = require('cloud/utils/Utility.js');
 
 // 在 Cloud code 里初始化 Express 框架

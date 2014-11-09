@@ -207,7 +207,10 @@ app.post('/administrator/memberinfodata',function(req, res) {
 });
 
 app.get('/administrator/depositrecorddata',function(req, res) {
-  DepositrecordCls.find({
+  var DepositRecord = DepositrecordCls.query();
+  var query = new AV.Query(DepositRecord);
+  query.equalTo("payvalid", 0);
+  query.find({
     success:function(data)
     {res.jsonp({Rows:data,Total:data.length});},
     error:function(error)
@@ -223,7 +226,7 @@ app.post('/administrator/depositrecorddata',function(req, res) {
     error:function(error)
     {}
   });
-  
+
 });
 
 app.post('/administrator/deposittotaildata',function(req, res) {
@@ -505,7 +508,7 @@ app.post('/administrator/moddepositrecord',function(req, res) {
   var pvd = req.body.data.payvalid;
   var ptime = UtilityCls.dataToString(new Date());
 
-  if (pvd) {
+  if (pvd == "是") {
     //支付确认
     var MemberInfo = MemberInfoCls.query();
     var query = new AV.Query(MemberInfo);
@@ -519,7 +522,7 @@ app.post('/administrator/moddepositrecord',function(req, res) {
           success: function(memberinfo) {
             var depositrecord = DepositrecordCls.create();
             depositrecord.ObjectId(oid);
-            depositrecord.Payvalid(pvd);
+            depositrecord.Payvalid(2);
             depositrecord.Payfortime(ptime);
             depositrecord.save(null,{
               success: function(depositrecord) {

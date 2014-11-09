@@ -9,8 +9,8 @@ var ScoretotailCls = require('cloud/model/ScoreTotail.js');
 var TasksCls = require('cloud/model/Tasks.js');
 var TerracesCls = require('cloud/model/Terraces.js');
 var FeedBackCls = require('cloud/model/FeedBack.js');
-// =====
-var AdminsCls = require('cloud/model/Admins.js');
+// ====
+=var AdminsCls = require('cloud/model/Admins.js');
 var UtilityCls = require('cloud/utils/Utility.js');
 
 // 在 Cloud code 里初始化 Express 框架
@@ -207,7 +207,10 @@ app.post('/administrator/memberinfodata',function(req, res) {
 });
 
 app.post('/administrator/depositrecorddata',function(req, res) {
-  DepositrecordCls.find({
+  var DepositRecord = DepositrecordCls.query();
+  var query = new AV.Query(DepositRecord);
+  query.equalTo("payvalid", false);
+  query.find({
     success:function(data)
     {res.jsonp({Rows:data,Total:data.length});},
     error:function(error)
@@ -1059,8 +1062,8 @@ AV.Cloud.define("addScorerecord", function(req, res) {
 AV.Cloud.define("addFeedBack", function(req, res) {
   var useridStr = req.params.userid;
   var nameStr = req.params.username;
-  var titleStr = req.params.title;
-  var contentStr = req.params.content;
+  var titleStr = req.params.ftitle;
+  var contentStr = req.params.fcontent;
   var ipStr = req.params.ipaddress;
 
   var memberinfo = MemberInfoCls.create();

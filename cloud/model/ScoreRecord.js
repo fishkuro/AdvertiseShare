@@ -139,17 +139,17 @@ var ScoreRecord = AV.Object.extend("ScoreRecord", {
 exports.init = function(recordtime,uid,username,taskid,taskname,terraceid,terracename,appname,adtype,adpoint,advalid,recordip) {
     var scorerecord = new ScoreRecord();
     scorerecord.set("recordtime",recordtime);		//DateTime
-	scorerecord.set("userid",uid);		//Int64
-	scorerecord.set("username",username);		//string
-	scorerecord.set("taskid",taskid);		//Int64
-	scorerecord.set("taskname",taskname);		//string
-	scorerecord.set("terraceid",terraceid);		//Int64
+	scorerecord.set("userid",uid);					//Int64
+	scorerecord.set("username",username);			//string
+	scorerecord.set("taskid",taskid);				//Int64
+	scorerecord.set("taskname",taskname);			//string
+	scorerecord.set("terraceid",terraceid);			//Int64
 	scorerecord.set("terracename",terracename);		//string
 	scorerecord.set("appname",appname);
-	scorerecord.set("adtype",adtype);		//string
-	scorerecord.set("adpoint",adpoint);		//Decimal
-	scorerecord.set("advalid",advalid);		//bool
-	scorerecord.set("recordip",recordip);		//string
+	scorerecord.set("adtype",adtype);				//string
+	scorerecord.set("adpoint",adpoint);				//Decimal
+	scorerecord.set("advalid",advalid);				//bool
+	scorerecord.set("recordip",recordip);			//string
 	
     return scorerecord;
   };

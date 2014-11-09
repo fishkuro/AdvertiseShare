@@ -117,35 +117,35 @@ var DepositRecord = AV.Object.extend("DepositRecord", {
 	}
 });
 
-exports.init = function(uid,username,payconduitId,payname,realname,payaccount,payvalue,payvalid,applytime,payfortime) {
-    var depositrecord = new DepositRecord();
-	depositrecord.set("userid",uid);					//Int64
-	depositrecord.set("username",username);				//string
-	depositrecord.set("payconduitid",payconduitId);		//string
-	depositrecord.set("payname",payname);				//string
-	depositrecord.set("realname",realname);				//string
-	depositrecord.set("payaccount",payaccount);			//string
-	depositrecord.set("payvalue",payvalue);				//Decimal
-	depositrecord.set("payvalid",payvalid);				//bool
-	depositrecord.set("applytime",applytime);			//DateTime
-	depositrecord.set("payfortime",payfortime);			//DateTime
+// exports.init = function(uid,username,payconduitId,payname,realname,payaccount,payvalue,payvalid,applytime,payfortime) {
+//     var depositrecord = new DepositRecord();
+// 	depositrecord.set("userid",uid);					//Int64
+// 	depositrecord.set("username",username);				//string
+// 	depositrecord.set("payconduitid",payconduitId);		//string
+// 	depositrecord.set("payname",payname);				//string
+// 	depositrecord.set("realname",realname);				//string
+// 	depositrecord.set("payaccount",payaccount);			//string
+// 	depositrecord.set("payvalue",payvalue);				//Decimal
+// 	depositrecord.set("payvalid",payvalid);				//bool
+// 	depositrecord.set("applytime",applytime);			//DateTime
+// 	depositrecord.set("payfortime",payfortime);			//DateTime
 	
-    return depositrecord;
-};
+//     return depositrecord;
+// };
 
-exports.create = function() {
-    var depositrecord = new DepositRecord();
-    return depositrecord;
-};
+// exports.create = function() {
+//     var depositrecord = new DepositRecord();
+//     return depositrecord;
+// };
 
-exports.query = function() {
-	var DepositRecord = AV.Object.extend("DepositRecord");
-	return DepositRecord;
-};
+// exports.query = function() {
+// 	var DepositRecord = AV.Object.extend("DepositRecord");
+// 	return DepositRecord;
+// };
 
-exports.find = function(options) {
-    var DepositRecord = AV.Object.extend("DepositRecord");
-    var query = new AV.Query(DepositRecord);
-    var reslut = query.find(options);
-	return reslut;
-};
+// exports.find = function(options) {
+//     var DepositRecord = AV.Object.extend("DepositRecord");
+//     var query = new AV.Query(DepositRecord);
+//     var reslut = query.find(options);
+// 	return reslut;
+// };

@@ -516,7 +516,7 @@ app.post('/administrator/moddepositrecord',function(req, res) {
       success: function(memberinfo) {
         // The object was retrieved successfully.
         var point = memberinfo.get("point");
-        point -= payvalue;
+        point -= payvalue * 100;
         memberinfo.set("point",point);
         memberinfo.save(null,{
           success: function(memberinfo) {

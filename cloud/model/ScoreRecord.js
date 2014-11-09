@@ -91,7 +91,7 @@ var ScoreRecord = AV.Object.extend("ScoreRecord", {
 		}
 		else
 		{
-			 return this.get("appname");
+			return this.get("appname");
 		}
 	},
 	Adtype:function(value)		// string

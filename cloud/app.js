@@ -207,16 +207,10 @@ app.post('/administrator/memberinfodata',function(req, res) {
 });
 
 app.post('/administrator/depositrecorddata',function(req, res) {
-  // var DepositRecord = DepositrecordCls.query();
-  // var query = new AV.Query(DepositRecord);
-  // query.equalTo("payvalid", false);
-  // query.find({
-  //   success:function(data)
-  //   {res.jsonp({Rows:data,Total:data.length});},
-  //   error:function(error)
-  //   {}
-  // });
-  DepositrecordCls.find({
+  var DepositRecord = DepositrecordCls.query();
+  var query = new AV.Query(DepositRecord);
+  query.equalTo("payvalid", false);
+  query.find({
     success:function(data)
     {res.jsonp({Rows:data,Total:data.length});},
     error:function(error)
@@ -985,114 +979,114 @@ AV.Cloud.define("addSubAccount", function(req, res) {
 
 });
 
-// function nowDate() {
-// 	var date = new Date();
-// 	var day = date.getDate();
-// 	var month = date.getMonth() + 1;
-// 	var year = date.getFullYear();
-// 	return year + "-" + month + "-" + day;
-// };
+function nowDate() {
+	var date = new Date();
+	var day = date.getDate();
+	var month = date.getMonth() + 1;
+	var year = date.getFullYear();
+	return year + "-" + month + "-" + day;
+};
 
-// function addDate(date,days) { 
-// 	var d = new Date(date); 
-// 	d.setDate(d.getDate() + days); 
-// 	var m = d.getMonth() + 1; 
-// 	return d.getFullYear() + '-' + m + '-' + d.getDate(); 
-// };
+function addDate(date,days) { 
+	var d = new Date(date); 
+	d.setDate(d.getDate() + days); 
+	var m = d.getMonth() + 1; 
+	return d.getFullYear() + '-' + m + '-' + d.getDate(); 
+};
 
-// AV.Cloud.define("addScorerecord", function(req, res) {
-// 	var useridVal = req.params.userid;
-// 	var usernameVal = req.params.username;
-//   var taskidVal = req.params.taskid;
-//   var tasknameVal = req.params.taskname;
-//   var terraceidVal = req.params.terraceid;
-//   var terracenameVal = req.params.terracename;
-//   var appnameVal = req.params.appname;
-//   var adpointVal = req.params.adpoint;
-// 	var ipStr = req.params.ipaddress;
-// 	var today = newDate();
-// 	//var nextday = addDate(today,1);
+AV.Cloud.define("addScorerecord", function(req, res) {
+	var useridVal = req.params.userid;
+	var usernameVal = req.params.username;
+  var taskidVal = req.params.taskid;
+  var tasknameVal = req.params.taskname;
+  var terraceidVal = req.params.terraceid;
+  var terracenameVal = req.params.terracename;
+  var appnameVal = req.params.appname;
+  var adpointVal = req.params.adpoint;
+	var ipStr = req.params.ipaddress;
+	var today = newDate();
+	//var nextday = addDate(today,1);
 
-// 	var ScoreRecord = ScorerecordCls.Query();
-// 	var query = new AV.Query(ScoreRecord);
-// 	query.equalTo("userid",useridStr);
-// 	query.equalTo("recordip",ipStr);
-// 	query.greaterThan("createAt", today); // >
-// 	query.find({
-// 		success:function(ScoreRecord)
-// 		{
-// 			var len = ScoreRecord.length;
-// 			var msg = "添加成功";
-// 			if (len > 0) {
-// 				msg = "您的ip已使用 " + len + " 次";
-// 			}
-//       var dateNow = UtilityCls.dataToString(new Date());
+	var ScoreRecord = ScorerecordCls.Query();
+	var query = new AV.Query(ScoreRecord);
+	query.equalTo("userid",useridVal);
+	query.equalTo("recordip",ipStr);
+	query.greaterThan("createAt", today); // >
+	query.find({
+		success:function(ScoreRecord)
+		{
+			var len = ScoreRecord.length;
+			var msg = "添加成功";
+			if (len > 0) {
+				msg = "您的ip已使用 " + len + " 次";
+			}
+      var dateNow = UtilityCls.dataToString(new Date());
 
-//       var memberinfo = MemberInfoCls.create();
-//       memberinfo.ObjectId(useridVal);
-//       var tasks = TasksCls.create();
-//       tasks.ObjectId(taskidVal);
-//       var terrace = TerracesCls.create();
-//       terrace.ObjectId(terraceidVal);
+      var memberinfo = MemberInfoCls.create();
+      memberinfo.ObjectId(useridVal);
+      var tasks = TasksCls.create();
+      tasks.ObjectId(taskidVal);
+      var terrace = TerracesCls.create();
+      terrace.ObjectId(terraceidVal);
 
-// 			var scorerecord = ScorerecordCls.create();
-//         scorerecord.Recordtime(dateNow);
-// 				scorerecord.Userid(memberinfo);
-// 				scorerecord.Username(usernameVal);
-//         scorerecord.Taskid(tasks);
-//         scorerecord.Taskname(tasknameVal);
-//         scorerecord.Terraceid(terrace);
-//         scorerecord.Terracename(terracenameVal);
-//         scorerecord.Appname(appnameVal);
-//         scorerecord.Adpoint(adpointVal);
-//         scorerecord.Advalid(false);
-//         scorerecord.Recordip(ipStr);
-// 				scorerecord.save(null,{
-// 					success:function(scorerecord){
-// 						cloudMsg = msg;
-//         		res.success(cloudMsg);
-// 					},
-// 					error:function(error) {
-//             cloudMsg = error.message;
-//             res.success(cloudMsg);
-// 					}
-// 				});
-// 		},
-// 		error:function()
-// 		{}
-// 	});
-// });
+			var scorerecord = ScorerecordCls.create();
+        scorerecord.Recordtime(dateNow);
+				scorerecord.Userid(memberinfo);
+				scorerecord.Username(usernameVal);
+        scorerecord.Taskid(tasks);
+        scorerecord.Taskname(tasknameVal);
+        scorerecord.Terraceid(terrace);
+        scorerecord.Terracename(terracenameVal);
+        scorerecord.Appname(appnameVal);
+        scorerecord.Adpoint(adpointVal);
+        scorerecord.Advalid(false);
+        scorerecord.Recordip(ipStr);
+				scorerecord.save(null,{
+					success:function(scorerecord){
+						cloudMsg = msg;
+        		res.success(cloudMsg);
+					},
+					error:function(error) {
+            cloudMsg = error.message;
+            res.success(cloudMsg);
+					}
+				});
+		},
+		error:function()
+		{}
+	});
+});
 
 //
 // 添加反馈
-// AV.Cloud.define("addFeedBack", function(req, res) {
-//   var useridStr = req.params.userid;
-//   var nameStr = req.params.username;
-//   var titleStr = req.params.title;
-//   var contentStr = req.params.content;
-//   var ipStr = req.params.ipaddress;
+AV.Cloud.define("addFeedBack", function(req, res) {
+  var useridStr = req.params.userid;
+  var nameStr = req.params.username;
+  var titleStr = req.params.title;
+  var contentStr = req.params.content;
+  var ipStr = req.params.ipaddress;
 
-//   var memberinfo = MemberInfoCls.create();
-//   memberinfo.ObjectId(useridStr);
-//   var feedback = FeedBackCls.create();
-//   feedback.Userid(memberinfo);
-//   feedback.Username(nameStr);
-//   feedback.Title(titleStr);
-//   feedback.Content(contentStr);
-//   feedback.FeedbackIp(ipStr);
-//   feedback.save(null,{
-//   	success:function(feedback)
-//   	{
-//   		cloudMsg = "添加成功";
-//       res.success(cloudMsg);
-//   	},
-//   	error:function(error)
-//   	{
-//   		cloudMsg = error.message;
-//       res.success(cloudMsg);
-//   	}
-//   });
-// });
+  var memberinfo = MemberInfoCls.create();
+  memberinfo.ObjectId(useridStr);
+  var feedback = FeedBackCls.create();
+  feedback.Userid(memberinfo);
+  feedback.Username(nameStr);
+  feedback.Title(titleStr);
+  feedback.Content(contentStr);
+  feedback.FeedbackIp(ipStr);
+  feedback.save(null,{
+  	success:function(feedback)
+  	{
+  		cloudMsg = "添加成功";
+      res.success(cloudMsg);
+  	},
+  	error:function(error)
+  	{
+  		cloudMsg = error.message;
+      res.success(cloudMsg);
+  	}
+  });
+});
 
 // 最后，必须有这行代码来使 express 响应 HTTP 请求
 app.listen();

@@ -125,7 +125,8 @@
 				var payconduitId = $("#winModify").data("payconduitId");
 				var payname = $("#winModify").data("payname");
 				var payvalue = $("#winModify").data("payvalue");
-                var payvalid = $("#txtModifyPayvalid").val() == "true";
+                var payvalid = $("#txtModifyPayvalid").val();
+                alert(payvalid);
 				var parms = { objectId: objectId, userId: userId, payvalid: payvalid };
                 $.post(Urlmoddepositrecord, { data: parms }, function (e) {
                     if (e.result) {

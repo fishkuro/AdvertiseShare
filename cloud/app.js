@@ -1013,9 +1013,9 @@ AV.Cloud.define("addScorerecord", function(req, res) {
 	query.equalTo("recordip",ipStr);
 	query.greaterThan("createAt", today); // >
 	query.find({
-		success:function(ScoreRecord)
+		success:function(result)
 		{
-			var len = ScoreRecord.length;
+			var len = result.length;
 			var msg = "添加成功";
 			if (len > 0) {
 				msg = "您的ip已使用 " + len + " 次";
@@ -1052,7 +1052,7 @@ AV.Cloud.define("addScorerecord", function(req, res) {
 					}
 				});
 		},
-		error:function()
+		error:function(error)
 		{}
 	});
 });

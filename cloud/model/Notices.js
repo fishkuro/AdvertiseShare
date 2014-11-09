@@ -48,10 +48,10 @@ var Notices = AV.Object.extend("Notices", {
 
 exports.init = function(title,context,postdate) {
     var notices = new Notices();
-	notices.set("title",title);		//string
+	notices.set("title",title);				//string
+	notices.set("context",context);			//string
 	notices.set("postdate",postdate);		//DateTime
-	notices.set("context",context);		//string
-	
+
     return notices;
 };
 

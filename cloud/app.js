@@ -8,7 +8,7 @@ var ScorerecordCls = require('cloud/model/ScoreRecord.js');
 var ScoretotailCls = require('cloud/model/ScoreTotail.js');
 var TasksCls = require('cloud/model/Tasks.js');
 var TerracesCls = require('cloud/model/Terraces.js');
-var FeedBackCls = require('cloud/model/FeedBack.js');
+//var FeedBackCls = require('cloud/model/FeedBack.js');
 // ====
 var AdminsCls = require('cloud/model/Admins.js');
 var UtilityCls = require('cloud/utils/Utility.js');

@@ -1,5 +1,20 @@
 var crypto = require('crypto');
 
+function nowDate() {
+	var date = new Date();
+	var day = date.getDate();
+	var month = date.getMonth() + 1;
+	var year = date.getFullYear();
+	return year + "-" + month + "-" + day;
+};
+
+function addDate(date,days) { 
+	var d = new Date(date); 
+	d.setDate(d.getDate() + days); 
+	var m = d.getMonth() + 1; 
+	return d.getFullYear() + '-' + m + '-' + d.getDate(); 
+};
+
 exports.md5 = function(data) {
     return crypto.createHash('md5').update(data).digest('hex').toUpperCase();  
 };
@@ -52,3 +67,6 @@ function ISODateString(d) {
 };
 
 exports.dataToString = ISODateString;
+
+exports.nowDate = nowDate;
+exports.addDate = addDate(date,days);

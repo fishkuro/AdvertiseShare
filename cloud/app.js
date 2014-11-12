@@ -1004,21 +1004,6 @@ AV.Cloud.define("addSubAccount", function(req, res) {
 
 });
 
-function nowDate() {
-	var date = new Date();
-	var day = date.getDate();
-	var month = date.getMonth() + 1;
-	var year = date.getFullYear();
-	return year + "-" + month + "-" + day;
-};
-
-function addDate(date,days) { 
-	var d = new Date(date); 
-	d.setDate(d.getDate() + days); 
-	var m = d.getMonth() + 1; 
-	return d.getFullYear() + '-' + m + '-' + d.getDate(); 
-};
-
 AV.Cloud.define("addScorerecord", function(req, res) {
 	var useridVal = req.params.userid;
 	var usernameVal = req.params.username;
@@ -1029,7 +1014,7 @@ AV.Cloud.define("addScorerecord", function(req, res) {
   //var appnameVal = req.params.appname;
   var adpointVal = req.params.adpoint;
 	var ipStr = req.params.ipaddress;
-	var today = newDate();
+	var today = UtilityCls.nowDate();
 	//var nextday = addDate(today,1);
 
 	var ScoreRecord = ScorerecordCls.Query();

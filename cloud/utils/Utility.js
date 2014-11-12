@@ -69,4 +69,4 @@ function ISODateString(d) {
 exports.dataToString = ISODateString;
 
 exports.nowDate = nowDate;
-exports.addDate = addDate(date,days);
+exports.addDate = addDate;

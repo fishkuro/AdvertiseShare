@@ -575,7 +575,7 @@ app.post('/administrator/addtasks',function(req, res) {
   var tacename = req.body.data.terracename;
   var enable = req.body.data.enable;
 
-  console.log("/administrator/addtasks/ taskname : " + taskname + " subtitle : " + subtitle
+  console.log("/administrator/addtasks/ taskname : " + taskname + " subtitle : " + subtitle +
     " taskpoint : " + taskpoint + " taceid : " + taceid + " tacename : " + tacename + " enable : "
     + enable);
 

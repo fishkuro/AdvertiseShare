@@ -241,9 +241,7 @@ app.post('/administrator/deposittotaildata',function(req, res) {
 app.post('/administrator/noticesdata',function(req, res) {
   NoticesCls.find({
     success:function(data)
-    {
-      res.jsonp({Rows:data,Total:data.length});
-    },
+    { res.jsonp({Rows:data,Total:data.length}); },
     error:function(error)
     {}
   });
@@ -253,9 +251,7 @@ app.post('/administrator/noticesdata',function(req, res) {
 app.post('/administrator/payconduitdata',function(req, res) {
   PayconduitCls.find({
     success:function(data)
-    {
-      res.jsonp({Rows:data,Total:data.length});
-    },
+    { res.jsonp({Rows:data,Total:data.length}); },
     error:function(error)
     {}
   });
@@ -519,6 +515,7 @@ app.post('/administrator/moddepositrecord',function(req, res) {
           success:function(object)
           {
             rlt.result = true;
+            rlt.msg = "支付确认";
             res.send(rlt);
           },
           error:function(object, error)
@@ -553,7 +550,7 @@ app.post('/administrator/addtasks',function(req, res) {
     + enable);
 
   var terrace = TerracesCls.create();
-  terrace.ObjectId(taceid);
+  terrace.Id = taceid;
   var task = TasksCls.init(terrace,taskname,subtitle,taskpoint,enable);
 
   task.save(null, {

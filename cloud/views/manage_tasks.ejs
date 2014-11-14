@@ -141,9 +141,8 @@
                 var terracename = $("#txtAddTerracename").val();
                 var enable = $("#txtAddEnable").val();
 
-                alert("terid: " + terraceid);
                 var grid = window['g'];
-                var parms = {taskname: taskname, subtitle: subtitle, taskpoint: taskpoint, terraceid: terraceid, terracename: terracename, enable: enable};
+                var parms = { taskname: taskname, subtitle: subtitle, taskpoint: taskpoint, terraceid: terraceid, terracename: terracename, enable: enable };
                 $.post(Urladdtasks, {data: parms}, function (e) {
                     if (e.result) {
                         grid.reload();

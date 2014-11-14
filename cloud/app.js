@@ -572,9 +572,12 @@ app.post('/administrator/addtasks',function(req, res) {
   var subtitle = req.body.data.subtitle;
   var taskpoint = req.body.data.taskpoint;
   var taceid = req.body.data.terraceid;
+  var tacename = req.body.data.terracename;
   var enable = req.body.data.enable;
 
-  console.log("memberLogin username : " + nameStr);
+  console.log("/administrator/addtasks/ taskname : " + taskname + " subtitle : " + subtitle
+    " taskpoint : " + taskpoint + " taceid : " + taceid + " tacename : " + tacename + " enable : "
+    + enable);
 
   var terrace = TerracesCls.create();
   terrace.ObjectId(taceid);

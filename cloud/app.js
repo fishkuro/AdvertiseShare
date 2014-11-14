@@ -574,6 +574,8 @@ app.post('/administrator/addtasks',function(req, res) {
   var taceid = req.body.data.terraceid;
   var enable = req.body.data.enable;
 
+  console.log("memberLogin username : " + nameStr);
+
   var terrace = TerracesCls.create();
   terrace.ObjectId(taceid);
   var task = TasksCls.init(terrace,taskname,subtitle,taskpoint,enable);
@@ -802,14 +804,11 @@ AV.Cloud.define("memberLogin", function(req, res) {
             if (USER.length > 0) {
               var user = USER[0];
               //有的话，删除再注册
-
               console.log("USER query : " + nameStr);
 
               user.destroy({
                 success: function(user) {
-
                   console.log("user destroy : " + passStr);
-
                   signUpUser(nameStr,passStr,memberId,res);
                 },
                 error: function(user, error) {
@@ -820,9 +819,7 @@ AV.Cloud.define("memberLogin", function(req, res) {
             }
             else
             {
-
               console.log("user add : " + passStr);
-
               //没有的话，直接注册
               signUpUser(nameStr,passStr,memberId,res);
             }

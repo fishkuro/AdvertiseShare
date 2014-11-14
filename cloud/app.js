@@ -501,7 +501,7 @@ app.post('/administrator/delpayconduit',function(req, res) {
 });
 
 app.post('/administrator/moddepositrecord',function(req, res) {
-  var oid = req.body.data.objectId;
+  var objectId = req.body.data.objectId;
   var userId = req.body.data.userId;
   var payvalue = req.body.data.payvalue;
   var pvd = req.body.data.payvalid;
@@ -509,60 +509,33 @@ app.post('/administrator/moddepositrecord',function(req, res) {
 
   if (pvd == "是") {
     //支付确认
-    var MemberInfo = MemberInfoCls.query();
-    var query = new AV.Query(MemberInfo);
-
-    console.log("moddepositrecord userid : " + userId);
-
-    query.get(userId,{
-      success: function(memberinfo) {
-        // The object was retrieved successfully.
-        var point = memberinfo.get("point");
-
-        console.log("moddepositrecord point : " + point);
-
-        point -= payvalue * 100;
-
-        console.log("moddepositrecord pointed : " + point);
-
-        memberinfo.set("point",point);
-        memberinfo.save(null,{
-          success: function(memberinfo) {
-
-            console.log("moddepositrecord memberinfo saved");
-
-            var depositrecord = DepositrecordCls.create();
-            depositrecord.ObjectId(oid);
-            depositrecord.Payvalid(2);
-            depositrecord.Payfortime(ptime);
-            depositrecord.save(null,{
-              success: function(depositrecord) {
-                
-                console.log("moddepositrecord depositrecord saved");
-
-                rlt.result = true;
-                res.send(rlt);
-              },
-              error: function(depositrecord, error) {
-                rlt.result = false;
-                rlt.msg = error.description;
-                res.send(rlt);
-              }
-            });
+    var DepositRecord = DepositrecordCls.query();
+    var query = new AV.Query(DepositRecord);
+    query.get(objectId,{
+      success:function(depositrecord)
+      {
+        depositrecord.set("payvalid",1);
+        depositrecord.save(null,{
+          success:function(object)
+          {
+            rlt.result = true;
+            res.send(rlt);
           },
-          error: function(memberinfo, error) {
+          error:function(object, error)
+          {
             rlt.result = false;
             rlt.msg = error.description;
             res.send(rlt);
           }
         });
       },
-      error: function(object, error) {
-        // The object was not retrieved successfully.
-        // error is a AV.Error with an error code and description.
+      error:function(object, error)
+      {
+        rlt.result = false;
+        rlt.msg = error.description;
+        res.send(rlt);
       }
     });
-
   }
   
 });

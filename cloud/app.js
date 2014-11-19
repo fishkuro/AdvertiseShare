@@ -259,13 +259,24 @@ app.post('/administrator/payconduitdata',function(req, res) {
 });
 
 app.post('/administrator/scorerecorddata',function(req, res) {
-  ScorerecordCls.find({
+  // ScorerecordCls.find({
+  //   success:function(data)
+  //   {res.jsonp({Rows:data,Total:data.length});},
+  //   error:function(error)
+  //   {}
+  // });
+
+  var ScoreRecord = ScorerecordCls.query();
+  var query = new AV.Query(ScoreRecord);
+  query.descending("createdAt");
+  query.find({
     success:function(data)
-    {res.jsonp({Rows:data,Total:data.length});},
+    {
+      res.jsonp({Rows:data,Total:data.length});
+    },
     error:function(error)
     {}
   });
-  
 });
 
 app.post('/administrator/scoretotaildata',function(req, res) {
